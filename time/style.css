@@ -1,0 +1,145 @@
+:root {
+  --primary: #5865f2;
+  --bg: #1a1b26;
+  --card: #2f3136;
+  --text: #e0e0e0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+body {
+  background: linear-gradient(135deg, var(--bg), #2a2b3d);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 1rem;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo i { font-size: 2rem; color: var(--primary); }
+h1 { font-size: 2rem; }
+.subtitle { font-size: 1rem; opacity: 0.8; }
+.converter-card {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.input-box label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.input-box input,
+.input-box select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  background: rgba(0,0,0,0.2);
+  color: var(--text);
+}
+.result-box {
+  margin-top: 1rem;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.copy-btn {
+  background: var(--primary);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+}
+.timestamp-preview {
+  background: rgba(0,0,0,0.2);
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  word-break: break-all;
+}
+.format-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.format-btn {
+  background: transparent;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.format-btn.active,
+.format-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.preview-section {
+  margin-top: 1.5rem;
+}
+.discord-message {
+  background: var(--card);
+  padding: 1rem;
+  border-left: 4px solid var(--primary);
+  border-radius: 4px;
+}
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.flash-summary {
+  font-weight: 500;
+}
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  .logo i { font-size: 1.5rem; }
+  .input-box input, .input-box select { padding: 0.4rem; }
+  .copy-btn { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+}
