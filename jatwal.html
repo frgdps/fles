@@ -70,7 +70,7 @@
         
         .schedule-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 25px;
         }
         
@@ -107,14 +107,22 @@
         }
         
         .subject-item {
-            padding: 15px;
-            margin-bottom: 12px;
+            padding: 13px 10px;
+            margin-bottom: 9px;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.1rem;
+            font-size: 1.06rem;
             transition: background-color 0.2s;
+        }
+        
+        .subject-item.break {
+            background-color: #e0e7ef;
+            color: #2574a9;
+            font-weight: bold;
+            justify-content: center;
+            font-size: 1.09rem;
         }
         
         .subject-item:hover {
@@ -128,19 +136,31 @@
         
         .subject-duration {
             background-color: #ecf0f1;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-weight: 600;
             color: #1a2a6c;
+            margin-left: 7px;
+            font-size: 0.97rem;
         }
         
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 38px;
             padding-top: 20px;
             border-top: 1px solid #eee;
             color: #7f8c8d;
             font-size: 0.9rem;
+        }
+
+        .info-jam {
+            margin: 0 0 25px 0;
+            background: #eaf0fa;
+            border-left: 4px solid #1a2a6c;
+            padding: 13px 18px;
+            border-radius: 7px;
+            font-size: 1.08rem;
+            line-height: 1.55;
         }
         
         @media (max-width: 768px) {
@@ -175,22 +195,19 @@
             <div class="day-card senin">
                 <div class="day-header">SENIN</div>
                 <ul class="subject-list">
-                    <li class="subject-item">
-                        <span class="subject-name">Ipas</span>
-                        <span class="subject-duration">3 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Desain Grafis</span>
-                        <span class="subject-duration">4 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">B. Inggris</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Bimbingan Konseling</span>
-                        <span class="subject-duration">1 jam</span>
-                    </li>
+                    <li class="subject-item"><span class="subject-name">Upacara</span> <span class="subject-duration">07.30-08.15</span></li>
+                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">08.15-09.00</span></li>
+                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
+                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">10.00-10.45</span></li>
+                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <span class="subject-duration">10.45-11.30</span></li>
+                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
+                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <span class="subject-duration">12.45-13.30</span></li>
+                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <span class="subject-duration">13.30-14.15</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">14.15-14.55</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">14.55-15.35</span></li>
+                    <li class="subject-item"><span class="subject-name">Bimbingan Konseling</span> <span class="subject-duration">15.35-16.15</span></li>
                 </ul>
             </div>
             
@@ -198,22 +215,19 @@
             <div class="day-card selasa">
                 <div class="day-header">SELASA</div>
                 <ul class="subject-list">
-                    <li class="subject-item">
-                        <span class="subject-name">Pemdas</span>
-                        <span class="subject-duration">5 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Sejarah</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">B. Indonesia</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Seni Budaya</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">07.30-08.15</span></li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">08.15-09.00</span></li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">10.00-10.45</span></li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">10.45-11.30</span></li>
+                    <li class="subject-item"><span class="subject-name">Sejarah</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
+                    <li class="subject-item"><span class="subject-name">Sejarah</span> <span class="subject-duration">12.45-13.30</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">13.30-14.15</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">14.15-14.55</span></li>
+                    <li class="subject-item"><span class="subject-name">Seni Budaya</span> <span class="subject-duration">14.55-15.35</span></li>
+                    <li class="subject-item"><span class="subject-name">Seni Budaya</span> <span class="subject-duration">15.35-16.15</span></li>
                 </ul>
             </div>
             
@@ -221,22 +235,19 @@
             <div class="day-card rabu">
                 <div class="day-header">RABU</div>
                 <ul class="subject-list">
-                    <li class="subject-item">
-                        <span class="subject-name">Ppkn</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Ipas</span>
-                        <span class="subject-duration">3 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Penjas / Olahraga</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Informatika</span>
-                        <span class="subject-duration">4 jam</span>
-                    </li>
+                    <li class="subject-item"><span class="subject-name">PPKn</span> <span class="subject-duration">07.30-08.15</span></li>
+                    <li class="subject-item"><span class="subject-name">PPKn</span> <span class="subject-duration">08.15-09.00</span></li>
+                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
+                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">10.00-10.45</span></li>
+                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">10.45-11.30</span></li>
+                    <li class="subject-item"><span class="subject-name">Penjas/Olah Raga</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
+                    <li class="subject-item"><span class="subject-name">Penjas/Olah Raga</span> <span class="subject-duration">12.45-13.30</span></li>
+                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">13.30-14.15</span></li>
+                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">14.15-14.55</span></li>
+                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">14.55-15.35</span></li>
+                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">15.35-16.15</span></li>
                 </ul>
             </div>
             
@@ -244,26 +255,19 @@
             <div class="day-card kamis">
                 <div class="day-header">KAMIS</div>
                 <ul class="subject-list">
-                    <li class="subject-item">
-                        <span class="subject-name">Pemdas</span>
-                        <span class="subject-duration">3 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Mulok</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Matematika</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">B. Indonesia</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">B. Inggris</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">07.30-08.15</span></li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">08.15-09.00</span></li>
+                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
+                    <li class="subject-item"><span class="subject-name">Mulok</span> <span class="subject-duration">10.00-10.45</span></li>
+                    <li class="subject-item"><span class="subject-name">Mulok</span> <span class="subject-duration">10.45-11.30</span></li>
+                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
+                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">12.45-13.30</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">13.30-14.15</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">14.15-14.55</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">14.55-15.35</span></li>
+                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">15.35-16.15</span></li>
                 </ul>
             </div>
             
@@ -271,17 +275,46 @@
             <div class="day-card jumat">
                 <div class="day-header">JUM'AT</div>
                 <ul class="subject-list">
-                    <li class="subject-item">
-                        <span class="subject-name">Matematika</span>
-                        <span class="subject-duration">2 jam</span>
-                    </li>
-                    <li class="subject-item">
-                        <span class="subject-name">Pendidikan Agama Islam</span>
-                        <span class="subject-duration">3 jam</span>
-                    </li>
+                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">07.30-08.15</span></li>
+                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">08.15-09.00</span></li>
+                    <li class="subject-item"><span class="subject-name">Pendidikan Agama Islam</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
+                    <li class="subject-item"><span class="subject-name">Pendidikan Agama Islam</span> <span class="subject-duration">10.00-10.45</span></li>
+                    <li class="subject-item"><span class="subject-name">Pendidikan Agama Islam</span> <span class="subject-duration">10.45-11.30</span></li>
                 </ul>
             </div>
         </div>
+        
+        <h1> ‎  </h2>
+        <div class="info-jam">
+            <strong>Jam Pelajaran & Istirahat:</strong><br>
+            <b>Senin s/d Kamis:</b><br>
+            - Jam ke-1: 07.30 - 08.15<br>
+            - Jam ke-2: 08.15 - 09.00<br>
+            - Jam ke-3: 09.00 - 09.45<br>
+            <b>Istirahat 1:</b> 09.45 - 10.00<br>
+            - Jam ke-4: 10.00 - 10.45<br>
+            - Jam ke-5: 10.45 - 11.30<br>
+            - Jam ke-6: 11.30 - 12.15<br>
+            <b>Istirahat 2:</b> 12.15 - 12.45<br>
+            - Jam ke-7: 12.45 - 13.30<br>
+            - Jam ke-8: 13.30 - 14.15<br>
+            - Jam ke-9: 14.15 - 14.55<br>
+            - Jam ke-10: 14.55 - 15.35<br>
+            - Jam ke-11: 15.35 - 16.15<br>
+            <br>
+            <b>Jum'at:</b><br>
+            - Jam ke-1: 07.30 - 08.15<br>
+            - Jam ke-2: 08.15 - 09.00<br>
+            - Jam ke-3: 09.00 - 09.45<br>
+            <b>Istirahat:</b> 09.45 - 10.00<br>
+            - Jam ke-4: 10.00 - 10.45<br>
+            - Jam ke-5: 10.45 - 11.30<br>
+            <br>
+            <em>Jadwal pelajaran dan jam istirahat dapat berubah sesuai kebutuhan sekolah.</em>
+        </div>
+        <h2> ‎ ‎</h2>
+        <H3> Information From Aya, Thank You </H3>
         
         <div class="footer">
             <p>Jadwal Pelajaran Kelas X RPL 1 - 2025/2026</p>
@@ -289,4 +322,4 @@
         </div>
     </div>
 </body>
-                  </html>
+</html>
