@@ -68,6 +68,40 @@
             font-size: 1.5rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
+
+        /* Mini button section */
+        .mini-section-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            margin: 20px 0 22px 0;
+        }
+        .mini-btn {
+            background: #1a2a6c;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 58px;
+            height: 56px;
+            font-size: 0.96rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.09);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.19s, transform 0.13s;
+        }
+        .mini-btn:hover {
+            background: #b21f1f;
+            transform: scale(1.09);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .day-card {
+            scroll-margin-top: 85px; /* supaya tidak ketutup header */
+        }
         
         .schedule-container {
             display: grid;
@@ -168,15 +202,15 @@
             .container {
                 padding: 15px;
             }
-            
+            .mini-section-buttons {
+                gap: 6px;
+            }
             .header h1 {
                 font-size: 2rem;
             }
-            
             .header h2 {
                 font-size: 1.5rem;
             }
-            
             .logo {
                 position: static;
                 margin: 0 auto 20px;
@@ -190,10 +224,19 @@
             <h1>JADWAL PELAJARAN</h1>
             <h2>KELAS X RPL 1 - SMK 4 BANJARMASIN</h2>
         </div>
+
+        <!-- MINI BUTTONS SECTION -->
+        <div class="mini-section-buttons">
+            <a href="#section-senin"><button class="mini-btn" title="Ke Senin">Senin</button></a>
+            <a href="#section-selasa"><button class="mini-btn" title="Ke Selasa">Selasa</button></a>
+            <a href="#section-rabu"><button class="mini-btn" title="Ke Rabu">Rabu</button></a>
+            <a href="#section-kamis"><button class="mini-btn" title="Ke Kamis">Kamis</button></a>
+            <a href="#section-jumat"><button class="mini-btn" title="Ke Jum'at">Jum'at</button></a>
+        </div>
         
         <div class="schedule-container">
-            <!-- Tabelan haari iSenin -->
-            <div class="day-card senin">
+            <!-- Senin -->
+            <div class="day-card senin" id="section-senin">
                 <div class="day-header">SENIN</div>
                 <ul class="subject-list">
                     <li class="subject-item"><span class="subject-name">Upacara</span> <h4>~~~~~~~~~~<h4> <span class="subject-duration">07.30-08.15</span></li>
@@ -213,7 +256,7 @@
             </div>
             
             <!-- Selasa -->
-            <div class="day-card selasa">
+            <div class="day-card selasa" id="section-selasa">
                 <div class="day-header">SELASA</div>
                 <ul class="subject-list">
                     <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">07.30-08.15</span></li>
@@ -233,7 +276,7 @@
             </div>
             
             <!-- Rabu -->
-            <div class="day-card rabu">
+            <div class="day-card rabu" id="section-rabu">
                 <div class="day-header">RABU</div>
                 <ul class="subject-list">
                     <li class="subject-item"><span class="subject-name">PPKn</span> <span class="subject-duration">07.30-08.15</span></li>
@@ -253,7 +296,7 @@
             </div>
             
             <!-- Kamis -->
-            <div class="day-card kamis">
+            <div class="day-card kamis" id="section-kamis">
                 <div class="day-header">KAMIS</div>
                 <ul class="subject-list">
                     <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">07.30-08.15</span></li>
@@ -273,7 +316,7 @@
             </div>
             
             <!-- Jumat -->
-            <div class="day-card jumat">
+            <div class="day-card jumat" id="section-jumat">
                 <div class="day-header">JUM'AT</div>
                 <ul class="subject-list">
                     <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">07.30-08.15</span></li>
@@ -286,7 +329,7 @@
             </div>
         </div>
         
-        <h1> ‎  </h2>
+        <h1> ‎  </h1>
         <div class="info-jam">
             <strong>Jam Pelajaran & Istirahat:</strong><br>
             <b>Senin s/d Kamis:</b><br>
@@ -314,8 +357,7 @@
             <br>
             <em>Jadwal pelajaran dan jam istirahat dapat berubah sesuai kebutuhan sekolah.</em>
         </div>
-        <h2> ‎ ‎</h2>
-        <H3> Information From Aya, Thank You </H3>
+        <h8> ‎Go To Fless Portfolio>‎ <a href="/">Here</a></h8>
         
         <div class="footer">
             <p>Jadwal Pelajaran Kelas X RPL 1 - 2025/2026</p>
