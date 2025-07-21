@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Pelajaran X RPL 1 - SMK 4 Banjarmasin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #1a2a6c;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h2 {
+            color: #b21f1f;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .schedule-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .day-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .day-header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        
+        .senin .day-header { background: linear-gradient(135deg, #3498db, #1a5276); }
+        .selasa .day-header { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .rabu .day-header { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .kamis .day-header { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .jumat .day-header { background: linear-gradient(135deg, #f39c12, #d35400); }
+        
+        .subject-list {
+            padding: 20px;
+            list-style: none;
+        }
+        
+        .subject-item {
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+        }
+        
+        .subject-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .subject-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .subject-duration {
+            background-color: #ecf0f1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                position: static;
+                margin: 0 auto 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>JADWAL PELAJARAN</h1>
+            <h2>KELAS X RPL 1 - SMK 4 BANJARMASIN</h2>
+            <div class="logo">SMK4</div>
+        </div>
+        
+        <div class="schedule-container">
+            <!-- Senin -->
+            <div class="day-card senin">
+                <div class="day-header">SENIN</div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-duration">3 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Desain Grafis</span>
+                        <span class="subject-duration">4 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Inggris</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Bimbingan Konseling</span>
+                        <span class="subject-duration">1 jam</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Selasa -->
+            <div class="day-card selasa">
+                <div class="day-header">SELASA</div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">5 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Sejarah</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Indonesia</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Seni Budaya</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Rabu -->
+            <div class="day-card rabu">
+                <div class="day-header">RABU</div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <span class="subject-name">Ppkn</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-duration">3 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Penjas / Olahraga</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Informatika</span>
+                        <span class="subject-duration">4 jam</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Kamis -->
+            <div class="day-card kamis">
+                <div class="day-header">KAMIS</div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">3 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Mulok</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Matematika</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Indonesia</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Inggris</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Jumat -->
+            <div class="day-card jumat">
+                <div class="day-header">JUM'AT</div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <span class="subject-name">Matematika</span>
+                        <span class="subject-duration">2 jam</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pendidikan Agama Islam</span>
+                        <span class="subject-duration">3 jam</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Jadwal Pelajaran Kelas X RPL 1 - Semester Genap 2023/2024</p>
+            <p>SMK Negeri 4 Banjarmasin</p>
+        </div>
+    </div>
+</body>
+                  </html>
