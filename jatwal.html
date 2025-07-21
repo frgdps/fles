@@ -234,6 +234,57 @@
             <a href="#section-jumat"><button class="mini-btn" title="Ke Jum'at">Jum'at</button></a>
         </div>
         
+        <!-- Back to Top Button pakai SVG -->
+<button id="backToTopBtn" title="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" style="display:block;margin:auto;">
+    <path d="M10 15V5M10 5L5 10M10 5l5 5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </svg>
+</button>
+<script>
+  window.onscroll = function() {
+    document.getElementById("backToTopBtn").style.display =
+      (window.scrollY > 250) ? "block" : "none";
+  };
+</script>
+<style>
+  #backToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 99;
+    background: #1a2a6c;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    transition: background 0.18s, transform 0.15s;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 0;
+  }
+  #backToTopBtn:hover {
+    background: #b21f1f;
+    transform: scale(1.10);
+  }
+  @media (max-width: 768px) {
+    #backToTopBtn {
+      bottom: 16px;
+      right: 16px;
+      width: 63px;
+      height: 63px;
+    }
+    #backToTopBtn svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+</style>
+        
         <div class="schedule-container">
             <!-- Senin -->
             <div class="day-card senin" id="section-senin">
