@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwal Pelajaran X RPL 1 - SMK 4 Banjarmasin</title>
-    <!-- web html statis dari thio saputra a.k.a. (Flessan) duduk di bangku 5 dari bangian kanan muka -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,9 +14,9 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background: url('https://smkn4bjm.sch.id/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-08.31.07-600x600.jpeg') center/cover no-repeat;
             color: #333;
-            padding: 20px;
+            padding: 10px;
             min-height: 100vh;
         }
         
@@ -26,64 +26,48 @@
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 30px;
+            padding: 20px 15px;
             position: relative;
             overflow: hidden;
         }
         
         .header {
             text-align: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
+            padding: 15px 0;
+            margin-bottom: 20px;
             border-bottom: 3px solid #1a2a6c;
             position: relative;
         }
         
         .header h1 {
             color: #1a2a6c;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .header h2 {
             color: #b21f1f;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 600;
-        }
-        
-        .logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Mini button section */
         .mini-section-buttons {
             display: flex;
             justify-content: center;
-            gap: 9px;
-            margin: 20px 0 22px 0;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0 18px 0;
         }
         .mini-btn {
             background: #1a2a6c;
             color: #fff;
             border: none;
             border-radius: 50%;
-            width: 58px;
-            height: 56px;
-            font-size: 0.96rem;
+            width: 50px;
+            height: 50px;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.09);
@@ -105,8 +89,8 @@
         
         .schedule-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
         
         .day-card {
@@ -118,15 +102,15 @@
         }
         
         .day-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
         .day-header {
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             color: white;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
         }
         
@@ -137,18 +121,19 @@
         .jumat .day-header { background: linear-gradient(135deg, #f39c12, #d35400); }
         
         .subject-list {
-            padding: 20px;
+            padding: 15px;
             list-style: none;
         }
         
         .subject-item {
-            padding: 13px 10px;
-            margin-bottom: 9px;
+            padding: 12px 8px;
+            margin-bottom: 8px;
             border-radius: 8px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.06rem;
+            font-size: 1rem;
             transition: background-color 0.2s;
         }
         
@@ -157,7 +142,7 @@
             color: #2574a9;
             font-weight: bold;
             justify-content: center;
-            font-size: 1.09rem;
+            font-size: 1.05rem;
         }
         
         .subject-item:hover {
@@ -167,58 +152,330 @@
         .subject-name {
             font-weight: 600;
             color: #2c3e50;
+            flex: 1 0 100%;
+            margin-bottom: 4px;
+        }
+        
+        .subject-teacher {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            flex: 1;
         }
         
         .subject-duration {
             background-color: #ecf0f1;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-weight: 600;
             color: #1a2a6c;
-            margin-left: 7px;
-            font-size: 0.97rem;
+            font-size: 0.9rem;
+            text-align: right;
         }
         
         .footer {
             text-align: center;
-            margin-top: 38px;
-            padding-top: 20px;
+            margin-top: 30px;
+            padding-top: 15px;
             border-top: 1px solid #eee;
             color: #7f8c8d;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .info-jam {
-            margin: 0 0 25px 0;
+            margin: 0 0 20px 0;
             background: #eaf0fa;
             border-left: 4px solid #1a2a6c;
-            padding: 13px 18px;
+            padding: 12px 15px;
             border-radius: 7px;
-            font-size: 1.08rem;
-            line-height: 1.55;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .mobile-nav-buttons {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        
+        .mobile-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            font-size: 0.75rem;
+            color: #1a2a6c;
+            cursor: pointer;
+            padding: 5px;
+            width: 20%;
+        }
+        
+        .mobile-nav-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+        
+        .mobile-nav-btn.active {
+            color: #b21f1f;
+            font-weight: bold;
+        }
+        
+        /* Back to Top Button */
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            right: 15px;
+            z-index: 99;
+            background: #1a2a6c;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+            transition: background 0.18s, transform 0.15s;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        #backToTopBtn:hover {
+            background: #b21f1f;
+            transform: scale(1.10);
+        }
+        
+       /* Ganti style hamburger menu dengan ini */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #1a2a6c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    z-index: 1001;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.hamburger-menu.active {
+    transform: rotate(90deg);
+}
+
+.hamburger-menu i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: url('https://smkn4bjm.sch.id/wp-content/uploads/2024/11/WhatsApp-Image-2024-11-01-at-08.00.50-600x600.jpeg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s;
+}
+
+.sidebar a i {
+    margin-right: 12px;
+    color: #1a2a6c;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar a:hover {
+    background: #f8f9fa;
+    color: #b21f1f;
+    padding-left: 25px;
+}
+
+.sidebar a:hover i {
+    color: #b21f1f;
+}
+
+.sidebar-footer {
+    padding: 15px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    border-top: 1px solid #eee;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+    transition: opacity 0.3s ease;
+}
+        
+        /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 15px 10px;
             }
-            .mini-section-buttons {
-                gap: 6px;
+            
+            .header {
+                padding: 10px 0;
             }
+            
             .header h1 {
-                font-size: 2rem;
-            }
-            .header h2 {
                 font-size: 1.5rem;
+                padding: 0 30px;
             }
-            .logo {
-                position: static;
-                margin: 0 auto 20px;
+            
+            .header h2 {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .mini-section-buttons {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .subject-name {
+                font-size: 1.05rem;
+            }
+            
+            .subject-teacher {
+                font-size: 0.85rem;
+            }
+            
+            .subject-duration {
+                font-size: 0.85rem;
+            }
+            
+            .info-jam {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+            
+            .footer {
+                margin-top: 25px;
+                font-size: 0.8rem;
+            }
+            
+            #backToTopBtn {
+                bottom: 85px;
+                right: 17px;
+                width: 70px;
+                height: 70px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .schedule-container {
+                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             }
         }
     </style>
 </head>
 <body>
+    <!-- Tombol Hamburger -->
+<button class="hamburger-menu">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- Sidebar Menu -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h3>ㅤㅤㅤㅤSMKN4BJM</h3>
+    </div>
+    <a href="https://smkn4bjm.sch.id" target="_blank">
+        <i class="fas fa-globe"></i> Website Resmi
+    </a>
+    <a href="https://ppdb.smkn4bjm.sch.id" target="_blank">
+        <i class="fas fa-user-graduate"></i> PPDB Online
+    </a>
+    <a href="https://elearning.smkn4bjm.sch.id" target="_blank">
+        <i class="fas fa-laptop"></i> E-Learning
+    </a>
+    <a href="https://instagram.com/smkn4bjm" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="https://facebook.com/smkn4bjm" target="_blank">
+        <i class="fab fa-facebook"></i> Facebook
+    </a>
+    <a href="https://youtube.com/smkn4bjm" target="_blank">
+        <i class="fab fa-youtube"></i> YouTube
+    </a>
+    <a href="https://twitter.com/smkn4bjm" target="_blank">
+        <i class="fab fa-twitter"></i> Twitter
+    </a>
+    <div class="sidebar-footer">
+        <p>Link Resmi Sekolah</p>
+    </div>
+    <a href="/" target="_blank">
+        <i class="fab fa-github"></i> My Portfolio
+    </a>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay"></div>
+    
     <div class="container">
         <div class="header">
             <h1>JADWAL PELAJARAN</h1>
@@ -234,75 +491,64 @@
             <a href="#section-jumat"><button class="mini-btn" title="Ke Jum'at">Jum'at</button></a>
         </div>
         
-        <!-- Back to Top Button pakai SVG -->
-<button id="backToTopBtn" title="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" style="display:block;margin:auto;">
-    <path d="M10 15V5M10 5L5 10M10 5l5 5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  </svg>
-</button>
-<script>
-  window.onscroll = function() {
-    document.getElementById("backToTopBtn").style.display =
-      (window.scrollY > 250) ? "block" : "none";
-  };
-</script>
-<style>
-  #backToTopBtn {
-    display: none;
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 99;
-    background: #1a2a6c;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-    transition: background 0.18s, transform 0.15s;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    padding: 0;
-  }
-  #backToTopBtn:hover {
-    background: #b21f1f;
-    transform: scale(1.10);
-  }
-  @media (max-width: 768px) {
-    #backToTopBtn {
-      bottom: 16px;
-      right: 16px;
-      width: 63px;
-      height: 63px;
-    }
-    #backToTopBtn svg {
-      width: 35px;
-      height: 35px;
-    }
-  }
-</style>
-        
         <div class="schedule-container">
             <!-- Senin -->
             <div class="day-card senin" id="section-senin">
                 <div class="day-header">SENIN</div>
                 <ul class="subject-list">
-                    <li class="subject-item"><span class="subject-name">Upacara</span> <h4>ㅤㅤ~ㅤ~ㅤ~ㅤ~<h4> <span class="subject-duration">07.30-08.15</span></li>
-                    <li class="subject-item"><span class="subject-name">Ipas</span> <h5>ㅤㅤㅤㅤ‎ ‎‎  Desy Hairina S. Pd<h5> <span class="subject-duration">08.15-09.00</span></li>
-                    <li class="subject-item"><span class="subject-name">Ipas</span> <h5>ㅤㅤㅤㅤ‎ ‎‎  Desy Hairina S. Pd<h5> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Upacara</span>
+                        <span class="subject-duration">07.30-08.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-teacher">Desy Hairina S. Pd</span>
+                        <span class="subject-duration">08.15-09.00</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-teacher">Desy Hairina S. Pd</span>
+                        <span class="subject-duration">09.00-09.45</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
-                    <li class="subject-item"><span class="subject-name">Ipas</span> <h5>ㅤㅤㅤㅤ‎ ‎‎  Desy Hairina S. Pd<h5> <span class="subject-duration">10.00-10.45</span></li>
-                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <h5>Budi A.R. S. Kom<h5> <span class="subject-duration">10.45-11.30</span></li>
-                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <h5>Budi A.R. S. Kom<h5> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-teacher">Desy Hairina S. Pd</span>
+                        <span class="subject-duration">10.00-10.45</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Desain Grafis</span>
+                        <span class="subject-teacher">Budi A.R. S. Kom</span>
+                        <span class="subject-duration">10.45-11.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Desain Grafis</span>
+                        <span class="subject-teacher">Budi A.R. S. Kom</span>
+                        <span class="subject-duration">11.30-12.15</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
-                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <h5>Budi A.R. S. Kom<h5> <span class="subject-duration">12.45-13.30</span></li>
-                    <li class="subject-item"><span class="subject-name">Desain Grafis</span> <h5>Budi A.R. S. Kom<h5> <span class="subject-duration">13.30-14.15</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">14.15-14.55</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">14.55-15.35</span></li>
-                    <li class="subject-item"><span class="subject-name">BK</span> <span class="subject-duration">15.35-16.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Desain Grafis</span>
+                        <span class="subject-teacher">Budi A.R. S. Kom</span>
+                        <span class="subject-duration">12.45-13.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Desain Grafis</span>
+                        <span class="subject-teacher">Budi A.R. S. Kom</span>
+                        <span class="subject-duration">13.30-14.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Inggris</span>
+                        <span class="subject-duration">14.15-14.55</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Inggris</span>
+                        <span class="subject-duration">14.55-15.35</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">BK</span>
+                        <span class="subject-duration">15.35-16.15</span>
+                    </li>
                 </ul>
             </div>
             
@@ -310,19 +556,52 @@
             <div class="day-card selasa" id="section-selasa">
                 <div class="day-header">SELASA</div>
                 <ul class="subject-list">
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">07.30-08.15</span></li>
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">08.15-09.00</span></li>
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">07.30-08.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">08.15-09.00</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">09.00-09.45</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">10.00-10.45</span></li>
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">10.45-11.30</span></li>
-                    <li class="subject-item"><span class="subject-name">Sejarah</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">10.00-10.45</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">10.45-11.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Sejarah</span>
+                        <span class="subject-duration">11.30-12.15</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
-                    <li class="subject-item"><span class="subject-name">Sejarah</span> <span class="subject-duration">12.45-13.30</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">13.30-14.15</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">14.15-14.55</span></li>
-                    <li class="subject-item"><span class="subject-name">Seni Budaya</span> <span class="subject-duration">14.55-15.35</span></li>
-                    <li class="subject-item"><span class="subject-name">Seni Budaya</span> <span class="subject-duration">15.35-16.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Sejarah</span>
+                        <span class="subject-duration">12.45-13.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Indonesia</span>
+                        <span class="subject-duration">13.30-14.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Indonesia</span>
+                        <span class="subject-duration">14.15-14.55</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Seni Budaya</span>
+                        <span class="subject-duration">14.55-15.35</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Seni Budaya</span>
+                        <span class="subject-duration">15.35-16.15</span>
+                    </li>
                 </ul>
             </div>
             
@@ -330,19 +609,52 @@
             <div class="day-card rabu" id="section-rabu">
                 <div class="day-header">RABU</div>
                 <ul class="subject-list">
-                    <li class="subject-item"><span class="subject-name">PPKn</span> <span class="subject-duration">07.30-08.15</span></li>
-                    <li class="subject-item"><span class="subject-name">PPKn</span> <span class="subject-duration">08.15-09.00</span></li>
-                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">PPKn</span>
+                        <span class="subject-duration">07.30-08.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">PPKn</span>
+                        <span class="subject-duration">08.15-09.00</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-duration">09.00-09.45</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
-                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">10.00-10.45</span></li>
-                    <li class="subject-item"><span class="subject-name">Ipas</span> <span class="subject-duration">10.45-11.30</span></li>
-                    <li class="subject-item"><span class="subject-name">Penjas/Olah Raga</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-duration">10.00-10.45</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Ipas</span>
+                        <span class="subject-duration">10.45-11.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Penjas/Olah Raga</span>
+                        <span class="subject-duration">11.30-12.15</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
-                    <li class="subject-item"><span class="subject-name">Penjas/Olah Raga</span> <span class="subject-duration">12.45-13.30</span></li>
-                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">13.30-14.15</span></li>
-                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">14.15-14.55</span></li>
-                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">14.55-15.35</span></li>
-                    <li class="subject-item"><span class="subject-name">Informatika</span> <span class="subject-duration">15.35-16.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Penjas/Olah Raga</span>
+                        <span class="subject-duration">12.45-13.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Informatika</span>
+                        <span class="subject-duration">13.30-14.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Informatika</span>
+                        <span class="subject-duration">14.15-14.55</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Informatika</span>
+                        <span class="subject-duration">14.55-15.35</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Informatika</span>
+                        <span class="subject-duration">15.35-16.15</span>
+                    </li>
                 </ul>
             </div>
             
@@ -350,19 +662,52 @@
             <div class="day-card kamis" id="section-kamis">
                 <div class="day-header">KAMIS</div>
                 <ul class="subject-list">
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">07.30-08.15</span></li>
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">08.15-09.00</span></li>
-                    <li class="subject-item"><span class="subject-name">Pemdas</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">07.30-08.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">08.15-09.00</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pemdas</span>
+                        <span class="subject-duration">09.00-09.45</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
-                    <li class="subject-item"><span class="subject-name">Mulok</span> <span class="subject-duration">10.00-10.45</span></li>
-                    <li class="subject-item"><span class="subject-name">Mulok</span> <span class="subject-duration">10.45-11.30</span></li>
-                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">11.30-12.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Mulok</span>
+                        <span class="subject-duration">10.00-10.45</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Mulok</span>
+                        <span class="subject-duration">10.45-11.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Matematika</span>
+                        <span class="subject-duration">11.30-12.15</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (12.15-12.45)</li>
-                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">12.45-13.30</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">13.30-14.15</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Indonesia</span> <span class="subject-duration">14.15-14.55</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">14.55-15.35</span></li>
-                    <li class="subject-item"><span class="subject-name">B. Inggris</span> <span class="subject-duration">15.35-16.15</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Matematika</span>
+                        <span class="subject-duration">12.45-13.30</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Indonesia</span>
+                        <span class="subject-duration">13.30-14.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Indonesia</span>
+                        <span class="subject-duration">14.15-14.55</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Inggris</span>
+                        <span class="subject-duration">14.55-15.35</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">B. Inggris</span>
+                        <span class="subject-duration">15.35-16.15</span>
+                    </li>
                 </ul>
             </div>
             
@@ -370,18 +715,34 @@
             <div class="day-card jumat" id="section-jumat">
                 <div class="day-header">JUM'AT</div>
                 <ul class="subject-list">
-                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">07.30-08.15</span></li>
-                    <li class="subject-item"><span class="subject-name">Matematika</span> <span class="subject-duration">08.15-09.00</span></li>
-                    <li class="subject-item"><span class="subject-name">Pendidikan Agama Islam</span> <span class="subject-duration">09.00-09.45</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Matematika</span>
+                        <span class="subject-duration">07.30-08.15</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Matematika</span>
+                        <span class="subject-duration">08.15-09.00</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pendidikan Agama Islam</span>
+                        <span class="subject-duration">09.00-09.45</span>
+                    </li>
                     <li class="subject-item break">ISTIRAHAT (09.45-10.00)</li>
-                    <li class="subject-item"><span class="subject-name">Pendidikan Agama Islam</span> <span class="subject-duration">10.00-10.45</span></li>
-                    <li class="subject-item"><span class="subject-name">Pendidikan Agama Islam</span> <span class="subject-duration">10.45-11.30</span></li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pendidikan Agama Islam</span>
+                        <span class="subject-duration">10.00-10.45</span>
+                    </li>
+                    <li class="subject-item">
+                        <span class="subject-name">Pendidikan Agama Islam</span>
+                        <span class="subject-duration">10.45-11.30</span>
+                    </li>
                 </ul>
             </div>
         </div>
         
-        <h1> ‎  </h1>
-        <div class="info-jam">
+        <h2> ‎  </h2>
+        
+        <div class="info-jam" id="info">
             <strong>Jam Pelajaran & Istirahat:</strong><br>
             <b>Senin s/d Kamis:</b><br>
             - Jam ke-1: 07.30 - 08.15<br>
@@ -406,14 +767,142 @@
             - Jam ke-4: 10.00 - 10.45<br>
             - Jam ke-5: 10.45 - 11.30<br>
             <br>
-            <em>Jadwal pelajaran dan jam istirahat dapat berubah sesuai kebutuhan sekolah.</em>
+            <em>Jadwal pelajaran dan jam istirahat dapat berubahㅤㅤㅤㅤㅤㅤㅤㅤsesuai kebutuhan sekolah.</em>
         </div>
-        <h11> ‎Go To Da Site Builder's Portfolio>‎ <a href="/">Here</a></h11>
         
         <div class="footer">
             <p>Jadwal Pelajaran Kelas X RPL 1 - 2025/2026</p>
             <p>SMK Negeri 4 Banjarmasin</p>
         </div>
     </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-buttons">
+            <button class="mobile-nav-btn" data-day="senin">
+                <i class="fas fa-calendar-day"></i>
+                Senin
+            </button>
+            <button class="mobile-nav-btn" data-day="selasa">
+                <i class="fas fa-calendar-day"></i>
+                Selasa
+            </button>
+            <button class="mobile-nav-btn" data-day="rabu">
+                <i class="fas fa-calendar-day"></i>
+                Rabu
+            </button>
+            <button class="mobile-nav-btn" data-day="kamis">
+                <i class="fas fa-calendar-day"></i>
+                Kamis
+            </button>
+            <button class="mobile-nav-btn" data-day="jumat">
+                <i class="fas fa-calendar-day"></i>
+                Jum'at
+            </button>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+// Hamburger menu functionality
+const hamburger = document.querySelector('.hamburger-menu');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.querySelector('.overlay');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    sidebar.classList.toggle('open');
+    overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+});
+
+overlay.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    sidebar.classList.remove('open');
+    overlay.style.display = 'none';
+});
+
+// Tutup sidebar saat memilih menu
+document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('open');
+        overlay.style.display = 'none';
+    });
+});
+
+// Tutup sidebar saat klik overlay
+overlay.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    sidebar.classList.remove('open');
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 300);
+});
+  
+  // Mobile navigation
+  const navButtons = document.querySelectorAll('.mobile-nav-btn');
+  
+  function scrollToDay(day) {
+    const element = document.getElementById(`section-${day}`);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'instant'
+      });
+      
+      // Update active button
+      navButtons.forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.mobile-nav-btn[data-day="${day}"]`).classList.add('active');
+    }
+  }
+  
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const day = button.getAttribute('data-day');
+      scrollToDay(day);
+    });
+  });
+  
+  // Back to top button
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 250) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+  });
+  
+  backToTopBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  // Sidebar links
+  document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = this.getAttribute('href').substring(1);
+      scrollToDay(target.split('-')[1]);
+      sidebar.style.left = '-250px';
+      overlay.style.display = 'none';
+    });
+  });
+});
+</script>
 </body>
 </html>
