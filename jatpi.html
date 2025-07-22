@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Piket Kebersihan - X RPL 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #1a2a6c;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #b21f1f;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .schedule-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .day-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .day-header {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .senin .day-header { background: linear-gradient(135deg, #3498db, #1a5276); }
+        .selasa .day-header { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .rabu .day-header { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .kamis .day-header { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .jumat .day-header { background: linear-gradient(135deg, #f39c12, #d35400); }
+        
+        .day-header::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+        }
+        
+        .day-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .cleaning-list {
+            list-style: none;
+            padding: 20px;
+        }
+        
+        .cleaning-item {
+            padding: 15px;
+            margin: 12px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cleaning-item:hover {
+            background: #e9f7fe;
+            transform: translateX(5px);
+        }
+        
+        .cleaning-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+        }
+        
+        .senin .cleaning-item::before { background: #3498db; }
+        .selasa .cleaning-item::before { background: #2ecc71; }
+        .rabu .cleaning-item::before { background: #e74c3c; }
+        .kamis .cleaning-item::before { background: #9b59b6; }
+        .jumat .cleaning-item::before { background: #f39c12; }
+        
+        .student-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-right: 15px;
+            min-width: 30px;
+            text-align: center;
+            color: #1a2a6c;
+        }
+        
+        .student-name {
+            font-size: 1.2rem;
+            flex-grow: 1;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .footer p {
+            font-size: 1.1rem;
+            color: #1a2a6c;
+            margin-bottom: 10px;
+        }
+        
+        .footer i {
+            color: #e74c3c;
+            margin: 0 5px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .schedule-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-broom"></i> Jadwal Piket Kebersihan</h1>
+            <div class="subtitle">Kelas X Rekayasa Perangkat Lunak 1</div>
+        </header>
+        
+        <div class="schedule-container">
+            <!-- Senin -->
+            <div class="day-card senin" id="section-senin">
+                <div class="day-header">SENIN</div>
+                <ul class="cleaning-list">
+                    <li class="cleaning-item">
+                        <span class="student-number">1</span>
+                        <span class="student-name">ADITHYA PRATAMA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">2</span>
+                        <span class="student-name">ALYA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">3</span>
+                        <span class="student-name">MUHAMMAD KARIM AL JABBAR</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">4</span>
+                        <span class="student-name">NOOR KHALISYA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">5</span>
+                        <span class="student-name">REINDRA IBNU PRATAMA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">6</span>
+                        <span class="student-name">SYVA SAFITRI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">7</span>
+                        <span class="student-name">M. HAMKA HAS NUR</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Selasa -->
+            <div class="day-card selasa" id="section-selasa">
+                <div class="day-header">SELASA</div>
+                <ul class="cleaning-list">
+                    <li class="cleaning-item">
+                        <span class="student-number">1</span>
+                        <span class="student-name">AHMAD FAREL</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">2</span>
+                        <span class="student-name">ANANDHA RAISYA OKTAMA PUTRI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">3</span>
+                        <span class="student-name">MUHAMMAD KHAIRIL FIRDAUS</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">4</span>
+                        <span class="student-name">NUR KEYREL ROBBY TINDAN</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">5</span>
+                        <span class="student-name">RAZENDRA SAHASIKA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">6</span>
+                        <span class="student-name">NUR AFIFATUL A’ISYAH</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">7</span>
+                        <span class="student-name">M. THIO SAPUTRA</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Rabu -->
+            <div class="day-card rabu" id="section-rabu">
+                <div class="day-header">RABU</div>
+                <ul class="cleaning-list">
+                    <li class="cleaning-item">
+                        <span class="student-number">1</span>
+                        <span class="student-name">AKHMAD DANURI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">2</span>
+                        <span class="student-name">MARSYA ZAHRA DHINIA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">3</span>
+                        <span class="student-name">MUHAMMAD REZA YURISHANDY FADILLAH</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">4</span>
+                        <span class="student-name">NITA AMELIA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">5</span>
+                        <span class="student-name">RIRIN NABILLA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">6</span>
+                        <span class="student-name">NADIA ULFA WAHYUNI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">7</span>
+                        <span class="student-name">MUHAMMAD ANSHORI</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Kamis -->
+            <div class="day-card kamis" id="section-kamis">
+                <div class="day-header">KAMIS</div>
+                <ul class="cleaning-list">
+                    <li class="cleaning-item">
+                        <span class="student-number">1</span>
+                        <span class="student-name">AURELIA SYIFA PUTRI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">2</span>
+                        <span class="student-name">FADILLAH</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">3</span>
+                        <span class="student-name">MUHAMMAD FAUZAN PUTRA NASA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">4</span>
+                        <span class="student-name">NOOR AZIZATUNNAZWA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">5</span>
+                        <span class="student-name">ZHVENT ARSENYCO HAKIM</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">6</span>
+                        <span class="student-name">NUR ARSYILLA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">7</span>
+                        <span class="student-name">M. REZKI ADITIA</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Jumat -->
+            <div class="day-card jumat" id="section-jumat">
+                <div class="day-header">JUM'AT</div>
+                <ul class="cleaning-list">
+                    <li class="cleaning-item">
+                        <span class="student-number">1</span>
+                        <span class="student-name">ANGGUN ANGGRAINI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">2</span>
+                        <span class="student-name">MUHAMMAD HAFI FAHREZI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">3</span>
+                        <span class="student-name">MUHAMMAD HAFIZH ASH-SYAKHAWI</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">4</span>
+                        <span class="student-name">MUHAMMAD JAFFAR</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">5</span>
+                        <span class="student-name">MUHAMMAD YORDA HERDANA</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">6</span>
+                        <span class="student-name">NAURATUL JANNAH</span>
+                    </li>
+                    <li class="cleaning-item">
+                        <span class="student-number">7</span>
+                        <span class="student-name">RAFFA WIJAYA</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><i class="fas fa-info-circle"></i> Jadwal ini berlaku mulai semester genap tahun ajaran 2024/2025</p>
+            <p><i class="fas fa-users"></i> Total petugas piket: 35 siswa | <i class="fas fa-calendar-alt"></i> Setiap hari 7 siswa bertugas</p>
+        </div>
+    </div>
+
+    <script>
+        // Animasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.day-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
