@@ -51,18 +51,9 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 ---
 
-### 🔹 Discord Bot: UploadSong
-> Bot Discord untuk GDPS, dapat mengupload lagu langsung via command, serta terintegrasi dengan sistem database web.
-
-- 🔗 [GitHub Project](https://github.com/flessan)
-- 🎮 Fitur: uploadsong, searchlevel, whoRated
-- ☁️ Hosting: Railway (gratis), no timeout
-
----
-
 ## 🖼️ Desain & Branding
 
-- Logo dan aset visual untuk FreedomGDPS
+- Logo dan aset visual untuk FreedomGDPS!!11
 - Thumbnail showcase untuk YouTube Geometry Dash
 - UI layout dashboard seperti website modern
 
@@ -70,7 +61,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 ## 📫 Kontak & Media Sosial
 
-- ✉️ Email: thio.saputra@example.com
+- ✉️ Email: kirimwanjay@gmail.com
 - 🌐 GitHub: [@flessan](https://github.com/flessan)
 - 🎥 YouTube: [FreedomGDPS!!11 Channel](https://youtube.com/@FrGDPS)
 - 💬 Discord: `flessan`
