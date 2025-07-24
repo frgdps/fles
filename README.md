@@ -77,4 +77,4 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 ---
 
-> “Bermimpi besar dan membangun sesuatu yang bisa bermanfaat untuk orang lain, adalah kebahagiaan sejati.” – Thio Saputra
+> “Bermimpi besar dan membangun sesuatu yang bisa bermanfaat untuk orang lain, adalah kebahagiaan.”
