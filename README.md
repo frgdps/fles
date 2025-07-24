@@ -25,7 +25,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 | Nama             | URL                                         | Keterangan                                  |
 |------------------|---------------------------------------------|---------------------------------------------|
-| FreedomGDPS      | [freedomgdps.com](https://fless.ps.fhgdps.com) | Situs utama GDPS yang ku kelola           |
+| FreedomGDPS!!11      | [freedomgdps.com](https://fless.ps.fhgdps.com) | Situs utama GDPS yang ku kelola           |
 | Tools GDPS       | [fless.rf.gd](https://fless.netlify.app)             | Alat bantu lengkap untuk GDPS creator       |
 | GitHub Profile   | [@flessan](https://github.com/flessan)        | Repositori proyek dan tools publik          |
 
