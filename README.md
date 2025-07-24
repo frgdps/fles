@@ -8,7 +8,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 - 🎓 Pelajar SMK dengan jurusan Rekayasa Perangkat Lunak (RPL)
 - 💻 Fokus pada web development, pengembangan aplikasi Android, dan Discord bot
-- 🎮 Pengelola **FreedomGDPS**, sebuah Geometry Dash Private Server dengan komunitas aktif
+- 🎮 Pengelola **FreedomGDPS!!11**, sebuah Geometry Dash Private Server dengan komunitas berada
 - 🎨 Hobi dalam desain UI/UX, animasi, serta eksperimen dengan modifikasi game
 
 ---
@@ -16,8 +16,8 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 ## 🛠️ Skillset
 
 - **Bahasa Pemrograman**: HTML, CSS, JavaScript, PHP, Python, Kotlin
-- **Tools/Frameworks**: AIDE, Termux, Supabase, GitHub Pages, Railway, Flutter (dasar)
-- **Desain**: Canva, Figma (dasar), Photoshop Express, PixelLab
+- **Tools/Frameworks**: TrebEdit, Termux, Supabase, GitHub Pages, Railway, QuickEdit+
+- **Desain**: Canva, IbisPaint, Alight Motion, PixelLab
 
 ---
 
@@ -43,7 +43,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 ---
 
 ### 🔹 Aplikasi Al-Qur’an (Android)
-> Aplikasi ringan dengan fitur pencarian terjemahan, jadwal sholat, arah kiblat, dan tasbih digital.
+> Aplikasi sangat ringan dan open source dengan fitur pencarian terjemahan, jadwal sholat, arah kiblat, dan tasbih digital.
 
 - 📱 Dibuat menggunakan Kotlin via AIDE
 - 🔧 Include: dark mode, custom UI, offline PDF
