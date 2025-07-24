@@ -33,7 +33,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 ## ⚙️ Proyek Unggulan
 
-### 🔹 FreedomGDPS
+### 🔹 FreedomGDPS!!11
 > GDPS yang dimodifikasi penuh dengan fitur unik dan tampilan visual khas. Menyediakan sistem rate level, leaderboard, login system, dan UI web modern.
 
 - 🔗 [Link Web](https://fless.ps.fhgdps.com)
@@ -72,7 +72,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 - ✉️ Email: thio.saputra@example.com
 - 🌐 GitHub: [@flessan](https://github.com/flessan)
-- 🎥 YouTube: [FreedomGDPS Channel](https://youtube.com/@FreedomGDPS)
+- 🎥 YouTube: [FreedomGDPS!!11 Channel](https://youtube.com/@FrGDPS)
 - 💬 Discord: `flessan`
 
 ---
