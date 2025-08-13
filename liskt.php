@@ -6,6 +6,8 @@
     <title>List2Do++ | Aplikasi To-Do List Modern</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tambahkan SortableJS setelah Font Awesome -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
         :root {
             --primary: #4361ee;
@@ -182,6 +184,7 @@
             gap: 25px;
         }
 
+        /* --- Tambahan Drag & Drop --- */
         .category {
             background: var(--card-bg);
             border-radius: 16px;
@@ -189,6 +192,20 @@
             overflow: hidden;
             transition: var(--transition);
             animation: slideUp 0.5s ease;
+            cursor: grab;
+            user-select: none;
+        }
+        .category:active {
+            cursor: grabbing;
+        }
+        .category-ghost {
+            opacity: 0.5;
+            background: var(--light);
+            border: 2px dashed var(--primary);
+        }
+        .category-chosen {
+            background: rgba(67, 97, 238, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         .category:hover {
@@ -203,6 +220,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: grab;
+            user-select: none;
         }
 
         .category-title {
@@ -228,6 +247,7 @@
             padding: 12px 0;
             border-bottom: 1px solid #eee;
             transition: var(--transition);
+            cursor: move;
         }
 
         .task:last-child {
@@ -322,6 +342,83 @@
         .empty-state p {
             font-size: 1.1rem;
             margin-bottom: 20px;
+        }
+
+        /* --- Drag handle & ghost for task --- */
+        .task-handle {
+            cursor: move;
+            margin-right: 10px;
+            color: var(--gray);
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        .task-handle:hover {
+            color: var(--dark);
+        }
+        .task-ghost {
+            opacity: 0.5;
+            background: var(--light);
+            border: 2px dashed var(--primary);
+        }
+        .task-chosen {
+            background: rgba(67, 97, 238, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- Dropdown sorting --- */
+        .sort-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .sort-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 5px;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .sort-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .sort-options {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            left: 0;
+            top: 100%;
+        }
+
+        .sort-options button {
+            width: 100%;
+            padding: 10px 15px;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .sort-options button:hover {
+            background: #f5f5f5;
+        }
+
+        .sort-dropdown:hover .sort-options {
+            display: block;
         }
 
         footer {
@@ -551,7 +648,24 @@
                 }
             }
         }
-        
+
+        // Fungsi sorting task dalam kategori
+        function sortTasks(catIndex, sortBy) {
+            switch(sortBy) {
+                case 'name':
+                    data[catIndex].tasks.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'date':
+                    data[catIndex].tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                    break;
+                case 'completed':
+                    data[catIndex].tasks.sort((a, b) => a.done - b.done);
+                    break;
+            }
+            saveData();
+            renderCategories();
+        }
+
         // Fungsi untuk merender semua kategori
         function renderCategories() {
             const container = document.getElementById('categories');
@@ -578,6 +692,14 @@
                         <div class="category-title">
                             <i class="fas fa-folder"></i>
                             ${category.name}
+                            <div class="sort-dropdown">
+                                <button class="sort-btn"><i class="fas fa-sort"></i></button>
+                                <div class="sort-options">
+                                    <button onclick="sortTasks(${catIndex}, 'name')">Sort by Name</button>
+                                    <button onclick="sortTasks(${catIndex}, 'date')">Sort by Date</button>
+                                    <button onclick="sortTasks(${catIndex}, 'completed')">Sort by Completed</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="category-actions">
                             <button class="btn btn-sm btn-danger" onclick="deleteCategory(${catIndex})">
@@ -586,9 +708,11 @@
                         </div>
                     </div>
                     <div class="tasks-container">
-                        ${category.tasks.length > 0 ? 
+                        ${
+                            category.tasks.length > 0 ? 
                             category.tasks.map((task, taskIndex) => `
                                 <div class="task ${task.done ? 'done' : ''}" data-cat="${catIndex}" data-task="${taskIndex}">
+                                    <i class="fas fa-grip-vertical task-handle"></i>
                                     <input type="checkbox" class="task-checkbox" ${task.done ? 'checked' : ''} 
                                            onclick="toggleTask(${catIndex}, ${taskIndex})">
                                     <div class="task-content">
@@ -620,6 +744,56 @@
             });
             
             calculateStats();
+
+            // Setelah render, inisialisasi drag & drop
+            setTimeout(initSortable, 0);
+        }
+
+        // --- Drag & Drop: inisialisasi SortableJS ---
+        function initSortable() {
+            // Drag & drop kategori
+            if (window.Sortable) {
+                if (!document.getElementById('categories').sortableInstance) {
+                    document.getElementById('categories').sortableInstance = new Sortable(document.getElementById('categories'), {
+                        animation: 150,
+                        handle: '.category-header',
+                        ghostClass: 'category-ghost',
+                        chosenClass: 'category-chosen',
+                        onEnd: function(evt) {
+                            if (evt.oldIndex === evt.newIndex) return;
+                            const movedItem = data[evt.oldIndex];
+                            data.splice(evt.oldIndex, 1);
+                            data.splice(evt.newIndex, 0, movedItem);
+                            saveData();
+                        }
+                    });
+                }
+                // Drag & drop task di setiap kategori
+                document.querySelectorAll('.tasks-container').forEach((container, catIndex) => {
+                    // Hindari double init
+                    if (container.sortableInstance) {
+                        container.sortableInstance.destroy();
+                    }
+                    container.sortableInstance = new Sortable(container, {
+                        animation: 150,
+                        handle: '.task-handle',
+                        ghostClass: 'task-ghost',
+                        chosenClass: 'task-chosen',
+                        draggable: '.task',
+                        filter: '.add-task-btn,.empty-state',
+                        onEnd: function(evt) {
+                            if (evt.oldIndex === evt.newIndex) return;
+                            // Hitung hanya pada elemen .task
+                            const tasksEls = Array.from(container.children).filter(el => el.classList.contains('task'));
+                            if (evt.oldIndex < 0 || evt.oldIndex >= tasksEls.length || evt.newIndex < 0 || evt.newIndex >= tasksEls.length) return;
+                            const movedTask = data[catIndex].tasks[evt.oldIndex];
+                            data[catIndex].tasks.splice(evt.oldIndex, 1);
+                            data[catIndex].tasks.splice(evt.newIndex, 0, movedTask);
+                            saveData();
+                        }
+                    });
+                });
+            }
         }
         
         // Inisialisasi PWA
