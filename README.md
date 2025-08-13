@@ -61,7 +61,7 @@ Halo! Saya **Thio Saputra**, seorang kreator digital & developer muda yang antus
 
 ## 📫 Kontak & Media Sosial
 
-- ✉️ Email: kirimwanjay@gmail.com
+- ✉️ Email: [admin@frgdps.com](mailto:kirimwanjay@gmail.com)
 - 🌐 GitHub: [@flessan](https://github.com/flessan)
 - 🎥 YouTube: [FreedomGDPS!!11 Channel](https://youtube.com/@FrGDPS)
 - 💬 Discord: `flessan`
