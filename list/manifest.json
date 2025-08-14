@@ -1,0 +1,15 @@
+{
+  "name": "List2Do++",
+  "short_name": "List2Do",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#4CAF50",
+  "theme_color": "#4CAF50",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2910/2910768.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
