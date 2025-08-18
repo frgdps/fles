@@ -56,9 +56,8 @@
 
     <div class="bottom-nav">
       <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Beranda</span></a>
-      <a href="#" class="nav-item" id="btnExport"><i class="fas fa-file-export"></i><span>Export</span></a>
-      <a href="#" class="nav-item" id="btnImport"><i class="fas fa-file-import"></i><span>Import</span></a>
       <a href="#" class="nav-item" id="btnTemplates"><i class="fas fa-copy"></i><span>Template</span></a>
+      <a href="#" class="nav-item" id="btnAddQuick"><i class="fas fa-plus-circle"></i><span>Tambah</span></a>
     </div>
   </div>
 
@@ -89,7 +88,6 @@
         <label>Data</label>
         <div style="display:flex;gap:8px;">
           <button class="btn danger" id="resetBtn">Reset</button>
-          <button class="btn" id="exportBtn">Export .json</button>
         </div>
         <div style="font-size:.85rem;color:var(--gray);margin-top:8px;"><i class="fas fa-info-circle"></i> Data disimpan di perangkat. Untuk sinkronisasi multi-device dibutuhkan backend.</div>
       </div>
@@ -131,8 +129,5 @@
       </div>
     </div>
   </div>
-
-  <!-- Hidden file input for import -->
-  <input type="file" id="importFile" accept=".json" style="display:none" />
 </body>
 </html>
