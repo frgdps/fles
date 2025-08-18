@@ -1,10 +1,12 @@
-// Simple PWA + offline-first list app
+// list2do — optimized, export/import removed, debounced save & search
 (function(){
-  // Data model stored in localStorage under key 'list2do_data_v2'
   const STORAGE_KEY = 'list2do_data_v2';
-  let data = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || { categories: [], meta: { xp:0, streak:0, lastComplete:null, history: {} } };
+  // load initial data safely
+  let data;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || { categories: [], meta: { xp:0, streak:0, lastComplete:null, history: {} } }; }
+  catch(e){ data = { categories: [], meta: { xp:0, streak:0, lastComplete:null, history: {} } }; }
 
-  // DOM refs
+  // DOM refs (cached)
   const categoriesSlider = document.getElementById('categoriesSlider');
   const sliderDots = document.getElementById('sliderDots');
   const totalCategoriesEl = document.getElementById('totalCategories');
@@ -24,48 +26,63 @@
   const searchInput = document.getElementById('searchInput');
   const filterSelect = document.getElementById('filterSelect');
   const sortSelect = document.getElementById('sortSelect');
-  const importFile = document.getElementById('importFile');
-  const btnExport = document.getElementById('btnExport');
-  const btnImport = document.getElementById('btnImport');
   const btnTemplates = document.getElementById('btnTemplates');
-  const exportBtn = document.getElementById('exportBtn');
+  const btnAddQuick = document.getElementById('btnAddQuick');
   const resetBtn = document.getElementById('resetBtn');
   const statsBtn = document.getElementById('statsBtn');
 
   let currentEdit = { catIndex: null, taskIndex: null };
+  let saveTimeout = null;
 
-  // Helpers
-  function save(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    render();
+  // Debounce util
+  function debounce(fn, wait=180){
+    let t = null;
+    return function(...args){
+      clearTimeout(t);
+      t = setTimeout(()=> fn.apply(this,args), wait);
+    };
   }
+
+  // Save (debounced writes to localStorage to reduce I/O)
+  function _doSave(){
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch(e){
+      console.warn('Save failed:', e);
+    }
+    render(); // ensure UI updated after eventual save
+    saveTimeout = null;
+  }
+  function save(){
+    if (saveTimeout) clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(_doSave, 120);
+  }
+
   function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
   function todayStr(){ return new Date().toISOString().split('T')[0]; }
 
-  // Stats & XP/Streak logic
+  // XP & streak
   function addXP(amount){
-    data.meta.xp = (data.meta.xp || 0) + amount;
+    data.meta.xp = (data.meta.xp||0) + (amount||5);
   }
   function updateStreakOnComplete(){
     const today = todayStr();
-    const last = data.meta.lastComplete;
-    if (last === today) return;
-    if (!last) { data.meta.streak = 1; }
+    if (data.meta.lastComplete === today) return;
+    if (!data.meta.lastComplete) data.meta.streak = 1;
     else {
-      const lastDate = new Date(last);
-      const nextDate = new Date(lastDate); nextDate.setDate(lastDate.getDate()+1);
-      if (nextDate.toISOString().split('T')[0] === today) data.meta.streak = (data.meta.streak||0)+1;
-      else data.meta.streak = 1;
+      const lastDate = new Date(data.meta.lastComplete);
+      lastDate.setDate(lastDate.getDate()+1);
+      const next = lastDate.toISOString().split('T')[0];
+      data.meta.streak = (next === today) ? (data.meta.streak||0) + 1 : 1;
     }
     data.meta.lastComplete = today;
-    // history for heatmap
     data.meta.history = data.meta.history || {};
     data.meta.history[today] = (data.meta.history[today] || 0) + 1;
   }
 
-  // CRUD Category/Task
+  // CRUD
   function addCategory(name){
-    if (!name) return alert('Nama kategori kosong');
+    if (!name || !name.trim()) return;
     data.categories.push({ id: uid(), name: name.trim().slice(0,40), tasks: [] });
     save();
     setTimeout(()=> scrollToCategory(data.categories.length-1), 80);
@@ -73,38 +90,43 @@
   function deleteCategory(idx){ if (!confirm('Hapus kategori?')) return; data.categories.splice(idx,1); save(); }
   function addTask(catIndex, taskObj){
     const cat = data.categories[catIndex];
-    if(!cat) return;
-    const task = Object.assign({ id: uid(), name:'', desc:'', done:false, createdAt: new Date().toISOString(), due:null, priority:'medium', tags:[], recurring:'none', xp:5 }, taskObj || {});
+    if (!cat) return;
+    const task = Object.assign({ id: uid(), name:'', desc:'', done:false, createdAt:new Date().toISOString(), due:null, priority:'medium', tags:[], recurring:'none', xp:5 }, taskObj || {});
     cat.tasks.push(task);
     save();
   }
   function editTask(catIndex, taskIndex, updates){
-    const task = data.categories[catIndex].tasks[taskIndex];
-    Object.assign(task, updates);
+    const t = data.categories[catIndex].tasks[taskIndex];
+    Object.assign(t, updates);
     save();
   }
   function deleteTask(catIndex, taskIndex){ if(!confirm('Hapus tugas?')) return; data.categories[catIndex].tasks.splice(taskIndex,1); save(); }
 
   function toggleTask(catIndex, taskIndex){
-    const task = data.categories[catIndex].tasks[taskIndex];
-    task.done = !task.done;
-    if (task.done) { addXP(task.xp || 5); updateStreakOnComplete(); scheduleRecurring(task, catIndex); showLocalNotification('Tugas selesai', task.name); }
+    const t = data.categories[catIndex].tasks[taskIndex];
+    t.done = !t.done;
+    if (t.done){
+      addXP(t.xp||5);
+      updateStreakOnComplete();
+      scheduleRecurring(t, catIndex);
+      showLocalNotification('Tugas selesai', t.name);
+    }
     save();
   }
 
-  // Recurring handling: when task completed and has recurring, create next instance
+  // Recurring (simple)
   function scheduleRecurring(task, catIndex){
     if (!task.recurring || task.recurring === 'none') return;
     const map = { daily:1, weekly:7, monthly:30 };
     const days = map[task.recurring] || 0;
-    if (days<=0) return;
-    const dueDate = task.due ? new Date(task.due) : new Date();
-    dueDate.setDate(dueDate.getDate() + days);
-    const next = Object.assign({}, task, { id: uid(), done:false, due: dueDate.toISOString().split('T')[0], createdAt: new Date().toISOString() });
+    if (!days) return;
+    const base = task.due ? new Date(task.due) : new Date();
+    base.setDate(base.getDate() + days);
+    const next = Object.assign({}, task, { id: uid(), done:false, due: base.toISOString().split('T')[0], createdAt: new Date().toISOString() });
     data.categories[catIndex].tasks.push(next);
   }
 
-  // Rendering
+  // Render (kept efficient by mapping once, minimal DOM queries)
   function render(){
     // stats
     const totalCategories = data.categories.length;
@@ -116,29 +138,38 @@
     streakEl.textContent = data.meta.streak || 0;
     xpEl.textContent = data.meta.xp || 0;
 
-    // categories
-    if (data.categories.length === 0){
+    // categories content
+    if (!data.categories.length){
       categoriesSlider.innerHTML = `<div class="category-card empty"><div class="empty-state"><i class="fas fa-clipboard-list"></i><div>Belum ada kategori. Tambah untuk mulai.</div></div></div>`;
       sliderDots.innerHTML = '';
       return;
     }
-    const q = searchInput.value.trim().toLowerCase();
-    // build cards
-    categoriesSlider.innerHTML = data.categories.map((cat,ci)=>{
-      const tasksFiltered = cat.tasks.filter((t)=>{
-        if (filterSelect.value === 'done' && !t.done) return false;
-        if (filterSelect.value === 'todo' && t.done) return false;
-        if (q && !(t.name.toLowerCase().includes(q) || (t.tags||[]).join(',').toLowerCase().includes(q) || (t.desc||'').toLowerCase().includes(q))) return false;
+
+    const q = (searchInput.value || '').trim().toLowerCase();
+    const sortMode = sortSelect.value;
+    const filterMode = filterSelect.value;
+
+    // build HTML for all categories (string building is fast enough here)
+    const html = data.categories.map((cat, ci) => {
+      const tasksFiltered = cat.tasks.filter(t => {
+        if (filterMode === 'done' && !t.done) return false;
+        if (filterMode === 'todo' && t.done) return false;
+        if (q){
+          const hay = (t.name+' '+(t.tags||[]).join(' ')+ ' ' + (t.desc||'')).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
         return true;
       });
-      // sort if requested
-      if (sortSelect.value === 'name') tasksFiltered.sort((a,b)=>a.name.localeCompare(b.name));
-      if (sortSelect.value === 'date') tasksFiltered.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
-      if (sortSelect.value === 'priority') tasksFiltered.sort((a,b)=> ['high','medium','low'].indexOf(a.priority) - ['high','medium','low'].indexOf(b.priority));
-      const tasksHtml = tasksFiltered.length ? tasksFiltered.map((t,ti)=>`
+
+      // sort visible tasks if needed
+      if (sortMode === 'name') tasksFiltered.sort((a,b)=> a.name.localeCompare(b.name));
+      if (sortMode === 'date') tasksFiltered.sort((a,b)=> new Date(a.createdAt) - new Date(b.createdAt));
+      if (sortMode === 'priority') tasksFiltered.sort((a,b)=> ['high','medium','low'].indexOf(a.priority) - ['high','medium','low'].indexOf(b.priority));
+
+      const tasksHtml = tasksFiltered.length ? tasksFiltered.map(t => `
         <div class="task ${t.done? 'done':''}" data-cat="${ci}" data-task="${t.id}">
           <i class="fas fa-grip-vertical task-handle"></i>
-          <input type="checkbox" class="task-checkbox" ${t.done? 'checked':''} data-action="toggle" data-cat="${ci}" data-task-index="${ci}_${t.id}">
+          <input type="checkbox" class="task-checkbox" ${t.done? 'checked':''} data-action="toggle" data-cat="${ci}" data-task-id="${t.id}">
           <div class="task-content">
             <div class="task-name">${escapeHtml(t.name)}</div>
             <div class="task-meta">${t.due? 'Due: '+t.due+' · ' : ''}${t.priority} · ${ (t.tags||[]).slice(0,3).join(', ') }</div>
@@ -148,6 +179,7 @@
             <button class="task-action-btn" data-action="delete" data-cat="${ci}" data-task-id="${t.id}"><i class="fas fa-trash"></i></button>
           </div>
         </div>`).join('') : `<div class="empty-state"><i class="fas fa-tasks"></i><div>Belum ada tugas.</div></div>`;
+
       return `
         <div class="category-card" data-cat-index="${ci}">
           <div class="category-header"><div class="category-title"><i class="fas fa-folder"></i> ${escapeHtml(cat.name)}</div>
@@ -157,14 +189,14 @@
           </div>
         </div>`;
     }).join('');
-    // init sortable
-    initSortable();
-    // render dots
-    renderDots();
-  }
 
-  function renderDots(){
+    categoriesSlider.innerHTML = html;
+
+    // dots
     sliderDots.innerHTML = data.categories.map((_,i)=>`<div class="slider-dot ${i===0? 'active':''}" data-dot="${i}"></div>`).join('');
+
+    // init sortable after DOM inserted
+    initSortable();
   }
 
   function scrollToCategory(idx){
@@ -172,44 +204,43 @@
     if (card) card.scrollIntoView({behavior:'smooth',inline:'center'});
   }
 
-  // Events delegation
-  document.body.addEventListener('click', (e)=>{
+  // events delegation (single listener)
+  document.body.addEventListener('click', (e) => {
     const action = e.target.closest('[data-action]');
-    if (action){
-      const act = action.getAttribute('data-action');
-      if (act === 'add-task'){
-        const ci = Number(action.dataset.cat);
-        openTaskModal({ mode:'add', catIndex:ci });
-      } else if (act === 'toggle'){
-        const [ci, id] = action.dataset.taskIndex.split('_');
-        const catIndex = Number(ci);
-        const cat = data.categories[catIndex];
-        const tIndex = cat.tasks.findIndex(t=>t.id===id);
-        if (tIndex>=0) toggleTask(catIndex, tIndex);
-      } else if (act === 'edit'){
-        const ci = Number(action.dataset.cat);
-        const id = action.dataset.taskId;
-        const cat = data.categories[ci];
-        const tIndex = cat.tasks.findIndex(t=>t.id===id);
-        if (tIndex>=0) openTaskModal({ mode:'edit', catIndex:ci, taskIndex:tIndex });
-      } else if (act === 'delete'){
-        const ci = Number(action.dataset.cat);
-        const id = action.dataset.taskId;
-        const cat = data.categories[ci];
-        const tIndex = cat.tasks.findIndex(t=>t.id===id);
-        if (tIndex>=0) deleteTask(ci,tIndex);
-      } else if (act === 'delete-cat'){
-        deleteCategory(Number(action.dataset.cat));
-      }
+    if (!action) return;
+    const act = action.getAttribute('data-action');
+
+    if (act === 'add-task'){
+      const ci = Number(action.dataset.cat);
+      openTaskModal({ mode:'add', catIndex:ci });
+    } else if (act === 'toggle'){
+      const catIndex = Number(action.dataset.cat);
+      const taskId = action.dataset.taskId;
+      const cat = data.categories[catIndex];
+      const tIndex = cat.tasks.findIndex(t=>t.id===taskId);
+      if (tIndex>=0) toggleTask(catIndex, tIndex);
+    } else if (act === 'edit'){
+      const ci = Number(action.dataset.cat);
+      const id = action.dataset.taskId;
+      const cat = data.categories[ci];
+      const tIndex = cat.tasks.findIndex(t=>t.id===id);
+      if (tIndex>=0) openTaskModal({ mode:'edit', catIndex:ci, taskIndex:tIndex });
+    } else if (act === 'delete'){
+      const ci = Number(action.dataset.cat);
+      const id = action.dataset.taskId;
+      const cat = data.categories[ci];
+      const tIndex = cat.tasks.findIndex(t=>t.id===id);
+      if (tIndex>=0) deleteTask(ci,tIndex);
+    } else if (act === 'delete-cat'){
+      deleteCategory(Number(action.dataset.cat));
     }
   });
 
-  // UI: open task modal
+  // modal open/close and saving
   function openTaskModal({mode, catIndex, taskIndex}){
     currentEdit.catIndex = catIndex;
     currentEdit.taskIndex = taskIndex ?? null;
     document.getElementById('taskModalTitle').textContent = mode==='edit'? 'Edit Tugas' : 'Tambah Tugas';
-    // reset fields
     document.getElementById('taskTitle').value = '';
     document.getElementById('taskDesc').value = '';
     document.getElementById('taskPriority').value = 'medium';
@@ -259,29 +290,9 @@
     addCategory(newCategoryInput.value);
     newCategoryInput.value='';
   });
-
   newCategoryInput.addEventListener('keydown', (e)=> { if (e.key==='Enter') addCategoryBtn.click(); });
 
-  // Import/Export
-  btnExport.addEventListener('click', ()=> exportData());
-  exportBtn.addEventListener('click', ()=> exportData());
-  btnImport.addEventListener('click', ()=> importFile.click());
-  importFile.addEventListener('change', (e)=> {
-    const f = e.target.files[0]; if(!f) return;
-    const reader = new FileReader(); reader.onload = (ev)=> {
-      try { const obj = JSON.parse(ev.target.result); data = obj; save(); alert('Import berhasil'); } catch(err){ alert('File tidak valid'); }
-    }; reader.readAsText(f);
-  });
-
-  function exportData(){
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob); const a = document.createElement('a');
-    a.href = url; a.download = 'list2do_backup.json'; a.click(); URL.revokeObjectURL(url);
-  }
-
-  resetBtn.addEventListener('click', ()=> { if(confirm('Reset semua data?')){ localStorage.removeItem(STORAGE_KEY); location.reload(); } });
-
-  // Templates
+  // Templates quick add
   btnTemplates.addEventListener('click', ()=> {
     const tpl = prompt('Pilih template: 1=Belanja,2=Perjalanan,3=Belajar\nKetik angka:');
     if (!tpl) return;
@@ -291,19 +302,24 @@
     save();
   });
 
-  // Search, filter, sort events
-  [searchInput, filterSelect, sortSelect].forEach(el=>el.addEventListener('input', ()=> render()));
+  // quick add button (bottom nav) -> open new category input
+  btnAddQuick.addEventListener('click', ()=> { newCategoryInput.focus(); });
 
-  // Sortable init per category container
+  // reset
+  resetBtn.addEventListener('click', ()=> { if(confirm('Reset semua data?')){ localStorage.removeItem(STORAGE_KEY); location.reload(); } });
+
+  // search/filter/sort: debounce render
+  const debouncedRender = debounce(render, 160);
+  [searchInput, filterSelect, sortSelect].forEach(el=>el.addEventListener('input', debouncedRender));
+
+  // Sortable init
   function initSortable(){
     data.categories.forEach((cat, index)=>{
       const container = document.getElementById('tasks-'+index);
       if (!container) return;
       if (container._sortable) container._sortable.destroy();
-      container._sortable = new Sortable(container, { group: 'tasks', handle: '.task-handle', draggable: '.task', animation: 180, onEnd(evt){
-        const oldIndex = evt.oldIndex, newIndex = evt.newIndex;
+      container._sortable = new Sortable(container, { group: 'tasks', handle: '.task-handle', draggable: '.task', animation: 160, onEnd(evt){
         const visibleTasks = Array.from(container.querySelectorAll('.task')).map(el=> el.getAttribute('data-task'));
-        // reorder underlying tasks array by visible order (visibleTasks contains ids)
         const allTasks = data.categories[index].tasks;
         const newOrder = visibleTasks.map(id=> allTasks.find(t=>t.id===id)).filter(Boolean);
         data.categories[index].tasks = newOrder.concat(allTasks.filter(t=> !visibleTasks.includes(t.id)));
@@ -312,10 +328,10 @@
     });
   }
 
-  // misc UI utilities
+  // helpers
   function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
 
-  // notification helpers (local only)
+  // notifications (local)
   async function ensureNotifications(){
     if (!('Notification' in window)) return false;
     if (Notification.permission === 'granted') return true;
@@ -327,7 +343,6 @@
   }
   async function showLocalNotification(title, body){
     if (!await ensureNotifications()) return;
-    // if service worker registered use it
     if (navigator.serviceWorker && navigator.serviceWorker.controller){
       const reg = await navigator.serviceWorker.getRegistration();
       if (reg) return reg.showNotification(title, { body, icon: './icon-192.png', tag: 'list2do' });
@@ -335,21 +350,15 @@
     try { new Notification(title, { body }); } catch(e){ console.warn('Notification failed', e); }
   }
 
-  // reminder checker: checks tasks with due dates and not done, and shows notification if due today or overdue
+  // reminders (checks due today)
   function checkReminders(){
     const today = todayStr();
-    data.categories.forEach((cat, ci)=>{
-      cat.tasks.forEach((t, ti)=>{
-        if (t.due && !t.done){
-          if (t.due === today){
-            showLocalNotification('Tugas jatuh tempo: '+t.name, 'Hari ini');
-          }
-        }
-      });
-    });
+    data.categories.forEach(cat => cat.tasks.forEach(t => {
+      if (t.due && !t.done && t.due === today) showLocalNotification('Tugas jatuh tempo', t.name);
+    }));
   }
 
-  // Stats modal button
+  // statistics quick view
   statsBtn.addEventListener('click', ()=> {
     const history = data.meta.history || {};
     let text = `Kategori: ${data.categories.length}\nTotal tugas: ${data.categories.reduce((s,c)=>s+c.tasks.length,0)}\nBelum selesai: ${data.categories.reduce((s,c)=>s+c.tasks.filter(t=>!t.done).length,0)}\n\nKontribusi harian:\n`;
@@ -358,39 +367,34 @@
     alert(text);
   });
 
-  // initial render and register service worker
-  render();
-
-  // service worker registration
+  // sw registration (if present)
   if ('serviceWorker' in navigator){
     navigator.serviceWorker.register('./service-worker.js').then(()=> console.log('SW registered')).catch(()=> console.warn('SW failed'));
   }
 
-  // on load, check reminders
   window.addEventListener('load', ()=> { checkReminders(); });
-  // visibility change check reminders and save frequently
   document.addEventListener('visibilitychange', ()=> { if (document.visibilityState === 'visible') checkReminders(); });
 
-  // expose some functions to console for debugging
-  window.__list2do = { data, save, addCategory, addTask, toggleTask, exportData };
+  // expose minimal debug API
+  window.__list2do = { data, save, addCategory, addTask, toggleTask };
 
   // settings apply
   function applySettings(){
     const theme = localStorage.getItem('list2do_theme') || 'light';
     document.documentElement.setAttribute('data-theme', theme);
-    document.querySelectorAll('.theme-btn').forEach(b=> b.classList.toggle('active', b.dataset.theme===theme));
     const accent = localStorage.getItem('list2do_accent') || 'blue';
     document.documentElement.setAttribute('data-accent', accent);
+    document.querySelectorAll('.theme-btn').forEach(b=> b.classList.toggle('active', b.dataset.theme===theme));
     document.querySelectorAll('.accent-btn').forEach(b=> b.classList.toggle('active', b.dataset.accent===accent));
   }
   document.querySelectorAll('.theme-btn').forEach(b=> b.addEventListener('click', ()=> { localStorage.setItem('list2do_theme', b.dataset.theme); applySettings(); }));
   document.querySelectorAll('.accent-btn').forEach(b=> b.addEventListener('click', ()=> { localStorage.setItem('list2do_accent', b.dataset.accent); applySettings(); }));
   applySettings();
 
-  // small helper: show task modal for category when clicking add task btn (delegated earlier)
-  document.addEventListener('click', (e)=> { if (e.target && e.target.closest && e.target.closest('[data-action="add-task"]')) { const ci = Number(e.target.closest('[data-action="add-task"]').dataset.cat); openTaskModal({mode:'add', catIndex: ci}); } });
+  // helper to open add task modal via delegated click for add-task buttons
+  document.addEventListener('click', (e)=> { const el = e.target.closest('[data-action="add-task"]'); if (el) { const ci = Number(el.dataset.cat); openTaskModal({mode:'add', catIndex: ci}); } });
 
-  // utility to scroll to first card on load
-  if (data.categories.length) setTimeout(()=> { const el = document.querySelector('.category-card'); if (el) el.scrollIntoView({behavior:'smooth', inline:'center'}); }, 120);
+  // initial render
+  render();
 
 })();
