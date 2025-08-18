@@ -273,6 +273,37 @@ body{
 }
 .theme-btn.active, .accent-btn.active{ outline: 3px solid rgba(var(--accent),0.12) }
 
+/* Heatmap */
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  margin-top: 1rem;
+}
+.heatmap-cell {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--gray-light);
+}
+.heatmap-cell.level-0 { background: #e5e7eb; }
+.heatmap-cell.level-1 { background: #9ae6b4; }
+.heatmap-cell.level-2 { background: #48bb78; }
+.heatmap-cell.level-3 { background: #2f855a; }
+.heatmap-cell.level-4 { background: #22543d; }
+
+/* Task actions update */
+.task-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray);
+  transition: color .2s;
+}
+.task-actions button:hover {
+  color: var(--accent);
+}
+
 /* responsive tweaks */
 @media(max-width:560px){
   .container{ padding:12px 14px; gap:10px }
