@@ -195,15 +195,6 @@
     // dots
     sliderDots.innerHTML = data.categories.map((_,i)=>`<div class="slider-dot ${i===0? 'active':''}" data-dot="${i}"></div>`).join('');
 
-    // init sortable after DOM inserted
-    initSortable();
-  }
-
-  function scrollToCategory(idx){
-    const card = categoriesSlider.children[idx];
-    if (card) card.scrollIntoView({behavior:'smooth',inline:'center'});
-  }
-
   // events delegation (single listener)
   document.body.addEventListener('click', (e) => {
     const action = e.target.closest('[data-action]');
@@ -308,25 +299,54 @@
   // reset
   resetBtn.addEventListener('click', ()=> { if(confirm('Reset semua data?')){ localStorage.removeItem(STORAGE_KEY); location.reload(); } });
 
+// move task up/down
+function moveTask(catIndex, taskId, dir){
+  const tasks = data.categories[catIndex].tasks;
+  const i = tasks.findIndex(t => t.id===taskId);
+  if (i<0) return;
+  const j = dir==='up'? i-1 : i+1;
+  if (j<0 || j>=tasks.length) return;
+  [tasks[i], tasks[j]] = [tasks[j], tasks[i]];
+  save();
+}
+
+// delegation tambahan
+if (act === 'up') moveTask(Number(action.dataset.cat), action.dataset.taskId, 'up');
+if (act === 'down') moveTask(Number(action.dataset.cat), action.dataset.taskId, 'down');
+
+// buka modal statistik
+statsBtn.addEventListener('click', ()=> {
+  const history = data.meta.history || {};
+  let text = `Kategori: ${data.categories.length}<br>
+  Total tugas: ${data.categories.reduce((s,c)=>s+c.tasks.length,0)}<br>
+  Belum selesai: ${data.categories.reduce((s,c)=>s+c.tasks.filter(t=>!t.done).length,0)}<br>`;
+  document.getElementById('statsText').innerHTML = text;
+
+  renderHeatmap(history);
+  document.getElementById('statsModal').classList.remove('hidden');
+});
+document.getElementById('closeStats').addEventListener('click', ()=> document.getElementById('statsModal').classList.add('hidden'));
+
+// heatmap renderer
+function renderHeatmap(history){
+  const container = document.getElementById('heatmap');
+  container.innerHTML='';
+  const days = 70; // 10 minggu terakhir
+  for(let i=days-1;i>=0;i--){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const key = d.toISOString().split('T')[0];
+    const val = history[key]||0;
+    const level = val>=5?4:val>=3?3:val>=1?2:0;
+    const cell = document.createElement('div');
+    cell.className='heatmap-cell level-'+level;
+    cell.title = key+': '+val+' selesai';
+    container.appendChild(cell);
+  }
+}
+
   // search/filter/sort: debounce render
   const debouncedRender = debounce(render, 160);
   [searchInput, filterSelect, sortSelect].forEach(el=>el.addEventListener('input', debouncedRender));
-
-  // Sortable init
-  function initSortable(){
-    data.categories.forEach((cat, index)=>{
-      const container = document.getElementById('tasks-'+index);
-      if (!container) return;
-      if (container._sortable) container._sortable.destroy();
-      container._sortable = new Sortable(container, { group: 'tasks', handle: '.task-handle', draggable: '.task', animation: 160, onEnd(evt){
-        const visibleTasks = Array.from(container.querySelectorAll('.task')).map(el=> el.getAttribute('data-task'));
-        const allTasks = data.categories[index].tasks;
-        const newOrder = visibleTasks.map(id=> allTasks.find(t=>t.id===id)).filter(Boolean);
-        data.categories[index].tasks = newOrder.concat(allTasks.filter(t=> !visibleTasks.includes(t.id)));
-        save();
-      }});
-    });
-  }
 
   // helpers
   function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
