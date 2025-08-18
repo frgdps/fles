@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
   <title>List2Do++ | Fless</title>
   <meta name="theme-color" content="#4361ee">
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./style.css">
+  <!-- FontAwesome untuk icon -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script defer src="./app.js"></script>
 </head>
 <body>
@@ -16,25 +16,25 @@
     <header class="mobile-header">
       <div class="logo"><i class="fas fa-tasks"></i> List2Do++</div>
       <div class="mobile-actions">
-        <button id="statsBtn" title="Statistik"><i class="fas fa-chart-pie"></i></button>
-        <button id="settingsBtn" title="Pengaturan"><i class="fas fa-cog"></i></button>
+        <button id="statsBtn" title="Statistik" aria-label="Statistik"><i class="fas fa-chart-pie"></i></button>
+        <button id="settingsBtn" title="Pengaturan" aria-label="Pengaturan"><i class="fas fa-cog"></i></button>
       </div>
     </header>
 
     <section class="controls">
       <div class="add-section">
-        <input id="newCategory" placeholder="Buat kategori baru..." maxlength="24">
-        <button id="addCategoryBtn" class="btn"><i class="fas fa-plus"></i> Kategori</button>
+        <input id="newCategory" placeholder="Buat kategori baru..." maxlength="24" aria-label="Nama kategori">
+        <button id="addCategoryBtn" class="btn" aria-label="Tambah kategori"><i class="fas fa-plus"></i> Kategori</button>
       </div>
 
       <div class="search-row">
-        <input id="searchInput" placeholder="Cari tugas, tag, atau kata..." />
-        <select id="filterSelect">
+        <input id="searchInput" placeholder="Cari tugas, tag, atau kata..." aria-label="Cari tugas"/>
+        <select id="filterSelect" aria-label="Filter">
           <option value="all">Semua</option>
           <option value="done">Selesai</option>
           <option value="todo">Belum</option>
         </select>
-        <select id="sortSelect">
+        <select id="sortSelect" aria-label="Urutkan">
           <option value="custom">Urut manual</option>
           <option value="date">Tanggal</option>
           <option value="name">Nama</option>
@@ -42,18 +42,8 @@
         </select>
       </div>
     </section>
-    
-    <!-- Statistik Modal -->
-<div id="statsModal" class="modal-overlay hidden">
-  <div class="modal">
-    <button class="modal-close" id="closeStats"><i class="fas fa-times"></i></button>
-    <h2>Statistik Produktivitas</h2>
-    <div id="statsText"></div>
-    <div id="heatmap" class="heatmap"></div>
-  </div>
-</div>
 
-    <div class="stats" id="topStats">
+    <div class="stats" id="topStats" role="region" aria-label="Statistik utama">
       <div class="stat-card"><i class="fas fa-clipboard-list"></i><div id="pendingTasks" class="stat-value">0</div><div class="stat-label">Belum Selesai</div></div>
       <div class="stat-card"><i class="fas fa-layer-group"></i><div id="totalCategories" class="stat-value">0</div><div class="stat-label">Kategori</div></div>
       <div class="stat-card"><i class="fas fa-list-check"></i><div id="totalTasks" class="stat-value">0</div><div class="stat-label">Total Tugas</div></div>
@@ -61,10 +51,10 @@
       <div class="stat-card"><i class="fas fa-star"></i><div id="xp" class="stat-value">0</div><div class="stat-label">XP</div></div>
     </div>
 
-    <div id="categoriesSlider" class="categories-slider"></div>
-    <div id="sliderDots" class="slider-dots"></div>
+    <div id="categoriesSlider" class="categories-slider" aria-live="polite"></div>
+    <div id="sliderDots" class="slider-dots" aria-hidden="true"></div>
 
-    <div class="bottom-nav">
+    <div class="bottom-nav" role="navigation" aria-label="Navigasi bawah">
       <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Beranda</span></a>
       <a href="#" class="nav-item" id="btnTemplates"><i class="fas fa-copy"></i><span>Template</span></a>
       <a href="#" class="nav-item" id="btnAddQuick"><i class="fas fa-plus-circle"></i><span>Tambah</span></a>
@@ -72,25 +62,25 @@
   </div>
 
   <!-- Settings Modal -->
-  <div id="settingsModal" class="modal-overlay hidden">
+  <div id="settingsModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
     <div class="modal">
-      <button class="modal-close" id="closeSettings"><i class="fas fa-times"></i></button>
-      <h2>Pengaturan</h2>
+      <button class="modal-close" id="closeSettings" aria-label="Tutup pengaturan"><i class="fas fa-times"></i></button>
+      <h2 id="settingsTitle">Pengaturan</h2>
       <div class="setting-group">
         <label>Tema</label>
         <div class="theme-options">
-          <button class="theme-btn" data-theme="light" title="Terang"><i class="fas fa-sun"></i></button>
-          <button class="theme-btn" data-theme="dark" title="Gelap"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn" data-theme="light" title="Terang" aria-label="Tema terang"><i class="fas fa-sun"></i></button>
+          <button class="theme-btn" data-theme="dark" title="Gelap" aria-label="Tema gelap"><i class="fas fa-moon"></i></button>
         </div>
       </div>
       <div class="setting-group">
         <label>Warna Aksen</label>
         <div class="accent-options">
-          <button class="accent-btn" data-accent="blue" title="Biru"></button>
-          <button class="accent-btn" data-accent="green" title="Hijau"></button>
-          <button class="accent-btn" data-accent="pink" title="Pink"></button>
-          <button class="accent-btn" data-accent="orange" title="Oranye"></button>
-          <button class="accent-btn" data-accent="red" title="Merah"></button>
+          <button class="accent-btn" data-accent="blue" title="Biru" aria-label="Aksen biru"></button>
+          <button class="accent-btn" data-accent="green" title="Hijau" aria-label="Aksen hijau"></button>
+          <button class="accent-btn" data-accent="pink" title="Pink" aria-label="Aksen pink"></button>
+          <button class="accent-btn" data-accent="orange" title="Oranye" aria-label="Aksen oranye"></button>
+          <button class="accent-btn" data-accent="red" title="Merah" aria-label="Aksen merah"></button>
         </div>
       </div>
 
@@ -99,15 +89,25 @@
         <div style="display:flex;gap:8px;">
           <button class="btn danger" id="resetBtn">Reset</button>
         </div>
-        <div style="font-size:.85rem;color:var(--gray);margin-top:8px;"><i class="fas fa-info-circle"></i> Data disimpan di perangkat. Untuk sinkronisasi multi-device dibutuhkan backend.</div>
+        <div style="font-size:.85rem;color:var(--muted);margin-top:8px;"><i class="fas fa-info-circle"></i> Data disimpan di perangkat. Untuk sinkronisasi multi-device dibutuhkan backend.</div>
       </div>
     </div>
   </div>
 
-  <!-- Add/Edit Task Modal -->
-  <div id="taskModal" class="modal-overlay hidden">
+  <!-- Statistik Modal (heatmap) -->
+  <div id="statsModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
     <div class="modal">
-      <button class="modal-close" id="closeTaskModal"><i class="fas fa-times"></i></button>
+      <button class="modal-close" id="closeStats" aria-label="Tutup statistik"><i class="fas fa-times"></i></button>
+      <h2 id="statsTitle">Statistik Produktivitas</h2>
+      <div id="statsText" style="white-space:pre-wrap;"></div>
+      <div id="heatmap" class="heatmap" aria-hidden="false" style="margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Task Modal -->
+  <div id="taskModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+    <div class="modal">
+      <button class="modal-close" id="closeTaskModal" aria-label="Tutup modal tugas"><i class="fas fa-times"></i></button>
       <h2 id="taskModalTitle">Tambah Tugas</h2>
       <div class="setting-group">
         <label>Judul</label>
@@ -139,5 +139,8 @@
       </div>
     </div>
   </div>
+
+  <!-- small accessibility helper -->
+  <div class="hidden-clip" aria-hidden="true">List2Do++</div>
 </body>
 </html>
