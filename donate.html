@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Fless</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.5); }
+    }
+    
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    .glow-animation { animation: glow 2s ease-in-out infinite; }
+    
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #000000 100%);
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="gradient-bg text-white min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    
+    <!-- Header Section -->
+    <header class="text-center mb-12">
+      <div class="relative inline-block mb-6">
+        <img src="https://iili.io/K3FmZzX.jpg" 
+             alt="Profile Fless" 
+             class="w-32 h-32 rounded-full mx-auto shadow-2xl border-4 border-blue-400 glow-animation float-animation">
+        <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full border-4 border-slate-900"></div>
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+        Support <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Me!</span>
+      </h1>
+      
+      <p class="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+        Bantu aku terus berkarya dan berbagi konten berkualitas melalui platform donasi favorit kamu ✨
+      </p>
+    </header>
+
+    <!-- Donation Cards Grid -->
+    <main class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      
+      <!-- Tako.id Card -->
+      <div class="glass-effect rounded-2xl p-6 card-hover">
+        <div class="flex items-center mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mr-4 shadow-lg">
+            <img src="https://avatars.githubusercontent.com/u/139215619?s=200&v=4" 
+                 alt="Tako.id" 
+                 class="w-8 h-8 object-contain">
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Tako.id</h3>
+            <p class="text-gray-400 text-sm">Platform donasi lokal Indonesia</p>
+          </div>
+        </div>
+        <a href="https://tako.id/Fless" 
+           target="_blank" 
+           class="block w-full text-center py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+          💝 Donasi Sekarang
+        </a>
+      </div>
+
+      <!-- Ko-fi Card -->
+      <div class="glass-effect rounded-2xl p-6 card-hover">
+        <div class="flex items-center mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mr-4 shadow-lg">
+            <img src="https://storage.ko-fi.com/cdn/logomarkLogo.png" 
+                 alt="Ko-fi" 
+                 class="w-8 h-8 object-contain">
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Ko-fi</h3>
+            <p class="text-gray-400 text-sm">Global donation platform</p>
+          </div>
+        </div>
+        <a href="https://ko-fi.com/fless" 
+           target="_blank" 
+           class="block w-full text-center py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+          ☕ Buy Me a Coffee
+        </a>
+      </div>
+
+      <!-- Saweria Card -->
+      <div class="glass-effect rounded-2xl p-6 card-hover">
+        <div class="flex items-center mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mr-4 shadow-lg">
+            <img src="https://iili.io/K3HrEeS.png" 
+                 alt="Saweria" 
+                 class="w-8 h-8 object-contain">
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Saweria</h3>
+            <p class="text-gray-400 text-sm">Platform tipping Indonesia</p>
+          </div>
+        </div>
+        <a href="https://saweria.co/thiosaputra" 
+           target="_blank" 
+           class="block w-full text-center py-3 bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+          🎁 Kirim Dukungan
+        </a>
+      </div>
+
+      <!-- Sociabuzz Card -->
+      <div class="glass-effect rounded-2xl p-6 card-hover">
+        <div class="flex items-center mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mr-4 shadow-lg">
+            <img src="https://storage.sociabuzz.com/storage/landingpage/img/sociabuzz-logo-icon.png" 
+                 alt="Sociabuzz" 
+                 class="w-8 h-8 object-contain">
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Sociabuzz</h3>
+            <p class="text-gray-400 text-sm">Social donation platform</p>
+          </div>
+        </div>
+        <a href="https://sociabuzz.com/ameliapt/tribe?_ref=linkbio" 
+           target="_blank" 
+           class="block w-full text-center py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+          🚀 Join Tribe
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Stats Section -->
+    <section class="glass-effect rounded-2xl p-6 mb-12 text-center">
+      <h2 class="text-2xl font-semibold mb-4">Why Support Me? (plz)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mb-3">
+            <span class="text-2xl">🎨</span>
+          </div>
+          <h3 class="font-semibold mb-2">Quality Content</h3>
+          <p class="text-gray-400 text-sm">Continue to work to produce useful content</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mb-3">
+            <span class="text-2xl">⚡</span>
+          </div>
+          <h3 class="font-semibold mb-2">Always Update</h3>
+          <p class="text-gray-400 text-sm">Consistently new content and projects</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mb-3">
+            <span class="text-2xl">❤️</span>
+          </div>
+          <h3 class="font-semibold mb-2">The Community</h3>
+          <p class="text-gray-400 text-sm">Building a supportive community</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center space-y-4">
+      <div class="flex justify-center space-x-4 text-gray-400">
+        <span class="text-2xl">💖</span>
+        <span class="text-lg">Thank you for your support!</span>
+        <span class="text-2xl">🚀</span>
+      </div>
+      <p class="text-gray-500 text-sm">
+        Your support means a lot to my journey.
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Add smooth scroll behavior and improved interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click ripple effect
+      const buttons = document.querySelectorAll('a[href]');
+      buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.classList.add('ripple');
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+      
+      // Add intersection observer for animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+      
+      // Observe all cards
+      document.querySelectorAll('.card-hover').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    });
+  </script>
+
+  <style>
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+
+</body>
+</html>
