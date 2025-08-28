@@ -3,38 +3,177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Fless</title>
+  <title>Support Fless - Dukung Konten Kreatif</title>
+  <meta name="description" content="Dukung Fless dalam berkarya dan berbagi konten berkualitas melalui berbagai platform donasi">
+  <meta name="keywords" content="donation, support, content creator, Indonesia">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Support Fless">
+  <meta property="og:description" content="Bantu aku terus berkarya dan berbagi konten berkualitas">
+  <meta property="og:image" content="https://iili.io/K3FmZzX.jpg">
+  <meta property="og:type" content="website">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://iili.io/K3FmZzX.jpg" as="image">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    :root {
+      --primary-blue: #3b82f6;
+      --primary-purple: #8b5cf6;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Optimized animations with better performance */
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      0%, 100% { transform: translateY(0px) translateZ(0); }
+      50% { transform: translateY(-10px) translateZ(0); }
     }
     
     @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
-      50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.5); }
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        filter: brightness(1);
+      }
+      50% { 
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.7);
+        filter: brightness(1.1);
+      }
     }
     
-    .float-animation { animation: float 3s ease-in-out infinite; }
-    .glow-animation { animation: glow 2s ease-in-out infinite; }
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    /* Base styles with hardware acceleration */
+    .float-animation { 
+      animation: float 3s ease-in-out infinite;
+      will-change: transform;
+    }
+    
+    .glow-animation { 
+      animation: glow 2s ease-in-out infinite;
+      will-change: box-shadow, filter;
+    }
     
     .card-hover {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      backface-visibility: hidden;
     }
     
     .card-hover:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-8px) scale(1.02) translateZ(0);
     }
     
+    .card-appear {
+      animation: slideInUp 0.6s ease-out forwards;
+    }
+    
+    /* Enhanced gradient background */
     .gradient-bg {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #000000 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #312e81 50%, #1e293b 75%, #000000 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 8s ease infinite;
     }
     
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    /* Improved glass effect */
     .glass-effect {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--glass-bg);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Button enhancements */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-primary:hover:before {
+      left: 100%;
+    }
+    
+    /* Ripple effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      animation: ripple-animation 0.6s ease-out;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    
+    /* Loading states */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      .float-animation,
+      .glow-animation,
+      .gradient-bg {
+        animation: none;
+      }
+      
+      .card-hover {
+        transition: none;
+      }
+    }
+    
+    /* Focus states */
+    .btn-primary:focus {
+      outline: 2px solid var(--primary-blue);
+      outline-offset: 2px;
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .card-hover:hover {
+        transform: translateY(-4px) scale(1.01);
+      }
     }
   </style>
 </head>
@@ -45,209 +184,375 @@
     <header class="text-center mb-12">
       <div class="relative inline-block mb-6">
         <img src="https://iili.io/K3FmZzX.jpg" 
-             alt="Profile Fless" 
-             class="w-32 h-32 rounded-full mx-auto shadow-2xl border-4 border-blue-400 glow-animation float-animation">
-        <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full border-4 border-slate-900"></div>
+             alt="Profile Fless - Content Creator" 
+             class="w-32 h-32 rounded-full mx-auto shadow-2xl border-4 border-blue-400 glow-animation float-animation"
+             loading="eager"
+             width="128"
+             height="128">
+        <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full border-4 border-slate-900 shadow-lg"
+             title="Online"></div>
       </div>
       
       <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-        Support <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Me!</span>
+        Support <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Me!</span>
       </h1>
       
-      <p class="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+      <p class="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed mb-6">
         Bantu aku terus berkarya dan berbagi konten berkualitas melalui platform donasi favorit kamu ✨
       </p>
+      
+      <div class="flex justify-center items-center space-x-4 text-sm text-gray-400">
+        <span class="flex items-center">
+          <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+          Active Creator
+        </span>
+        <span>•</span>
+        <span>🇮🇩 Indonesia</span>
+      </div>
     </header>
 
     <!-- Donation Cards Grid -->
     <main class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
       
       <!-- Tako.id Card -->
-      <div class="glass-effect rounded-2xl p-6 card-hover">
+      <article class="glass-effect rounded-2xl p-6 card-hover donation-card" data-platform="tako">
         <div class="flex items-center mb-4">
           <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mr-4 shadow-lg">
             <img src="https://avatars.githubusercontent.com/u/139215619?s=200&v=4" 
-                 alt="Tako.id" 
-                 class="w-8 h-8 object-contain">
+                 alt="Tako.id Logo" 
+                 class="w-8 h-8 object-contain"
+                 loading="lazy"
+                 width="32"
+                 height="32">
           </div>
           <div>
             <h3 class="text-xl font-semibold">Tako.id</h3>
             <p class="text-gray-400 text-sm">Platform donasi lokal Indonesia</p>
+            <div class="flex items-center mt-1">
+              <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">🏆 Popular</span>
+            </div>
           </div>
         </div>
         <a href="https://tako.id/Fless" 
            target="_blank" 
-           class="block w-full text-center py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+           rel="noopener noreferrer"
+           class="btn-primary block w-full text-center py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 rounded-xl font-semibold shadow-lg hover:shadow-xl"
+           aria-label="Donasi melalui Tako.id">
           💝 Donasi Sekarang
         </a>
-      </div>
+      </article>
 
       <!-- Ko-fi Card -->
-      <div class="glass-effect rounded-2xl p-6 card-hover">
+      <article class="glass-effect rounded-2xl p-6 card-hover donation-card" data-platform="kofi">
         <div class="flex items-center mb-4">
           <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mr-4 shadow-lg">
             <img src="https://storage.ko-fi.com/cdn/logomarkLogo.png" 
-                 alt="Ko-fi" 
-                 class="w-8 h-8 object-contain">
+                 alt="Ko-fi Logo" 
+                 class="w-8 h-8 object-contain"
+                 loading="lazy"
+                 width="32"
+                 height="32">
           </div>
           <div>
             <h3 class="text-xl font-semibold">Ko-fi</h3>
             <p class="text-gray-400 text-sm">Global donation platform</p>
+            <div class="flex items-center mt-1">
+              <span class="text-xs bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded-full">🌍 Global</span>
+            </div>
           </div>
         </div>
         <a href="https://ko-fi.com/fless" 
            target="_blank" 
-           class="block w-full text-center py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+           rel="noopener noreferrer"
+           class="btn-primary block w-full text-center py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-xl font-semibold shadow-lg hover:shadow-xl"
+           aria-label="Buy me a coffee di Ko-fi">
           ☕ Buy Me a Coffee
         </a>
-      </div>
+      </article>
 
       <!-- Saweria Card -->
-      <div class="glass-effect rounded-2xl p-6 card-hover">
+      <article class="glass-effect rounded-2xl p-6 card-hover donation-card" data-platform="saweria">
         <div class="flex items-center mb-4">
           <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mr-4 shadow-lg">
             <img src="https://iili.io/K3HrEeS.png" 
-                 alt="Saweria" 
-                 class="w-8 h-8 object-contain">
+                 alt="Saweria Logo" 
+                 class="w-8 h-8 object-contain"
+                 loading="lazy"
+                 width="32"
+                 height="32">
           </div>
           <div>
             <h3 class="text-xl font-semibold">Saweria</h3>
             <p class="text-gray-400 text-sm">Platform tipping Indonesia</p>
+            <div class="flex items-center mt-1">
+              <span class="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full">⚡ Quick</span>
+            </div>
           </div>
         </div>
         <a href="https://saweria.co/thiosaputra" 
            target="_blank" 
-           class="block w-full text-center py-3 bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+           rel="noopener noreferrer"
+           class="btn-primary block w-full text-center py-3 bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black font-semibold rounded-xl shadow-lg hover:shadow-xl"
+           aria-label="Kirim dukungan melalui Saweria">
           🎁 Kirim Dukungan
         </a>
-      </div>
+      </article>
 
       <!-- Sociabuzz Card -->
-      <div class="glass-effect rounded-2xl p-6 card-hover">
+      <article class="glass-effect rounded-2xl p-6 card-hover donation-card" data-platform="sociabuzz">
         <div class="flex items-center mb-4">
           <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mr-4 shadow-lg">
             <img src="https://storage.sociabuzz.com/storage/landingpage/img/sociabuzz-logo-icon.png" 
-                 alt="Sociabuzz" 
-                 class="w-8 h-8 object-contain">
+                 alt="Sociabuzz Logo" 
+                 class="w-8 h-8 object-contain"
+                 loading="lazy"
+                 width="32"
+                 height="32">
           </div>
           <div>
             <h3 class="text-xl font-semibold">Sociabuzz</h3>
             <p class="text-gray-400 text-sm">Social donation platform</p>
+            <div class="flex items-center mt-1">
+              <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">🤝 Community</span>
+            </div>
           </div>
         </div>
         <a href="https://sociabuzz.com/ameliapt/tribe?_ref=linkbio" 
            target="_blank" 
-           class="block w-full text-center py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+           rel="noopener noreferrer"
+           class="btn-primary block w-full text-center py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 rounded-xl font-semibold shadow-lg hover:shadow-xl"
+           aria-label="Join tribe di Sociabuzz">
           🚀 Join Tribe
         </a>
-      </div>
+      </article>
 
     </main>
 
     <!-- Stats Section -->
-    <section class="glass-effect rounded-2xl p-6 mb-12 text-center">
-      <h2 class="text-2xl font-semibold mb-4">Why Support Me? (plz)</h2>
+    <section class="glass-effect rounded-2xl p-6 mb-8 text-center">
+      <h2 class="text-2xl font-semibold mb-6">Why Support Me?</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="flex flex-col items-center">
-          <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mb-3">
-            <span class="text-2xl">🎨</span>
+        <div class="flex flex-col items-center p-4 rounded-xl hover:bg-white/5 transition-colors duration-300">
+          <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mb-3 shadow-lg">
+            <span class="text-3xl" role="img" aria-label="Art">🎨</span>
           </div>
-          <h3 class="font-semibold mb-2">Quality Content</h3>
-          <p class="text-gray-400 text-sm">Continue to work to produce useful content</p>
+          <h3 class="font-semibold mb-2 text-lg">Quality Content</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Continue to work to produce useful and engaging content</p>
         </div>
-        <div class="flex flex-col items-center">
-          <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mb-3">
-            <span class="text-2xl">⚡</span>
+        <div class="flex flex-col items-center p-4 rounded-xl hover:bg-white/5 transition-colors duration-300">
+          <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mb-3 shadow-lg">
+            <span class="text-3xl" role="img" aria-label="Lightning">⚡</span>
           </div>
-          <h3 class="font-semibold mb-2">Always Update</h3>
-          <p class="text-gray-400 text-sm">Consistently new content and projects</p>
+          <h3 class="font-semibold mb-2 text-lg">Always Update</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Consistently delivering new content and exciting projects</p>
         </div>
-        <div class="flex flex-col items-center">
-          <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mb-3">
-            <span class="text-2xl">❤️</span>
+        <div class="flex flex-col items-center p-4 rounded-xl hover:bg-white/5 transition-colors duration-300">
+          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mb-3 shadow-lg">
+            <span class="text-3xl" role="img" aria-label="Heart">❤️</span>
           </div>
-          <h3 class="font-semibold mb-2">The Community</h3>
-          <p class="text-gray-400 text-sm">Building a supportive community</p>
+          <h3 class="font-semibold mb-2 text-lg">The Community</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Building a supportive and engaged community together</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thank You Section -->
+    <section class="glass-effect rounded-2xl p-6 mb-8 text-center">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold mb-4">Every Support Matters</h2>
+        <p class="text-gray-300 mb-4">
+          Setiap dukungan dari kalian, sekecil apapun, sangat berarti bagi perjalanan kreatif saya. 
+          Dengan bantuan kalian, saya bisa terus fokus menghasilkan konten yang bermanfaat dan menghibur.
+        </p>
+        <div class="flex justify-center items-center space-x-2 text-2xl">
+          <span class="animate-pulse">💖</span>
+          <span class="text-lg font-medium">Terima kasih!</span>
+          <span class="animate-pulse">🚀</span>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="text-center space-y-4">
-      <div class="flex justify-center space-x-4 text-gray-400">
-        <span class="text-2xl">💖</span>
+      <div class="flex justify-center space-x-4 text-gray-400 mb-4">
+        <span class="text-2xl animate-pulse">💖</span>
         <span class="text-lg">Thank you for your support!</span>
-        <span class="text-2xl">🚀</span>
+        <span class="text-2xl animate-pulse">🚀</span>
       </div>
       <p class="text-gray-500 text-sm">
-        Your support means a lot to my journey.
+        Your support means everything to my creative journey.
       </p>
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <p class="text-xs text-gray-600">
+          Made with ❤️ for amazing supporters | © 2025 Fless
+        </p>
+      </div>
     </footer>
 
   </div>
 
+  <!-- Toast notification for user feedback -->
+  <div id="toast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+    <span id="toast-message">Link copied to clipboard!</span>
+  </div>
+
   <script>
-    // Add smooth scroll behavior and improved interactions
+    // Enhanced JavaScript with better performance and error handling
     document.addEventListener('DOMContentLoaded', function() {
-      // Add click ripple effect
-      const buttons = document.querySelectorAll('a[href]');
-      buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
+      // Lazy load images
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.src; // Trigger loading
+              imageObserver.unobserve(img);
+            }
+          });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+      }
+
+      // Enhanced ripple effect with throttling
+      let rippleTimeout;
+      const createRipple = (e, element) => {
+        clearTimeout(rippleTimeout);
+        rippleTimeout = setTimeout(() => {
           const ripple = document.createElement('span');
-          const rect = this.getBoundingClientRect();
+          const rect = element.getBoundingClientRect();
           const size = Math.max(rect.width, rect.height);
           const x = e.clientX - rect.left - size / 2;
           const y = e.clientY - rect.top - size / 2;
           
-          ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = x + 'px';
-          ripple.style.top = y + 'px';
-          ripple.classList.add('ripple');
+          ripple.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+          `;
+          ripple.className = 'ripple';
           
-          this.appendChild(ripple);
+          element.appendChild(ripple);
           
           setTimeout(() => {
-            ripple.remove();
+            if (ripple.parentNode) {
+              ripple.remove();
+            }
           }, 600);
+        }, 10);
+      };
+
+      // Add event listeners to donation buttons
+      const donationButtons = document.querySelectorAll('.btn-primary');
+      donationButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          createRipple(e, this);
+          
+          // Add loading state
+          this.classList.add('loading');
+          setTimeout(() => {
+            this.classList.remove('loading');
+          }, 1000);
         });
-      });
-      
-      // Add intersection observer for animations
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+
+        // Add keyboard support
+        button.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
           }
         });
       });
       
-      // Observe all cards
-      document.querySelectorAll('.card-hover').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
+      // Intersection observer for card animations
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('card-appear');
+            }, index * 100); // Stagger animations
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
       });
-    });
-  </script>
+      
+      // Observe donation cards
+      document.querySelectorAll('.donation-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        cardObserver.observe(card);
+      });
 
-  <style>
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.6);
-      animation: ripple-animation 0.6s linear;
-      pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-      to {
-        transform: scale(2);
-        opacity: 0;
+      // Add copy link functionality
+      const addCopyFunctionality = () => {
+        donationButtons.forEach(button => {
+          const originalText = button.textContent;
+          
+          button.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(this.href).then(() => {
+              showToast('Link copied to clipboard!');
+            }).catch(() => {
+              showToast('Failed to copy link', 'error');
+            });
+          });
+        });
+      };
+
+      // Toast notification system
+      const showToast = (message, type = 'success') => {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        
+        toastMessage.textContent = message;
+        toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 z-50 ${
+          type === 'success' ? 'bg-green-500' : 'bg-red-500'
+        } text-white`;
+        
+        toast.style.transform = 'translateX(0)';
+        
+        setTimeout(() => {
+          toast.style.transform = 'translateX(100%)';
+        }, 3000);
+      };
+
+      // Performance monitoring
+      const logPerformance = () => {
+        if ('performance' in window) {
+          window.addEventListener('load', () => {
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            if (loadTime > 3000) {
+              console.warn('Page load time exceeded 3 seconds:', loadTime + 'ms');
+            }
+          });
+        }
+      };
+
+      // Initialize features
+      addCopyFunctionality();
+      logPerformance();
+
+      // Service Worker registration for offline support (optional)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+          // Fail silently
+        });
       }
-    }
-  </style>
+    });
+
+    // Error handling for images
+    document.addEventListener('error', function(e) {
+      if (e.target.tagName === 'IMG') {
+        e.target.style.opacity = '0.5';
+        e.target.alt = 'Image failed to load';
+      }
+    }, true);
+  </script>
 
 </body>
 </html>
