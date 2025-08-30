@@ -10,266 +10,837 @@
       --bg: #0f0f0f;
       --card: #181818;
       --text: #f1f1f1;
-      --accent: #22c55e;
-    }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
+      --accent: #ff4444;
+      --hover: #272727;
+      --border: #333;
     }
 
-    /* Sidebar */
-    aside {
-      width: 220px;
-      background: #111;
-      padding: 20px 10px;
-      border-right: 1px solid #222;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      overflow-y: auto;
-      transition: 0.3s;
+    * {
+      box-sizing: border-box;
     }
-    aside h1 {
-      font-size: 20px;
-      color: var(--accent);
-      margin: 0 0 20px;
-    }
-    aside a {
-      display: block;
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 4px 0;
-    }
-    aside a:hover {
-      background: #222;
-      color: var(--accent);
+      line-height: 1.4;
     }
 
     /* Header */
-    header {
+    .header {
       position: fixed;
       top: 0;
-      left: 220px;
+      left: 0;
       right: 0;
-      background: #111;
-      padding: 10px 20px;
+      height: 56px;
+      background: var(--card);
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #222;
-      z-index: 10;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
     }
-    header input {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 20px;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .menu-btn {
+      background: none;
       border: none;
-      margin: 0 10px;
-      background: #222;
       color: var(--text);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: 0.2s;
     }
-    header button {
-      background: var(--accent);
-      border: none;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 20px;
+
+    .menu-btn:hover {
+      background: var(--hover);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      height: 40px;
+      padding: 0 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-right: none;
+      border-radius: 20px 0 0 20px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: #4285f4;
+    }
+
+    .search-btn {
+      height: 40px;
+      padding: 0 20px;
+      background: var(--hover);
+      border: 1px solid var(--border);
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .search-btn:hover {
+      background: var(--border);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      width: 240px;
+      height: calc(100vh - 56px);
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      transition: transform 0.2s;
+      z-index: 900;
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-240px);
+    }
+
+    .sidebar-section {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 10px 24px;
+      color: var(--text);
+      text-decoration: none;
+      transition: 0.2s;
       cursor: pointer;
     }
 
-    /* Main content */
-    main {
-      margin-left: 220px;
-      margin-top: 60px;
-      padding: 20px;
-      flex: 1;
+    .sidebar-item:hover,
+    .sidebar-item.active {
+      background: var(--hover);
     }
 
-    section {
+    .sidebar-item.active {
+      background: var(--hover);
+      border-right: 3px solid var(--accent);
+    }
+
+    .sidebar-icon {
+      font-size: 20px;
+      width: 24px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 240px;
+      margin-top: 56px;
+      padding: 24px;
+      transition: margin-left 0.2s;
+    }
+
+    .main-content.expanded {
+      margin-left: 0;
+    }
+
+    .page-section {
       display: none;
     }
-    section.active {
+
+    .page-section.active {
       display: block;
     }
 
     /* Video Grid */
-    .grid {
+    .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
     }
-    .card {
+
+    .video-card {
       background: var(--card);
       border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.3s ease;
     }
-    .card:hover {
-      transform: scale(1.02);
-      background: #202020;
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     }
-    .thumb {
+
+    .video-thumbnail {
+      position: relative;
       width: 100%;
       aspect-ratio: 16/9;
       background: #333;
+      overflow: hidden;
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      transition: 0.3s;
     }
-    .card-content {
-      padding: 10px;
+
+    .video-card:hover .video-thumbnail img {
+      transform: scale(1.05);
     }
-    .card-content h3 {
-      margin: 0 0 5px;
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.8);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .video-card:hover .play-overlay {
+      opacity: 1;
+    }
+
+    .play-icon {
+      color: white;
+      font-size: 24px;
+      margin-left: 4px;
+    }
+
+    .video-info {
+      padding: 16px;
+    }
+
+    .video-title {
       font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 8px 0;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    .card-content p {
-      margin: 0;
-      font-size: 13px;
+
+    .video-meta {
+      color: #aaa;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .video-channel {
+      color: #aaa;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .video-channel:hover {
+      color: var(--text);
+    }
+
+    /* Video Player Modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 2000;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .video-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 1200px;
+      max-height: 90vh;
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+
+    .close-btn:hover {
+      background: var(--hover);
+    }
+
+    .video-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    .video-details {
+      padding: 20px;
+    }
+
+    .video-details h2 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .video-stats {
+      display: flex;
+      gap: 20px;
+      color: #aaa;
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    /* About Page */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .about-content h2 {
+      color: var(--accent);
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    /* Submit Form */
+    .submit-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+
+    .submit-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #cc3333;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
       color: #aaa;
     }
 
-    /* Mobile responsive */
+    /* Responsive */
     @media (max-width: 768px) {
-      aside {
-        width: 200px;
-        left: -200px;
+      .sidebar {
+        transform: translateX(-240px);
       }
-      aside.show {
-        left: 0;
+
+      .sidebar.show {
+        transform: translateX(0);
       }
-      header {
-        left: 0;
-      }
-      main {
+
+      .main-content {
         margin-left: 0;
+      }
+
+      .search-container {
+        margin: 0 16px;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+
+      .modal-content {
+        margin: 10px;
+        width: calc(100% - 20px);
       }
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <aside id="sidebar">
-    <h1>🕶️ DarkTube</h1>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#tos">ToS</a>
-    <a href="#submit">Submit</a>
-  </aside>
-
   <!-- Header -->
-  <header>
-    <button onclick="toggleSidebar()">☰</button>
-    <input type="text" id="search" placeholder="Cari video...">
-  </header>
+  <div class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <a href="#" class="logo">
+        🕶️ DarkTube
+      </a>
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-box" id="searchInput" placeholder="Cari video...">
+      <button class="search-btn" onclick="searchVideos()">🔍</button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-item active" onclick="showSection('home')">
+        <span class="sidebar-icon">🏠</span>
+        <span>Beranda</span>
+      </div>
+      <div class="sidebar-item" onclick="showSection('trending')">
+        <span class="sidebar-icon">🔥</span>
+        <span>Trending</span>
+      </div>
+    </div>
+    
+    <div class="sidebar-section">
+      <div class="sidebar-item" onclick="showSection('about')">
+        <span class="sidebar-icon">ℹ️</span>
+        <span>Tentang</span>
+      </div>
+      <div class="sidebar-item" onclick="showSection('tos')">
+        <span class="sidebar-icon">📄</span>
+        <span>Ketentuan</span>
+      </div>
+      <div class="sidebar-item" onclick="showSection('submit')">
+        <span class="sidebar-icon">📤</span>
+        <span>Kirim Video</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Main Content -->
-  <main>
-    <!-- Home -->
-    <section id="home" class="active">
-      <h2>🔥 Video Terbaru</h2>
-      <div class="grid" id="videoGrid"></div>
-    </section>
+  <div class="main-content" id="mainContent">
+    <!-- Home Section -->
+    <div class="page-section active" id="home">
+      <h1>🔥 Video Terbaru</h1>
+      <div class="loading" id="loading">Memuat video...</div>
+      <div class="video-grid" id="videoGrid"></div>
+    </div>
 
-    <!-- About -->
-    <section id="about">
-      <h2>About DarkTube</h2>
-      <p>
-        DarkTube adalah eksperimen web mirip YouTube untuk video absurd, receh, 
-        atau random yang mungkin tidak cocok di platform mainstream. 
-        Semua video diambil dari Google Spreadsheet publik.
-      </p>
-    </section>
+    <!-- Trending Section -->
+    <div class="page-section" id="trending">
+      <h1>📈 Trending</h1>
+      <div class="video-grid" id="trendingGrid"></div>
+    </div>
 
-    <!-- ToS -->
-    <section id="tos">
-      <h2>Terms of Service</h2>
-      <p>
-        Tidak boleh ada konten ilegal, berbahaya, atau merugikan orang lain.  
-        DarkTube hanya untuk hiburan receh, unik, dan kreatif.
-      </p>
-    </section>
+    <!-- About Section -->
+    <div class="page-section" id="about">
+      <div class="about-content">
+        <h2>Tentang DarkTube</h2>
+        <p>
+          DarkTube adalah platform video yang menyediakan konten-konten unik dan menarik yang mungkin tidak tersedia di platform video mainstream lainnya. Kami berkomitmen untuk memberikan pengalaman menonton yang berbeda dan menyajikan konten dari berbagai kreator independen.
+        </p>
+        <p>
+          Platform ini dirancang dengan antarmuka yang modern dan user-friendly, memberikan pengalaman browsing video yang nyaman dengan fitur pencarian yang canggih dan sistem organisasi konten yang efektif.
+        </p>
+        <p>
+          Bergabunglah dengan komunitas DarkTube dan temukan video-video menarik yang tidak akan Anda temukan di tempat lain!
+        </p>
+      </div>
+    </div>
 
-    <!-- Submit -->
-    <section id="submit">
-      <h2>Submit Video</h2>
-      <p>Kamu bisa submit video melalui Google Form berikut:</p>
-      <a href="https://forms.gle/GvHY4th5bKzKjj2V7" target="_blank">📤 Kirim Video</a>
-    </section>
-  </main>
+    <!-- Terms of Service -->
+    <div class="page-section" id="tos">
+      <div class="about-content">
+        <h2>Ketentuan Layanan</h2>
+        <p>
+          Dengan menggunakan DarkTube, Anda setuju untuk mematuhi ketentuan layanan berikut:
+        </p>
+        <p>
+          1. Konten yang ditampilkan di platform ini bersumber dari berbagai kontributor dan mungkin mengandung materi yang bersifat eksperimental atau non-mainstream.
+        </p>
+        <p>
+          2. Pengguna bertanggung jawab atas penggunaan platform ini dan diharapkan untuk menggunakan dengan bijak.
+        </p>
+        <p>
+          3. Kami tidak bertanggung jawab atas konten yang dibuat oleh pengguna atau pihak ketiga.
+        </p>
+        <p>
+          4. Ketentuan layanan ini dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.
+        </p>
+      </div>
+    </div>
+
+    <!-- Submit Section -->
+    <div class="page-section" id="submit">
+      <div class="submit-form">
+        <h2 style="text-align: center; color: var(--accent); margin-bottom: 30px;">📤 Kirim Video</h2>
+        <p style="text-align: center; color: #aaa; margin-bottom: 30px;">
+          Bagikan video menarik Anda dengan komunitas DarkTube
+        </p>
+        
+        <div class="form-group">
+          <label class="form-label">Link YouTube Video:</label>
+          <input type="url" class="form-input" placeholder="https://youtube.com/watch?v=...">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Username Anda:</label>
+          <input type="text" class="form-input" placeholder="Masukkan username Anda">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Deskripsi Video:</label>
+          <textarea class="form-input" rows="4" placeholder="Ceritakan tentang video Anda..."></textarea>
+        </div>
+        
+        <button class="submit-btn" onclick="submitVideo()">Kirim Video</button>
+        
+        <p style="text-align: center; margin-top: 20px; color: #aaa; font-size: 14px;">
+          Atau gunakan <a href="https://forms.gle/GvHY4th5bKzKjj2V7" target="_blank" style="color: var(--accent);">Google Form</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Video Player</h3>
+        <button class="close-btn" onclick="closeVideoModal()">✕</button>
+      </div>
+      <iframe class="video-player" id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+      <div class="video-details">
+        <h2 id="videoTitle">Loading...</h2>
+        <div class="video-stats">
+          <span id="videoChannel">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // Sidebar toggle (mobile)
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("show");
-    }
+    let videosData = [];
+    let sidebarCollapsed = false;
 
-    // Tab navigation
-    const links = document.querySelectorAll("aside a");
-    const sections = document.querySelectorAll("main section");
-    links.forEach(link => {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        const target = link.getAttribute("href").substring(1);
-        sections.forEach(sec => sec.classList.remove("active"));
-        document.getElementById(target).classList.add("active");
-        if(window.innerWidth < 768) toggleSidebar();
-      });
+    // Load videos from Google Sheets
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnVXYhGBJHAcuOPM3j8quHA4DK_5pLg8vIWzKucISoWQSL1J9OCVom3W7frsub9B3ufIAmpBZw0qsF/pub?output=csv";
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      loadVideos();
     });
 
-    // Load video from Google Sheets
-    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnVXYhGBJHAcuOPM3j8quHA4DK_5pLg8vIWzKucISoWQSL1J9OCVom3W7frsub9B3ufIAmpBZw0qsF/pub?output=csv";
-    const grid = document.getElementById("videoGrid");
+    // Load videos from CSV
+    function loadVideos() {
+      Papa.parse(sheetUrl, {
+        download: true,
+        header: true,
+        complete: function(results) {
+          videosData = results.data.filter(video => video["A YouTube Video Link!"]);
+          renderVideos(videosData);
+          document.getElementById('loading').style.display = 'none';
+        },
+        error: function(error) {
+          console.error('Error loading videos:', error);
+          document.getElementById('loading').innerHTML = 'Error loading videos';
+        }
+      });
+    }
 
-    Papa.parse(sheetUrl, {
-      download: true,
-      header: true,
-      complete: function(results) {
-        const data = results.data;
-        renderVideos(data);
+    // Render videos
+    function renderVideos(videos) {
+      const grid = document.getElementById('videoGrid');
+      grid.innerHTML = '';
+      
+      videos.forEach((video, index) => {
+        const ytUrl = video["A YouTube Video Link!"];
+        const ytID = extractYouTubeID(ytUrl);
+        
+        if (!ytID) return;
+
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+        videoCard.innerHTML = `
+          <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/${ytID}/maxresdefault.jpg" 
+                 alt="Video thumbnail"
+                 onerror="this.src='https://img.youtube.com/vi/${ytID}/hqdefault.jpg'">
+            <div class="play-overlay">
+              <span class="play-icon">▶</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">${video.description || 'Video tanpa judul'}</h3>
+            <div class="video-channel">${video["Your Username?"] || 'Channel Unknown'}</div>
+            <div class="video-meta">DarkTube • ${getRandomViews()} views</div>
+          </div>
+        `;
+        
+        videoCard.addEventListener('click', () => {
+          playVideo(ytID, video.description || 'Video tanpa judul', video["Your Username?"] || 'Channel Unknown');
+        });
+        
+        grid.appendChild(videoCard);
+      });
+    }
+
+    // Extract YouTube ID
+    function extractYouTubeID(url) {
+      const regex = /(?:youtube\.com.*[?&]v=|youtu\.be\/|youtube\.com.*\/embed\/)([^&\n?#]+)/;
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    }
+
+    // Generate random views count
+    function getRandomViews() {
+      const views = Math.floor(Math.random() * 1000000) + 1000;
+      return views.toLocaleString('id-ID');
+    }
+
+    // Play video in modal
+    function playVideo(videoId, title, channel) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      const titleEl = document.getElementById('videoTitle');
+      const channelEl = document.getElementById('videoChannel');
+      
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      titleEl.textContent = title;
+      channelEl.textContent = channel;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close video modal
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      
+      iframe.src = '';
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVideoModal();
       }
     });
 
-    function renderVideos(videos) {
-      grid.innerHTML = "";
-      videos.forEach(video => {
-        if(!video["A YouTube Video Link!"]) return; // skip baris kosong
+    // Toggle sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle('show');
+      } else {
+        sidebarCollapsed = !sidebarCollapsed;
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }
 
+    // Show section
+    function showSection(sectionName) {
+      // Remove active class from all sections and sidebar items
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Add active class to selected section and sidebar item
+      document.getElementById(sectionName).classList.add('active');
+      event.target.closest('.sidebar-item').classList.add('active');
+      
+      // Close sidebar on mobile
+      if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('show');
+      }
+      
+      // Load trending videos if trending section is selected
+      if (sectionName === 'trending') {
+        renderTrendingVideos();
+      }
+    }
+
+    // Render trending videos (same as regular but shuffled)
+    function renderTrendingVideos() {
+      const trendingGrid = document.getElementById('trendingGrid');
+      const shuffledVideos = [...videosData].sort(() => Math.random() - 0.5).slice(0, 12);
+      
+      trendingGrid.innerHTML = '';
+      shuffledVideos.forEach((video, index) => {
         const ytUrl = video["A YouTube Video Link!"];
-        const ytID = extractID(ytUrl);
+        const ytID = extractYouTubeID(ytUrl);
+        
+        if (!ytID) return;
 
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="https://img.youtube.com/vi/${ytID}/hqdefault.jpg" class="thumb">
-          <div class="card-content">
-            <h3>${video["Your Username?"] || "Anonim"}</h3>
-            <p>${video.description || "Tanpa deskripsi"}</p>
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+        videoCard.innerHTML = `
+          <div class="video-thumbnail">
+            <img src="https://img.youtube.com/vi/${ytID}/maxresdefault.jpg" 
+                 alt="Video thumbnail"
+                 onerror="this.src='https://img.youtube.com/vi/${ytID}/hqdefault.jpg'">
+            <div class="play-overlay">
+              <span class="play-icon">▶</span>
+            </div>
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">${video.description || 'Video tanpa judul'}</h3>
+            <div class="video-channel">${video["Your Username?"] || 'Channel Unknown'}</div>
+            <div class="video-meta">DarkTube • ${getRandomViews()} views • Trending #${index + 1}</div>
           </div>
         `;
-        card.onclick = () => window.open(ytUrl, "_blank");
-        grid.appendChild(card);
+        
+        videoCard.addEventListener('click', () => {
+          playVideo(ytID, video.description || 'Video tanpa judul', video["Your Username?"] || 'Channel Unknown');
+        });
+        
+        trendingGrid.appendChild(videoCard);
       });
     }
 
-    function extractID(url) {
-      const reg = /(?:youtube\.com.*[?&]v=|youtu\.be\/)([^&]+)/;
-      const match = url.match(reg);
-      return match ? match[1] : "";
+    // Search videos
+    function searchVideos() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      if (!query.trim()) {
+        renderVideos(videosData);
+        return;
+      }
+      
+      const filteredVideos = videosData.filter(video => {
+        const title = (video.description || '').toLowerCase();
+        const channel = (video["Your Username?"] || '').toLowerCase();
+        return title.includes(query) || channel.includes(query);
+      });
+      
+      renderVideos(filteredVideos);
+      
+      // Show home section if not already active
+      showSection('home');
     }
 
-    // Search filter
-    document.getElementById("search").addEventListener("input", function() {
-      const q = this.value.toLowerCase();
-      const cards = grid.querySelectorAll(".card");
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(q) ? "block" : "none";
-      });
+    // Submit video
+    function submitVideo() {
+      alert('Fitur submit video akan segera hadir! Sementara gunakan Google Form yang tersedia.');
+    }
+
+    // Search on Enter key
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchVideos();
+      }
+    });
+
+    // Handle responsive behavior
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        document.getElementById('sidebar').classList.remove('show');
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+      }
     });
   </script>
 </body>
