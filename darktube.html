@@ -3,147 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <title>DarkTube</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <style>
+    :root {
+      --bg: #0f0f0f;
+      --card: #181818;
+      --text: #f1f1f1;
+      --accent: #22c55e;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0a0a0a;
-      color: #f1f5f9;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
     }
 
+    /* Sidebar */
+    aside {
+      width: 220px;
+      background: #111;
+      padding: 20px 10px;
+      border-right: 1px solid #222;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      transition: 0.3s;
+    }
+    aside h1 {
+      font-size: 20px;
+      color: var(--accent);
+      margin: 0 0 20px;
+    }
+    aside a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 4px 0;
+    }
+    aside a:hover {
+      background: #222;
+      color: var(--accent);
+    }
+
+    /* Header */
     header {
+      position: fixed;
+      top: 0;
+      left: 220px;
+      right: 0;
       background: #111;
       padding: 10px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #222;
+      border-bottom: 1px solid #222;
+      z-index: 10;
+    }
+    header input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      margin: 0 10px;
+      background: #222;
+      color: var(--text);
+    }
+    header button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 22px;
-      color: #22c55e;
-    }
-
-    nav a {
-      color: #f1f5f9;
-      margin-left: 15px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    nav a:hover {
-      color: #22c55e;
-    }
-
+    /* Main content */
     main {
+      margin-left: 220px;
+      margin-top: 60px;
       padding: 20px;
+      flex: 1;
     }
 
     section {
       display: none;
     }
-
     section.active {
       display: block;
     }
 
-    /* Grid Video */
+    /* Video Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
     }
-
     .card {
-      background: #111;
-      padding: 10px;
+      background: var(--card);
       border-radius: 12px;
-      transition: 0.2s;
+      overflow: hidden;
       cursor: pointer;
+      transition: 0.2s;
     }
-
     .card:hover {
-      background: #222;
       transform: scale(1.02);
+      background: #202020;
     }
-
     .thumb {
       width: 100%;
-      border-radius: 8px;
-      background: #333;
       aspect-ratio: 16/9;
-      display: block;
+      background: #333;
+      object-fit: cover;
     }
-
-    h3 {
-      margin: 10px 0 5px;
+    .card-content {
+      padding: 10px;
+    }
+    .card-content h3 {
+      margin: 0 0 5px;
       font-size: 16px;
     }
-
-    p {
+    .card-content p {
+      margin: 0;
       font-size: 13px;
-      color: #bbb;
+      color: #aaa;
     }
 
-    a.button {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #22c55e;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-
-    a.button:hover {
-      background: #16a34a;
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      aside {
+        width: 200px;
+        left: -200px;
+      }
+      aside.show {
+        left: 0;
+      }
+      header {
+        left: 0;
+      }
+      main {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
+  <!-- Sidebar -->
+  <aside id="sidebar">
     <h1>🕶️ DarkTube</h1>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#tos">ToS</a>
-      <a href="#submit">Submit</a>
-    </nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#tos">ToS</a>
+    <a href="#submit">Submit</a>
+  </aside>
+
+  <!-- Header -->
+  <header>
+    <button onclick="toggleSidebar()">☰</button>
+    <input type="text" id="search" placeholder="Cari video...">
   </header>
 
+  <!-- Main Content -->
   <main>
     <!-- Home -->
     <section id="home" class="active">
       <h2>🔥 Video Terbaru</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="thumb"></div>
-          <h3>Video Absurd 1</h3>
-          <p>Tutorial buka Indomie tanpa gunting.</p>
-        </div>
-        <div class="card">
-          <div class="thumb"></div>
-          <h3>Video Absurd 2</h3>
-          <p>ASMR kipas angin 3 jam nonstop.</p>
-        </div>
-        <div class="card">
-          <div class="thumb"></div>
-          <h3>Video Absurd 3</h3>
-          <p>Sandwich isi nasi sama Indomie lagi.</p>
-        </div>
-      </div>
+      <div class="grid" id="videoGrid"></div>
     </section>
 
     <!-- About -->
     <section id="about">
       <h2>About DarkTube</h2>
       <p>
-        DarkTube adalah eksperimen web yang menampilkan video unik, aneh, receh,
-        atau absurd — video yang *mungkin* terlalu random buat YouTube. 
-        Semua konten berasal dari spreadsheet publik.
+        DarkTube adalah eksperimen web mirip YouTube untuk video absurd, receh, 
+        atau random yang mungkin tidak cocok di platform mainstream. 
+        Semua video diambil dari Google Spreadsheet publik.
       </p>
     </section>
 
@@ -151,8 +189,8 @@
     <section id="tos">
       <h2>Terms of Service</h2>
       <p>
-        DarkTube hanya untuk hiburan. Jangan unggah konten berbahaya atau ilegal.
-        Semua video yang di-submit harus aman untuk ditonton publik, meskipun absurd. 😎
+        Tidak boleh ada konten ilegal, berbahaya, atau merugikan orang lain.  
+        DarkTube hanya untuk hiburan receh, unik, dan kreatif.
       </p>
     </section>
 
@@ -160,22 +198,77 @@
     <section id="submit">
       <h2>Submit Video</h2>
       <p>Kamu bisa submit video melalui Google Form berikut:</p>
-      <a class="button" href="LINK_GOOGLE_FORM" target="_blank">📤 Kirim Video</a>
+      <a href="https://forms.gle/GvHY4th5bKzKjj2V7" target="_blank">📤 Kirim Video</a>
     </section>
   </main>
 
   <script>
-    // Tab Navigation
-    const links = document.querySelectorAll("nav a");
-    const sections = document.querySelectorAll("main section");
+    // Sidebar toggle (mobile)
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
 
+    // Tab navigation
+    const links = document.querySelectorAll("aside a");
+    const sections = document.querySelectorAll("main section");
     links.forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
         const target = link.getAttribute("href").substring(1);
-
         sections.forEach(sec => sec.classList.remove("active"));
         document.getElementById(target).classList.add("active");
+        if(window.innerWidth < 768) toggleSidebar();
+      });
+    });
+
+    // Load video from Google Sheets
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnVXYhGBJHAcuOPM3j8quHA4DK_5pLg8vIWzKucISoWQSL1J9OCVom3W7frsub9B3ufIAmpBZw0qsF/pub?output=csv";
+    const grid = document.getElementById("videoGrid");
+
+    Papa.parse(sheetUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        renderVideos(data);
+      }
+    });
+
+    function renderVideos(videos) {
+      grid.innerHTML = "";
+      videos.forEach(video => {
+        if(!video["A YouTube Video Link!"]) return; // skip baris kosong
+
+        const ytUrl = video["A YouTube Video Link!"];
+        const ytID = extractID(ytUrl);
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="https://img.youtube.com/vi/${ytID}/hqdefault.jpg" class="thumb">
+          <div class="card-content">
+            <h3>${video["Your Username?"] || "Anonim"}</h3>
+            <p>${video.description || "Tanpa deskripsi"}</p>
+          </div>
+        `;
+        card.onclick = () => window.open(ytUrl, "_blank");
+        grid.appendChild(card);
+      });
+    }
+
+    function extractID(url) {
+      const reg = /(?:youtube\.com.*[?&]v=|youtu\.be\/)([^&]+)/;
+      const match = url.match(reg);
+      return match ? match[1] : "";
+    }
+
+    // Search filter
+    document.getElementById("search").addEventListener("input", function() {
+      const q = this.value.toLowerCase();
+      const cards = grid.querySelectorAll(".card");
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(q) ? "block" : "none";
       });
     });
   </script>
