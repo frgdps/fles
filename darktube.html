@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>DarkTube</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <style>
     :root {
@@ -498,25 +499,25 @@
   <nav class="sidebar" id="sidebar" aria-label="Sidebar">
     <div class="sidebar-section">
       <div class="sidebar-item active" onclick="showSection(event, 'home')">
-        <span class="sidebar-icon">🏠</span>
+        <span class="sidebar-icon"><i class="fa-solid fa-house-chimney"></i></span>
         <span>Beranda</span>
       </div>
       <div class="sidebar-item" onclick="showSection(event, 'trending')">
-        <span class="sidebar-icon">🔥</span>
+        <span class="sidebar-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
         <span>Trending</span>
       </div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-item" onclick="showSection(event, 'about')">
-        <span class="sidebar-icon">ℹ️</span>
+        <span class="sidebar-icon"><i class="fa-solid fa-circle-info"></i></span>
         <span>Tentang</span>
       </div>
       <div class="sidebar-item" onclick="showSection(event, 'tos')">
-        <span class="sidebar-icon">📄</span>
+        <span class="sidebar-icon"><i class="fa-solid fa-file-contract"></i></span>
         <span>Ketentuan</span>
       </div>
       <div class="sidebar-item" onclick="showSection(event, 'submit')">
-        <span class="sidebar-icon">📤</span>
+        <span class="sidebar-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
         <span>Kirim Video</span>
       </div>
     </div>
@@ -526,14 +527,14 @@
   <main class="main-content" id="mainContent">
     <!-- Home Section -->
     <section class="page-section active" id="home">
-      <h1>🔥 Video Terbaru</h1>
+      <h1>‎ ‎ <i class="fa-solid fa-video"></i>‎ ‎ Video Terbaru</h1>
       <div class="loading" id="loading">Memuat video...</div>
       <div class="video-grid" id="videoGrid"></div>
     </section>
 
     <!-- Trending Section -->
     <section class="page-section" id="trending">
-      <h1>📈 Trending</h1>
+      <h1>‎ ‎ <i class="fa-solid fa-arrow-trend-up"></i>‎ ‎ Trending</h1>
       <div class="video-grid" id="trendingGrid"></div>
     </section>
 
