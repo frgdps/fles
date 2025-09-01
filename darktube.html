@@ -573,12 +573,12 @@
   <!-- Header -->
   <div class="header">
     <div class="header-left">
-      <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
+      <button class="menu-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">☰</button>
       <a href="#" class="logo" style="gap:4px;">
         <img src="https://i.ibb.co/Kpp8RjCt/20250830-232559.png" alt="DarkTube Logo" class="logo-img">
       </a>
     </div>
-    <div class="search" style="max-width: 400px;">
+    <div class="search" style="max-width: 150px;">
       <input id="q" type="search" placeholder="Searching..." autocomplete="off" />
       <button class="btn" id="clearBtn" title="Bersihkan" style="display:none"><i class="fa-solid fa-xmark"></i></button>
     </div>
@@ -591,25 +591,25 @@
   <!-- Sidebar -->
   <nav class="sidebar" id="sidebar" aria-label="Sidebar">
     <div class="sidebar-section">
-      <div class="sidebar-item active" onclick="showSection(event, 'home')">
+      <div class="sidebar-item active" data-view="home">
         <span class="sidebar-icon"><i class="fa-solid fa-house-chimney"></i></span>
         <span>Beranda</span>
       </div>
-      <div class="sidebar-item" onclick="showSection(event, 'trending')">
+      <div class="sidebar-item" data-view="trending">
         <span class="sidebar-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
         <span>Trending</span>
       </div>
     </div>
     <div class="sidebar-section">
-      <div class="sidebar-item" onclick="showSection(event, 'about')">
+      <div class="sidebar-item" data-view="about">
         <span class="sidebar-icon"><i class="fa-solid fa-circle-info"></i></span>
         <span>Tentang</span>
       </div>
-      <div class="sidebar-item" onclick="showSection(event, 'tos')">
+      <div class="sidebar-item" data-view="tos">
         <span class="sidebar-icon"><i class="fa-solid fa-file-contract"></i></span>
         <span>Ketentuan</span>
       </div>
-      <div class="sidebar-item" onclick="showSection(event, 'submit')">
+      <div class="sidebar-item" data-view="submit">
         <span class="sidebar-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
         <span>Kirim Video</span>
       </div>
@@ -744,6 +744,9 @@
     const player = document.getElementById("player");
     const closeModalBtn = document.getElementById("closeModal");
     const viewFavsBtn = document.getElementById("viewFavsBtn");
+    const sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
+    const sidebar = document.getElementById("sidebar");
+    const mainContent = document.getElementById("mainContent");
 
     // ====== HELPERS ======
     const showToast = (msg, ok=false) => {
@@ -907,35 +910,46 @@
     });
     clearBtn.addEventListener("click", ()=>{ q.value=""; clearBtn.style.display="none"; render(); });
     sortSel.addEventListener("change", render);
-    document.querySelectorAll(".sidebar-item").forEach(item=>{
+
+    // Sidebar navigation improved: use data-view for clarity and less error-prone
+    document.querySelectorAll(".sidebar-item[data-view]").forEach(item=>{
       item.addEventListener("click", (e)=>{
         document.querySelectorAll(".sidebar-item").forEach(x=>x.classList.remove("active"));
         item.classList.add("active");
-        let view = "";
-        if(item.textContent.trim().toLowerCase().includes("beranda")) view = "home";
-        if(item.textContent.trim().toLowerCase().includes("trending")) view = "trending";
-        if(item.textContent.trim().toLowerCase().includes("favorites")) view = "favorites";
-        // only switch grid on home/favorites
+        const view = item.getAttribute("data-view");
+        document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+        document.getElementById(view).classList.add('active');
+        // If home/favs switch grid, else don't
         if(view === "home" || view === "favorites"){
           VIEW = view;
           activeView.textContent = "View: " + (VIEW==="favorites"?"Favorites":"Home");
           render();
         }
+        if(view === "trending") renderTrendingVideos();
+        if(window.innerWidth <= 768) sidebar.classList.remove("show");
       });
     });
+
     refreshBtn.addEventListener("click", (e)=>{ e.preventDefault(); load(); showToast("Data refreshed", true); });
-    viewFavsBtn.addEventListener("click", ()=> {
+    viewFavsBtn.addEventListener("click", ()=>{
       VIEW = (VIEW==="favorites" ? "home" : "favorites");
       activeView.textContent = "View: " + (VIEW==="favorites"?"Favorites":"Home");
       render();
     });
 
-    // Init
-    load();
-    // Auto-refresh tiap 5 menit
-    setInterval(load, 300000);
+    // Sidebar toggle
+    let sidebarCollapsed = false;
+    sidebarToggleBtn.addEventListener('click', ()=>{
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle('show');
+      } else {
+        sidebarCollapsed = !sidebarCollapsed;
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    });
 
-    // Trending logic (keep your old trending section working)
+    // Trending logic
     function renderTrendingVideos() {
       const trendingGrid = document.getElementById('trendingGrid');
       if (!RAW.length) {
@@ -972,30 +986,14 @@
       });
     }
 
-    // Sidebar toggle (unchanged)
-    let sidebarCollapsed = false;
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const mainContent = document.getElementById('mainContent');
-      if (window.innerWidth <= 768) {
-        sidebar.classList.toggle('show');
-      } else {
-        sidebarCollapsed = !sidebarCollapsed;
-        sidebar.classList.toggle('collapsed');
-        mainContent.classList.toggle('expanded');
-      }
-    }
-
-    // Section navigation (add trending logic)
+    // Section navigation for non-sidebar triggers (for direct function use)
     function showSection(event, sectionName) {
       document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
       document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
       document.getElementById(sectionName).classList.add('active');
-      if (event && event.target.closest('.sidebar-item')) {
-        event.target.closest('.sidebar-item').classList.add('active');
-      }
+      document.querySelector(`.sidebar-item[data-view="${sectionName}"]`)?.classList.add('active');
       if (window.innerWidth <= 768) {
-        document.getElementById('sidebar').classList.remove('show');
+        sidebar.classList.remove('show');
       }
       if (sectionName === 'trending') {
         renderTrendingVideos();
@@ -1023,6 +1021,23 @@
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
+
+    // Init
+    load();
+    setInterval(load, 300000);
+
+    // Accessibility: allow closing modal with Escape globally
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape") closeModal();
+    });
+
+    // Responsive: hide sidebar on resize if necessary
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('show');
+      }
+    });
+
   </script>
 </body>
 </html>
