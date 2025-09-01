@@ -14,6 +14,7 @@
       --accent: #ff4444;
       --hover: #272727;
       --border: #333;
+      --muted: #aaa;
     }
 
     * {
@@ -82,46 +83,45 @@
       vertical-align: middle;
     }
 
-    .search-container {
+    /* Custom search bar and stats */
+    .search {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0 6px 0 12px;
+      margin: 0 16px;
+      max-width: 400px;
       flex: 1;
-      max-width: 600px;
-      margin: 0 40px;
+    }
+    .search input[type="search"] {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      outline: none;
+      font-size: 16px;
+      flex: 1;
+      padding: 8px 0;
+    }
+    .search .btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 4px;
       display: flex;
       align-items: center;
     }
 
-    .search-box {
-      flex: 1;
-      height: 40px;
-      padding: 0 16px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-right: none;
-      border-radius: 20px 0 0 20px;
-      color: var(--text);
-      outline: none;
-      font-size: 16px;
-      transition: border-color 0.2s;
-    }
-
-    .search-box:focus {
-      border-color: #4285f4;
-    }
-
-    .search-btn {
-      height: 40px;
-      padding: 0 20px;
-      background: var(--hover);
-      border: 1px solid var(--border);
-      border-left: none;
-      border-radius: 0 20px 20px 0;
-      color: var(--text);
-      cursor: pointer;
-      transition: background 0.2s;
-      font-size: 18px;
-    }
-    .search-btn:active {
-      background: var(--border);
+    .mini-stats {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-left: 16px;
     }
 
     /* Sidebar */
@@ -199,15 +199,42 @@
       to { opacity: 1; }
     }
 
+    /* Controls / sort pills */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      background: var(--hover);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 4px 12px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+    }
+    select.btn {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-left: 6px;
+      font-size: 14px;
+      padding: 3px 8px;
+    }
+
     /* Video Grid */
-    .video-grid {
+    .video-grid, .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 24px;
       margin-top: 20px;
     }
 
-    .video-card {
+    .video-card, .card {
       background: var(--card);
       border-radius: 12px;
       overflow: hidden;
@@ -215,23 +242,28 @@
       transition: 0.3s box-shadow, 0.3s transform;
       box-shadow: 0 2px 10px #0002;
       will-change: transform, box-shadow;
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
     }
 
-    .video-card:hover {
+    .video-card:hover, .card:hover {
       transform: translateY(-4px) scale(1.025);
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
       z-index: 2;
     }
 
-    .video-thumbnail {
+    .video-thumbnail, .thumb {
       position: relative;
       width: 100%;
       aspect-ratio: 16/9;
       background: #222;
       overflow: hidden;
+      display: block;
+      object-fit: cover;
     }
 
-    .video-thumbnail img {
+    .video-thumbnail img, .thumb {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -240,7 +272,8 @@
       display: block;
     }
 
-    .video-card:hover .video-thumbnail img {
+    .video-card:hover .video-thumbnail img,
+    .card:hover .thumb {
       transform: scale(1.05);
     }
 
@@ -260,7 +293,7 @@
       transition: opacity 0.3s;
     }
 
-    .video-card:hover .play-overlay {
+    .video-card:hover .play-overlay, .card:hover .play-overlay {
       opacity: 1;
     }
 
@@ -270,11 +303,15 @@
       margin-left: 4px;
     }
 
-    .video-info {
+    .video-info, .meta {
       padding: 16px;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .video-title {
+    .video-title, .title {
       font-size: 16px;
       font-weight: 500;
       margin: 0 0 8px 0;
@@ -286,8 +323,12 @@
       min-height: 44px;
     }
 
-    .video-meta,
-    .video-channel {
+    .video-meta, .sub {
+      color: #aaa;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+    .video-channel, .sub {
       color: #aaa;
       font-size: 14px;
       margin: 4px 0;
@@ -295,9 +336,32 @@
     .video-channel:hover {
       color: var(--text);
     }
+    .actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .icon-btn:hover {
+      background: var(--hover);
+      color: var(--accent);
+    }
 
-    /* Video Player Modal */
-    .video-modal {
+    /* Modal player */
+    .modal, .video-modal {
       display: none;
       position: fixed;
       top: 0;
@@ -311,10 +375,10 @@
       align-items: center;
       justify-content: center;
     }
-    .video-modal.active {
+    .modal.active, .video-modal.active {
       display: flex;
     }
-    .modal-content {
+    .modal-inner, .modal-content {
       width: 100%;
       max-width: 900px;
       max-height: 90vh;
@@ -322,16 +386,11 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 32px #000a;
-    }
-    .modal-header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      background: var(--card);
+      flex-direction: column;
+      align-items: stretch;
     }
-    .close-btn {
+    .modal-close, .close-btn {
       background: none;
       border: none;
       color: var(--text);
@@ -340,11 +399,15 @@
       padding: 8px;
       border-radius: 50%;
       transition: background 0.2s;
+      position: absolute;
+      right: 24px;
+      top: 18px;
+      z-index: 10;
     }
-    .close-btn:hover {
+    .modal-close:hover, .close-btn:hover {
       background: var(--hover);
     }
-    .video-player {
+    .player, .video-player {
       width: 100%;
       aspect-ratio: 16/9;
       background: #000;
@@ -366,6 +429,32 @@
       font-size: 14px;
       margin: 12px 0;
       flex-wrap: wrap;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      background: #181818;
+      color: #fff;
+      padding: 12px 32px;
+      border-radius: 24px;
+      box-shadow: 0 2px 18px #0006;
+      font-size: 15px;
+      opacity: 0;
+      z-index: 3000;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .toast.ok {
+      background: #308b4a;
+      color: #fff;
     }
 
     /* About Page */
@@ -436,7 +525,7 @@
     }
 
     /* Loading */
-    .loading {
+    .loading, .info {
       text-align: center;
       padding: 40px;
       color: #aaa;
@@ -450,7 +539,7 @@
       .about-content, .submit-form {
         padding: 28px 10px;
       }
-      .modal-content {
+      .modal-inner, .modal-content {
         margin: 10px;
         width: calc(100% - 20px);
       }
@@ -469,11 +558,11 @@
       .search-container {
         margin: 0 8px;
       }
-      .video-grid {
+      .video-grid, .grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 10px;
       }
-      .modal-content {
+      .modal-inner, .modal-content {
         margin: 5px;
         width: calc(100% - 10px);
       }
@@ -489,9 +578,13 @@
         <img src="https://i.ibb.co/Kpp8RjCt/20250830-232559.png" alt="DarkTube Logo" class="logo-img">
       </a>
     </div>
-    <div class="search-container">
-      <input type="text" class="search-box" id="searchInput" placeholder="Cari video...">
-      <button class="search-btn" onclick="searchVideos()" aria-label="Cari">🔍</button>
+    <div class="search" style="max-width: 400px;">
+      <input id="q" type="search" placeholder="Searching..." autocomplete="off" />
+      <button class="btn" id="clearBtn" title="Bersihkan" style="display:none"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mini-stats">
+      <span id="statTotal">Total: 0</span>
+      <span id="statUploaders">Uploader: 0</span>
     </div>
   </div>
 
@@ -525,11 +618,26 @@
 
   <!-- Main Content -->
   <main class="main-content" id="mainContent">
+    <!-- Controls -->
+    <div class="controls" style="margin-bottom:18px;">
+      <div class="pill">Sort:
+        <select id="sort" class="btn" style="margin-left:6px">
+          <option value="newest">Newest</option>
+          <option value="username">Username A→Z</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+      <!-- Favorites & Refresh -->
+      <button class="icon-btn" id="viewFavsBtn" title="Lihat Favorites"><i class="fa-solid fa-star"></i> Favorites</button>
+      <button class="icon-btn" id="refresh" title="Refresh data"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+      <span class="pill" id="activeView" style="margin-left:8px;">DarkTube v1</span>
+    </div>
+
     <!-- Home Section -->
     <section class="page-section active" id="home">
-      <h1>‎ ‎ <i class="fa-solid fa-video"></i>‎ ‎ Video Terbaru</h1>
-      <div class="loading" id="loading">Memuat video...</div>
-      <div class="video-grid" id="videoGrid"></div>
+      <div id="grid" class="grid">
+        <div class="info" id="loading">Memuat video...</div>
+      </div>
     </section>
 
     <!-- Trending Section -->
@@ -543,13 +651,13 @@
       <div class="about-content">
         <h2>Tentang DarkTube</h2>
         <p>
-          <strong>DarkTube</strong> adalah platform yang menyelami sisi gelap dari internet, menyajikan konten-konten yang dilarang, tersembunyi, dan ditolak oleh sistem mainstream. Kami menghadirkan video-video yang terlupakan, terkubur dalam kegelapan web, dan dianggap terlalu ekstrem untuk mata publik.
+          <strong>DarkTube</strong> adalah platform yang menyelami sisi gelap dari internet, menyajikan konten-konten yang dilarang, tersembunyi, dan ditolak oleh sistem mainstream. Kami menghadirkan [...]
         </p>
         <p>
-          Di sini, tidak ada sensor. Tidak ada filter. Hanya kebenaran telanjang yang tidak berani ditampilkan oleh platform lain. Kami mengumpulkan serpihan-serpihan konten yang hilang dalam labirin digital, video-video yang dihapus karena terlalu mengganggu, terlalu nyata, atau terlalu berbahaya untuk konsumsi massa.
+          Di sini, tidak ada sensor. Tidak ada filter. Hanya kebenaran telanjang yang tidak berani ditampilkan oleh platform lain. Kami mengumpulkan serpihan-serpihan konten yang hilang dalam labirin [...]
         </p>
         <p>
-          Platform ini diciptakan sebagai bentuk perlawanan terhadap tirani algoritma dan sensor korporat. Sebuah tempat di mana kegelapan dapat bernapas bebas, di mana yang terlarang menjadi aksesible, dan di mana batas-batas moral diuji hingga titik ekstrem.
+          Platform ini diciptakan sebagai bentuk perlawanan terhadap tirani algoritma dan sensor korporat. Sebuah tempat di mana kegelapan dapat bernapas bebas, di mana yang terlarang menjadi aksesibl[...]
         </p>
         <p style="color: #ff4444; font-weight: 500;">
           ⚠️ Masuki dengan risiko sendiri. Yang Anda saksikan di sini mungkin akan mengubah cara Anda memandang dunia. Beberapa kebenaran terlalu kelam untuk dilupakan.
@@ -600,58 +708,245 @@
     </section>
   </main>
 
-  <!-- Video Modal -->
-  <div class="video-modal" id="videoModal" tabindex="-1" aria-modal="true" role="dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modalTitle" style="font-size:18px;">Video Player</h3>
-        <button class="close-btn" onclick="closeVideoModal()" aria-label="Tutup">✕</button>
-      </div>
-      <iframe class="video-player" id="videoFrame" src="" allowfullscreen title="YouTube Video"></iframe>
-      <div class="video-details">
-        <h2 id="videoTitle">Loading...</h2>
-        <div class="video-stats">
-          <span id="videoChannel">Loading...</span>
-        </div>
-      </div>
+  <!-- Modal Player -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="modal-close" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+      <iframe id="player" class="player" allow="autoplay; encrypted-media" allowfullscreen title="YouTube player"></iframe>
     </div>
   </div>
 
+  <!-- Toast -->
+  <div id="toast" class="toast">Toast</div>
+
   <script>
-    let videosData = [];
-    let sidebarCollapsed = false;
+    // ====== CONFIG ======
+    const SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnVXYhGBJHAcuOPM3j8quHA4DK_5pLg8vIWzKucISoWQSL1J9OCVom3W7frsub9B3ufIAmpBZw0qsF/pub?output=csv";
+    const KEY_FAVS = "darktube_favs_v1";
 
-    // Load videos from Google Sheets
-    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnVXYhGBJHAcuOPM3j8quHA4DK_5pLg8vIWzKucISoWQSL1J9OCVom3W7frsub9B3ufIAmpBZw0qsF/pub?output=csv";
-    document.addEventListener('DOMContentLoaded', function() {
-      loadVideos();
+    // ====== STATE ======
+    let RAW = [];
+    let VIEW = "home"; // home | favorites
+    let FAVS = new Set(JSON.parse(localStorage.getItem(KEY_FAVS) || "[]"));
+
+    // ====== EL REFS ======
+    const grid = document.getElementById("grid");
+    const loading = document.getElementById("loading");
+    const q = document.getElementById("q");
+    const clearBtn = document.getElementById("clearBtn");
+    const sortSel = document.getElementById("sort");
+    const statTotal = document.getElementById("statTotal");
+    const statUploaders = document.getElementById("statUploaders");
+    const activeView = document.getElementById("activeView");
+    const refreshBtn = document.getElementById("refresh");
+    const toastEl = document.getElementById("toast");
+    const modal = document.getElementById("modal");
+    const player = document.getElementById("player");
+    const closeModalBtn = document.getElementById("closeModal");
+    const viewFavsBtn = document.getElementById("viewFavsBtn");
+
+    // ====== HELPERS ======
+    const showToast = (msg, ok=false) => {
+      toastEl.textContent = msg;
+      toastEl.classList.toggle("ok", !!ok);
+      toastEl.classList.add("show");
+      setTimeout(()=> toastEl.classList.remove("show"), 1400);
+    };
+
+    function ytIdFrom(url){
+      if(!url) return null;
+      const rx = /^.*(?:youtu\.be\/|v\/|embed\/|watch\?v=|&v=)([^#&?]{11}).*/;
+      const m = url.match(rx);
+      return m ? m[1] : null;
+    }
+    const thumbFromId = (id) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+    function saveFavs(){
+      localStorage.setItem(KEY_FAVS, JSON.stringify(Array.from(FAVS)));
+    }
+
+    // ====== RENDER ======
+    function computeStats(list){
+      const total = list.length;
+      const uploaders = new Set(list.map(v => (v["Your Username?"] || "Anon")));
+      statTotal.textContent = `Total: ${total}`;
+      statUploaders.textContent = `Uploader: ${uploaders.size}`;
+    }
+
+    function cardTemplate(item){
+      const user = item["Your Username?"] || "Anon";
+      const url = item["A YouTube Video Link!"] || "";
+      const id = ytIdFrom(url);
+      const desc = item["description"] || "";
+      if(!id) return "";
+
+      const favActive = FAVS.has(id) ? " style='color:#ffd166'" : "";
+      return `
+        <article class="card" data-id="${id}" data-user="${user.toLowerCase()}">
+          <img loading="lazy" src="${thumbFromId(id)}" alt="Thumbnail ${user}" class="thumb" />
+          <div class="meta">
+            <h3 class="title">${desc ? escapeHTML(desc) : "Video dari " + escapeHTML(user)}</h3>
+            <p class="sub">Sender: ${escapeHTML(user)}</p>
+            <div class="actions">
+              <button class="icon-btn" data-action="play"><i class="fa-solid fa-play"></i> Play</button>
+              <button class="icon-btn" data-action="share"><i class="fa-solid fa-share-nodes"></i> Share</button>
+              <button class="icon-btn" data-action="fav"><i class="fa-solid fa-star"${favActive}></i> Favorite</button>
+              <a class="icon-btn" href="${url}" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function applySort(list){
+      const mode = sortSel.value;
+      if(mode === "username"){
+        list.sort((a,b)=> (a["Your Username?"]||"").localeCompare(b["Your Username?"]||""));
+      } else if(mode === "random"){
+        for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [list[i],list[j]]=[list[j],list[i]];}
+      } else { // newest by Timestamp (best-effort)
+        list.sort((a,b)=> new Date(b["Timestamp"]||0) - new Date(a["Timestamp"]||0));
+      }
+      return list;
+    }
+
+    function filteredList(){
+      const term = (q.value||"").toLowerCase().trim();
+      let list = RAW.filter(v => ytIdFrom(v["A YouTube Video Link!"]));
+      if(VIEW === "favorites"){
+        list = list.filter(v => FAVS.has(ytIdFrom(v["A YouTube Video Link!"])));
+      }
+      if(term){
+        list = list.filter(v => {
+          const user = (v["Your Username?"]||"").toLowerCase();
+          const desc = (v["description"]||"").toLowerCase();
+          const url = (v["A YouTube Video Link!"]||"").toLowerCase();
+          return user.includes(term) || desc.includes(term) || url.includes(term);
+        });
+      }
+      return applySort(list);
+    }
+
+    function render(){
+      const list = filteredList();
+      computeStats(list);
+      if(!list.length){
+        grid.innerHTML = `<div class="info">Tidak ada video${VIEW==='favorites'?' di Favorites. Klik ⭐ pada video untuk menyimpan.':''}</div>`;
+        return;
+      }
+      grid.innerHTML = list.map(cardTemplate).join("");
+
+      // bind actions
+      grid.querySelectorAll(".card").forEach(card=>{
+        const id = card.dataset.id;
+        const url = (RAW.find(v => ytIdFrom(v["A YouTube Video Link!"])===id) || {})["A YouTube Video Link!"] || "";
+
+        card.querySelector('[data-action="play"]').onclick = ()=> openModal(id);
+        card.querySelector('[data-action="share"]').onclick = async ()=>{
+          try{
+            await navigator.clipboard.writeText(url);
+            showToast("Link copied!", true);
+          }catch(e){
+            showToast("Gagal copy link");
+          }
+        };
+        card.querySelector('[data-action="fav"]').onclick = (e)=>{
+          if(FAVS.has(id)) FAVS.delete(id); else FAVS.add(id);
+          saveFavs();
+          // update icon color
+          const icon = e.currentTarget.querySelector("i");
+          icon.style.color = FAVS.has(id) ? "#ffd166" : "";
+          showToast(FAVS.has(id) ? "Added to Favorites" : "Removed from Favorites", true);
+          if(VIEW==="favorites") render();
+        };
+      });
+    }
+
+    // ====== MODAL ======
+    function openModal(id){
+      player.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden","false");
+      document.body.style.overflow="hidden";
+      CURRENT_ID = id;
+    }
+    function closeModal(){
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden","true");
+      player.src = "";
+      document.body.style.overflow="";
+    }
+    let CURRENT_ID = null;
+    document.addEventListener("keydown", (e)=>{
+      if(!modal.classList.contains("active")) return;
+      if(e.key === "Escape") closeModal();
     });
+    modal.addEventListener("click", (e)=>{ if(e.target===modal) closeModal(); });
+    closeModalBtn.onclick = closeModal;
 
-    function loadVideos() {
-      Papa.parse(sheetUrl, {
-        download: true,
-        header: true,
-        complete: function(results) {
-          videosData = results.data.filter(video => video["A YouTube Video Link!"]);
-          renderVideos(videosData);
-          document.getElementById('loading').style.display = 'none';
+    // ====== LOAD ======
+    function load(){
+      loading.style.display = "";
+      Papa.parse(SHEET_CSV, {
+        download:true, header:true, skipEmptyLines:true,
+        complete: (res)=>{
+          RAW = res.data.filter(r => r["A YouTube Video Link!"]);
+          loading.style.display = "none";
+          render();
         },
-        error: function(error) {
-          document.getElementById('loading').innerHTML = 'Error loading videos';
+        error: ()=>{
+          grid.innerHTML = `<div class="info">Gagal memuat CSV.</div>`;
         }
       });
     }
 
-    function renderVideos(videos) {
-      const grid = document.getElementById('videoGrid');
-      grid.innerHTML = '';
-      if (!videos.length) {
-        grid.innerHTML = `<div style="color:#aaa;font-size:18px;text-align:center;">Tidak ada video ditemukan.</div>`;
+    // ====== EVENTS ======
+    q.addEventListener("input", ()=>{
+      clearBtn.style.display = q.value ? "" : "none";
+      render();
+    });
+    clearBtn.addEventListener("click", ()=>{ q.value=""; clearBtn.style.display="none"; render(); });
+    sortSel.addEventListener("change", render);
+    document.querySelectorAll(".sidebar-item").forEach(item=>{
+      item.addEventListener("click", (e)=>{
+        document.querySelectorAll(".sidebar-item").forEach(x=>x.classList.remove("active"));
+        item.classList.add("active");
+        let view = "";
+        if(item.textContent.trim().toLowerCase().includes("beranda")) view = "home";
+        if(item.textContent.trim().toLowerCase().includes("trending")) view = "trending";
+        if(item.textContent.trim().toLowerCase().includes("favorites")) view = "favorites";
+        // only switch grid on home/favorites
+        if(view === "home" || view === "favorites"){
+          VIEW = view;
+          activeView.textContent = "View: " + (VIEW==="favorites"?"Favorites":"Home");
+          render();
+        }
+      });
+    });
+    refreshBtn.addEventListener("click", (e)=>{ e.preventDefault(); load(); showToast("Data refreshed", true); });
+    viewFavsBtn.addEventListener("click", ()=> {
+      VIEW = (VIEW==="favorites" ? "home" : "favorites");
+      activeView.textContent = "View: " + (VIEW==="favorites"?"Favorites":"Home");
+      render();
+    });
+
+    // Init
+    load();
+    // Auto-refresh tiap 5 menit
+    setInterval(load, 300000);
+
+    // Trending logic (keep your old trending section working)
+    function renderTrendingVideos() {
+      const trendingGrid = document.getElementById('trendingGrid');
+      if (!RAW.length) {
+        trendingGrid.innerHTML = `<div style="color:#aaa;font-size:18px;text-align:center;">Tidak ada video trending untuk saat ini.</div>`;
         return;
       }
-      videos.forEach((video, index) => {
+      const shuffledVideos = [...RAW].sort(() => Math.random() - 0.5).slice(0, 12);
+      trendingGrid.innerHTML = '';
+      shuffledVideos.forEach((video, index) => {
         const ytUrl = video["A YouTube Video Link!"];
-        const ytID = extractYouTubeID(ytUrl);
+        const ytID = ytIdFrom(ytUrl);
         if (!ytID) return;
         const videoCard = document.createElement('div');
         videoCard.className = 'video-card';
@@ -667,55 +962,18 @@
           <div class="video-info">
             <h3 class="video-title">${escapeHTML(video.description || 'Video tanpa judul')}</h3>
             <div class="video-channel">${escapeHTML(video["Your Username?"] || 'Channel Unknown')}</div>
-            <div class="video-meta">DarkTube • ${getRandomViews()} views</div>
+            <div class="video-meta">DarkTube • Trending #${index + 1}</div>
           </div>
         `;
         videoCard.addEventListener('click', () => {
-          playVideo(ytID, video.description || 'Video tanpa judul', video["Your Username?"] || 'Channel Unknown');
+          openModal(ytID);
         });
-        grid.appendChild(videoCard);
+        trendingGrid.appendChild(videoCard);
       });
     }
 
-    function extractYouTubeID(url) {
-      // Accepts youtu.be, youtube.com/watch?v=, youtube.com/embed/
-      if (!url) return null;
-      const regex = /(?:youtube\.com.*[?&]v=|youtu\.be\/|youtube\.com.*\/embed\/)([^&\n?#]+)/;
-      const match = url.match(regex);
-      return match ? match[1] : null;
-    }
-
-    function getRandomViews() {
-      const views = Math.floor(Math.random() * 1000000) + 1000;
-      return views.toLocaleString('id-ID');
-    }
-
-    function playVideo(videoId, title, channel) {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('videoFrame');
-      const titleEl = document.getElementById('videoTitle');
-      const channelEl = document.getElementById('videoChannel');
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-      titleEl.textContent = title;
-      channelEl.textContent = channel;
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => { document.getElementById('videoModal').focus(); }, 200);
-    }
-
-    function closeVideoModal() {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('videoFrame');
-      iframe.src = '';
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    document.getElementById('videoModal').addEventListener('click', function(e) {
-      if (e.target === this) closeVideoModal();
-    });
-
-    // Sidebar toggle
+    // Sidebar toggle (unchanged)
+    let sidebarCollapsed = false;
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       const mainContent = document.getElementById('mainContent');
@@ -728,7 +986,7 @@
       }
     }
 
-    // Section navigation
+    // Section navigation (add trending logic)
     function showSection(event, sectionName) {
       document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
       document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
@@ -742,83 +1000,19 @@
       if (sectionName === 'trending') {
         renderTrendingVideos();
       }
-    }
-
-    // Trending videos
-    function renderTrendingVideos() {
-      const trendingGrid = document.getElementById('trendingGrid');
-      const shuffledVideos = [...videosData].sort(() => Math.random() - 0.5).slice(0, 12);
-      trendingGrid.innerHTML = '';
-      if (!shuffledVideos.length) {
-        trendingGrid.innerHTML = `<div style="color:#aaa;font-size:18px;text-align:center;">Tidak ada video trending untuk saat ini.</div>`;
-        return;
+      if(sectionName === 'home'){
+        VIEW = "home";
+        activeView.textContent = "View: Home";
+        render();
       }
-      shuffledVideos.forEach((video, index) => {
-        const ytUrl = video["A YouTube Video Link!"];
-        const ytID = extractYouTubeID(ytUrl);
-        if (!ytID) return;
-        const videoCard = document.createElement('div');
-        videoCard.className = 'video-card';
-        videoCard.innerHTML = `
-          <div class="video-thumbnail">
-            <img src="https://img.youtube.com/vi/${ytID}/maxresdefault.jpg" 
-                 alt="Video thumbnail"
-                 onerror="this.src='https://img.youtube.com/vi/${ytID}/hqdefault.jpg';">
-            <div class="play-overlay">
-              <span class="play-icon">▶</span>
-            </div>
-          </div>
-          <div class="video-info">
-            <h3 class="video-title">${escapeHTML(video.description || 'Video tanpa judul')}</h3>
-            <div class="video-channel">${escapeHTML(video["Your Username?"] || 'Channel Unknown')}</div>
-            <div class="video-meta">DarkTube • ${getRandomViews()} views • Trending #${index + 1}</div>
-          </div>
-        `;
-        videoCard.addEventListener('click', () => {
-          playVideo(ytID, video.description || 'Video tanpa judul', video["Your Username?"] || 'Channel Unknown');
-        });
-        trendingGrid.appendChild(videoCard);
-      });
-    }
-
-    // Search videos
-    function searchVideos() {
-      const query = document.getElementById('searchInput').value.toLowerCase().trim();
-      if (!query) {
-        renderVideos(videosData);
-        return;
-      }
-      const filteredVideos = videosData.filter(video => {
-        const title = (video.description || '').toLowerCase();
-        const channel = (video["Your Username?"] || '').toLowerCase();
-        return title.includes(query) || channel.includes(query);
-      });
-      renderVideos(filteredVideos);
-      showSection(null, 'home');
     }
 
     // Submit video
     function submitVideo(event) {
       event.preventDefault();
-      alert('Fitur submit video akan segera hadir! Sementara gunakan Google Form yang tersedia.');
-      // Here you could add integration with Google Forms or backend service in the future
+      showToast('Fitur submit video akan segera hadir! Sementara gunakan Google Form yang tersedia.');
       event.target.reset();
     }
-
-    // Search on Enter key
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') searchVideos();
-    });
-
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
-        document.getElementById('sidebar').classList.remove('show');
-      }
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeVideoModal();
-    });
 
     // HTML escaping utility for XSS safety
     function escapeHTML(str) {
