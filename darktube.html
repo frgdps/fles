@@ -595,9 +595,9 @@
         <span class="sidebar-icon"><i class="fa-solid fa-house-chimney"></i></span>
         <span>Beranda</span>
       </div>
-      <div class="sidebar-item" data-view="trending">
-        <span class="sidebar-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
-        <span>Trending</span>
+      <div class="sidebar-item" data-view="favorites">
+        <span class="sidebar-icon"><i class="fa-solid fa-star"></i></span>
+        <span>Favorites</span>
       </div>
     </div>
     <div class="sidebar-section">
@@ -628,7 +628,7 @@
         </select>
       </div>
       <!-- Favorites & Refresh -->
-      <button class="icon-btn" id="viewFavsBtn" title="Lihat Favorites"><i class="fa-solid fa-star"></i> Favorites</button>
+      <button class="icon-btn" id="viewFavsBtn" title="Lihat Favorites"><i class="fa-solid fa-star"></i></button>
       <button class="icon-btn" id="refresh" title="Refresh data"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
       <span class="pill" id="activeView" style="margin-left:8px;">DarkTube v1</span>
     </div>
@@ -640,10 +640,10 @@
       </div>
     </section>
 
-    <!-- Trending Section -->
-    <section class="page-section" id="trending">
-      <h1>‎ ‎ <i class="fa-solid fa-arrow-trend-up"></i>‎ ‎ Trending</h1>
-      <div class="video-grid" id="trendingGrid"></div>
+    <!-- Favorites Section -->
+    <section class="page-section" id="favorites">
+      <h1><i class="fa-solid fa-star"></i> Favorites</h1>
+      <div class="grid" id="favoritesGrid"></div>
     </section>
 
     <!-- About Section -->
@@ -731,6 +731,7 @@
 
     // ====== EL REFS ======
     const grid = document.getElementById("grid");
+    const favoritesGrid = document.getElementById("favoritesGrid");
     const loading = document.getElementById("loading");
     const q = document.getElementById("q");
     const clearBtn = document.getElementById("clearBtn");
@@ -833,14 +834,25 @@
     function render(){
       const list = filteredList();
       computeStats(list);
-      if(!list.length){
-        grid.innerHTML = `<div class="info">Tidak ada video${VIEW==='favorites'?' di Favorites. Klik ⭐ pada video untuk menyimpan.':''}</div>`;
-        return;
+      if(VIEW === "favorites"){
+        if(!list.length){
+          favoritesGrid.innerHTML = `<div class="info">Tidak ada video di Favorites. Klik ⭐ pada video untuk menyimpan.</div>`;
+          return;
+        }
+        favoritesGrid.innerHTML = list.map(cardTemplate).join("");
+        bindCardActions(favoritesGrid, list);
+      } else {
+        if(!list.length){
+          grid.innerHTML = `<div class="info">Tidak ada video.</div>`;
+          return;
+        }
+        grid.innerHTML = list.map(cardTemplate).join("");
+        bindCardActions(grid, list);
       }
-      grid.innerHTML = list.map(cardTemplate).join("");
+    }
 
-      // bind actions
-      grid.querySelectorAll(".card").forEach(card=>{
+    function bindCardActions(container, list) {
+      container.querySelectorAll(".card").forEach(card=>{
         const id = card.dataset.id;
         const url = (RAW.find(v => ytIdFrom(v["A YouTube Video Link!"])===id) || {})["A YouTube Video Link!"] || "";
 
@@ -925,7 +937,6 @@
           activeView.textContent = "View: " + (VIEW==="favorites"?"Favorites":"Home");
           render();
         }
-        if(view === "trending") renderTrendingVideos();
         if(window.innerWidth <= 768) sidebar.classList.remove("show");
       });
     });
@@ -935,6 +946,11 @@
       VIEW = (VIEW==="favorites" ? "home" : "favorites");
       activeView.textContent = "View: " + (VIEW==="favorites"?"Favorites":"Home");
       render();
+      // show tab
+      document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+      document.getElementById(VIEW).classList.add('active');
+      document.querySelectorAll(".sidebar-item").forEach(x=>x.classList.remove("active"));
+      document.querySelector(`.sidebar-item[data-view="${VIEW}"]`)?.classList.add('active');
     });
 
     // Sidebar toggle
@@ -949,43 +965,6 @@
       }
     });
 
-    // Trending logic
-    function renderTrendingVideos() {
-      const trendingGrid = document.getElementById('trendingGrid');
-      if (!RAW.length) {
-        trendingGrid.innerHTML = `<div style="color:#aaa;font-size:18px;text-align:center;">Tidak ada video trending untuk saat ini.</div>`;
-        return;
-      }
-      const shuffledVideos = [...RAW].sort(() => Math.random() - 0.5).slice(0, 12);
-      trendingGrid.innerHTML = '';
-      shuffledVideos.forEach((video, index) => {
-        const ytUrl = video["A YouTube Video Link!"];
-        const ytID = ytIdFrom(ytUrl);
-        if (!ytID) return;
-        const videoCard = document.createElement('div');
-        videoCard.className = 'video-card';
-        videoCard.innerHTML = `
-          <div class="video-thumbnail">
-            <img src="https://img.youtube.com/vi/${ytID}/maxresdefault.jpg" 
-                 alt="Video thumbnail"
-                 onerror="this.src='https://img.youtube.com/vi/${ytID}/hqdefault.jpg';">
-            <div class="play-overlay">
-              <span class="play-icon">▶</span>
-            </div>
-          </div>
-          <div class="video-info">
-            <h3 class="video-title">${escapeHTML(video.description || 'Video tanpa judul')}</h3>
-            <div class="video-channel">${escapeHTML(video["Your Username?"] || 'Channel Unknown')}</div>
-            <div class="video-meta">DarkTube • Trending #${index + 1}</div>
-          </div>
-        `;
-        videoCard.addEventListener('click', () => {
-          openModal(ytID);
-        });
-        trendingGrid.appendChild(videoCard);
-      });
-    }
-
     // Section navigation for non-sidebar triggers (for direct function use)
     function showSection(event, sectionName) {
       document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
@@ -995,12 +974,14 @@
       if (window.innerWidth <= 768) {
         sidebar.classList.remove('show');
       }
-      if (sectionName === 'trending') {
-        renderTrendingVideos();
-      }
       if(sectionName === 'home'){
         VIEW = "home";
         activeView.textContent = "View: Home";
+        render();
+      }
+      if(sectionName === 'favorites'){
+        VIEW = "favorites";
+        activeView.textContent = "View: Favorites";
         render();
       }
     }
