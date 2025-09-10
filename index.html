@@ -5,201 +5,394 @@
   <title>Flessan | Portfolio</title>
   <meta name="description" content="Thio Saputra (Flessan) - programmer, gamer, explainer, music creator">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <!-- OG & Thumbnail -->
   <meta property="og:title" content="Flessan Portfolio">
   <meta property="og:description" content="Programmer, gamer, explainer, music creator">
   <meta property="og:image" content="https://raw.githubusercontent.com/flessan/flessan/refs/heads/main/20250713_044409.png">
   <meta property="og:url" content="https://flessan.pages.dev">
   <meta property="og:type" content="website">
-
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/flessan/flessan/refs/heads/main/fav.png">
-
   <style>
-    body {
-      background: #f2f2f2 url("https://www.transparenttextures.com/patterns/white-wall.png");
-      font-family: 'Poppins', sans-serif;
-      color: #222;
-      margin: 0;
+    :root {
+      --primary: #4FA9FF;
+      --primary-light: #3888DC;
+      --secondary: #00B3C1;
+      --accent: #FF4A3F;
+      --text: #263238;
+      --text-light: #546e7a;
+      --background: #f5f7fa;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background-color: var(--background);
+      background-image: url("https://www.transparenttextures.com/patterns/white-wall.png");
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
     header {
-      text-align: center;
-      background: linear-gradient(90deg, #00008B, #1E90FF);
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
       color: white;
-      padding: 40px 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      padding: 30px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+      text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border-radius: 50%;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .social-icons a:hover {
+      background: var(--accent);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Main Content */
+    main {
+      padding: 40px 0;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
       position: relative;
     }
-    h1 {
-      font-size: 48px;
-      text-shadow: 2px 2px #FFD700;
-      margin: 0;
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--secondary);
     }
-    header p {
-      margin: 10px 0 0;
-      font-size: 18px;
-    }
-    .social-icons {
-      margin-top: 15px;
-    }
-    .social-icons a {
-      margin: 0 8px;
-      padding: 8px 12px;
-      background: #FFD700;
-      color: black;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    marquee {
-      font-size: 16px;
-      background: #FFD700;
-      color: black;
-      padding: 6px;
-      font-weight: bold;
-    }
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
-    section {
-      margin-bottom: 40px;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-top: 0;
-      color: #00008B;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 6px;
-    }
+
+    /* Project Cards */
     .project-card {
-      border: 2px dashed teal;
-      padding: 12px;
-      margin-bottom: 12px;
-      background: #F0F8FF;
-      border-radius: 8px;
+      border-left: 4px solid var(--secondary);
+      padding: 20px;
+      margin-bottom: 20px;
+      background: rgba(0, 172, 193, 0.05);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      transition: all 0.3s ease;
     }
+
+    .project-card:hover {
+      background: rgba(0, 172, 193, 0.1);
+      transform: translateX(5px);
+    }
+
+    .project-card strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--secondary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .project-card a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Fun Fact */
     .fun-fact {
       font-style: italic;
-      background: #FFFFE0;
-      border-left: 6px solid orange;
-      padding: 10px;
-      margin: 10px 0;
+      background: rgba(255, 213, 79, 0.2);
+      border-left: 4px solid var(--accent);
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
     }
+
+    /* Music Section */
     .track {
-      margin-bottom: 20px;
-    }
-    audio {
-      width: 100%;
-      margin-top: 8px;
-    }
-    footer {
-      text-align: center;
+      margin-bottom: 25px;
       padding: 15px;
-      background: #00008B;
+      border-radius: var(--radius);
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .track strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    /* Contact Section */
+    .contact-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .contact-list li {
+      background: rgba(26, 35, 126, 0.05);
+      padding: 15px;
+      border-radius: var(--radius);
+      transition: all 0.3s ease;
+    }
+
+    .contact-list li:hover {
+      background: rgba(26, 35, 126, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .contact-list a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-list i {
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
       color: white;
+      text-align: center;
+      padding: 30px 0;
       margin-top: 40px;
+    }
+
+    footer p {
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .contact-list {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-
-<marquee>~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~</marquee>
-
-<header>
-  <h1>Flessan</h1>
-  <p>webdev, musician</p>
-  <div class="social-icons">
-    <a href="https://www.youtube.com/@ameliaptz">YouTube</a>
-    <a href="https://www.instagram.com/thio2009_">Instagram</a>
-    <a href="https://github.com/flessan">GitHub</a>
-  </div>
-</header>
-
-<main>
-  <section>
-    <h2>About Me</h2>
-    <div class="fun-fact">I build simple things that just work. Less = more, fam.</div>
-    <p>Hi there! My name is Thio Saputra, you can call me Thio or Fless. I'm an amateur programmer and content creator who makes random things and videos on the internet.</p>
-  </section>
-
-  <section>
-    <h2>My School</h2>
-    <div class="project-card">
-      <strong>SD Islam Terpadu Al-Fatih</strong><br>
-      Handil Bakti, Griya Permata <a href="https://daftarsekolah.net/sekolah/206120/sd-islam-al-fatih">See More</a>
+  <header>
+    <div class="container">
+      <h1>Flessan</h1>
+      <p>webdev, musician</p>
+      <div class="social-icons">
+        <a href="https://www.youtube.com/@ameliaptz" title="YouTube" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/thio2009_" title="Instagram" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://flessan.github.io" title="GitHub" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
     </div>
-    <div class="project-card">
-      <strong>Ponpes Raudhatul Musthofa</strong><br>
-      Barito Kuala, Kalimantan Selatan <a href="https://idalamat.com/alamat/400151/pondok-pesantren-raudhatul-musthofa-barito-kuala-kalimantan-selatan">See More</a>
-    </div>
-    <div class="project-card">
-      <strong>SMKN 4 Banjarmasin</strong><br>
-     Banjarmasin <a href="https://skenpat.pages.dev/">See More</a>
-    </div>
-  </section>
+  </header>
 
-  <section>
-    <h2>My Music</h2>
-    <p>Here are some of my tracks from SoundCloud. Feel free to listen!</p>
+  <main class="container">
+    <section>
+      <h2><a href="/hp">About Me! </a></h2>
+      <div class="fun-fact">I build simple things that just work. Less = more, fam.</div>
+      <p>Hi there! My name is Thio Saputra, you can call me Thio or Fless. I'm an amateur programmer and content creator who makes random things and videos on the internet.</p>
+    </section>
 
-    <div class="track">
-      <strong>Superb (Remastered)</strong>
-        <iframe width="100%" height="116" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%239cb4bc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/thiosaputra" title="Fless" target="_blank" style="color: #cccccc; text-decoration: none;">Fless</a> � <a href="https://soundcloud.com/thiosaputra/lazycar-superb" title="Lazycar - Superb" target="_blank" style="color: #cccccc; text-decoration: none;">Lazycar - Superb</a></div>
-    </div>
-    <div class="track">
-      <strong>Superb (Remastered)</strong>
-        <iframe width="100%" height="116" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%239cb4bc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/thiosaputra" title="Fless" target="_blank" style="color: #cccccc; text-decoration: none;">Fless</a> � <a href="https://soundcloud.com/thiosaputra/lazycar-superb" title="Lazycar - Superb" target="_blank" style="color: #cccccc; text-decoration: none;">Lazycar - Superb</a></div>
-    </div>
-  </section>
+    <section>
+      <h2>My School</h2>
+      <div class="project-card">
+        <strong>SD Islam Terpadu Al-Fatih</strong>
+        Handil Bakti, Griya Permata 
+        <a href="https://daftarsekolah.net/sekolah/206120/sd-islam-al-fatih">See More</a>
+      </div>
+      <div class="project-card">
+        <strong>Ponpes Raudhatul Musthofa</strong>
+        Barito Kuala, Kalimantan Selatan 
+        <a href="https://idalamat.com/alamat/400151/pondok-pesantren-raudhatul-musthofa-barito-kuala-kalimantan-selatan">See More</a>
+      </div>
+      <div class="project-card">
+        <strong>SMKN 4 Banjarmasin</strong>
+        Banjarmasin 
+        <a href="https://skenpat.pages.dev/">See More</a>
+      </div>
+    </section>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="project-card">
-      <strong>FreedomGDPS!!11</strong><br>
-      My custom Geometry Dash private server<br>
-      <a href="https://fless.ps.fhgdps.com">Play Now</a>
-    </div>
-    <div class="project-card">
-      <strong>List2Do++</strong><br>
-      To-do list app, no login required!<br>
-      <a href="/list">Try It</a>
-    </div>
-    <div class="project-card">
-      <strong>GitHub Desktop App</strong><br>
-      Lightweight GitHub web app version<br>
-      <a href="https://github.com/flessan/ThDev2/releases/tag/v1.0.1">View on GitHub</a>
-    </div>
-    <div class="project-card">
-      <strong>Discord Timestamp Generator</strong><br>
-      Create and view Discord timestamps<br>
-      <a href="/time">Use Tool</a>
-    </div>
-  </section>
+    <section>
+      <h2>My Music</h2>
+      <p>Here are some of my tracks from SoundCloud. Feel free to listen!</p>
+      <div class="track">
+        <strong>Superb (Remastered)</strong>
+        <iframe width="100%" height="116" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%239cb4bc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+      </div>
+      <div class="track">
+        <strong>Superb (Remastered)</strong>
+        <iframe width="100%" height="116" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%239cb4bc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+      </div>
+    </section>
 
-  <section>
-    <h2>Contact</h2>
-    <div class="fun-fact">I typically respond within 24 hours. No complicated forms, just simple communication.</div>
-    <ul>
-      <li><a href="https://wa.me/qr/GCWWEYIQQ6UQI1">WhatsApp</a></li>
-      <li><a href="https://discordapp.com/users/776722084030054421">Discord</a></li>
-      <li><a href="https://t.me/ameliaptz">Telegram</a></li>
-      <li><a href="mailto:kambinghirang2@gmail.com">Email</a></li>      
-    </ul>
-  </section>
-</main>
+    <section>
+      <h2>Projects</h2>
+      <div class="project-card">
+        <strong>FreedomGDPS!!11</strong>
+        My custom Geometry Dash private server
+        <a href="https://fless.ps.fhgdps.com">Play Now</a>
+      </div>
+      <div class="project-card">
+        <strong>List2Do++</strong>
+        To-do list app, no login required!
+        <a href="/list">Try It</a>
+      </div>
+      <div class="project-card">
+        <strong>GitHub Desktop App</strong>
+        Lightweight GitHub web app version
+        <a href="https://github.com/flessan/ThDev2/releases/tag/v1.0.1">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <strong>Discord Timestamp Generator</strong>
+        Create and view Discord timestamps
+        <a href="/time">Use Tool</a>
+      </div>
+    </section>
 
-<footer>
-  Inspired by retro 2010s web vibes · Powered by Cloudflare Pages 🚀
-</footer>
+    <section>
+      <h2>Contact</h2>
+      <div class="fun-fact">I typically respond within 24 hours. No complicated forms, just simple communication.</div>
+      <ul class="contact-list">
+        <li>
+          <a href="https://wa.me/qr/GCWWEYIQQ6UQI1">
+            <i class="fab fa-whatsapp"></i>
+            WhatsApp
+          </a>
+        </li>
+        <li>
+          <a href="https://discordapp.com/users/776722084030054421">
+            <i class="fab fa-discord"></i>
+            Discord
+          </a>
+        </li>
+        <li>
+          <a href="https://t.me/ameliaptz">
+            <i class="fab fa-telegram"></i>
+            Telegram
+          </a>
+        </li>
+        <li>
+          <a href="mailto:kambinghirang2@gmail.com">
+            <i class="fas fa-envelope"></i>
+            Email
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
 
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Flessan Portfolio. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
