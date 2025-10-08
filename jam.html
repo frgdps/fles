@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clock Studio – Modern Analog Clock</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css  " />
   <style>
     /* ===== CSS RESET & BASE ===== */
     *, *::before, *::after {
@@ -333,6 +333,21 @@
       text-align: center;
     }
 
+    .location-display {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .location-display i {
+      color: var(--primary);
+    }
+
     .clock-controls, .clock-styles {
       display: flex;
       justify-content: center;
@@ -428,6 +443,7 @@
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
     }
 
     .tab {
@@ -538,6 +554,112 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* ===== NEW FEATURES ===== */
+    .day-counter-container, .stopwatch-container, .alarm-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .day-counter-display, .stopwatch-display {
+      font-size: 42px;
+      font-weight: 700;
+      text-align: center;
+      padding: 16px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .day-counter-controls, .stopwatch-controls, .alarm-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .alarm-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 16px;
+    }
+
+    .alarm-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .alarm-time {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .alarm-label {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .lap-list {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 16px;
+    }
+
+    .lap-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .input-group input, .input-group select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+
+    /* Location-specific styles */
+    .location-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    .location-status.loading {
+      color: var(--primary);
+    }
+
+    .location-status.error {
+      color: #ef4444;
+    }
+
+    .location-status.success {
+      color: #22c55e;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
@@ -601,6 +723,13 @@
 
         <div class="digital-time" id="digitalTime">00:00:00</div>
         <div class="date-display" id="dateDisplay">—</div>
+        <div class="location-display" id="locationDisplay">
+          <i class="fa-solid fa-location-dot"></i>
+          <span id="locationText">Detecting location...</span>
+          <span id="locationStatus" class="location-status loading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+          </span>
+        </div>
 
         <div class="clock-styles" role="group" aria-label="Clock style selector">
           <button class="clock-style active" data-style="classic" title="Classic" aria-label="Classic style">
@@ -624,6 +753,9 @@
           <button class="btn btn-secondary" id="syncNow" aria-label="Sync time now">
             <i class="fa-solid fa-arrows-rotate"></i> Sync Now
           </button>
+          <button class="btn btn-secondary" id="updateLocation" aria-label="Update location">
+            <i class="fa-solid fa-location-crosshairs"></i> Update Location
+          </button>
         </div>
       </div>
 
@@ -632,6 +764,9 @@
           <button class="tab active" data-tab="info" role="tab" aria-selected="true">Time Info</button>
           <button class="tab" data-tab="world" role="tab" aria-selected="false">World Clock</button>
           <button class="tab" data-tab="pomodoro" role="tab" aria-selected="false">Pomodoro</button>
+          <button class="tab" data-tab="daycounter" role="tab" aria-selected="false">Day Counter</button>
+          <button class="tab" data-tab="stopwatch" role="tab" aria-selected="false">Stopwatch</button>
+          <button class="tab" data-tab="alarm" role="tab" aria-selected="false">Alarm</button>
         </div>
 
         <div class="tab-content active" id="info-tab">
@@ -642,6 +777,16 @@
               <div class="info-item"><div class="info-label">UTC Offset</div><div class="info-value" id="utcOffset">—</div></div>
               <div class="info-item"><div class="info-label">Day of Year</div><div class="info-value" id="dayOfYear">—</div></div>
               <div class="info-item"><div class="info-label">Week Number</div><div class="info-value" id="weekNumber">—</div></div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3><i class="fa-solid fa-location-dot"></i> Location Information</h3>
+            <div class="info-grid">
+              <div class="info-item"><div class="info-label">Latitude</div><div class="info-value" id="latitude">—</div></div>
+              <div class="info-item"><div class="info-label">Longitude</div><div class="info-value" id="longitude">—</div></div>
+              <div class="info-item"><div class="info-label">Country</div><div class="info-value" id="country">—</div></div>
+              <div class="info-item"><div class="info-label">Region</div><div class="info-value" id="region">—</div></div>
             </div>
           </div>
 
@@ -694,6 +839,81 @@
             </div>
           </div>
         </div>
+
+        <!-- Day Counter Tab -->
+        <div class="tab-content" id="daycounter-tab">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-calendar-days"></i> Day Counter</h3>
+            <div class="day-counter-container">
+              <div class="day-counter-display" id="dayCounterDisplay">0 days</div>
+              <div class="day-counter-controls">
+                <div class="input-group">
+                  <label for="counterStartDate">Start Date</label>
+                  <input type="date" id="counterStartDate">
+                </div>
+                <div class="input-group">
+                  <label for="counterEndDate">End Date (optional)</label>
+                  <input type="date" id="counterEndDate">
+                </div>
+                <button class="btn" id="updateDayCounter">
+                  <i class="fa-solid fa-calculator"></i> Calculate
+                </button>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Result</div>
+                <div class="info-value" id="dayCounterResult">Select dates to calculate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stopwatch Tab -->
+        <div class="tab-content" id="stopwatch-tab">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-stopwatch"></i> Stopwatch</h3>
+            <div class="stopwatch-container">
+              <div class="stopwatch-display" id="stopwatchDisplay">00:00:00</div>
+              <div class="stopwatch-controls">
+                <button class="btn" id="stopwatchStart">
+                  <i class="fa-solid fa-play"></i> Start
+                </button>
+                <button class="btn btn-secondary" id="stopwatchPause">
+                  <i class="fa-solid fa-pause"></i> Pause
+                </button>
+                <button class="btn btn-secondary" id="stopwatchReset">
+                  <i class="fa-solid fa-arrows-rotate"></i> Reset
+                </button>
+                <button class="btn btn-secondary" id="stopwatchLap">
+                  <i class="fa-solid fa-flag"></i> Lap
+                </button>
+              </div>
+              <div class="lap-list" id="lapList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alarm Tab -->
+        <div class="tab-content" id="alarm-tab">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-bell"></i> Alarm</h3>
+            <div class="alarm-container">
+              <div class="alarm-controls">
+                <div class="input-group">
+                  <label for="alarmTime">Alarm Time</label>
+                  <input type="time" id="alarmTime">
+                </div>
+                <div class="input-group">
+                  <label for="alarmLabel">Alarm Label</label>
+                  <input type="text" id="alarmLabel" placeholder="Enter alarm label">
+                </div>
+                <button class="btn" id="addAlarm">
+                  <i class="fa-solid fa-plus"></i> Add Alarm
+                </button>
+              </div>
+              <div class="alarm-list" id="alarmList"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -711,6 +931,9 @@
           secondHand: document.getElementById('secondHand'),
           digitalTime: document.getElementById('digitalTime'),
           dateDisplay: document.getElementById('dateDisplay'),
+          locationDisplay: document.getElementById('locationDisplay'),
+          locationText: document.getElementById('locationText'),
+          locationStatus: document.getElementById('locationStatus'),
           timezone: document.getElementById('timezone'),
           utcOffset: document.getElementById('utcOffset'),
           dayOfYear: document.getElementById('dayOfYear'),
@@ -722,6 +945,23 @@
           pomodoroTimer: document.getElementById('pomodoroTimer'),
           pomodoroStatus: document.getElementById('pomodoroStatus'),
           soundToggle: document.getElementById('soundToggle'),
+          // Location elements
+          latitude: document.getElementById('latitude'),
+          longitude: document.getElementById('longitude'),
+          country: document.getElementById('country'),
+          region: document.getElementById('region'),
+          // Day Counter elements
+          dayCounterDisplay: document.getElementById('dayCounterDisplay'),
+          dayCounterResult: document.getElementById('dayCounterResult'),
+          counterStartDate: document.getElementById('counterStartDate'),
+          counterEndDate: document.getElementById('counterEndDate'),
+          // Stopwatch elements
+          stopwatchDisplay: document.getElementById('stopwatchDisplay'),
+          lapList: document.getElementById('lapList'),
+          // Alarm elements
+          alarmTime: document.getElementById('alarmTime'),
+          alarmLabel: document.getElementById('alarmLabel'),
+          alarmList: document.getElementById('alarmList')
         };
 
         this.use24Hour = true;
@@ -731,6 +971,31 @@
         this.pomodoroRunning = false;
         this.pomodoroInterval = null;
         this.audioContext = null;
+        
+        // Location properties
+        this.userLocation = {
+          latitude: null,
+          longitude: null,
+          city: null,
+          region: null,
+          country: null,
+          timezone: null,
+          timezoneOffset: null
+        };
+        
+        // Day Counter properties
+        this.dayCounterStartDate = null;
+        this.dayCounterEndDate = null;
+        
+        // Stopwatch properties
+        this.stopwatchTime = 0;
+        this.stopwatchRunning = false;
+        this.stopwatchInterval = null;
+        this.lapTimes = [];
+        
+        // Alarm properties
+        this.alarms = [];
+        this.alarmInterval = null;
 
         this.init();
       }
@@ -742,6 +1007,16 @@
         this.updateWorldClocks();
         setInterval(() => this.updateWorldClocks(), 1000);
         this.requestNotificationPermission();
+        
+        // Initialize day counter with today's date
+        const today = new Date();
+        this.elements.counterStartDate.value = today.toISOString().split('T')[0];
+        
+        // Start alarm checker
+        this.startAlarmChecker();
+        
+        // Get user location
+        this.getUserLocation();
       }
 
       setupEventListeners() {
@@ -776,6 +1051,11 @@
         document.getElementById('syncNow').addEventListener('click', () => {
           this.updateClock();
           this.playSound('sync');
+        });
+        
+        // Update location
+        document.getElementById('updateLocation').addEventListener('click', () => {
+          this.getUserLocation();
         });
 
         // Sound toggle
@@ -812,6 +1092,30 @@
         document.getElementById('pomodoroReset').addEventListener('click', () => {
           this.resetPomodoro();
         });
+        
+        // Day Counter
+        document.getElementById('updateDayCounter').addEventListener('click', () => {
+          this.updateDayCounter();
+        });
+        
+        // Stopwatch
+        document.getElementById('stopwatchStart').addEventListener('click', () => {
+          this.startStopwatch();
+        });
+        document.getElementById('stopwatchPause').addEventListener('click', () => {
+          this.pauseStopwatch();
+        });
+        document.getElementById('stopwatchReset').addEventListener('click', () => {
+          this.resetStopwatch();
+        });
+        document.getElementById('stopwatchLap').addEventListener('click', () => {
+          this.recordLap();
+        });
+        
+        // Alarm
+        document.getElementById('addAlarm').addEventListener('click', () => {
+          this.addAlarm();
+        });
 
         // Init audio on first interaction
         document.body.addEventListener('click', () => {
@@ -842,7 +1146,17 @@
       }
 
       updateClock() {
-        const now = new Date();
+        // Get current time based on user's location timezone
+        let now;
+        if (this.userLocation.timezone) {
+          // Create date string in the user's timezone
+          const nowUTC = new Date();
+          const localTime = new Date(nowUTC.toLocaleString("en-US", {timeZone: this.userLocation.timezone}));
+          now = localTime;
+        } else {
+          // Fallback to local time
+          now = new Date();
+        }
 
         // Hands
         const sec = now.getSeconds() + now.getMilliseconds() / 1000;
@@ -869,14 +1183,25 @@
           weekday: 'long',
           year: 'numeric',
           month: 'long',
-          day: 'numeric'
+          day: 'numeric',
+          timeZone: this.userLocation.timezone || undefined
         });
 
         // Timezone
-        this.elements.timezone.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (this.userLocation.timezone) {
+          this.elements.timezone.textContent = this.userLocation.timezone;
+        } else {
+          this.elements.timezone.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        }
 
         // UTC offset
-        const offset = -now.getTimezoneOffset();
+        let offset;
+        if (this.userLocation.timezoneOffset !== null) {
+          offset = this.userLocation.timezoneOffset;
+        } else {
+          offset = -now.getTimezoneOffset();
+        }
+        
         const sign = offset >= 0 ? '+' : '-';
         const abs = Math.abs(offset);
         const utcH = String(Math.floor(abs / 60)).padStart(2, '0');
@@ -901,12 +1226,38 @@
         this.elements.dayProgress.textContent = `${percent.toFixed(2)}%`;
         this.elements.dayProgressBar.style.width = `${percent}%`;
 
-        // Sun (approx)
-        const doy = Math.floor(diff);
-        const sunriseH = 6 + Math.sin((doy - 80) * Math.PI / 182) * 1.5;
-        const sunsetH = 18 + Math.sin((doy - 80) * Math.PI / 182) * 1.5;
-        this.elements.sunrise.textContent = `${Math.floor(sunriseH)}:${String(Math.round((sunriseH % 1) * 60)).padStart(2, '0')}`;
-        this.elements.sunset.textContent = `${Math.floor(sunsetH)}:${String(Math.round((sunsetH % 1) * 60)).padStart(2, '0')}`;
+        // Sun info (more accurate based on location)
+        this.calculateSunTimes(now);
+      }
+
+      calculateSunTimes(date) {
+        if (!this.userLocation.latitude || !this.userLocation.longitude) {
+          // Fallback to approximate calculation
+          const doy = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+          const sunriseH = 6 + Math.sin((doy - 80) * Math.PI / 182) * 1.5;
+          const sunsetH = 18 + Math.sin((doy - 80) * Math.PI / 182) * 1.5;
+          this.elements.sunrise.textContent = `${Math.floor(sunriseH)}:${String(Math.round((sunriseH % 1) * 60)).padStart(2, '0')}`;
+          this.elements.sunset.textContent = `${Math.floor(sunsetH)}:${String(Math.round((sunsetH % 1) * 60)).padStart(2, '0')}`;
+          return;
+        }
+
+        // More accurate sun calculation based on latitude
+        const lat = this.userLocation.latitude * Math.PI / 180;
+        const doy = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+        
+        // Solar declination
+        const declination = -23.45 * Math.cos((360 * (284 + doy) / 365) * Math.PI / 180) * Math.PI / 180;
+        
+        // Hour angle
+        const hourAngle = Math.acos(-Math.tan(lat) * Math.tan(declination));
+        
+        // Sunrise and sunset in hours from midnight
+        const sunrise = 12 - hourAngle * 12 / Math.PI;
+        const sunset = 12 + hourAngle * 12 / Math.PI;
+        
+        // Format times
+        this.elements.sunrise.textContent = `${Math.floor(sunrise)}:${String(Math.round((sunrise % 1) * 60)).padStart(2, '0')}`;
+        this.elements.sunset.textContent = `${Math.floor(sunset)}:${String(Math.round((sunset % 1) * 60)).padStart(2, '0')}`;
       }
 
       startClock() {
@@ -919,16 +1270,121 @@
       updateWorldClocks() {
         const now = new Date();
         const cities = {
-          'ny-time': 'America/New_York',
-          'london-time': 'Europe/London',
-          'tokyo-time': 'Asia/Tokyo',
-          'sydney-time': 'Australia/Sydney'
+          'ny-time': { timezone: 'America/New_York', name: 'New York' },
+          'london-time': { timezone: 'Europe/London', name: 'London' },
+          'tokyo-time': { timezone: 'Asia/Tokyo', name: 'Tokyo' },
+          'sydney-time': { timezone: 'Australia/Sydney', name: 'Sydney' }
         };
-        Object.entries(cities).forEach(([id, tz]) => {
-          const time = new Date(now.toLocaleString('en-US', { timeZone: tz }));
-          document.getElementById(id).textContent =
-            `${String(time.getHours()).padStart(2, '0')}:${String(time.getMinutes()).padStart(2, '0')}`;
+        
+        Object.entries(cities).forEach(([id, city]) => {
+          const time = new Date(now.toLocaleString("en-US", {timeZone: city.timezone}));
+          const hours = String(time.getHours()).padStart(2, '0');
+          const minutes = String(time.getMinutes()).padStart(2, '0');
+          document.getElementById(id).textContent = `${hours}:${minutes}`;
         });
+      }
+
+      // Location methods
+      getUserLocation() {
+        // Update status to loading
+        this.updateLocationStatus('loading', '<i class="fa-solid fa-spinner fa-spin"></i>');
+        
+        if (!navigator.geolocation) {
+          this.updateLocationStatus('error', '<i class="fa-solid fa-exclamation-circle"></i>');
+          this.elements.locationText.textContent = 'Geolocation not supported';
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.userLocation.latitude = position.coords.latitude;
+            this.userLocation.longitude = position.coords.longitude;
+            
+            // Update UI with coordinates
+            this.elements.latitude.textContent = this.userLocation.latitude.toFixed(6);
+            this.elements.longitude.textContent = this.userLocation.longitude.toFixed(6);
+            
+            // Get timezone and location name
+            this.getTimezoneFromCoordinates(this.userLocation.latitude, this.userLocation.longitude);
+          },
+          (error) => {
+            this.updateLocationStatus('error', '<i class="fa-solid fa-exclamation-circle"></i>');
+            this.elements.locationText.textContent = 'Location access denied';
+            console.error('Error getting location:', error);
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000 // 5 minutes
+          }
+        );
+      }
+
+      getTimezoneFromCoordinates(lat, lon) {
+        // Using timezone API based on coordinates
+        // Using a free timezone API (you might want to replace with your preferred service)
+        fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=YOUR_API_KEY&format=json&by=position&lat=${lat}&lng=${lon}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'OK') {
+              this.userLocation.timezone = data.zoneName;
+              this.userLocation.timezoneOffset = parseInt(data.gmtOffset) / 60;
+              
+              // Update timezone display
+              this.elements.timezone.textContent = this.userLocation.timezone;
+              
+              // Get location name
+              this.getLocationName(lat, lon);
+            } else {
+              throw new Error('Failed to get timezone');
+            }
+          })
+          .catch(error => {
+            console.error('Error getting timezone:', error);
+            // Fallback to browser timezone
+            this.userLocation.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            this.getLocationName(lat, lon);
+          });
+      }
+
+      getLocationName(lat, lon) {
+        // Using Nominatim OpenStreetMap API for reverse geocoding
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`)
+          .then(response => response.json())
+          .then(data => {
+            if (data && data.address) {
+              const address = data.address;
+              this.userLocation.city = address.city || address.town || address.village || 'Unknown';
+              this.userLocation.region = address.state || address.region || 'Unknown';
+              this.userLocation.country = address.country || 'Unknown';
+              
+              // Update UI with location name
+              this.elements.locationText.textContent = 
+                `${this.userLocation.city}, ${this.userLocation.region}, ${this.userLocation.country}`;
+              
+              this.elements.country.textContent = this.userLocation.country;
+              this.elements.region.textContent = this.userLocation.region;
+              
+              // Update status to success
+              this.updateLocationStatus('success', '<i class="fa-solid fa-check-circle"></i>');
+              
+              // Update clock with new timezone
+              this.updateClock();
+            } else {
+              throw new Error('No address data found');
+            }
+          })
+          .catch(error => {
+            console.error('Error getting location name:', error);
+            // Fallback to coordinates only
+            this.elements.locationText.textContent = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+            this.updateLocationStatus('success', '<i class="fa-solid fa-check-circle"></i>');
+          });
+      }
+
+      updateLocationStatus(status, icon) {
+        this.elements.locationStatus.className = `location-status ${status}`;
+        this.elements.locationStatus.innerHTML = icon;
       }
 
       // Pomodoro methods
@@ -976,6 +1432,204 @@
         const m = Math.floor(this.pomodoroTime / 60);
         const s = this.pomodoroTime % 60;
         this.elements.pomodoroTimer.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      }
+
+      // Day Counter methods
+      updateDayCounter() {
+        const startDate = new Date(this.elements.counterStartDate.value);
+        const endDate = this.elements.counterEndDate.value ? new Date(this.elements.counterEndDate.value) : new Date();
+        
+        if (isNaN(startDate.getTime())) {
+          this.elements.dayCounterResult.textContent = 'Please select a valid start date';
+          return;
+        }
+        
+        const diffTime = Math.abs(endDate - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        this.elements.dayCounterDisplay.textContent = `${diffDays} days`;
+        this.elements.dayCounterResult.textContent = 
+          `${diffDays} days between ${startDate.toLocaleDateString()} and ${endDate.toLocaleDateString()}`;
+        
+        this.playSound('click');
+      }
+
+      // Stopwatch methods
+      startStopwatch() {
+        if (!this.stopwatchRunning) {
+          this.stopwatchRunning = true;
+          this.stopwatchInterval = setInterval(() => {
+            this.stopwatchTime += 10; // increment by 10ms
+            this.updateStopwatchDisplay();
+          }, 10);
+          this.playSound('start');
+        }
+      }
+
+      pauseStopwatch() {
+        if (this.stopwatchRunning) {
+          this.stopwatchRunning = false;
+          clearInterval(this.stopwatchInterval);
+          this.playSound('pause');
+        }
+      }
+
+      resetStopwatch() {
+        this.stopwatchRunning = false;
+        clearInterval(this.stopwatchInterval);
+        this.stopwatchTime = 0;
+        this.lapTimes = [];
+        this.updateStopwatchDisplay();
+        this.elements.lapList.innerHTML = '';
+        this.playSound('reset');
+      }
+
+      recordLap() {
+        if (this.stopwatchRunning) {
+          const lapTime = this.stopwatchTime;
+          this.lapTimes.push(lapTime);
+          
+          const lapItem = document.createElement('div');
+          lapItem.className = 'lap-item';
+          lapItem.innerHTML = `
+            <span>Lap ${this.lapTimes.length}</span>
+            <span>${this.formatStopwatchTime(lapTime)}</span>
+          `;
+          
+          this.elements.lapList.prepend(lapItem);
+          this.playSound('click');
+        }
+      }
+
+      updateStopwatchDisplay() {
+        this.elements.stopwatchDisplay.textContent = this.formatStopwatchTime(this.stopwatchTime);
+      }
+
+      formatStopwatchTime(time) {
+        const minutes = Math.floor(time / 60000);
+        const seconds = Math.floor((time % 60000) / 1000);
+        const milliseconds = Math.floor((time % 1000) / 10);
+        
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(2, '0')}`;
+      }
+
+      // Alarm methods
+      addAlarm() {
+        const time = this.elements.alarmTime.value;
+        const label = this.elements.alarmLabel.value || 'Alarm';
+        
+        if (!time) {
+          return;
+        }
+        
+        const alarm = {
+          id: Date.now(),
+          time: time,
+          label: label,
+          active: true
+        };
+        
+        this.alarms.push(alarm);
+        this.renderAlarms();
+        
+        // Clear inputs
+        this.elements.alarmTime.value = '';
+        this.elements.alarmLabel.value = '';
+        
+        this.playSound('click');
+      }
+
+      deleteAlarm(id) {
+        this.alarms = this.alarms.filter(alarm => alarm.id !== id);
+        this.renderAlarms();
+        this.playSound('click');
+      }
+
+      toggleAlarm(id) {
+        const alarm = this.alarms.find(a => a.id === id);
+        if (alarm) {
+          alarm.active = !alarm.active;
+          this.renderAlarms();
+          this.playSound('click');
+        }
+      }
+
+      renderAlarms() {
+        this.elements.alarmList.innerHTML = '';
+        
+        if (this.alarms.length === 0) {
+          const emptyMessage = document.createElement('div');
+          emptyMessage.className = 'info-item';
+          emptyMessage.textContent = 'No alarms set';
+          this.elements.alarmList.appendChild(emptyMessage);
+          return;
+        }
+        
+        this.alarms.forEach(alarm => {
+          const alarmItem = document.createElement('div');
+          alarmItem.className = 'alarm-item';
+          
+          alarmItem.innerHTML = `
+            <div>
+              <div class="alarm-time">${alarm.time}</div>
+              <div class="alarm-label">${alarm.label}</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn" style="padding: 6px 10px; font-size: 12px;" data-id="${alarm.id}" data-action="toggle">
+                <i class="fa-solid ${alarm.active ? 'fa-toggle-on' : 'fa-toggle-off'}"></i>
+              </button>
+              <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 12px;" data-id="${alarm.id}" data-action="delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          `;
+          
+          // Add event listeners
+          alarmItem.querySelector('[data-action="toggle"]').addEventListener('click', () => {
+            this.toggleAlarm(alarm.id);
+          });
+          
+          alarmItem.querySelector('[data-action="delete"]').addEventListener('click', () => {
+            this.deleteAlarm(alarm.id);
+          });
+          
+          this.elements.alarmList.appendChild(alarmItem);
+        });
+      }
+
+      startAlarmChecker() {
+        this.alarmInterval = setInterval(() => {
+          // Get current time in user's timezone
+          let now;
+          if (this.userLocation.timezone) {
+            const nowUTC = new Date();
+            now = new Date(nowUTC.toLocaleString("en-US", {timeZone: this.userLocation.timezone}));
+          } else {
+            now = new Date();
+          }
+          
+          const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          
+          this.alarms.forEach(alarm => {
+            if (alarm.active && alarm.time === currentTime) {
+              this.triggerAlarm(alarm);
+              // Deactivate alarm after triggering
+              alarm.active = false;
+              this.renderAlarms();
+            }
+          });
+        }, 1000);
+      }
+
+      triggerAlarm(alarm) {
+        this.playSound('alarm');
+        
+        if (Notification.permission === 'granted') {
+          new Notification('Alarm!', { 
+            body: `${alarm.label} - ${alarm.time}`,
+            icon: 'https://cdn-icons-png.flaticon.com/512/3471/3471705.png'
+          });
+        }
       }
 
       // Sound
