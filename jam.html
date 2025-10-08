@@ -555,13 +555,13 @@
     }
 
     /* ===== NEW FEATURES ===== */
-    .day-counter-container, .stopwatch-container, .alarm-container {
+    .day-counter-container, .stopwatch-container, .alarm-container, .countdown-container, .timezone-container, .event-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    .day-counter-display, .stopwatch-display {
+    .day-counter-display, .stopwatch-display, .countdown-display, .event-display {
       font-size: 42px;
       font-weight: 700;
       text-align: center;
@@ -571,7 +571,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .day-counter-controls, .stopwatch-controls, .alarm-controls {
+    .day-counter-controls, .stopwatch-controls, .alarm-controls, .countdown-controls, .timezone-controls, .event-controls {
       display: flex;
       gap: 12px;
       justify-content: center;
@@ -660,6 +660,112 @@
       color: #22c55e;
     }
 
+    /* Timezone converter styles */
+    .timezone-result {
+      margin-top: 16px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .timezone-result-time {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .timezone-result-info {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Fullscreen button */
+    .fullscreen-btn {
+      position: absolute;
+      top: 20px;
+      right: 70px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform var(--transition-speed);
+    }
+
+    .fullscreen-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Auto theme switch styles */
+    .auto-theme-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 24px;
+      background: var(--card-border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .toggle-switch.active {
+      background: var(--primary);
+    }
+
+    .toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .toggle-switch.active .toggle-slider {
+      transform: translateX(26px);
+    }
+
+    /* Event countdown styles */
+    .event-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 16px;
+    }
+
+    .event-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .event-name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .event-date {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
@@ -719,6 +825,9 @@
           <button class="sound-toggle active" id="soundToggle" title="Toggle Sound" aria-label="Toggle sound">
             <i class="fa-solid fa-volume-high"></i>
           </button>
+          <button class="fullscreen-btn" id="fullscreenBtn" title="Fullscreen" aria-label="Fullscreen">
+            <i class="fa-solid fa-expand"></i>
+          </button>
         </div>
 
         <div class="digital-time" id="digitalTime">00:00:00</div>
@@ -764,6 +873,9 @@
           <button class="tab active" data-tab="info" role="tab" aria-selected="true">Time Info</button>
           <button class="tab" data-tab="world" role="tab" aria-selected="false">World Clock</button>
           <button class="tab" data-tab="pomodoro" role="tab" aria-selected="false">Pomodoro</button>
+          <button class="tab" data-tab="countdown" role="tab" aria-selected="false">Countdown</button>
+          <button class="tab" data-tab="timezone" role="tab" aria-selected="false">Timezone</button>
+          <button class="tab" data-tab="event" role="tab" aria-selected="false">Events</button>
           <button class="tab" data-tab="daycounter" role="tab" aria-selected="false">Day Counter</button>
           <button class="tab" data-tab="stopwatch" role="tab" aria-selected="false">Stopwatch</button>
           <button class="tab" data-tab="alarm" role="tab" aria-selected="false">Alarm</button>
@@ -808,6 +920,20 @@
               <div class="info-item"><div class="info-label">Sunset</div><div class="info-value" id="sunset">—</div></div>
             </div>
           </div>
+
+          <div class="info-card">
+            <h3><i class="fa-solid fa-palette"></i> Theme Settings</h3>
+            <div class="auto-theme-container">
+              <span>Auto Theme Switching</span>
+              <div class="toggle-switch" id="autoThemeToggle">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Current Time</div>
+              <div class="info-value" id="currentTimeForTheme">—</div>
+            </div>
+          </div>
         </div>
 
         <div class="tab-content" id="world-tab">
@@ -836,6 +962,111 @@
                   <i class="fa-solid fa-arrows-rotate"></i> Reset
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Countdown Timer Tab -->
+        <div class="tab-content" id="countdown-tab">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-hourglass-end"></i> Countdown Timer</h3>
+            <div class="countdown-container">
+              <div class="countdown-display" id="countdownDisplay">00:00:00</div>
+              <div class="countdown-controls">
+                <div class="input-group">
+                  <label for="countdownHours">Hours</label>
+                  <input type="number" id="countdownHours" min="0" max="23" value="0">
+                </div>
+                <div class="input-group">
+                  <label for="countdownMinutes">Minutes</label>
+                  <input type="number" id="countdownMinutes" min="0" max="59" value="5">
+                </div>
+                <div class="input-group">
+                  <label for="countdownSeconds">Seconds</label>
+                  <input type="number" id="countdownSeconds" min="0" max="59" value="0">
+                </div>
+                <div class="countdown-controls">
+                  <button class="btn" id="countdownStart">
+                    <i class="fa-solid fa-play"></i> Start
+                  </button>
+                  <button class="btn btn-secondary" id="countdownPause">
+                    <i class="fa-solid fa-pause"></i> Pause
+                  </button>
+                  <button class="btn btn-secondary" id="countdownReset">
+                    <i class="fa-solid fa-arrows-rotate"></i> Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timezone Converter Tab -->
+        <div class="tab-content" id="timezone-tab">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-globe"></i> Timezone Converter</h3>
+            <div class="timezone-container">
+              <div class="input-group">
+                <label for="fromTime">From Time</label>
+                <input type="time" id="fromTime" value="12:00">
+              </div>
+              <div class="input-group">
+                <label for="fromTimezone">From Timezone</label>
+                <select id="fromTimezone">
+                  <option value="UTC">UTC</option>
+                  <option value="America/New_York">New York (EST)</option>
+                  <option value="America/Los_Angeles">Los Angeles (PST)</option>
+                  <option value="Europe/London">London (GMT)</option>
+                  <option value="Europe/Paris">Paris (CET)</option>
+                  <option value="Asia/Tokyo">Tokyo (JST)</option>
+                  <option value="Asia/Shanghai">Shanghai (CST)</option>
+                  <option value="Australia/Sydney">Sydney (AEST)</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="toTimezone">To Timezone</label>
+                <select id="toTimezone">
+                  <option value="UTC">UTC</option>
+                  <option value="America/New_York" selected>New York (EST)</option>
+                  <option value="America/Los_Angeles">Los Angeles (PST)</option>
+                  <option value="Europe/London">London (GMT)</option>
+                  <option value="Europe/Paris">Paris (CET)</option>
+                  <option value="Asia/Tokyo">Tokyo (JST)</option>
+                  <option value="Asia/Shanghai">Shanghai (CST)</option>
+                  <option value="Australia/Sydney">Sydney (AEST)</option>
+                </select>
+              </div>
+              <button class="btn" id="convertTimezone">
+                <i class="fa-solid fa-arrows-rotate"></i> Convert
+              </button>
+              <div class="timezone-result" id="timezoneResult" style="display: none;">
+                <div class="timezone-result-time" id="timezoneResultTime">—</div>
+                <div class="timezone-result-info" id="timezoneResultInfo">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Countdown Tab -->
+        <div class="tab-content" id="event-tab">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-calendar-check"></i> Event Countdown</h3>
+            <div class="event-container">
+              <div class="event-display" id="eventDisplay">No events</div>
+              <div class="event-controls">
+                <div class="input-group">
+                  <label for="eventName">Event Name</label>
+                  <input type="text" id="eventName" placeholder="Enter event name">
+                </div>
+                <div class="input-group">
+                  <label for="eventDate">Event Date & Time</label>
+                  <input type="datetime-local" id="eventDate">
+                </div>
+                <button class="btn" id="addEvent">
+                  <i class="fa-solid fa-plus"></i> Add Event
+                </button>
+              </div>
+              <div class="event-list" id="eventList"></div>
             </div>
           </div>
         </div>
@@ -945,6 +1176,9 @@
           pomodoroTimer: document.getElementById('pomodoroTimer'),
           pomodoroStatus: document.getElementById('pomodoroStatus'),
           soundToggle: document.getElementById('soundToggle'),
+          fullscreenBtn: document.getElementById('fullscreenBtn'),
+          autoThemeToggle: document.getElementById('autoThemeToggle'),
+          currentTimeForTheme: document.getElementById('currentTimeForTheme'),
           // Location elements
           latitude: document.getElementById('latitude'),
           longitude: document.getElementById('longitude'),
@@ -961,7 +1195,24 @@
           // Alarm elements
           alarmTime: document.getElementById('alarmTime'),
           alarmLabel: document.getElementById('alarmLabel'),
-          alarmList: document.getElementById('alarmList')
+          alarmList: document.getElementById('alarmList'),
+          // Countdown elements
+          countdownDisplay: document.getElementById('countdownDisplay'),
+          countdownHours: document.getElementById('countdownHours'),
+          countdownMinutes: document.getElementById('countdownMinutes'),
+          countdownSeconds: document.getElementById('countdownSeconds'),
+          // Timezone converter elements
+          fromTime: document.getElementById('fromTime'),
+          fromTimezone: document.getElementById('fromTimezone'),
+          toTimezone: document.getElementById('toTimezone'),
+          timezoneResult: document.getElementById('timezoneResult'),
+          timezoneResultTime: document.getElementById('timezoneResultTime'),
+          timezoneResultInfo: document.getElementById('timezoneResultInfo'),
+          // Event elements
+          eventDisplay: document.getElementById('eventDisplay'),
+          eventName: document.getElementById('eventName'),
+          eventDate: document.getElementById('eventDate'),
+          eventList: document.getElementById('eventList')
         };
 
         this.use24Hour = true;
@@ -971,6 +1222,8 @@
         this.pomodoroRunning = false;
         this.pomodoroInterval = null;
         this.audioContext = null;
+        this.autoThemeEnabled = false;
+        this.isFullscreen = false;
         
         // Location properties
         this.userLocation = {
@@ -996,6 +1249,15 @@
         // Alarm properties
         this.alarms = [];
         this.alarmInterval = null;
+        
+        // Countdown properties
+        this.countdownTime = 0;
+        this.countdownRunning = false;
+        this.countdownInterval = null;
+        
+        // Event properties
+        this.events = [];
+        this.eventInterval = null;
 
         this.init();
       }
@@ -1015,8 +1277,14 @@
         // Start alarm checker
         this.startAlarmChecker();
         
+        // Start event checker
+        this.startEventChecker();
+        
         // Get user location
         this.getUserLocation();
+        
+        // Setup auto theme switching
+        this.setupAutoTheme();
       }
 
       setupEventListeners() {
@@ -1070,6 +1338,16 @@
             this.elements.soundToggle.classList.remove('active');
           }
         });
+        
+        // Fullscreen toggle
+        this.elements.fullscreenBtn.addEventListener('click', () => {
+          this.toggleFullscreen();
+        });
+        
+        // Auto theme toggle
+        this.elements.autoThemeToggle.addEventListener('click', () => {
+          this.toggleAutoTheme();
+        });
 
         // Tabs
         document.querySelectorAll('.tab').forEach(tab => {
@@ -1091,6 +1369,27 @@
         });
         document.getElementById('pomodoroReset').addEventListener('click', () => {
           this.resetPomodoro();
+        });
+        
+        // Countdown
+        document.getElementById('countdownStart').addEventListener('click', () => {
+          this.startCountdown();
+        });
+        document.getElementById('countdownPause').addEventListener('click', () => {
+          this.pauseCountdown();
+        });
+        document.getElementById('countdownReset').addEventListener('click', () => {
+          this.resetCountdown();
+        });
+        
+        // Timezone converter
+        document.getElementById('convertTimezone').addEventListener('click', () => {
+          this.convertTimezone();
+        });
+        
+        // Event countdown
+        document.getElementById('addEvent').addEventListener('click', () => {
+          this.addEvent();
         });
         
         // Day Counter
@@ -1123,6 +1422,17 @@
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
           }
         }, { once: true });
+        
+        // Handle fullscreen change
+        document.addEventListener('fullscreenchange', () => {
+          this.isFullscreen = !!document.fullscreenElement;
+          const icon = this.elements.fullscreenBtn.querySelector('i');
+          if (this.isFullscreen) {
+            icon.className = 'fa-solid fa-compress';
+          } else {
+            icon.className = 'fa-solid fa-expand';
+          }
+        });
       }
 
       setClockStyle(style) {
@@ -1228,6 +1538,9 @@
 
         // Sun info (more accurate based on location)
         this.calculateSunTimes(now);
+        
+        // Update current time for auto theme
+        this.elements.currentTimeForTheme.textContent = now.toLocaleTimeString();
       }
 
       calculateSunTimes(date) {
@@ -1256,8 +1569,8 @@
         const sunset = 12 + hourAngle * 12 / Math.PI;
         
         // Format times
-        this.elements.sunrise.textContent = `${Math.floor(sunrise)}:${String(Math.round((sunrise % 1) * 60)).padStart(2, '0')}`;
-        this.elements.sunset.textContent = `${Math.floor(sunset)}:${String(Math.round((sunset % 1) * 60)).padStart(2, '0')}`;
+        this.elements.sunrise.textContent = `${Math.floor(sunrise)}:${String(Math.round((sunriseH % 1) * 60)).padStart(2, '0')}`;
+        this.elements.sunset.textContent = `${Math.floor(sunset)}:${String(Math.round((sunsetH % 1) * 60)).padStart(2, '0')}`;
       }
 
       startClock() {
@@ -1354,7 +1667,7 @@
           .then(data => {
             if (data && data.address) {
               const address = data.address;
-              this.userLocation.city = address.city || address.town || address.village || 'Unknown';
+              this.userLocation.city = address.city || address.town || address.village || 'Not Mentioned';
               this.userLocation.region = address.state || address.region || 'Unknown';
               this.userLocation.country = address.country || 'Unknown';
               
@@ -1432,6 +1745,246 @@
         const m = Math.floor(this.pomodoroTime / 60);
         const s = this.pomodoroTime % 60;
         this.elements.pomodoroTimer.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      }
+
+      // Countdown Timer methods
+      startCountdown() {
+        if (!this.countdownRunning) {
+          // Get time from inputs
+          const hours = parseInt(this.elements.countdownHours.value) || 0;
+          const minutes = parseInt(this.elements.countdownMinutes.value) || 0;
+          const seconds = parseInt(this.elements.countdownSeconds.value) || 0;
+          
+          // If countdown is at 0, set it to the input values
+          if (this.countdownTime === 0) {
+            this.countdownTime = hours * 3600 + minutes * 60 + seconds;
+          }
+          
+          if (this.countdownTime > 0) {
+            this.countdownRunning = true;
+            this.countdownInterval = setInterval(() => {
+              if (this.countdownTime > 0) {
+                this.countdownTime--;
+                this.updateCountdownDisplay();
+              } else {
+                this.completeCountdown();
+              }
+            }, 1000);
+            this.playSound('start');
+          }
+        }
+      }
+
+      pauseCountdown() {
+        if (this.countdownRunning) {
+          this.countdownRunning = false;
+          clearInterval(this.countdownInterval);
+          this.playSound('pause');
+        }
+      }
+
+      resetCountdown() {
+        this.pauseCountdown();
+        this.countdownTime = 0;
+        this.updateCountdownDisplay();
+        this.playSound('reset');
+      }
+
+      completeCountdown() {
+        this.pauseCountdown();
+        this.playSound('alarm');
+        if (Notification.permission === 'granted') {
+          new Notification('Countdown Complete!', { body: 'Your countdown timer has finished.' });
+        }
+      }
+
+      updateCountdownDisplay() {
+        const hours = Math.floor(this.countdownTime / 3600);
+        const minutes = Math.floor((this.countdownTime % 3600) / 60);
+        const seconds = this.countdownTime % 60;
+        
+        this.elements.countdownDisplay.textContent = 
+          `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }
+
+      // Timezone Converter methods
+      convertTimezone() {
+        const fromTime = this.elements.fromTime.value;
+        const fromTimezone = this.elements.fromTimezone.value;
+        const toTimezone = this.elements.toTimezone.value;
+        
+        if (!fromTime) {
+          return;
+        }
+        
+        // Create a date object with today's date and the selected time
+        const today = new Date();
+        const [hours, minutes] = fromTime.split(':').map(Number);
+        
+        // Create date in the source timezone
+        const sourceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
+        
+        // Format the date in the source timezone to get the correct UTC time
+        const sourceTimeUTC = new Date(sourceDate.toLocaleString("en-US", {timeZone: fromTimezone}));
+        
+        // Convert UTC time to the target timezone
+        const targetTime = new Date(sourceTimeUTC.toLocaleString("en-US", {timeZone: toTimezone}));
+        
+        // Format the result
+        const targetHours = String(targetTime.getHours()).padStart(2, '0');
+        const targetMinutes = String(targetTime.getMinutes()).padStart(2, '0');
+        
+        // Display the result
+        this.elements.timezoneResultTime.textContent = `${targetHours}:${targetMinutes}`;
+        this.elements.timezoneResultInfo.textContent = `${fromTime} in ${fromTimezone} is ${targetHours}:${targetMinutes} in ${toTimezone}`;
+        this.elements.timezoneResult.style.display = 'block';
+        
+        this.playSound('click');
+      }
+
+      // Event Countdown methods
+      addEvent() {
+        const name = this.elements.eventName.value;
+        const date = this.elements.eventDate.value;
+        
+        if (!name || !date) {
+          return;
+        }
+        
+        const event = {
+          id: Date.now(),
+          name: name,
+          date: new Date(date)
+        };
+        
+        this.events.push(event);
+        this.renderEvents();
+        
+        // Clear inputs
+        this.elements.eventName.value = '';
+        this.elements.eventDate.value = '';
+        
+        // Update display to show the next event
+        this.updateEventDisplay();
+        
+        this.playSound('click');
+      }
+
+      deleteEvent(id) {
+        this.events = this.events.filter(event => event.id !== id);
+        this.renderEvents();
+        this.updateEventDisplay();
+        this.playSound('click');
+      }
+
+      renderEvents() {
+        this.elements.eventList.innerHTML = '';
+        
+        if (this.events.length === 0) {
+          const emptyMessage = document.createElement('div');
+          emptyMessage.className = 'info-item';
+          emptyMessage.textContent = 'No events added';
+          this.elements.eventList.appendChild(emptyMessage);
+          return;
+        }
+        
+        // Sort events by date (closest first)
+        const sortedEvents = [...this.events].sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        sortedEvents.forEach(event => {
+          const eventItem = document.createElement('div');
+          eventItem.className = 'event-item';
+          
+          // Calculate time remaining
+          const now = new Date();
+          const eventDate = new Date(event.date);
+          const diff = eventDate - now;
+          
+          let timeRemaining = '';
+          if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            if (days > 0) {
+              timeRemaining = `${days}d ${hours}h ${minutes}m`;
+            } else if (hours > 0) {
+              timeRemaining = `${hours}h ${minutes}m`;
+            } else {
+              timeRemaining = `${minutes}m ${Math.floor((diff % (1000 * 60)) / 1000)}s`;
+            }
+          } else {
+            timeRemaining = 'Event passed';
+          }
+          
+          eventItem.innerHTML = `
+            <div>
+              <div class="event-name">${event.name}</div>
+              <div class="event-date">${eventDate.toLocaleDateString()} ${eventDate.toLocaleTimeString()}</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+              <div style="font-weight: 600;">${timeRemaining}</div>
+              <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 12px;" data-id="${event.id}" data-action="delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          `;
+          
+          // Add event listener
+          eventItem.querySelector('[data-action="delete"]').addEventListener('click', () => {
+            this.deleteEvent(event.id);
+          });
+          
+          this.elements.eventList.appendChild(eventItem);
+        });
+      }
+
+      updateEventDisplay() {
+        if (this.events.length === 0) {
+          this.elements.eventDisplay.textContent = 'No events';
+          return;
+        }
+        
+        // Find the next upcoming event
+        const now = new Date();
+        const upcomingEvents = this.events.filter(event => new Date(event.date) > now);
+        
+        if (upcomingEvents.length === 0) {
+          this.elements.eventDisplay.textContent = 'No upcoming events';
+          return;
+        }
+        
+        // Sort by date and get the closest one
+        upcomingEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const nextEvent = upcomingEvents[0];
+        
+        // Calculate time remaining
+        const eventDate = new Date(nextEvent.date);
+        const diff = eventDate - now;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        let displayText = '';
+        if (days > 0) {
+          displayText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        } else if (hours > 0) {
+          displayText = `${hours}h ${minutes}m ${seconds}s`;
+        } else if (minutes > 0) {
+          displayText = `${minutes}m ${seconds}s`;
+        } else {
+          displayText = `${seconds}s`;
+        }
+        
+        this.elements.eventDisplay.textContent = `${nextEvent.name}: ${displayText}`;
+      }
+
+      startEventChecker() {
+        this.eventInterval = setInterval(() => {
+          this.updateEventDisplay();
+        }, 1000);
       }
 
       // Day Counter methods
@@ -1629,6 +2182,75 @@
             body: `${alarm.label} - ${alarm.time}`,
             icon: 'https://cdn-icons-png.flaticon.com/512/3471/3471705.png'
           });
+        }
+      }
+
+      // Fullscreen methods
+      toggleFullscreen() {
+        if (!this.isFullscreen) {
+          // Enter fullscreen
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+          } else if (document.documentElement.webkitRequestFullscreen) {
+            document.documentElement.webkitRequestFullscreen();
+          } else if (document.documentElement.msRequestFullscreen) {
+            document.documentElement.msRequestFullscreen();
+          }
+        } else {
+          // Exit fullscreen
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+        this.playSound('click');
+      }
+
+      // Auto theme methods
+      toggleAutoTheme() {
+        this.autoThemeEnabled = !this.autoThemeEnabled;
+        this.elements.autoThemeToggle.classList.toggle('active', this.autoThemeEnabled);
+        
+        if (this.autoThemeEnabled) {
+          this.setupAutoTheme();
+        }
+        
+        this.playSound('click');
+      }
+
+      setupAutoTheme() {
+        if (!this.autoThemeEnabled) return;
+        
+        const now = new Date();
+        const hour = now.getHours();
+        
+        // Set theme based on time of day
+        let theme;
+        if (hour >= 6 && hour < 12) {
+          // Morning - Ocean theme
+          theme = 'ocean';
+        } else if (hour >= 12 && hour < 18) {
+          // Afternoon - Forest theme
+          theme = 'forest';
+        } else if (hour >= 18 && hour < 21) {
+          // Evening - Sunset theme
+          theme = 'sunset';
+        } else {
+          // Night - Dark theme
+          theme = 'dark';
+        }
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.theme === theme);
+        });
+        
+        // Check again in 10 minutes
+        if (this.autoThemeEnabled) {
+          setTimeout(() => this.setupAutoTheme(), 600000);
         }
       }
 
