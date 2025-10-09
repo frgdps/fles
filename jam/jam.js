@@ -59,6 +59,14 @@ class ClockApp {
           eventList: document.getElementById('eventList')
         };
 
+            <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker aktif! 💪"))
+    .catch(err => console.log("Service Worker gagal:", err));
+  }
+</script>
+
         this.use24Hour = true;
         this.soundEnabled = true;
         this.clockStyle = 'classic';
