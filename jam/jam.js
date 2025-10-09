@@ -1,3 +1,8 @@
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker aktif! 💪"))
+    .catch(err => console.log("Service Worker gagal:", err));
+  }
 class ClockApp {
       constructor() {
         this.elements = {
@@ -58,14 +63,6 @@ class ClockApp {
           eventDate: document.getElementById('eventDate'),
           eventList: document.getElementById('eventList')
         };
-
-            <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js")
-    .then(() => console.log("Service Worker aktif! 💪"))
-    .catch(err => console.log("Service Worker gagal:", err));
-  }
-</script>
 
         this.use24Hour = true;
         this.soundEnabled = true;
