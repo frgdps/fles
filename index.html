@@ -506,83 +506,115 @@
       border: none;
     }
 
-    /* Contact */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
-    }
+    /* ===========================
+   CONTACT SECTION
+=========================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
 
-    .contact-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px 20px;
-      background: var(--bg-card);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
 
-    .contact-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-    }
+.contact-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
 
-    .contact-item:hover {
-      color: white;
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
-    }
+.contact-item:hover {
+  color: #fff;
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
+}
 
-    .contact-item:hover::before {
-      opacity: 1;
-    }
+.contact-item:hover::before {
+  opacity: 1;
+}
 
-    .contact-item i {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      color: var(--primary);
-      transition: all 0.3s ease;
-    }
+/* ===========================
+   ICONS (Font Awesome)
+=========================== */
+.contact-item i {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
 
-    .contact-item:hover i {
-      color: white;
-      transform: scale(1.2);
-    }
+.contact-item:hover i {
+  color: #fff;
+  transform: scale(1.2);
+}
 
-    .contact-item strong {
-      font-size: 1.1rem;
-      margin-bottom: 5px;
-      transition: all 0.3s ease;
-    }
+/* ===========================
+   TEXT
+=========================== */
+.contact-item strong {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
 
-    .contact-item span {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
+.contact-item span {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-align: center;
+  transition: all 0.3s ease;
+}
 
-    .contact-item:hover span {
-      color: rgba(255, 255, 255, 0.8);
-    }
+.contact-item:hover span {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===========================
+   IMAGE ICON (contoh: Roblox)
+=========================== */
+.contact-item img {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 15px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+}
+
+/* Hover: animasi & highlight seperti icon */
+.contact-item:hover img {
+  transform: scale(1.2);
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.4));
+}
+
+/* Dark mode image fix */
+[data-theme="dark"] .contact-item img {
+  filter: brightness(1.8) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+}
+
+[data-theme="dark"] .contact-item:hover img {
+  filter: brightness(1.8) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.4));
+}
 
     /* Footer */
     footer {
@@ -719,12 +751,6 @@
         Hi! My name is Thio Saputra, you can call me Thio or Fless. I'm an amateur <a href="/hp" style="color: var(--primary); font-weight: 500;">programmer</a> and content creator who makes random things and videos on the internet.
       </p>
       
-      <a href="/donate" class="contact-item">
-          <i class="fas fa-hands-helping"></i>
-          <strong>Donate</strong>
-          <span>Donation Tab, For Those Who Want</span>
-        </a>
-      
       <h3 style="margin: 40px 0 20px; font-size: 1.5rem; font-weight: 600;">Education</h3>
       
       <div class="cards-grid">
@@ -742,6 +768,11 @@
           <h3>SMKN 4 Banjarmasin</h3>
           <p>Banjarmasin Utara</p>
           <a href="https://skenpat.pages.dev/">Visit website <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card">
+          <h3><i class="fas fa-hands-helping" style="margin-right: 10px; color: var(--primary);"></i> Donate</h3>
+          <p>Donation Tab, For Those Who Want</p>
+          <a href="/donate">Donate <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
@@ -815,70 +846,71 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
-      <div class="section-header">
-        <h2>Get In Touch</h2>
-        <p class="section-subtitle">Let's connect and create something amazing</p>
-      </div>
-      
-      <div class="alert">
-        <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
-        I typically respond within 24 hours. No complicated forms, just simple communication.
-      </div>
-      
-      <div class="contact-grid">
-        <a href="https://wa.me/qr/GCWWEYIQQ6UQI1" class="contact-item">
-          <i class="fab fa-whatsapp"></i>
-          <strong>WhatsApp</strong>
-          <span>Quick chat</span>
-        </a>
-        <a href="https://www.instagram.com/flethio" class="contact-item">
-          <i class="fab fa-instagram"></i>
-          <strong>Instagram</strong>
-          <span>Instagram DM</span>
-        </a>
-        <a href="https://discordapp.com/users/776722084030054421" class="contact-item">
-          <i class="fab fa-discord"></i>
-          <strong>Discord</strong>
-          <span>Discord DM</span>
-        </a>
-        <a href="https://t.me/flethio" class="contact-item">
-          <i class="fab fa-telegram"></i>
-          <strong>Telegram</strong>
-          <span>Telegram DM</span>
-        </a>
-        <a href="mailto:flessan@yahoo.com" class="contact-item">
-          <i class="fab fa-yahoo"></i>
-          <strong>Email</strong>
-          <span>Professional</span>
-        </a>
-        <a href="https://fb.com/flethio" class="contact-item">
-          <i class="fab fa-facebook"></i>
-          <strong>Facebook</strong>
-          <span>Facebook Page</span>
-        </a>
-        <a href="https://www.roblox.com/share?code=40247c633fcf7043a5dbb6b507f19a09&type=Profile" 
-   class="contact-item" target="_blank" 
-   style="display:flex; align-items:center; gap:10px; text-decoration:none; color:#000;">
-
-  <!-- Logo Roblox asli -->
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Roblox_Logo_2022.svg" 
-       alt="Roblox Logo" width="30" height="30" 
-       style="display:block;">
-
-  <div style="display:flex; flex-direction:column; line-height:1;">
-    <strong>Roblox</strong>
-    <span style="font-size:0.85em; color:#555;">Roblox DM</span>
+<section id="contact">
+  <div class="section-header">
+    <h2>Get In Touch</h2>
+    <p class="section-subtitle">Let's connect and create something amazing</p>
   </div>
-</a>
-        <a href="https://whatsapp.com/channel/0029VbAoWYi7T8bQVepYkn1a" class="contact-item">
-          <i class="fab fa-whatsapp"></i>
-          <strong>Keluhan Diri</strong>
-          <span>WhatsApp Channel</span>
-        </a>
-      </div>
-    </section>
-  </main>
+
+  <div class="alert">
+    <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
+    I typically respond within 24 hours. No complicated forms, just simple communication.
+  </div>
+
+  <div class="contact-grid">
+    <a href="https://wa.me/qr/GCWWEYIQQ6UQI1" class="contact-item">
+      <i class="fab fa-whatsapp"></i>
+      <strong>WhatsApp</strong>
+      <span>Quick chat</span>
+    </a>
+
+    <a href="https://www.instagram.com/flethio" class="contact-item">
+      <i class="fab fa-instagram"></i>
+      <strong>Instagram</strong>
+      <span>Instagram DM</span>
+    </a>
+
+    <!-- FIXED Roblox Link -->
+    <a href="https://www.roblox.com/share?code=40247c633fcf7043a5dbb6b507f19a09&type=Profile"
+       class="contact-item" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Roblox_Logo.svg"
+           alt="Roblox" width="25" height="25"
+           style="vertical-align: middle; filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));">
+      <strong>Roblox</strong>
+      <span>Roblox DM</span>
+    </a>
+
+    <a href="https://discordapp.com/users/776722084030054421" class="contact-item">
+      <i class="fab fa-discord"></i>
+      <strong>Discord</strong>
+      <span>Discord DM</span>
+    </a>
+
+    <a href="https://t.me/flethio" class="contact-item">
+      <i class="fab fa-telegram"></i>
+      <strong>Telegram</strong>
+      <span>Telegram DM</span>
+    </a>
+
+    <a href="mailto:flessan@yahoo.com" class="contact-item">
+      <i class="fab fa-yahoo"></i>
+      <strong>Email</strong>
+      <span>Professional</span>
+    </a>
+
+    <a href="https://fb.com/flethio" class="contact-item">
+      <i class="fab fa-facebook"></i>
+      <strong>Facebook</strong>
+      <span>Facebook Page</span>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbAoWYi7T8bQVepYkn1a" class="contact-item">
+      <i class="fab fa-whatsapp"></i>
+      <strong>Keluhan Diri</strong>
+      <span>WhatsApp Channel</span>
+    </a>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer>
@@ -923,7 +955,8 @@
     
     // Generate particles for hero background
     const heroBg = document.getElementById('hero-bg');
-    const particleCount = 20;
+    // Adjust particle count based on screen size
+    const particleCount = window.innerWidth < 768 ? 10 : 20;
     
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
