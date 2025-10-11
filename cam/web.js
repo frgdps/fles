@@ -1,4 +1,4 @@
-class AVTestStudioPro {
+class AVTestStudio {
             constructor() {
                 this.audioContext = null;
                 this.analyser = null;
@@ -14,26 +14,15 @@ class AVTestStudioPro {
                 this.cameras = [];
                 this.microphones = [];
                 
-                // New properties for enhanced features
-                this.mediaRecorder = null;
-                this.recordedChunks = [];
-                this.isRecording = false;
-                this.recordingStartTime = 0;
-                this.audioChunks = [];
-                this.audioMediaRecorder = null;
-                this.isAudioRecording = false;
-                
                 this.initializeElements();
                 this.setupEventListeners();
                 this.setupCanvas();
                 this.enumerateDevices();
-                this.setupPresetButtons();
             }
 
             initializeElements() {
                 // Camera elements
                 this.webcam = document.getElementById('webcam');
-                this.cameraPlaceholder = document.getElementById('cameraPlaceholder');
                 this.cameraSelect = document.getElementById('cameraSelect');
                 this.startCameraBtn = document.getElementById('startCamera');
                 this.stopCameraBtn = document.getElementById('stopCamera');
@@ -42,16 +31,10 @@ class AVTestStudioPro {
                 this.qualitySlider = document.getElementById('qualitySlider');
                 this.qualityValue = document.getElementById('qualityValue');
                 this.recordingIndicator = document.getElementById('recordingIndicator');
-                this.startRecordingBtn = document.getElementById('startRecording');
-                this.stopRecordingBtn = document.getElementById('stopRecording');
-                this.recordingTimer = document.getElementById('recordingTimer');
-                this.exportVideoBtn = document.getElementById('exportVideo');
-                this.exportGifBtn = document.getElementById('exportGif');
 
                 // Audio elements
                 this.canvas = document.getElementById('visualizer');
                 this.ctx = this.canvas.getContext('2d');
-                this.audioPlaceholder = document.getElementById('audioPlaceholder');
                 this.micSelect = document.getElementById('micSelect');
                 this.startMicBtn = document.getElementById('startMic');
                 this.stopMicBtn = document.getElementById('stopMic');
@@ -61,8 +44,6 @@ class AVTestStudioPro {
                 this.micVolumeValue = document.getElementById('micVolumeValue');
                 this.echoVolumeSlider = document.getElementById('echoVolumeSlider');
                 this.echoVolumeValue = document.getElementById('echoVolumeValue');
-                this.exportAudioBtn = document.getElementById('exportAudio');
-                this.playbackAudioBtn = document.getElementById('playbackAudio');
 
                 // Status elements
                 this.statusMessage = document.getElementById('statusMessage');
@@ -86,12 +67,6 @@ class AVTestStudioPro {
                         }
                     }
                 });
-                
-                // Recording events
-                this.startRecordingBtn.addEventListener('click', () => this.startRecording());
-                this.stopRecordingBtn.addEventListener('click', () => this.stopRecording());
-                this.exportVideoBtn.addEventListener('click', () => this.exportVideo());
-                this.exportGifBtn.addEventListener('click', () => this.exportGif());
 
                 // Audio events
                 this.startMicBtn.addEventListener('click', () => this.startMicrophone());
@@ -115,37 +90,6 @@ class AVTestStudioPro {
                         this.stopMicrophone();
                         this.startMicrophone();
                     }
-                });
-                
-                // Audio export events
-                this.exportAudioBtn.addEventListener('click', () => this.exportAudio());
-                this.playbackAudioBtn.addEventListener('click', () => this.playbackAudio());
-            }
-
-            setupPresetButtons() {
-                // Video presets
-                document.querySelectorAll('.preset-btn[data-preset]').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const preset = e.target.dataset.preset;
-                        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-                        e.target.classList.add('active');
-                        
-                        if (preset === 'lowlight') {
-                            this.qualitySlider.value = 40;
-                            this.qualityValue.textContent = '40%';
-                        } else if (preset === 'highres') {
-                            this.qualitySlider.value = 100;
-                            this.qualityValue.textContent = '100%';
-                        } else if (preset === 'webcam') {
-                            this.qualitySlider.value = 60;
-                            this.qualityValue.textContent = '60%';
-                        } else {
-                            this.qualitySlider.value = 80;
-                            this.qualityValue.textContent = '80%';
-                        }
-                        
-                        this.updateStatus(`Applied ${preset} preset`);
-                    });
                 });
             }
 
@@ -205,8 +149,6 @@ class AVTestStudioPro {
                     
                     this.videoStream = await navigator.mediaDevices.getUserMedia(constraints);
                     this.webcam.srcObject = this.videoStream;
-                    this.webcam.style.display = 'block';
-                    this.cameraPlaceholder.style.display = 'none';
                     
                     this.recordingIndicator.classList.add('active');
                     this.startCameraBtn.classList.add('active');
@@ -214,7 +156,6 @@ class AVTestStudioPro {
                     this.updateCameraInfo();
                     this.updateTestResult('cameraAccess', 'success', 'Granted');
                     this.updateTestResult('videoStream', 'success', 'Active');
-                    this.updateTestResult('recording', 'success', 'Supported');
                     
                     this.updateStatus('Camera started successfully');
                     document.getElementById('cameraStatus').textContent = 'Active';
@@ -236,8 +177,6 @@ class AVTestStudioPro {
                     this.webcam.srcObject = null;
                 }
                 
-                this.webcam.style.display = 'none';
-                this.cameraPlaceholder.style.display = 'block';
                 this.recordingIndicator.classList.remove('active');
                 this.startCameraBtn.classList.remove('active');
                 
@@ -287,89 +226,6 @@ class AVTestStudioPro {
                 this.updateStatus('Snapshot saved');
             }
 
-            async startRecording() {
-                if (!this.videoStream) {
-                    this.updateStatus('Start camera before recording');
-                    return;
-                }
-                
-                try {
-                    this.recordedChunks = [];
-                    this.mediaRecorder = new MediaRecorder(this.videoStream);
-                    
-                    this.mediaRecorder.ondataavailable = (event) => {
-                        if (event.data.size > 0) {
-                            this.recordedChunks.push(event.data);
-                        }
-                    };
-                    
-                    this.mediaRecorder.onstop = () => {
-                        this.isRecording = false;
-                        this.updateStatus('Recording stopped');
-                        this.stopRecordingBtn.disabled = true;
-                        this.startRecordingBtn.disabled = false;
-                    };
-                    
-                    this.mediaRecorder.start();
-                    this.isRecording = true;
-                    this.recordingStartTime = Date.now();
-                    this.updateRecordingTimer();
-                    
-                    this.startRecordingBtn.disabled = true;
-                    this.stopRecordingBtn.disabled = false;
-                    this.updateStatus('Recording started');
-                } catch (error) {
-                    console.error('Error starting recording:', error);
-                    this.updateStatus('Recording not supported in this browser');
-                    this.updateTestResult('recording', 'error', 'Not Supported');
-                }
-            }
-
-            stopRecording() {
-                if (this.mediaRecorder && this.isRecording) {
-                    this.mediaRecorder.stop();
-                    this.isRecording = false;
-                }
-            }
-
-            exportVideo() {
-                if (this.recordedChunks.length === 0) {
-                    this.updateStatus('No recording to export');
-                    return;
-                }
-                
-                const blob = new Blob(this.recordedChunks, { type: 'video/webm' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = `recording_${new Date().getTime()}.webm`;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                }, 100);
-                
-                this.updateStatus('Video exported');
-            }
-
-            exportGif() {
-                this.updateStatus('GIF export feature coming soon!');
-            }
-
-            updateRecordingTimer() {
-                if (!this.isRecording) return;
-                
-                const elapsed = Date.now() - this.recordingStartTime;
-                const minutes = Math.floor(elapsed / 60000);
-                const seconds = Math.floor((elapsed % 60000) / 1000);
-                this.recordingTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                setTimeout(() => this.updateRecordingTimer(), 1000);
-            }
-
             async startMicrophone() {
                 try {
                     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -411,11 +267,9 @@ class AVTestStudioPro {
                     
                     this.startMicBtn.classList.add('active');
                     this.startVisualization();
-                    this.audioPlaceholder.style.display = 'none';
                     
                     this.updateTestResult('micAccess', 'success', 'Granted');
                     this.updateTestResult('audioStream', 'success', 'Active');
-                    this.updateTestResult('audioQuality', 'success', 'Good');
                     
                     this.updateStatus('Microphone started successfully');
                     document.getElementById('micStatus').textContent = 'Active';
@@ -455,7 +309,6 @@ class AVTestStudioPro {
                 
                 this.startMicBtn.classList.remove('active');
                 this.clearCanvas();
-                this.audioPlaceholder.style.display = 'block';
                 
                 document.getElementById('micStatus').textContent = 'Inactive';
                 document.getElementById('inputLevel').textContent = '-';
@@ -502,49 +355,6 @@ class AVTestStudioPro {
                 oscillator.stop(this.audioContext.currentTime + 1);
                 
                 this.updateStatus('Test tone played');
-            }
-
-            exportAudio() {
-                if (!this.stream) {
-                    this.updateStatus('Start microphone before exporting');
-                    return;
-                }
-                
-                this.audioChunks = [];
-                this.audioMediaRecorder = new MediaRecorder(this.stream);
-                
-                this.audioMediaRecorder.ondataavailable = (event) => {
-                    if (event.data.size > 0) {
-                        this.audioChunks.push(event.data);
-                    }
-                };
-                
-                this.audioMediaRecorder.onstop = () => {
-                    const blob = new Blob(this.audioChunks, { type: 'audio/webm' });
-                    const url = URL.createObjectURL(blob);
-                    
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = `audio_${new Date().getTime()}.webm`;
-                    document.body.appendChild(a);
-                    a.click();
-                    setTimeout(() => {
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(url);
-                    }, 100);
-                    
-                    this.updateStatus('Audio exported');
-                };
-                
-                this.audioMediaRecorder.start();
-                setTimeout(() => {
-                    this.audioMediaRecorder.stop();
-                }, 3000); // Record for 3 seconds
-            }
-
-            playbackAudio() {
-                this.updateStatus('Playback feature coming soon!');
             }
 
             startVisualization() {
@@ -676,12 +486,11 @@ class AVTestStudioPro {
 
             updateStatus(message) {
                 this.statusMessage.textContent = message;
-                console.log('AV Test Studio Pro:', message);
+                console.log('AV Test Studio:', message);
             }
         }
 
         // Initialize the application when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            new AVTestStudioPro();
+            new AVTestStudio();
         });
-    </script>
