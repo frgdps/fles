@@ -589,33 +589,6 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* ===========================
-   IMAGE ICON (contoh: Roblox)
-=========================== */
-.contact-item img {
-  width: 2rem;
-  height: 2rem;
-  margin-bottom: 15px;
-  object-fit: contain;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
-}
-
-/* Hover: animasi & highlight seperti icon */
-.contact-item:hover img {
-  transform: scale(1.2);
-  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.4));
-}
-
-/* Dark mode image fix */
-[data-theme="dark"] .contact-item img {
-  filter: brightness(1.8) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
-}
-
-[data-theme="dark"] .contact-item:hover img {
-  filter: brightness(1.8) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.4));
-}
-
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
@@ -750,7 +723,11 @@
       <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">
         Hi! My name is Thio Saputra, you can call me Thio or Fless. I'm an amateur <a href="/hp" style="color: var(--primary); font-weight: 500;">programmer</a> and content creator who makes random things and videos on the internet.
       </p>
-      
+      <div class="card">
+          <h3><i class="fas fa-hands-helping" style="margin-right: 10px; color: var(--primary);"></i> Donate</h3>
+          <p>Donation Tab, For Those Who Want</p>
+          <a href="/donate">Donate <i class="fas fa-arrow-right"></i></a>
+        </div>
       <h3 style="margin: 40px 0 20px; font-size: 1.5rem; font-weight: 600;">Education</h3>
       
       <div class="cards-grid">
@@ -768,11 +745,6 @@
           <h3>SMKN 4 Banjarmasin</h3>
           <p>Banjarmasin Utara</p>
           <a href="https://skenpat.pages.dev/">Visit website <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-hands-helping" style="margin-right: 10px; color: var(--primary);"></i> Donate</h3>
-          <p>Donation Tab, For Those Who Want</p>
-          <a href="/donate">Donate <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
@@ -870,14 +842,10 @@
       <span>Instagram DM</span>
     </a>
 
-    <!-- FIXED Roblox Link -->
-    <a href="https://www.roblox.com/share?code=40247c633fcf7043a5dbb6b507f19a09&type=Profile"
-       class="contact-item" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Roblox_Logo.svg"
-           alt="Roblox" width="25" height="25"
-           style="vertical-align: middle; filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));">
-      <strong>Roblox</strong>
-      <span>Roblox DM</span>
+    <a href="/cc" class="contact-item">
+      <i class="fas fa-cube"></i>
+      <strong>CubeChat</strong>
+      <span>CubeChat Community</span>
     </a>
 
     <a href="https://discordapp.com/users/776722084030054421" class="contact-item">
@@ -1046,4 +1014,5 @@
     console.log('🚀 Cool portfolio loaded with animations and dark mode!');
   </script>
 </body>
+
 </html>
