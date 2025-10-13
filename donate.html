@@ -9,10 +9,41 @@
   <meta property="og:description" content="Bantu aku terus berkarya dan berbagi konten berkualitas.">
   <meta property="og:image" content="https://iili.io/K3FmZzX.jpg">
   <meta property="og:url" content="https://flessan.pages.dev/donate">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <!-- Preconnect to external domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" as="style">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+  <link rel="preload" href="https://iili.io/K3FmZzX.jpg" as="image">
+  
+  <!-- Load CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/flessan/flessan/refs/heads/main/fav.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/flessan/flessan/refs/heads/main/fav.png">
+  
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fless",
+    "url": "https://flessan.pages.dev/donate",
+    "image": "https://iili.io/K3FmZzX.jpg",
+    "description": "Content Creator",
+    "sameAs": [
+      "https://tako.id/Fless",
+      "https://saweria.co/thiosaputra",
+      "https://teer.id/flessan",
+      "https://sociabuzz.com/ameliapt/tribe?_ref=linkbio"
+    ]
+  }
+  </script>
+  
   <style>
     :root {
       --primary: #2563eb;
@@ -29,6 +60,7 @@
       --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
       --glow: 0 0 20px rgba(37, 99, 235, 0.3);
     }
+    
     [data-theme="dark"] {
       --text: #f9fafb;
       --text-light: #d1d5db;
@@ -39,11 +71,17 @@
       --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
       --glow: 0 0 20px rgba(139, 92, 246, 0.4);
     }
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
+    
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
@@ -52,24 +90,32 @@
       transition: all 0.3s ease;
       overflow-x: hidden;
     }
-    .container { 
-      max-width: 1000px; 
-      margin: 0 auto; 
-      padding: 0 20px; 
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    ::-webkit-scrollbar { 
-      width: 10px; 
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 10px;
     }
-    ::-webkit-scrollbar-track { 
-      background: var(--bg-light); 
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-light);
     }
+    
     ::-webkit-scrollbar-thumb {
       background: var(--primary);
       border-radius: 5px;
     }
-    ::-webkit-scrollbar-thumb:hover { 
-      background: var(--primary-dark); 
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
     }
+    
+    /* Theme toggle */
     .theme-toggle {
       position: fixed;
       top: 20px;
@@ -88,14 +134,34 @@
       box-shadow: var(--shadow);
       transition: all 0.3s ease;
     }
-    .theme-toggle:hover { 
-      transform: scale(1.1); 
+    
+    .theme-toggle:hover {
+      transform: scale(1.1);
       box-shadow: var(--glow);
     }
-    .theme-toggle i { 
-      font-size: 1.2rem; 
+    
+    .theme-toggle i {
+      font-size: 1.2rem;
       color: var(--primary);
     }
+    
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      z-index: 1001;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+    
+    /* Hero section */
     .hero {
       min-height: 60vh;
       display: flex;
@@ -105,14 +171,17 @@
       overflow: hidden;
       background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg) 100%);
     }
+    
     [data-theme="dark"] .hero {
       background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg) 100%);
     }
+    
     .hero-content {
       text-align: center;
       z-index: 1;
       padding: 40px 20px;
     }
+    
     .profile-img {
       width: 128px;
       height: 128px;
@@ -122,6 +191,7 @@
       border: 3px solid var(--primary);
       object-fit: cover;
     }
+    
     .hero-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(2.5rem, 7vw, 4rem);
@@ -133,16 +203,18 @@
       color: transparent;
       animation: fadeInUp 0.8s ease-out;
     }
+    
     @keyframes fadeInUp {
-      from { 
-        opacity: 0; 
+      from {
+        opacity: 0;
         transform: translateY(30px);
       }
-      to { 
-        opacity: 1; 
+      to {
+        opacity: 1;
         transform: translateY(0);
       }
     }
+    
     .hero-subtitle {
       font-size: 1.3rem;
       color: var(--text-light);
@@ -152,6 +224,8 @@
       margin-left: auto;
       margin-right: auto;
     }
+    
+    /* Navigation */
     nav {
       position: sticky;
       top: 0;
@@ -161,12 +235,15 @@
       z-index: 100;
       transition: all 0.3s ease;
     }
+    
     .nav-links {
       display: flex;
       justify-content: center;
       gap: 32px;
       padding: 16px 0;
+      list-style: none;
     }
+    
     .nav-links a {
       color: var(--text-light);
       text-decoration: none;
@@ -174,6 +251,7 @@
       position: relative;
       transition: color 0.3s ease;
     }
+    
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -184,19 +262,24 @@
       background: var(--primary);
       transition: width 0.3s ease;
     }
+    
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--primary);
     }
+    
     .nav-links a:hover::after,
     .nav-links a.active::after {
       width: 100%;
     }
+    
+    /* Section headers */
     .section-header {
       text-align: center;
       margin-bottom: 60px;
       padding-top: 40px;
     }
+    
     h2 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 2.5rem;
@@ -206,6 +289,7 @@
       position: relative;
       display: inline-block;
     }
+    
     h2::after {
       content: '';
       position: absolute;
@@ -217,18 +301,22 @@
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       border-radius: 2px;
     }
+    
     .section-subtitle {
       color: var(--text-light);
       max-width: 600px;
       margin: 0 auto;
       font-size: 1.1rem;
     }
+    
+    /* Cards grid */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
       margin-top: 40px;
     }
+    
     .card {
       background: var(--bg-card);
       backdrop-filter: blur(10px);
@@ -245,30 +333,42 @@
       text-align: center;
       min-height: 240px;
     }
+    
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
+    
     .card .logo {
-      width: 64px; 
+      width: 64px;
       height: 64px;
       border-radius: 16px;
-      display: flex; 
-      align-items: center; 
+      display: flex;
+      align-items: center;
       justify-content: center;
       margin-bottom: 16px;
+      overflow: hidden;
     }
-    .card h3 { 
-      font-size: 1.3rem; 
-      font-weight: 600; 
-      margin-bottom: 12px; 
+    
+    .card .logo img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+    
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 12px;
       color: var(--text);
     }
-    .card p { 
-      color: var(--text-light); 
+    
+    .card p {
+      color: var(--text-light);
       margin-bottom: 16px;
       flex-grow: 1;
     }
+    
     .card .btn {
       display: inline-block;
       padding: 12px 28px;
@@ -278,14 +378,17 @@
       transition: all 0.3s ease;
       background: var(--primary);
       color: white;
-      box-shadow: 0 4px 15px rgba(37,99,235,0.3);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
       margin-top: auto;
     }
+    
     .card .btn:hover {
       background: var(--primary-dark);
-      box-shadow: 0 7px 20px rgba(37,99,235,0.4);
+      box-shadow: 0 7px 20px rgba(37, 99, 235, 0.4);
       transform: translateY(-3px);
     }
+    
+    /* Tags */
     .tag {
       font-size: 0.9em;
       padding: 4px 12px;
@@ -293,50 +396,33 @@
       margin-bottom: 10px;
       display: inline-block;
     }
+    
     .tag-popular {
-      background: #3b82f633;
+      background: rgba(59, 130, 246, 0.2);
       color: #3b82f6;
     }
+    
     .tag-global {
-      background: #06b6d433;
+      background: rgba(6, 182, 212, 0.2);
       color: #06b6d4;
     }
+    
     .tag-quick {
-      background: #facc1533;
+      background: rgba(250, 204, 21, 0.2);
       color: #facc15;
     }
+    
+    .tag-fast {
+      background: rgba(231, 0, 0, 0.2);
+      color: #E5352B;
+    }
+    
     .tag-community {
-      background: #8b5cf633;
+      background: rgba(139, 92, 246, 0.2);
       color: #8b5cf6;
     }
-    @media (max-width: 768px) {
-      .hero-title { 
-        font-size: 3rem; 
-      }
-      .cards-grid { 
-        grid-template-columns: 1fr;
-      }
-      .nav-links {
-        gap: 20px;
-      }
-      h2 {
-        font-size: 2rem;
-      }
-    }
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { 
-        transform: scale(1);
-      }
-      50% { 
-        transform: scale(1.05);
-      }
-      100% { 
-        transform: scale(1);
-      }
-    }
+    
+    /* Info sections */
     .info-section {
       margin: 60px 0 40px;
       text-align: center;
@@ -344,30 +430,49 @@
       background: var(--bg-light);
       border-radius: 16px;
     }
+    
     [data-theme="dark"] .info-section {
       background: var(--bg-dark);
     }
+    
     .info-section h2 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 20px;
     }
+    
     .info-section p {
       color: var(--text-light);
       max-width: 600px;
       margin: 0 auto 20px;
       font-size: 1.1rem;
     }
+    
+    .info-section ul {
+      text-align: left;
+      max-width: 500px;
+      margin: 20px auto;
+      color: var(--text-light);
+      padding-left: 20px;
+    }
+    
+    .info-section li {
+      margin-bottom: 10px;
+    }
+    
     .thank-you {
       font-size: 2rem;
       margin-top: 20px;
     }
+    
     .thank-you span {
       font-size: 1.2rem;
       font-weight: 500;
       margin: 0 10px;
     }
+    
+    /* Footer */
     footer {
       border-top: 1px solid var(--border);
       padding: 60px 0;
@@ -375,11 +480,13 @@
       color: var(--text-light);
       margin-top: 60px;
     }
+    
     .footer-content {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+    
     .footer-logo {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.5rem;
@@ -390,17 +497,71 @@
       background-clip: text;
       color: transparent;
     }
+    
+    /* Animations */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        gap: 20px;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    
+    /* Loading state for images */
+    .img-loading {
+      background: linear-gradient(90deg, var(--bg-light), var(--border), var(--bg-light));
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    
+    @keyframes loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="theme-toggle" id="theme-toggle">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
     <i class="fas fa-moon" id="theme-icon"></i>
   </div>
   
-  <section class="hero">
+  <header class="hero">
     <div class="container">
       <div class="hero-content">
-        <img src="https://iili.io/K3FmZzX.jpg" alt="Profile Fless - Content Creator" class="profile-img">
+        <img src="https://iili.io/K3FmZzX.jpg" alt="Profile Fless - Content Creator" class="profile-img" loading="eager">
         <h1 class="hero-title">
           Dukung <span style="background:linear-gradient(90deg,#2563eb,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent;">Fless!</span>
         </h1>
@@ -409,93 +570,104 @@
         </p>
       </div>
     </div>
-  </section>
+  </header>
   
-  <nav>
+  <nav aria-label="Main navigation">
     <div class="container">
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="#donate" class="active">Donate</a>
-        <a href="#kenapa">Why?</a>
-        <a href="#kemana">Where?</a>
-      </div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="#donate" class="active">Donate</a></li>
+        <li><a href="#kenapa">Why?</a></li>
+        <li><a href="#kemana">Where?</a></li>
+      </ul>
     </div>
   </nav>
   
-  <main class="container">
-    <section id="donate">
+  <main id="main-content" class="container">
+    <section id="donate" aria-labelledby="donate-heading">
       <div class="section-header">
-        <h2>Dukungan & Donasi</h2>
+        <h2 id="donate-heading">Dukungan & Donasi</h2>
         <p class="section-subtitle">Pilih platform donasi favoritmu dan bantu aku terus berkarya!</p>
       </div>
       <div class="cards-grid">
         <!-- Tako.id Card -->
-        <div class="card">
+        <article class="card">
           <div class="logo" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);">
-            <img src="https://avatars.githubusercontent.com/u/139215619?s=200&v=4" alt="Tako.id Logo" width="36" height="36">
+            <img src="https://avatars.githubusercontent.com/u/139215619?s=200&v=4" alt="Tako.id Logo" loading="lazy">
           </div>
           <h3>Tako.id</h3>
-          <div class="tag tag-popular">🏆 Popular</div>
+          <div class="tag tag-popular" aria-label="Popular platform">🌊 Indonesian</div>
           <p>Platform donasi lokal Indonesia yang mudah dan cepat</p>
-          <a href="https://tako.id/Fless" target="_blank" class="btn">💝 Donasi Sekarang</a>
-        </div>
+          <a href="https://tako.id/Fless" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Donate on Tako.id">💝 Donasi Sekarang</a>
+        </article>
         
         <!-- Saweria Card -->
-        <div class="card">
+        <article class="card">
           <div class="logo" style="background:linear-gradient(135deg,#facc15,#fb923c);">
-            <img src="https://iili.io/K3HrEeS.png" alt="Saweria Logo" width="36" height="36">
+            <img src="https://iili.io/K3HrEeS.png" alt="Saweria Logo" loading="lazy">
           </div>
           <h3>Saweria</h3>
-          <div class="tag tag-quick">⚡ Quick</div>
+          <div class="tag tag-quick" aria-label="Quick platform">⚡ Quick</div>
           <p>Platform donasi Indonesia dengan proses yang sederhana</p>
-          <a href="https://saweria.co/thiosaputra" target="_blank" class="btn" style="color:#111827;background:#facc15;">🎁 Kirim Dukungan</a>
-        </div>
+          <a href="https://saweria.co/thiosaputra" target="_blank" rel="noopener noreferrer" class="btn" style="color:#111827;background:#facc15;" aria-label="Support on Saweria">🎁 Kirim Dukungan</a>
+        </article>
+        
+        <!-- Trakteer Card -->
+        <article class="card">
+          <div class="logo" style="background:linear-gradient(135deg,#A40F14,#F1484B);">
+            <img src="https://cdn.modrinth.com/data/x2yIW2EF/ede252f1d11041a83080a108295ec281d6a26082.png" alt="Trakteer Logo" loading="lazy">
+          </div>
+          <h3>Trakteer</h3>
+          <div class="tag tag-fast" aria-label="Fast platform">♨️ Fast</div>
+          <p>Platform donasi dengan berbagai metode pembayaran</p>
+          <a href="https://teer.id/flessan" target="_blank" rel="noopener noreferrer" class="btn" style="background:#F1484B;" aria-label="Support on Trakteer">🍥 Trakteer</a>
+        </article>
         
         <!-- Sociabuzz Card -->
-        <div class="card">
+        <article class="card">
           <div class="logo" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);">
-            <img src="https://storage.sociabuzz.com/storage/landingpage/img/sociabuzz-logo-icon.png" alt="Sociabuzz Logo" width="36" height="36">
+            <img src="https://storage.sociabuzz.com/storage/landingpage/img/sociabuzz-logo-icon.png" alt="Sociabuzz Logo" loading="lazy">
           </div>
           <h3>Sociabuzz</h3>
-          <div class="tag tag-community">🤝 Community</div>
+          <div class="tag tag-community" aria-label="Community platform">🤝 Community</div>
           <p>Platform donasi dengan fitur komunitas dan membership</p>
-          <a href="https://sociabuzz.com/ameliapt/tribe?_ref=linkbio" target="_blank" class="btn">🚀 Join Tribe</a>
-        </div>
+          <a href="https://sociabuzz.com/ameliapt/tribe?_ref=linkbio" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Join Tribe on Sociabuzz">🚀 Join Tribe</a>
+        </article>
       </div>
     </section>
     
-    <section id="kenapa" class="info-section">
-      <h2>Kenapa Support?</h2>
+    <section id="kenapa" class="info-section" aria-labelledby="kenapa-heading">
+      <h2 id="kenapa-heading">Kenapa Support?</h2>
       <p>
         Setiap dukungan dari kalian sangat berarti bagi perjalanan kreatif saya. Dengan bantuan kalian, saya bisa terus fokus menghasilkan konten yang bermanfaat dan menghibur.
       </p>
       <p>
         Dukungan kalian membantu saya untuk:
       </p>
-      <ul style="text-align: left; max-width: 500px; margin: 20px auto; color: var(--text-light);">
-        <li style="margin-bottom: 10px;">Mengembangkan konten yang lebih berkualitas</li>
-        <li style="margin-bottom: 10px;">Membeli peralatan yang lebih baik untuk produksi</li>
-        <li style="margin-bottom: 10px;">Menghabiskan lebih banyak waktu untuk membuat konten</li>
+      <ul>
+        <li>Mengembangkan konten yang lebih berkualitas</li>
+        <li>Membeli peralatan yang lebih baik untuk produksi</li>
+        <li>Menghabiskan lebih banyak waktu untuk membuat konten</li>
         <li>Mendukung biaya operasional platform dan hosting</li>
       </ul>
     </section>
     
-    <section id="kemana" class="info-section">
-      <h2>Dipakai Untuk Apa?</h2>
+    <section id="kemana" class="info-section" aria-labelledby="kemana-heading">
+      <h2 id="kemana-heading">Dipakai Untuk Apa?</h2>
       <p>
         Dana yang terkumpul akan digunakan untuk mendukung berbagai aspek pembuatan konten:
       </p>
-      <ul style="text-align: left; max-width: 500px; margin: 20px auto; color: var(--text-light);">
-        <li style="margin-bottom: 10px;">🛠️ <strong>Peralatan Produksi:</strong> Upgrade peralatan audio, video, dan editing</li>
-        <li style="margin-bottom: 10px;">🎨 <strong>Software & Tools:</strong> Lisensi software editing dan aplikasi pendukung</li>
-        <li style="margin-bottom: 10px;">🌐 <strong>Infrastruktur:</strong> Biaya hosting, domain, dan platform konten</li>
-        <li style="margin-bottom: 10px;">⏰ <strong>Waktu Produksi:</strong> Mengalokasikan lebih banyak waktu untuk membuat konten berkualitas</li>
+      <ul>
+        <li>🛠️ <strong>Peralatan Produksi:</strong> Upgrade peralatan audio, video, dan editing</li>
+        <li>🎨 <strong>Software & Tools:</strong> Lisensi software editing dan aplikasi pendukung</li>
+        <li>🌐 <strong>Infrastruktur:</strong> Biaya hosting, domain, dan platform konten</li>
+        <li>⏰ <strong>Waktu Produksi:</strong> Mengalokasikan lebih banyak waktu untuk membuat konten berkualitas</li>
         <li>📚 <strong>Pengembangan Diri:</strong> Kursus dan resources untuk meningkatkan skill</li>
       </ul>
       <div class="thank-you">
-        <span class="pulse">💖</span>
+        <span class="pulse" aria-hidden="true">💖</span>
         <span>Terima kasih!</span>
-        <span class="pulse">🚀</span>
+        <span class="pulse" aria-hidden="true">🚀</span>
       </div>
     </section>
   </main>
@@ -511,79 +683,114 @@
   
   <script>
     // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const html = document.documentElement;
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
-    html.setAttribute('data-theme', currentTheme);
-    if (currentTheme === 'dark') {
-      themeIcon.classList.remove('fa-moon');
-      themeIcon.classList.add('fa-sun');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      const theme = html.getAttribute('data-theme');
-      const newTheme = theme === 'light' ? 'dark' : 'light';
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const html = document.documentElement;
       
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+      // Check for saved theme preference or default to 'light'
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      html.setAttribute('data-theme', currentTheme);
       
-      if (newTheme === 'dark') {
+      // Update theme icon
+      if (currentTheme === 'dark') {
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
-      } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
       }
-    });
-    
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
+      
+      // Theme toggle event listener
+      themeToggle.addEventListener('click', () => {
+        const theme = html.getAttribute('data-theme');
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update theme icon
+        if (newTheme === 'dark') {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+        } else {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
         }
       });
-    });
-    
-    // Add pulse animation to buttons on hover
-    document.querySelectorAll('.btn').forEach(button => {
-      button.addEventListener('mouseenter', () => { 
-        button.classList.add('pulse'); 
+      
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+            // Update active class
+            document.querySelectorAll('.nav-links a').forEach(link => {
+              link.classList.remove('active');
+            });
+            this.classList.add('active');
+          }
+        });
       });
-      button.addEventListener('mouseleave', () => { 
-        button.classList.remove('pulse'); 
+      
+      // Add pulse animation to buttons on hover
+      document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('mouseenter', () => { 
+          button.classList.add('pulse'); 
+        });
+        button.addEventListener('mouseleave', () => { 
+          button.classList.remove('pulse'); 
+        });
       });
-    });
-    
-    // Update active nav link on scroll
-    window.addEventListener('scroll', () => {
+      
+      // Update active nav link on scroll
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('.nav-links a');
       
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 100)) {
-          current = section.getAttribute('id');
-        }
-      });
+      const updateActiveNavLink = () => {
+        let current = '';
+        const scrollPosition = window.scrollY + 100;
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      };
       
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
+      // Throttle scroll event for performance
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+          window.cancelAnimationFrame(scrollTimeout);
         }
+        scrollTimeout = window.requestAnimationFrame(() => {
+          updateActiveNavLink();
+        });
+      }, { passive: true });
+      
+      // Initialize active nav link
+      updateActiveNavLink();
+      
+      // Add error handling for images
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+          this.src = 'https://via.placeholder.com/64x64?text=Image+Not+Available';
+          this.alt = 'Image not available';
+        });
       });
     });
   </script>
 </body>
-
 </html>
