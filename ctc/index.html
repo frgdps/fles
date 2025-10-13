@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Code & Text Cleaner Pro — Thio Edition</title>
+  <title>Code Text Cleaner</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Offline toolbox: text utilities, code cleaner, html decoder, combine/split html-css-js." />
+  <meta name="description" content="Offline toolbox: text utilities, code cleaner, html decoder, combine/split html-css-js, drag & drop, preview." />
 </head>
 <body>
   <aside class="sidebar">
@@ -13,7 +13,7 @@
       <div class="logo">🧰</div>
       <div>
         <h1>Code & Text<br/>Cleaner Pro</h1>
-        <small>Proyek Beruntun #5</small>
+        <small>Proyek Beruntun Ke-5</small>
       </div>
     </header>
 
@@ -24,16 +24,15 @@
       <button class="tab-btn" data-tool="combine">Combine</button>
       <button class="tab-btn" data-tool="split">Split</button>
       <div class="spacer"></div>
-      <button id="clearAll" class="danger">Clear All Storage</button>
+      <button id="clearAll" class="danger">Clear Local Data</button>
     </nav>
 
     <footer class="footer">
-      <small>Thio Saputra — modify & share — ATM</small>
+      <small>Thio Saputra — ATM — Amati Tiru Modifikasi</small>
     </footer>
   </aside>
 
   <main class="main">
-    <!-- toolbar -->
     <div class="toolbar">
       <div class="tool-title" id="toolTitle">Text Tools</div>
       <div class="actions">
@@ -43,11 +42,12 @@
       </div>
     </div>
 
-    <!-- panels -->
+    <!-- TEXT TOOLS -->
     <section class="panel" id="panel-text" data-tool="text">
       <div class="cols">
         <div class="col">
           <label>Input</label>
+          <div class="dropzone" id="textDrop">Drag & drop file (.txt/.md) atau paste teks di sini</div>
           <textarea id="inputText" placeholder="Paste teks atau kode di sini..."></textarea>
 
           <div class="controls">
@@ -56,6 +56,7 @@
             <button data-action="title">Cap Each Word</button>
             <button data-action="trimspaces">Hapus Spasi Ganda</button>
             <button data-action="trimlines">Hapus Baris Kosong</button>
+            <button id="prettyJson">Prettify JSON</button>
           </div>
         </div>
 
@@ -75,10 +76,12 @@
       </div>
     </section>
 
+    <!-- CODE CLEANER -->
     <section class="panel hidden" id="panel-code" data-tool="code">
       <div class="cols">
         <div class="col">
           <label>Input (HTML / CSS / JS)</label>
+          <div class="dropzone" id="codeDrop">Drag & drop file (.html/.css/.js) atau paste kode di sini</div>
           <textarea id="codeInput" placeholder="Paste HTML/CSS/JS di sini..."></textarea>
 
           <div class="controls">
@@ -86,6 +89,7 @@
             <button data-code-action="minify-css">Clean CSS</button>
             <button data-code-action="minify-js">Clean JS</button>
             <button data-code-action="remove-comments">Remove Comments</button>
+            <button id="formatHtml">Format HTML (basic)</button>
           </div>
         </div>
 
@@ -95,12 +99,20 @@
 
           <div class="controls">
             <button id="copyCode">Copy</button>
-            <button id="downloadCode">Download .txt</button>
+            <button id="downloadCode">Download</button>
+            <button id="previewCode">Live Preview</button>
+          </div>
+
+          <div class="previewWrap hidden" id="previewWrap">
+            <label>Preview (sandbox)</label>
+            <iframe id="previewFrame" sandbox="allow-scripts"></iframe>
+            <button id="closePreview">Close Preview</button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- DECODER -->
     <section class="panel hidden" id="panel-decoder" data-tool="decoder">
       <div class="cols">
         <div class="col">
@@ -109,6 +121,7 @@
           <div class="controls">
             <button id="decodeBtn">Decode Entities</button>
             <button id="encodeBtn">Encode</button>
+            <button id="autoDetectEntities">Auto-detect & Decode</button>
           </div>
         </div>
 
@@ -122,21 +135,22 @@
       </div>
     </section>
 
+    <!-- COMBINE -->
     <section class="panel hidden" id="panel-combine" data-tool="combine">
       <div class="cols">
         <div class="col narrow">
-          <label>HTML (body / template)</label>
+          <label>HTML (body atau fragment)</label>
           <textarea id="combineHtml" placeholder="Masukkan HTML (body atau full HTML)"></textarea>
         </div>
 
         <div class="col narrow">
           <label>CSS</label>
-          <textarea id="combineCss" placeholder="Masukkan CSS (otomatis dimasukkan di &lt;style&gt;)"></textarea>
+          <textarea id="combineCss" placeholder="Masukkan CSS (otomatis dimasukkan di <style>)"></textarea>
         </div>
 
         <div class="col narrow">
           <label>JS</label>
-          <textarea id="combineJs" placeholder="Masukkan JS (otomatis dimasukkan di &lt;script&gt;)"></textarea>
+          <textarea id="combineJs" placeholder="Masukkan JS (otomatis dimasukkan di <script>)"></textarea>
         </div>
       </div>
 
@@ -144,23 +158,32 @@
         <button id="combineBtn">Combine jadi 1 HTML</button>
         <button id="downloadCombined">Download .html</button>
         <button id="copyCombined">Copy</button>
+        <button id="previewCombined">Preview Combined</button>
       </div>
 
       <label>Hasil Gabungan</label>
       <textarea id="combinedOutput" readonly></textarea>
+
+      <div class="previewWrap hidden" id="previewCombinedWrap">
+        <label>Combined Preview</label>
+        <iframe id="previewCombined" sandbox="allow-scripts"></iframe>
+        <button class="closePreview" data-target="previewCombinedWrap">Close Preview</button>
+      </div>
     </section>
 
+    <!-- SPLIT -->
     <section class="panel hidden" id="panel-split" data-tool="split">
       <div class="cols single">
         <div class="col">
-          <label>Masukkan HTML untuk dipisah (mengandung &lt;style&gt; dan/atau &lt;script&gt;)</label>
+          <label>Masukkan HTML yang mengandung &lt;style&gt; dan/atau &lt;script&gt;</label>
           <textarea id="splitInput" placeholder="Paste full HTML di sini..."></textarea>
 
           <div class="controls mt">
             <button id="splitBtn">Split HTML → HTML / CSS / JS</button>
-            <button id="downloadHtml">Download .html</button>
-            <button id="downloadCss">Download .css</button>
-            <button id="downloadJs">Download .js</button>
+            <button id="downloadHtml">Download HTML</button>
+            <button id="downloadCss">Download CSS</button>
+            <button id="downloadJs">Download JS</button>
+            <button id="copySplitAll">Copy Semua</button>
           </div>
         </div>
       </div>
@@ -180,6 +203,9 @@
       </div>
     </section>
   </main>
+
+  <!-- toast -->
+  <div id="toast" class="toast hidden"></div>
 
   <script src="sc.js"></script>
 </body>
