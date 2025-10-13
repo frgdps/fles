@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Code & Text Cleaner Pro — Thio Edition</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Offline toolbox: text utilities, code cleaner, html decoder, combine/split html-css-js." />
+</head>
+<body>
+  <aside class="sidebar">
+    <header class="brand">
+      <div class="logo">🧰</div>
+      <div>
+        <h1>Code & Text<br/>Cleaner Pro</h1>
+        <small>Proyek Beruntun #5</small>
+      </div>
+    </header>
+
+    <nav>
+      <button class="tab-btn active" data-tool="text">Text Tools</button>
+      <button class="tab-btn" data-tool="code">Code Cleaner</button>
+      <button class="tab-btn" data-tool="decoder">HTML Decoder</button>
+      <button class="tab-btn" data-tool="combine">Combine</button>
+      <button class="tab-btn" data-tool="split">Split</button>
+      <div class="spacer"></div>
+      <button id="clearAll" class="danger">Clear All Storage</button>
+    </nav>
+
+    <footer class="footer">
+      <small>Thio Saputra — modify & share — ATM</small>
+    </footer>
+  </aside>
+
+  <main class="main">
+    <!-- toolbar -->
+    <div class="toolbar">
+      <div class="tool-title" id="toolTitle">Text Tools</div>
+      <div class="actions">
+        <button id="saveLocal">Save</button>
+        <button id="loadLocal">Load</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+
+    <!-- panels -->
+    <section class="panel" id="panel-text" data-tool="text">
+      <div class="cols">
+        <div class="col">
+          <label>Input</label>
+          <textarea id="inputText" placeholder="Paste teks atau kode di sini..."></textarea>
+
+          <div class="controls">
+            <button data-action="lower">lowercase</button>
+            <button data-action="upper">UPPERCASE</button>
+            <button data-action="title">Cap Each Word</button>
+            <button data-action="trimspaces">Hapus Spasi Ganda</button>
+            <button data-action="trimlines">Hapus Baris Kosong</button>
+          </div>
+        </div>
+
+        <div class="col">
+          <label>Output</label>
+          <textarea id="outputText" readonly placeholder="Hasil muncul di sini..."></textarea>
+
+          <div class="controls">
+            <button id="copyOutput">Copy</button>
+            <button id="downloadTxt">Download .txt</button>
+            <div class="counter">
+              <span id="wordCount">Kata: 0</span>
+              <span id="charCount">Karakter: 0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="panel-code" data-tool="code">
+      <div class="cols">
+        <div class="col">
+          <label>Input (HTML / CSS / JS)</label>
+          <textarea id="codeInput" placeholder="Paste HTML/CSS/JS di sini..."></textarea>
+
+          <div class="controls">
+            <button data-code-action="minify-html">Minify HTML</button>
+            <button data-code-action="minify-css">Clean CSS</button>
+            <button data-code-action="minify-js">Clean JS</button>
+            <button data-code-action="remove-comments">Remove Comments</button>
+          </div>
+        </div>
+
+        <div class="col">
+          <label>Output</label>
+          <textarea id="codeOutput" readonly placeholder="Hasil pembersihan..."></textarea>
+
+          <div class="controls">
+            <button id="copyCode">Copy</button>
+            <button id="downloadCode">Download .txt</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="panel-decoder" data-tool="decoder">
+      <div class="cols">
+        <div class="col">
+          <label>HTML Entities (masuk)</label>
+          <textarea id="encoded" placeholder="&amp;lt;div&amp;gt;Hello&amp;lt;/div&amp;gt;"></textarea>
+          <div class="controls">
+            <button id="decodeBtn">Decode Entities</button>
+            <button id="encodeBtn">Encode</button>
+          </div>
+        </div>
+
+        <div class="col">
+          <label>Decoded</label>
+          <textarea id="decoded" readonly placeholder="<div>Hello</div>"></textarea>
+          <div class="controls">
+            <button id="copyDecoded">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="panel-combine" data-tool="combine">
+      <div class="cols">
+        <div class="col narrow">
+          <label>HTML (body / template)</label>
+          <textarea id="combineHtml" placeholder="Masukkan HTML (body atau full HTML)"></textarea>
+        </div>
+
+        <div class="col narrow">
+          <label>CSS</label>
+          <textarea id="combineCss" placeholder="Masukkan CSS (otomatis dimasukkan di &lt;style&gt;)"></textarea>
+        </div>
+
+        <div class="col narrow">
+          <label>JS</label>
+          <textarea id="combineJs" placeholder="Masukkan JS (otomatis dimasukkan di &lt;script&gt;)"></textarea>
+        </div>
+      </div>
+
+      <div class="controls mt">
+        <button id="combineBtn">Combine jadi 1 HTML</button>
+        <button id="downloadCombined">Download .html</button>
+        <button id="copyCombined">Copy</button>
+      </div>
+
+      <label>Hasil Gabungan</label>
+      <textarea id="combinedOutput" readonly></textarea>
+    </section>
+
+    <section class="panel hidden" id="panel-split" data-tool="split">
+      <div class="cols single">
+        <div class="col">
+          <label>Masukkan HTML untuk dipisah (mengandung &lt;style&gt; dan/atau &lt;script&gt;)</label>
+          <textarea id="splitInput" placeholder="Paste full HTML di sini..."></textarea>
+
+          <div class="controls mt">
+            <button id="splitBtn">Split HTML → HTML / CSS / JS</button>
+            <button id="downloadHtml">Download .html</button>
+            <button id="downloadCss">Download .css</button>
+            <button id="downloadJs">Download .js</button>
+          </div>
+        </div>
+      </div>
+
+      <label>HTML (bersih dari style/script)</label>
+      <textarea id="splitHtml" readonly></textarea>
+
+      <div class="cols">
+        <div class="col">
+          <label>CSS</label>
+          <textarea id="splitCss" readonly></textarea>
+        </div>
+        <div class="col">
+          <label>JS</label>
+          <textarea id="splitJs" readonly></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="sc.js"></script>
+</body>
+</html>
