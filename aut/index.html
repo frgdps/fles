@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AuthLab Pro — All-in-One</title>
+  <style>
+    :root{
+  --bg: #ffffff;
+  --muted: #6b7280;
+  --accent: #0ea5e9; /* biru */
+  --accent-2: #ec4899; /* pink */
+  --card: #ffffff;
+  --glass: rgba(14,165,233,0.04);
+  --radius: 12px;
+  --shadow: 0 8px 20px rgba(2,6,23,0.06);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: linear-gradient(180deg, #fbfdff 0%, #fff 100%);
+  color:#0f172a;
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  padding:28px;
+}
+
+/* container */
+.app{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 260px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+/* sidebar */
+.sidebar{
+  background:var(--card);
+  padding:18px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border:1px solid #eef6fb;
+  height:fit-content;
+}
+.brand{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+.logo{
+  width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;
+}
+.brand h1{margin:0;font-size:16px;line-height:1.05}
+.brand small{color:var(--muted);font-size:12px}
+
+/* nav */
+.nav{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.tab-btn{
+  padding:10px 12px;border-radius:10px;border:0;background:transparent;text-align:left;cursor:pointer;color:#0f172a;font-weight:600;display:flex;gap:10px;align-items:center;
+}
+.tab-btn:hover{background:var(--glass)}
+.tab-btn.active{background:linear-gradient(90deg, rgba(14,165,233,0.06), rgba(236,72,153,0.03));box-shadow:inset 0 1px 0 rgba(255,255,255,0.6)}
+
+/* main area */
+.main{
+  min-height:80vh;
+}
+.header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
+}
+.h-title{font-weight:700;font-size:18px}
+.controls{display:flex;gap:8px;align-items:center}
+
+/* panel */
+.panel{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:var(--shadow);
+  border:1px solid #eef6fb;
+}
+
+/* tabs content layout */
+.tools-wrap{display:flex;flex-direction:column;gap:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab-content{margin-top:12px}
+
+/* grid columns */
+.cols{display:grid;grid-template-columns: 1fr 420px;gap:14px}
+@media (max-width:1000px){.app{grid-template-columns:1fr;}.cols{grid-template-columns:1fr}}
+
+/* inputs */
+input[type="text"], input[type="number"], select, textarea {
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e6eef6;
+  background:#fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size:13px;
+}
+textarea{min-height:140px;resize:vertical}
+
+/* buttons */
+.btn{
+  padding:8px 12px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:600;
+}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.warn{background:#f59e0b}
+.btn.secondary{background:var(--accent-2)}
+.small{padding:6px 8px;font-size:13px}
+
+/* results list */
+.results{background:#fff;padding:10px;border-radius:10px;border:1px solid #eef6fb;min-height:120px;overflow:auto}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px dashed #f1f5f9}
+.result-row:last-child{border-bottom:0}
+.result-name{font-family:ui-monospace, monospace}
+
+/* avatar canvas */
+.avatar-wrap{display:flex;gap:10px;align-items:center}
+.canvas-box{width:120px;height:120px;border-radius:12px;background:#fff;border:1px solid #eef6fb;display:flex;align-items:center;justify-content:center}
+
+/* strength bar */
+.strength{
+  height:10px;border-radius:8px;background:#f1f5f9;overflow:hidden;border:1px solid #eef6fb;
+}
+.strength > span{display:block;height:100%;width:0%}
+
+/* preview iframe */
+.preview{border-radius:10px;overflow:hidden;border:1px solid #eef6fb;background:#fff}
+.preview .frame{width:100%;height:340px;border:0;display:block}
+
+/* tiny text */
+.muted{color:var(--muted);font-size:13px}
+
+/* nice subtle tab animation */
+.fade-enter{opacity:0;transform:translateY(8px)}
+.fade-enter-active{opacity:1;transform:translateY(0);transition:all .18s ease}
+.fade-exit{opacity:1}
+.fade-exit-active{opacity:0;transform:translateY(6px);transition:all .12s ease}
+
+/* footer small */
+.footer{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
+
+/* misc */
+.pill{display:inline-block;padding:6px 8px;border-radius:999px;background:#f8fafc;border:1px solid #eef6fb;font-size:12px}
+    </style>
+</head>
+<body>
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar panel">
+      <div class="brand">
+        <div class="logo">🔐</div>
+        <div>
+          <h1>AuthLab Pro</h1>
+          <small>Toolkit: Username · Avatar · Password · Preview</small>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="tab-btn active" data-target="tab-dashboard">🏠 Dashboard</button>
+        <button class="tab-btn" data-target="tab-username">🦊 Username Tools</button>
+        <button class="tab-btn" data-target="tab-avatar">🧩 Avatar Generator</button>
+        <button class="tab-btn" data-target="tab-password">🔐 Password Tools</button>
+        <button class="tab-btn" data-target="tab-visualizer">🧮 Visualizer</button>
+        <button class="tab-btn" data-target="tab-entropy">📈 Entropy</button>
+        <button class="tab-btn" data-target="tab-mock">🧾 Mock Generator</button>
+        <button class="tab-btn" data-target="tab-preview">🧑‍💻 Previewer</button>
+        <button class="tab-btn" data-target="tab-export">💾 Exporter</button>
+      </nav>
+
+      <div style="margin-top:12px">
+        <button id="clearLocal" class="btn ghost small">Clear Local Data</button>
+      </div>
+
+      <div style="margin-top:10px" class="muted">
+        <div>Made by Thio & Raisya</div>
+        <div style="margin-top:6px;font-size:12px">Single-file UI + separate CSS — ready for Git</div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="header">
+        <div class="h-title">AuthLab Pro Suite</div>
+        <div class="controls">
+          <div class="pill" id="currentTool">Dashboard</div>
+        </div>
+      </div>
+
+      <div class="tools-wrap">
+
+        <!-- DASHBOARD -->
+        <section id="tab-dashboard" class="tab-content panel">
+          <h3>Welcome — Dashboard</h3>
+          <p class="muted">Pilih tool di kiri. Semua tools berjalan client-side. Kamu bisa memodifikasi & commit ke Git.</p>
+          <div style="margin-top:12px" class="cols">
+            <div>
+              <div class="panel">
+                <h4>Quick actions</h4>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                  <button class="btn" data-target="tab-username">Try Username</button>
+                  <button class="btn" data-target="tab-password">Try Password</button>
+                  <button class="btn" data-target="tab-preview">Open Previewer</button>
+                </div>
+                <p class="muted" style="margin-top:8px">Autosave for username & password settings to localStorage.</p>
+              </div>
+            </div>
+            <div>
+              <div class="panel">
+                <h4>About</h4>
+                <p class="muted">AuthLab Pro — compact toolkit untuk eksperimen auth & identitas. Built for offline/demo use.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- USERNAME -->
+        <section id="tab-username" class="tab-content panel hidden">
+          <h3>Username Tools</h3>
+          <div class="cols">
+            <div>
+              <label>Base name (optional)</label>
+              <input id="u_base" placeholder="e.g. thio" />
+
+              <label style="margin-top:8px">Mode</label>
+              <select id="u_mode">
+                <option value="animal">Animal Mode</option>
+                <option value="creative">Creative Mode</option>
+                <option value="classic">Classic Mode</option>
+                <option value="random">Random Only</option>
+              </select>
+
+              <label style="margin-top:8px">Batch size</label>
+              <input id="u_batch" type="number" min="1" max="30" value="8" />
+
+              <div style="margin-top:10px;display:flex;gap:8px">
+                <button id="u_gen" class="btn">Generate</button>
+                <button id="u_copy_all" class="btn ghost">Copy All</button>
+                <button id="u_save" class="btn secondary">Save</button>
+              </div>
+
+              <div style="margin-top:10px" class="muted">Klik nama untuk copy. Kamu bisa tambahkan base words di script jika mau customizing.</div>
+            </div>
+
+            <div>
+              <label>Results</label>
+              <div id="u_results" class="results"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AVATAR -->
+        <section id="tab-avatar" class="tab-content panel hidden">
+          <h3>Avatar Generator</h3>
+          <div class="cols">
+            <div>
+              <label>Seed (username)</label>
+              <input id="a_seed" placeholder="enter username or text" />
+              <label style="margin-top:8px">Mode</label>
+              <select id="a_mode">
+                <option value="identicon">Identicon (geometric)</option>
+                <option value="gradient">Gradient circle</option>
+                <option value="pixel">Pixel block</option>
+              </select>
+
+              <div style="margin-top:10px;display:flex;gap:8px">
+                <button id="a_gen" class="btn">Generate</button>
+                <button id="a_download" class="btn ghost">Download PNG</button>
+              </div>
+              <div class="muted" style="margin-top:10px">Avatar generated on canvas — download PNG available.</div>
+            </div>
+
+            <div>
+              <label>Preview</label>
+              <div class="avatar-wrap">
+                <div class="canvas-box panel"><canvas id="a_canvas" width="120" height="120"></canvas></div>
+                <div>
+                  <div id="a_meta" class="muted">No avatar yet</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PASSWORD -->
+        <section id="tab-password" class="tab-content panel hidden">
+          <h3>Password Tools</h3>
+          <div class="cols">
+            <div>
+              <label>Options</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                <label><input type="checkbox" id="p_lower" checked> lower</label>
+                <label><input type="checkbox" id="p_upper" checked> UPPER</label>
+                <label><input type="checkbox" id="p_numbers" checked> 0-9</label>
+                <label><input type="checkbox" id="p_symbols" checked> symbols</label>
+              </div>
+
+              <label style="margin-top:8px">Length</label>
+              <input id="p_length" type="number" min="6" max="64" value="14" />
+
+              <div style="margin-top:10px;display:flex;gap:8px">
+                <button id="p_gen" class="btn">Generate</button>
+                <button id="p_regen" class="btn ghost">Regenerate</button>
+                <button id="p_copy" class="btn secondary">Copy</button>
+              </div>
+
+              <div style="margin-top:12px">
+                <label>Generated</label>
+                <input id="p_output" readonly />
+                <div style="margin-top:8px" class="strength"><span id="p_strength"></span></div>
+                <div id="p_strength_text" class="muted" style="margin-top:6px">Strength: —</div>
+              </div>
+
+            </div>
+
+            <div>
+              <label>Entropy Calculator</label>
+              <input id="e_input" placeholder="Paste password to calculate entropy" />
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="e_calc" class="btn">Calculate</button>
+                <button id="e_clear" class="btn ghost">Clear</button>
+              </div>
+              <div id="e_result" style="margin-top:10px" class="panel muted">Entropy results appear here.</div>
+
+              <div style="margin-top:12px">
+                <h4 class="muted">Tips</h4>
+                <ul class="muted">
+                  <li>Use longer passphrases with mixed classes for higher entropy.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISUALIZER -->
+        <section id="tab-visualizer" class="tab-content panel hidden">
+          <h3>Password Visualizer</h3>
+          <div class="cols">
+            <div>
+              <label>Seed (password)</label>
+              <input id="v_seed" placeholder="type a password or phrase" />
+              <div style="margin-top:10px;display:flex;gap:8px">
+                <button id="v_gen" class="btn">Generate Pattern</button>
+                <button id="v_download" class="btn ghost">Download PNG</button>
+              </div>
+            </div>
+
+            <div>
+              <label>Preview</label>
+              <div class="panel" style="padding:12px">
+                <canvas id="v_canvas" width="300" height="150" style="width:100%;height:auto;border-radius:8px;background:#fff"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ENTROPY (separate page too) -->
+        <section id="tab-entropy" class="tab-content panel hidden">
+          <h3>Entropy Calculator</h3>
+          <div>
+            <label>Password</label>
+            <input id="ent_input" placeholder="enter password" />
+            <div style="margin-top:8px;display:flex;gap:8px">
+              <button id="ent_calc" class="btn">Calc Entropy</button>
+              <button id="ent_copy" class="btn ghost">Copy Bits</button>
+            </div>
+            <div id="ent_out" class="panel muted" style="margin-top:12px">Result will show here.</div>
+          </div>
+        </section>
+
+        <!-- MOCK GEN -->
+        <section id="tab-mock" class="tab-content panel hidden">
+          <h3>Account Mock Generator</h3>
+          <div class="cols">
+            <div>
+              <label>Count</label>
+              <input id="m_count" type="number" min="1" max="200" value="6" />
+              <div style="margin-top:8px;display:flex;gap:8px">
+                <button id="m_gen" class="btn">Generate</button>
+                <button id="m_json" class="btn ghost">Export JSON</button>
+                <button id="m_csv" class="btn secondary">Export CSV</button>
+              </div>
+              <div class="muted" style="margin-top:8px">Local, fake data — safe for testing forms.</div>
+            </div>
+
+            <div>
+              <label>Results</label>
+              <div id="m_results" class="results"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PREVIEWER -->
+        <section id="tab-preview" class="tab-content panel hidden">
+          <h3>Login Page Previewer</h3>
+          <div class="cols">
+            <div>
+              <label>Template</label>
+              <select id="pr_template">
+                <option value="github">GitHub</option>
+                <option value="google">Google</option>
+                <option value="discord">Discord</option>
+                <option value="corporate">Corporate</option>
+              </select>
+
+              <label style="margin-top:8px">Primary Color</label>
+              <input id="pr_color" type="color" value="#0ea5e9" />
+
+              <div style="margin-top:10px;display:flex;gap:8px">
+                <button id="pr_load" class="btn">Load Preview</button>
+                <button id="pr_copy" class="btn ghost">Copy HTML</button>
+              </div>
+            </div>
+
+            <div>
+              <label>Preview</label>
+              <div class="preview panel">
+                <iframe id="pr_frame" class="frame"></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXPORTER -->
+        <section id="tab-export" class="tab-content panel hidden">
+          <h3>Template Exporter</h3>
+          <div class="cols">
+            <div>
+              <label>Project name</label>
+              <input id="ex_name" placeholder="MyAuthTemplate" />
+              <label style="margin-top:8px">Include:</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                <label><input type="checkbox" id="ex_include_avatar" checked> Avatar</label>
+                <label><input type="checkbox" id="ex_include_preview" checked> Preview HTML</label>
+                <label><input type="checkbox" id="ex_include_readme" checked> README</label>
+              </div>
+
+              <div style="margin-top:10px;display:flex;gap:8px">
+                <button id="ex_generate" class="btn">Generate Files</button>
+                <button id="ex_download_all" class="btn ghost">Download Files</button>
+              </div>
+              <div id="ex_status" class="muted" style="margin-top:8px">Files will be generated client-side. (ZIP not required — downloads available.)</div>
+            </div>
+
+            <div>
+              <label>Files (preview)</label>
+              <div id="ex_files" class="results"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="footer muted">AuthLab Pro — single-file UI + separate CSS — have fun & share</div>
+    </main>
+  </div>
+
+  <!-- SCRIPT: all logic inline -->
+  <script>
+  (function(){
+    // helpers
+    const $ = q => document.querySelector(q);
+    const $$ = q => Array.from(document.querySelectorAll(q));
+    const saveKey = k => 'authlab:'+k;
+    const setText = (sel,txt) => { const el=$(sel); if(el) el.textContent=txt; }
+
+    // TAB NAV
+    const tabs = $$('.tab-btn');
+    const currentLabel = $('#currentTool');
+    function showTab(id){
+      $$('#nav .tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+      $$('.tab-content').forEach(s=>s.classList.add('hidden'));
+      const t = document.getElementById(id);
+      if(t){ t.classList.remove('hidden'); currentLabel.textContent = t.querySelector('h3') ? t.querySelector('h3').textContent : 'Tool'; window.scrollTo({top:0, behavior:'smooth'}) }
+    }
+    tabs.forEach(b=> b.addEventListener('click', ()=> showTab(b.dataset.target)));
+    // quick buttons on dashboard
+    $$('.btn[data-target]').forEach(b=> b.addEventListener('click', e=> showTab(e.currentTarget.dataset.target)));
+
+    // clear local
+    $('#clearLocal').addEventListener('click', ()=> {
+      if(confirm('Clear localStorage for AuthLab?')) {
+        Object.keys(localStorage).filter(k=>k.startsWith('authlab:')).forEach(k=>localStorage.removeItem(k));
+        alert('Local data cleared');
+      }
+    });
+
+    /* -----------------------------
+       USERNAME GENERATOR
+    ------------------------------*/
+    const adjectives = ["curious","bright","silent","rapid","gentle","brave","midnight","rainy","happy","lucky","clever","sly","swift","quiet","bold","neon"];
+    const animals = ["fox","otter","swan","penguin","tiger","panda","raccoon","owl","hedgehog","badger","lemur","wolf","hare"];
+    const creative = ["circuit","byte","syntax","pixel","flux","vector","syntax","loop","node","string","signal","anchor","tidal"];
+    function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+    function slugify(s){ return s.toString().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+
+    function genUsername(mode, base){
+      base = base ? slugify(base) : '';
+      if(mode==='animal'){
+        const a = rand(animals);
+        const adj = rand(adjectives);
+        return base ? (Math.random()<0.4? base+'-'+a : base+'-'+adj+'-'+a) : (adj+'-'+a);
+      } else if(mode==='creative'){
+        return base ? base+'-'+rand(creative) : (rand(adjectives)+'-'+rand(creative));
+      } else if(mode==='classic'){
+        const num = Math.floor(Math.random()*9999);
+        return base ? `${base}${Math.random()<0.5?'-':''}${num}` : `user${num}`;
+      } else { // random
+        const choice = Math.random();
+        if(choice<0.45) return rand(adjectives)+'-'+rand(animals);
+        if(choice<0.8) return rand(creative)+'-'+rand(animals);
+        return 'user'+Math.floor(Math.random()*99999);
+      }
+    }
+
+    function renderUserResults(listEl, arr){
+      listEl.innerHTML = '';
+      arr.forEach(name=>{
+        const row = document.createElement('div');
+        row.className='result-row';
+        const left = document.createElement('div'); left.className='result-name'; left.textContent = name;
+        left.style.cursor='pointer';
+        left.title='Click to copy';
+        left.addEventListener('click', async ()=> {
+          try{ await navigator.clipboard.writeText(name); left.style.opacity=0.6; setTimeout(()=> left.style.opacity=1,300); } catch(e){ alert('Copy fail') }
+        });
+        const right = document.createElement('div');
+        const btn = document.createElement('button'); btn.className='btn small'; btn.textContent='Copy';
+        btn.addEventListener('click', async ()=> { await navigator.clipboard.writeText(name); btn.textContent='Copied'; setTimeout(()=>btn.textContent='Copy',700); });
+        right.appendChild(btn);
+        row.appendChild(left); row.appendChild(right);
+        listEl.appendChild(row);
+      });
+    }
+
+    $('#u_gen').addEventListener('click', ()=>{
+      const mode = $('#u_mode').value;
+      const base = $('#u_base').value.trim();
+      let count = parseInt($('#u_batch').value) || 8; count = Math.min(30, Math.max(1,count));
+      const results = [];
+      for(let i=0;i<count;i++) results.push(genUsername(mode, base));
+      renderUserResults($('#u_results'), results);
+      localStorage.setItem(saveKey('username:latest'), JSON.stringify(results));
+    });
+    $('#u_copy_all').addEventListener('click', async ()=>{
+      const rows = Array.from($('#u_results').querySelectorAll('.result-name')).map(n=>n.textContent);
+      if(rows.length===0) return alert('No results');
+      await navigator.clipboard.writeText(rows.join('\\n'));
+      alert('All copied');
+    });
+    $('#u_save').addEventListener('click', ()=> {
+      const rows = Array.from($('#u_results').querySelectorAll('.result-name')).map(n=>n.textContent);
+      localStorage.setItem(saveKey('username:saved'), JSON.stringify(rows));
+      alert('Saved locally');
+    });
+    // load last
+    try {
+      const last = JSON.parse(localStorage.getItem(saveKey('username:latest'))||'null');
+      if(Array.isArray(last) && last.length) renderUserResults($('#u_results'), last);
+    } catch(e){}
+
+    /* -----------------------------
+       AVATAR GENERATOR (canvas)
+    ------------------------------*/
+    const a_canvas = $('#a_canvas'); const a_ctx = a_canvas.getContext('2d');
+    function hashStr(s){
+      let h=2166136261>>>0;
+      for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h += (h<<1) + (h<<4) + (h<<7) + (h<<8) + (h<<24); }
+      return (h>>>0).toString(16);
+    }
+    function colorFromHash(h){
+      // derive two colors
+      const r = parseInt(h.slice(0,2)||'aa',16)%200+20;
+      const g = parseInt(h.slice(2,4)||'bb',16)%200+20;
+      const b = parseInt(h.slice(4,6)||'cc',16)%200+20;
+      return `rgb(${r},${g},${b})`;
+    }
+    function drawIdenticon(seed){
+      const h = hashStr(seed);
+      const bg = '#ffffff';
+      a_ctx.fillStyle = bg; a_ctx.fillRect(0,0,a_canvas.width,a_canvas.height);
+      const cols = 5, size = Math.floor(a_canvas.width/cols);
+      const color = colorFromHash(h);
+      for(let x=0;x<cols;x++){
+        for(let y=0;y<cols;y++){
+          const idx = x*cols+y;
+          // symmetric: mirror x
+          const check = parseInt(h[idx%h.length],16) % 2 === 0;
+          const draw = (x<Math.ceil(cols/2))? check : ( (parseInt(h[(cols-1-x)*cols+y%h.length],16)%2===0) );
+          if(draw){
+            a_ctx.fillStyle = color;
+            a_ctx.fillRect(x*size, y*size, size, size);
+          }
+        }
+      }
+    }
+    function drawGradient(seed){
+      const h = hashStr(seed);
+      const c1 = colorFromHash(h);
+      const c2 = colorFromHash(h.slice(-6));
+      const g = a_ctx.createLinearGradient(0,0,a_canvas.width,a_canvas.height);
+      g.addColorStop(0,c1); g.addColorStop(1,c2);
+      a_ctx.fillStyle = g; a_ctx.fillRect(0,0,a_canvas.width,a_canvas.height);
+      // add initial letter
+      a_ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      a_ctx.font = 'bold 48px sans-serif'; a_ctx.textAlign='center'; a_ctx.textBaseline='middle';
+      const ch = (seed||'?')[0] ? (seed[0].toUpperCase()) : '?';
+      a_ctx.fillText(ch, a_canvas.width/2, a_canvas.height/2);
+    }
+    function drawPixel(seed){
+      const h = hashStr(seed);
+      const cols = 8; const size = Math.floor(a_canvas.width/cols);
+      a_ctx.fillStyle = '#fff'; a_ctx.fillRect(0,0,a_canvas.width,a_canvas.height);
+      const color = colorFromHash(h);
+      for(let x=0;x<cols;x++){
+        for(let y=0;y<cols;y++){
+          const idx = (x*cols+y)%h.length;
+          if(parseInt(h[idx],16)%3===0){
+            a_ctx.fillStyle = color;
+            a_ctx.fillRect(x*size, y*size, size, size);
+          }
+        }
+      }
+    }
+
+    $('#a_gen').addEventListener('click', ()=>{
+      const s = $('#a_seed').value.trim() || ('seed-'+Math.random().toString(36).slice(2,7));
+      const mode = $('#a_mode').value;
+      if(mode==='identicon') drawIdenticon(s);
+      else if(mode==='gradient') drawGradient(s);
+      else drawPixel(s);
+      $('#a_meta').textContent = 'Seed: '+s;
+      localStorage.setItem(saveKey('avatar:seed'), JSON.stringify({s,mode}));
+    });
+    $('#a_download').addEventListener('click', ()=> {
+      const url = a_canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = url; a.download = 'avatar.png'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    // load saved avatar seed
+    try {
+      const as = JSON.parse(localStorage.getItem(saveKey('avatar:seed'))||'null');
+      if(as){ $('#a_seed').value = as.s; $('#a_mode').value = as.mode; $('#a_gen').click(); }
+    } catch(e){}
+
+    /* -----------------------------
+       PASSWORD GENERATOR & STRENGTH
+    ------------------------------*/
+    const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+    const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numChars = '0123456789';
+    const symChars = '!@#$%^&*()-_=+[]{};:,.<>?/';
+
+    function generatePassword(opts){
+      let pool = '';
+      if(opts.lower) pool += lowerChars;
+      if(opts.upper) pool += upperChars;
+      if(opts.numbers) pool += numChars;
+      if(opts.symbols) pool += symChars;
+      if(!pool) pool = lowerChars;
+      let pw = '';
+      for(let i=0;i<opts.length;i++) pw += pool[Math.floor(Math.random()*pool.length)];
+      return pw;
+    }
+
+    function calcEntropyBits(pw){
+      // approximate: bits = length * log2(pool)
+      let pool = 0;
+      if(/[a-z]/.test(pw)) pool += 26;
+      if(/[A-Z]/.test(pw)) pool += 26;
+      if(/[0-9]/.test(pw)) pool += 10;
+      if(/[^a-zA-Z0-9]/.test(pw)) pool += 32;
+      if(pool===0) pool=26;
+      const bits = pw.length * Math.log2(pool);
+      return Math.round(bits*10)/10;
+    }
+
+    function updateStrengthVisual(bits){
+      const el = $('#p_strength');
+      const pct = Math.min(100, Math.round((bits/100)*100));
+      el.style.width = pct+'%';
+      let color = '#ef4444', text='Weak';
+      if(bits>60){ color = '#16a34a'; text='Strong' }
+      else if(bits>35){ color = '#f59e0b'; text='Medium' }
+      el.style.background = color; $('#p_strength_text').textContent = 'Strength: '+text+' ('+bits+' bits)';
+    }
+
+    $('#p_gen').addEventListener('click', ()=>{
+      const opts = {
+        lower: $('#p_lower').checked,
+        upper: $('#p_upper').checked,
+        numbers: $('#p_numbers').checked,
+        symbols: $('#p_symbols').checked,
+        length: parseInt($('#p_length').value) || 12
+      };
+      const pw = generatePassword(opts);
+      $('#p_output').value = pw;
+      const bits = calcEntropyBits(pw);
+      updateStrengthVisual(bits);
+      localStorage.setItem(saveKey('password:last'), JSON.stringify({pw,opts}));
+    });
+    $('#p_regen').addEventListener('click', ()=> $('#p_gen').click());
+    $('#p_copy').addEventListener('click', async ()=>{
+      const v = $('#p_output').value; if(!v) return alert('No password');
+      await navigator.clipboard.writeText(v); alert('Password copied');
+    });
+    // load saved
+    try{
+      const last = JSON.parse(localStorage.getItem(saveKey('password:last'))||'null');
+      if(last){ $('#p_output').value = last.pw; $('#p_length').value = last.opts.length; $('#p_lower').checked = last.opts.lower; $('#p_upper').checked = last.opts.upper; $('#p_numbers').checked = last.opts.numbers; $('#p_symbols').checked = last.opts.symbols; const b=calcEntropyBits(last.pw); updateStrengthVisual(b); }
+    }catch(e){}
+
+    // ENTROPY calculator actions
+    $('#e_calc').addEventListener('click', ()=>{
+      const pw = $('#e_input').value || $('#p_output').value;
+      if(!pw) return alert('No password');
+      const bits = calcEntropyBits(pw);
+      $('#e_result').textContent = 'Entropy: '+bits+' bits — '+ (bits>60?'Strong':bits>35?'Medium':'Weak');
+    });
+
+    /* -----------------------------
+       VISUALIZER (canvas)
+    ------------------------------*/
+    const v_canvas = $('#v_canvas'); const v_ctx = v_canvas.getContext('2d');
+    function drawPattern(seed){
+      const h = hashStr(seed||('seed'+Math.random()));
+      const cols = 20; const rows = 10;
+      const w = v_canvas.width/cols; const hh = v_canvas.height/rows;
+      for(let x=0;x<cols;x++){
+        for(let y=0;y<rows;y++){
+          const idx = (x*rows+y)%h.length;
+          const v = parseInt(h[idx],16)%16;
+          const color = (v%2===0) ? colorFromHash(h) : '#f1f5f9';
+          v_ctx.fillStyle = color;
+          v_ctx.fillRect(x*w, y*hh, w, hh);
+        }
+      }
+    }
+    $('#v_gen').addEventListener('click', ()=> {
+      const s = $('#v_seed').value || $('#p_output').value || Math.random().toString(36).slice(2);
+      drawPattern(s);
+    });
+    $('#v_download').addEventListener('click', ()=>{
+      const url = v_canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href=url; a.download='pattern.png'; document.body.appendChild(a); a.click(); a.remove();
+    });
+
+    /* -----------------------------
+       ENTROPY tab (separate)
+    ------------------------------*/
+    $('#ent_calc').addEventListener('click', ()=>{
+      const pw = $('#ent_input').value;
+      if(!pw) return alert('enter password');
+      const bits = calcEntropyBits(pw);
+      $('#ent_out').textContent = bits + ' bits — ' + (bits>80?'Very strong':bits>60?'Strong':bits>35?'Medium':'Weak');
+    });
+    $('#ent_copy').addEventListener('click', async ()=>{
+      const t = $('#ent_out').textContent;
+      if(!t) return alert('No result'); await navigator.clipboard.writeText(t); alert('Copied');
+    });
+
+    /* -----------------------------
+       MOCK DATA GENERATOR
+    ------------------------------*/
+    const firstNames = ["Rani","Budi","Siti","Andi","Rizal","Maya","Dewi","Anton","Rizky","Lia","Sukma","Hendra"];
+    const lastNames = ["Saputra","Wijaya","Pratama","Setiawan","Herlina","Mulyani","Kusuma","Putra"];
+    function randFrom(a){ return a[Math.floor(Math.random()*a.length)]; }
+    function genPhone(){
+      const prefix = ['081','082','083','085','087']; return prefix[Math.floor(Math.random()*prefix.length)] + Math.floor(10000000 + Math.random()*90000000);
+    }
+    function genMock(n){
+      const out=[];
+      for(let i=0;i<n;i++){
+        const fn = randFrom(firstNames), ln = randFrom(lastNames);
+        const name = fn + ' ' + ln;
+        const email = (fn+'.'+ln+Math.floor(Math.random()*99)+'@example.com').toLowerCase();
+        out.push({name, email, phone: genPhone(), username: slugify(fn+ln+Math.floor(Math.random()*99))});
+      }
+      return out;
+    }
+    $('#m_gen').addEventListener('click', ()=>{
+      const n = parseInt($('#m_count').value)||6;
+      const data = genMock(n);
+      const container = $('#m_results'); container.innerHTML='';
+      data.forEach(d=>{
+        const r = document.createElement('div'); r.className='result-row';
+        r.innerHTML = '<div style="font-weight:600">'+d.name+'<div class="muted" style="font-weight:400">'+d.email+' · '+d.phone+'</div></div><div><button class="btn small">Copy</button></div>';
+        r.querySelector('button').addEventListener('click', ()=> navigator.clipboard.writeText(JSON.stringify(d)));
+        container.appendChild(r);
+      });
+      localStorage.setItem(saveKey('mock:last'), JSON.stringify(data));
+    });
+    $('#m_json').addEventListener('click', ()=> {
+      const last = JSON.parse(localStorage.getItem(saveKey('mock:last'))||'[]');
+      if(!last.length) return alert('No data');
+      const blob = new Blob([JSON.stringify(last,null,2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mock.json'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    $('#m_csv').addEventListener('click', ()=> {
+      const last = JSON.parse(localStorage.getItem(saveKey('mock:last'))||'[]');
+      if(!last.length) return alert('No data');
+      const headers = Object.keys(last[0]);
+      const lines = [headers.join(',')].concat(last.map(r=> headers.map(h=> '"'+String(r[h]).replace(/"/g,'""')+'"').join(',')));
+      const blob = new Blob([lines.join('\\n')], {type:'text/csv'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mock.csv'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    // load last mock to show if present
+    try{ const last = JSON.parse(localStorage.getItem(saveKey('mock:last'))||'null'); if(last) { $('#m_count').value = last.length; $('#m_gen').click(); } }catch(e){}
+
+    /* -----------------------------
+       PREVIEWER (templates)
+    ------------------------------*/
+    function previewTemplate(type, color){
+      const c = color || '#0ea5e9';
+      if(type==='github'){
+        return \`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:sans-serif;background:#f6f8fa;display:flex;align-items:center;justify-content:center;height:100vh} .box{width:360px;padding:28px;background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(2,6,23,0.06)} h1{margin:0 0 12px;font-size:18px} .btn{display:inline-block;padding:10px 12px;border-radius:8px;background:${c};color:#fff;text-decoration:none}</style></head><body><div class=\"box\"><h1>Sign in to GitHub</h1><input placeholder=\"Username or email\" style=\"width:100%;padding:8px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6\"><input placeholder=\"Password\" type=\"password\" style=\"width:100%;padding:8px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6\"><div style=\"margin-top:12px\"><a class=\"btn\">Sign in</a></div></div></body></html>\`;
+      }
+      if(type==='google'){
+        return \`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Roboto,Arial,Helvetica,sans-serif;background:#fff;display:flex;align-items:center;justify-content:center;height:100vh}.card{width:380px;padding:28px;border-radius:8px;border:1px solid #eef3f8} h1{font-size:20px;margin:0 0 12px;color:#202124} .btn{display:inline-block;padding:10px 12px;border-radius:6px;background:${c};color:#fff;text-decoration:none}</style></head><body><div class="card"><h1>Sign in</h1><input placeholder="Email or phone" style="width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6"><input placeholder="Password" type="password" style="width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6"><div style="margin-top:12px"><a class="btn">Next</a></div></div></body></html>\`;
+      }
+      if(type==='discord'){
+        return \`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Whitney,Helvetica,Arial,sans-serif;background:#7289da;display:flex;align-items:center;justify-content:center;height:100vh} .panel{width:360px;padding:28px;background:#fff;border-radius:8px} h1{margin:0 0 12px} .btn{padding:10px 12px;background:${c};color:#fff;border-radius:8px;text-decoration:none}</style></head><body><div class="panel"><h1>Welcome Back</h1><input placeholder="Email or Phone" style="width:100%;padding:8px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6"><input placeholder="Password" type="password" style="width:100%;padding:8px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6"><div style="margin-top:12px"><a class="btn">Login</a></div></div></body></html>\`;
+      }
+      // corporate
+      return \`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Inter,Arial,sans-serif;background:#f7fafc;display:flex;align-items:center;justify-content:center;height:100vh}.wrap{display:flex;gap:24px;align-items:center} .card{width:420px;padding:28px;background:#fff;border-radius:8px;border:1px solid #eef3f8} .logo{height:44px;width:44px;border-radius:8px;background:${c}} h1{margin:0 0 12px;font-size:18px} .btn{padding:10px 12px;border-radius:8px;background:${c};color:#fff;text-decoration:none}</style></head><body><div class="wrap"><div class="logo"></div><div class="card"><h1>Sign in to Acme Corp</h1><input placeholder="Email" style="width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6"><input placeholder="Password" type="password" style="width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #e6eef6"><div style="margin-top:12px"><a class="btn">Sign in</a></div></div></div></body></html>\`;
+    }
+
+    $('#pr_load').addEventListener('click', ()=>{
+      const t = $('#pr_template').value;
+      const c = $('#pr_color').value;
+      const doc = previewTemplate(t,c);
+      $('#pr_frame').srcdoc = doc;
+    });
+    $('#pr_copy').addEventListener('click', ()=>{
+      const t = $('#pr_template').value; const c = $('#pr_color').value;
+      const doc = previewTemplate(t,c);
+      navigator.clipboard.writeText(doc); alert('HTML copied to clipboard');
+    });
+
+    /* -----------------------------
+       EXPORTER (generate files)
+    ------------------------------*/
+    let exFiles = [];
+    $('#ex_generate').addEventListener('click', ()=> {
+      exFiles = [];
+      const name = $('#ex_name').value.trim() || 'MyAuthTemplate';
+      // basic index.html with preview embed and avatar placeholder
+      const incAvatar = $('#ex_include_avatar').checked;
+      const incPreview = $('#ex_include_preview').checked;
+      const html = \`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>\${name}</title><style>body{font-family:Inter,Arial,sans-serif;padding:24px;background:#f8fafc} .box{max-width:420px;background:#fff;padding:20px;border-radius:8px;border:1px solid #eef3f8}</style></head><body><div class="box"><h1>\${name} — Login</h1>\${incAvatar?'<div id=\"avatar\"></div>':''}<form><input placeholder=\"username\" style=\"width:100%;padding:8px;margin-top:8px\"><input placeholder=\"password\" type=\"password\" style=\"width:100%;padding:8px;margin-top:8px\"><div style=\"margin-top:12px\"><button type=\"submit\" style=\"padding:8px 12px;background:#0ea5e9;color:#fff;border-radius:8px;border:0\">Login</button></div></form></div></body></html>\`;
+      exFiles.push({name: 'index.html', content: html});
+      if($('#ex_include_readme').checked){
+        exFiles.push({name: 'README.md', content: '# ' + name + '\\nGenerated by AuthLab Pro\\n'});
+      }
+      // show files
+      const container = $('#ex_files'); container.innerHTML='';
+      exFiles.forEach(f=>{
+        const r = document.createElement('div'); r.className='result-row';
+        r.innerHTML = '<div style=\"font-weight:600\">'+f.name+'<div class=\"muted\" style=\"font-weight:400\">'+(f.content.slice(0,140).replace(/</g,'&lt;'))+'...</div></div><div><button class=\"btn small\">Download</button></div>';
+        r.querySelector('button').addEventListener('click', ()=> {
+          const blob = new Blob([f.content], {type: f.name.endsWith('.html')? 'text/html':'text/plain'});
+          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+        });
+        container.appendChild(r);
+      });
+      $('#ex_status').textContent = 'Files ready — download individually';
+    });
+
+    $('#ex_download_all').addEventListener('click', ()=>{
+      // download all as separate files sequentially
+      if(exFiles.length===0) return alert('Generate files first');
+      exFiles.forEach(f=>{
+        const blob = new Blob([f.content], {type: f.name.endsWith('.html')? 'text/html':'text/plain'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+      });
+      alert('Downloads started (multiple files).');
+    });
+
+    // init: show dashboard
+    showTab('tab-dashboard');
+
+  })();
+  </script>
+</body>
+</html>
