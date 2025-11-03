@@ -1,5 +1,5 @@
 /*
-  Code Text Cleaner Pro - GitHub Desktop Dark Mode Edition
+  Code Text Cleaner Pro - GitHub Dark Mode Edition
   Features: text utils, code cleaner, html decoder, combine/split, regex tester, find/replace
   Author: Thio Saputra
 */
@@ -43,14 +43,11 @@
     toastEl.className = 'toast';
     toastEl.classList.add(type);
     toastEl.classList.remove('hidden');
-    // Force reflow to ensure transition works
-    void toastEl.offsetWidth;
-    toastEl.classList.add('show');
-    
+    setTimeout(() => toastEl.classList.add('show'), 10);
     clearTimeout(toastEl._t);
     toastEl._t = setTimeout(() => {
       toastEl.classList.remove('show');
-      setTimeout(() => toastEl.classList.add('hidden'), 300);
+      setTimeout(() => toastEl.classList.add('hidden'), 250);
     }, timeout);
   }
 
@@ -66,9 +63,6 @@
     
     // Show corresponding panel
     $$('.panel').forEach(panel => panel.classList.toggle('active', panel.dataset.tool === tool));
-    
-    // Save to localStorage
-    storage.setItem('ctcpro:currentTool', tool);
   }
   
   navItems.forEach(item => {
@@ -110,12 +104,6 @@
     themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
   }
 
-  // Load saved tool
-  const savedTool = storage.getItem('ctcpro:currentTool');
-  if (savedTool) {
-    switchTool(savedTool);
-  }
-
   // --- Line numbers functionality
   function updateLineNumbers(textarea, lineNumbersId) {
     const lineNumbers = $(lineNumbersId);
@@ -132,7 +120,6 @@
     const digitCount = lines.toString().length;
     const width = Math.max(40, digitCount * 8 + 20);
     lineNumbers.style.width = width + 'px';
-    lineNumbers.style.minWidth = width + 'px';
     
     // Adjust padding of editor
     textarea.style.paddingLeft = width + 10 + 'px';
@@ -186,11 +173,6 @@
       const editor = activePanel.querySelector('textarea.editor:not([readonly])');
       if (editor) {
         currentEditor = editor;
-        
-        // If there's selected text, use it as the search term
-        if (editor.selectionStart !== editor.selectionEnd) {
-          findInput.value = editor.value.substring(editor.selectionStart, editor.selectionEnd);
-        }
       }
     }
   }
@@ -224,14 +206,8 @@
     if (matchIndex !== -1) {
       currentEditor.focus();
       currentEditor.setSelectionRange(matchIndex, matchIndex + searchText.length);
-      
-      // Scroll to match if needed
-      const lineHeight = parseInt(getComputedStyle(currentEditor).lineHeight);
-      const editorHeight = currentEditor.clientHeight;
-      const linesAbove = currentEditor.value.substring(0, matchIndex).split('\n').length;
-      const scrollPosition = (linesAbove - 1) * lineHeight - editorHeight / 2;
-      
-      currentEditor.scrollTop = Math.max(0, scrollPosition);
+      currentEditor.scrollTop = currentEditor.scrollTop + 
+        (matchIndex - currentEditor.selectionStart) * parseInt(getComputedStyle(currentEditor).lineHeight);
       
       findReplaceInfo.textContent = `Found match at position ${matchIndex}`;
     } else {
@@ -257,9 +233,6 @@
       const newCursorPos = selectionStart + replaceText.length;
       currentEditor.setSelectionRange(newCursorPos, newCursorPos);
       
-      // Trigger input event to update line numbers
-      currentEditor.dispatchEvent(new Event('input'));
-      
       findReplaceInfo.textContent = 'Replaced 1 occurrence';
     } else {
       findReplaceInfo.textContent = 'No match at cursor position';
@@ -278,10 +251,6 @@
     if (originalValue !== newValue) {
       currentEditor.value = newValue;
       const matchCount = (originalValue.match(regex) || []).length;
-      
-      // Trigger input event to update line numbers
-      currentEditor.dispatchEvent(new Event('input'));
-      
       findReplaceInfo.textContent = `Replaced ${matchCount} occurrences`;
     } else {
       findReplaceInfo.textContent = 'No matches found';
@@ -860,28 +829,12 @@
       // Highlight matches
       let highlightedText = text;
       if (matches) {
-        // Create a copy of the original text to avoid infinite loops
-        const textCopy = text;
-        let lastIndex = 0;
-        let result = '';
-        
-        let match;
-        while ((match = regex.exec(textCopy)) !== null) {
-          // Add text before the match
-          result += textCopy.substring(lastIndex, match.index);
-          
-          // Add the highlighted match
-          result += `<span class="regex-match">${match[0]}</span>`;
-          
-          lastIndex = match.index + match[0].length;
-          
-          // If not global match, break after first match
-          if (!flags.includes('g')) break;
-        }
-        
-        // Add remaining text
-        result += textCopy.substring(lastIndex);
-        highlightedText = result;
+        matches.forEach(match => {
+          highlightedText = highlightedText.replace(
+            new RegExp(escapeRegExp(match), 'g'),
+            '<span class="regex-match">$&</span>'
+          );
+        });
       }
       
       regexResult.innerHTML = highlightedText || '<div class="empty-state">No matches found</div>';
@@ -927,19 +880,7 @@
       textarea.classList.toggle('word-wrap');
       const isWrapped = textarea.classList.contains('word-wrap');
       toast(isWrapped ? 'Word wrap enabled' : 'Word wrap disabled', 'success');
-      
-      // Save preference
-      storage.setItem(`ctcpro:wordwrap:${textareaId}`, isWrapped);
     });
-    
-    // Load saved preference
-    const savedWrap = storage.getItem(`ctcpro:wordwrap:${textareaId}`);
-    if (savedWrap === 'true') {
-      const textarea = $(textareaId);
-      if (textarea) {
-        textarea.classList.add('word-wrap');
-      }
-    }
   }
   
   setupWordWrapToggle('#toggleWordWrap', 'inputText');
