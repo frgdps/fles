@@ -1,4 +1,4 @@
-/* GitHub Dark Mode Colors */
+/* GitHub Desktop Dark Mode Colors */
 :root {
   --bg-primary: #0d1117;
   --bg-secondary: #161b22;
@@ -7,18 +7,24 @@
   --bg-editor: #0d1117;
   --border-default: #30363d;
   --border-muted: #21262d;
+  --border-secondary: #484f58;
   --text-primary: #c9d1d9;
   --text-secondary: #8b949e;
   --text-tertiary: #6e7681;
+  --text-link: #58a6ff;
   --accent-primary: #58a6ff;
   --accent-secondary: #1f6feb;
   --accent-success: #3fb950;
   --accent-danger: #f85149;
   --accent-warning: #d29922;
+  --accent-info: #a371f7;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --radius: 6px;
   --transition: all 0.2s ease;
   --editor-font-size: 14px;
+  --header-height: 60px;
+  --nav-height: 49px;
 }
 
 /* Light Theme */
@@ -30,9 +36,11 @@ body.light-theme {
   --bg-editor: #ffffff;
   --border-default: #d1d9e0;
   --border-muted: #e1e4e8;
+  --border-secondary: #d1d9e0;
   --text-primary: #24292f;
   --text-secondary: #57606a;
   --text-tertiary: #656d76;
+  --text-link: #0969da;
 }
 
 * {
@@ -63,12 +71,13 @@ body {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-default);
   padding: 0 16px;
-  height: 60px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
 
 .header-content {
@@ -103,7 +112,7 @@ body {
   border-bottom: 1px solid var(--border-default);
   padding: 0 16px;
   position: sticky;
-  top: 60px;
+  top: var(--header-height);
   z-index: 90;
 }
 
@@ -166,6 +175,7 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
+  margin-top: calc(var(--header-height) + var(--nav-height));
 }
 
 .panel {
@@ -216,6 +226,11 @@ body {
   border: 1px solid var(--border-default);
   border-radius: var(--radius);
   overflow: hidden;
+  transition: var(--transition);
+}
+
+.editor-container:hover {
+  border-color: var(--border-secondary);
 }
 
 .editor-header {
@@ -240,11 +255,10 @@ body {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 50px;
   padding: 10px 5px;
   background-color: var(--bg-tertiary);
   color: var(--text-tertiary);
-  font-family: monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: var(--editor-font-size);
   line-height: 1.5;
   text-align: right;
@@ -252,6 +266,7 @@ body {
   overflow: hidden;
   white-space: pre;
   border-right: 1px solid var(--border-default);
+  min-width: 50px;
 }
 
 .editor {
@@ -266,6 +281,11 @@ body {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: var(--editor-font-size);
   line-height: 1.5;
+  transition: var(--transition);
+}
+
+.editor:focus {
+  background-color: var(--bg-primary);
 }
 
 .editor.word-wrap {
@@ -275,6 +295,7 @@ body {
 
 .editor:read-only {
   cursor: default;
+  background-color: var(--bg-tertiary);
 }
 
 /* Controls */
@@ -311,6 +332,7 @@ body {
 .btn:hover {
   background-color: var(--bg-overlay);
   border-color: var(--accent-primary);
+  color: var(--text-primary);
 }
 
 .btn:active {
@@ -441,6 +463,13 @@ body {
   color: var(--text-primary);
   margin: 8px 16px;
   font-family: monospace;
+  transition: var(--transition);
+}
+
+.find-replace-input:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
 }
 
 .find-replace-actions {
@@ -472,6 +501,13 @@ body {
   border-radius: var(--radius);
   color: var(--text-primary);
   font-family: monospace;
+  transition: var(--transition);
+}
+
+.regex-input:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
 }
 
 .regex-flags {
@@ -513,9 +549,10 @@ body {
   border: 1px solid var(--border-default);
   border-radius: var(--radius);
   white-space: pre-wrap;
-  font-family: monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: var(--editor-font-size);
   line-height: 1.5;
+  transition: var(--transition);
 }
 
 .regex-match {
@@ -579,8 +616,12 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  :root {
+    --header-height: 50px;
+    --nav-height: 44px;
+  }
+  
   .header {
-    height: 50px;
     padding: 0 12px;
   }
   
@@ -593,7 +634,7 @@ body {
   }
   
   .nav {
-    top: 50px;
+    top: var(--header-height);
     padding: 0 12px;
   }
   
@@ -608,6 +649,7 @@ body {
   
   .main {
     padding: 12px;
+    margin-top: calc(var(--header-height) + var(--nav-height));
   }
   
   .panel-header {
