@@ -154,16 +154,6 @@
         updateLineNumbers(textarea, lineNumbersId);
       });
       
-      // Update on value change (for paste operations)
-      const observer = new MutationObserver(() => {
-        updateLineNumbers(textarea, lineNumbersId);
-      });
-      
-      observer.observe(textarea, { 
-        attributes: true, 
-        attributeFilter: ['value'] 
-      });
-      
       // Sync scroll
       textarea.addEventListener('scroll', () => {
         lineNumbers.scrollTop = textarea.scrollTop;
@@ -797,43 +787,60 @@
   const codeOutput = $('#codeOutput');
   
   function removeCommentsCSSJS(s) {
+    // Remove multi-line comments (/* ... */)
     s = s.replace(/\/\*[\s\S]*?\*\//g, '');
+    // Remove single-line comments (// ...)
     s = s.replace(/(^|\n)\s*\/\/.*$/gm, '');
     return s;
   }
   
   function minifyHTML(html) {
+    // Remove HTML comments
     html = html.replace(/<!--[\s\S]*?-->/g, '');
-    html = html.replace(/\s{2,}/g, ' ');
+    // Remove whitespace between tags
     html = html.replace(/>\s+</g, '><');
+    // Remove multiple spaces
+    html = html.replace(/\s{2,}/g, ' ');
     return html.trim();
   }
   
   function cleanCSS(s) {
     s = removeCommentsCSSJS(s);
+    // Remove multiple spaces and newlines
     s = s.replace(/\s+/g, ' ');
+    // Remove spaces around special characters
+    s = s.replace(/\s*([{}:;,])\s*/g, '$1');
     return s.trim();
   }
   
   function cleanJS(s) {
     s = removeCommentsCSSJS(s);
+    // Remove multiple spaces and newlines, but keep some structure
     s = s.replace(/\n\s*/g, '\n');
+    s = s.replace(/;\s*/g, ';\n');
     return s.trim();
   }
   
   function formatHTMLbasic(s) {
-    return s.replace(/>\s*</g, '>\n<').replace(/\n\s+/g, '\n').trim();
+    // Add line breaks between tags
+    s = s.replace(/></g, '>\n<');
+    // Remove multiple empty lines
+    s = s.replace(/\n\s*\n/g, '\n');
+    return s.trim();
   }
   
   function formatCSS(css) {
+    // Add line breaks after rules and properties
     css = css.replace(/}/g, '}\n');
     css = css.replace(/{/g, ' {\n  ');
     css = css.replace(/;/g, ';\n  ');
+    // Remove empty lines
     css = css.replace(/\n\s+\n/g, '\n');
     return css.trim();
   }
   
   function formatJS(js) {
+    // Add line breaks after braces and semicolons
     js = js.replace(/{/g, ' {\n  ');
     js = js.replace(/}/g, '\n}');
     js = js.replace(/;/g, ';\n');
@@ -862,22 +869,30 @@
       }
       
       codeOutput.value = out;
+      // Update line numbers for output
+      updateLineNumbers(codeOutput, 'codeOutputLineNumbers');
       toast('Operation completed', 'success');
     });
   });
 
   $('#formatHtml').addEventListener('click', () => {
     codeOutput.value = formatHTMLbasic(codeInput.value);
+    // Update line numbers for output
+    updateLineNumbers(codeOutput, 'codeOutputLineNumbers');
     toast('HTML formatted', 'success');
   });
 
   $('#formatCss').addEventListener('click', () => {
     codeOutput.value = formatCSS(codeInput.value);
+    // Update line numbers for output
+    updateLineNumbers(codeOutput, 'codeOutputLineNumbers');
     toast('CSS formatted', 'success');
   });
 
   $('#formatJs').addEventListener('click', () => {
     codeOutput.value = formatJS(codeInput.value);
+    // Update line numbers for output
+    updateLineNumbers(codeOutput, 'codeOutputLineNumbers');
     toast('JavaScript formatted', 'success');
   });
 
@@ -887,9 +902,11 @@
     try {
       const obj = JSON.parse(s);
       codeOutput.value = JSON.stringify(obj, null, 2);
+      // Update line numbers for output
+      updateLineNumbers(codeOutput, 'codeOutputLineNumbers');
       toast('JSON beautified successfully', 'success');
     } catch (e) {
-      toast('Invalid JSON', 'error');
+      toast('Invalid JSON: ' + e.message, 'error');
     }
   });
 
@@ -923,6 +940,8 @@
     try {
       const text = await navigator.clipboard.readText();
       codeInput.value = text;
+      // Update line numbers for input
+      updateLineNumbers(codeInput, 'codeInputLineNumbers');
       toast('Code pasted from clipboard', 'success');
     } catch (e) {
       toast('Failed to paste', 'error');
@@ -959,11 +978,15 @@
   
   $('#decodeBtn').addEventListener('click', () => {
     decoded.value = decodeHTMLEntities(encoded.value);
+    // Update line numbers for decoded output
+    updateLineNumbers(decoded, 'decodedLineNumbers');
     toast('Decode complete', 'success');
   });
   
   $('#encodeBtn').addEventListener('click', () => {
     encoded.value = encodeHTMLEntities(decoded.value || encoded.value);
+    // Update line numbers for encoded output
+    updateLineNumbers(encoded, 'encodedLineNumbers');
     toast('Encode complete', 'success');
   });
   
@@ -977,12 +1000,14 @@
   });
   
   function decodeHTMLEntities(text) {
+    // Create a temporary textarea element
     const txt = document.createElement('textarea');
     txt.innerHTML = text;
     return txt.value;
   }
   
   function encodeHTMLEntities(text) {
+    // Create a temporary textarea element
     const txt = document.createElement('textarea');
     txt.textContent = text;
     return txt.innerHTML;
@@ -1002,29 +1027,49 @@
       if (/<html/i.test(htmlRaw)) {
         doc = htmlRaw;
         
+        // Add CSS if provided
         if (combineCss.value.trim()) {
           if (/<\/head>/i.test(doc)) {
             doc = doc.replace(/<\/head>/i, `  <style>\n${combineCss.value}\n  </style>\n</head>`);
           } else {
-            doc = doc.replace(/<body.*?>/i, `<head><style>\n${combineCss.value}\n</style></head></body>`);
+            // If no head tag, create one
+            doc = doc.replace(/<html[^>]*>/i, '$&\n<head>\n  <style>\n' + combineCss.value + '\n  </style>\n</head>');
           }
         }
         
+        // Add JS if provided
         if (combineJs.value.trim()) {
           if (/<\/body>/i.test(doc)) {
             doc = doc.replace(/<\/body>/i, `  <script>\n${combineJs.value}\n  </script>\n</body>`);
           } else {
-            doc += `\n<script>\n${combineJs.value}\n</script>`;
+            // If no body closing tag, add one
+            doc += `\n<script>\n${combineJs.value}\n</script>\n</body>`;
           }
         }
       } else {
-        doc = `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1"/>\n<title>Combined</title>\n<style>\n${combineCss.value}\n</style>\n</head>\n<body>\n${htmlRaw}\n<script>\n${combineJs.value}\n</script>\n</body>\n</html>`;
+        // If not a full HTML document, create one
+        doc = `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1"/>\n<title>Combined</title>`;
+        
+        if (combineCss.value.trim()) {
+          doc += `\n<style>\n${combineCss.value}\n</style>`;
+        }
+        
+        doc += `\n</head>\n<body>\n${htmlRaw}`;
+        
+        if (combineJs.value.trim()) {
+          doc += `\n<script>\n${combineJs.value}\n</script>`;
+        }
+        
+        doc += `\n</body>\n</html>`;
       }
     } catch (e) {
       doc = htmlRaw;
+      console.error('Error combining code:', e);
     }
     
     combinedOutput.value = doc;
+    // Update line numbers for combined output
+    updateLineNumbers(combinedOutput, 'combinedOutputLineNumbers');
     toast('Combine complete', 'success');
   });
 
@@ -1073,16 +1118,29 @@
     const src = splitInput.value;
     if (!src) return toast('Enter HTML containing <style> / <script>', 'warning');
     
+    // Extract CSS from style tags
     const styleMatches = [...src.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)];
-    const scriptMatches = [...src.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)];
-    
     let css = styleMatches.map(m => m[1]).join('\n\n').trim();
-    let js = scriptMatches.map(m => m[1]).join('\n\n').trim();
-    let htmlClean = src.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '').replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
     
+    // Extract JavaScript from script tags
+    const scriptMatches = [...src.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)];
+    let js = scriptMatches.map(m => m[1]).join('\n\n').trim();
+    
+    // Remove style and script tags from HTML
+    let htmlClean = src
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+    
+    // Update the output fields
     splitCss.value = css;
     splitJs.value = js;
     splitHtml.value = htmlClean.trim();
+    
+    // Update line numbers for all outputs
+    updateLineNumbers(splitHtml, 'splitHtmlLineNumbers');
+    updateLineNumbers(splitCss, 'splitCssLineNumbers');
+    updateLineNumbers(splitJs, 'splitJsLineNumbers');
+    
     toast('Split complete', 'success');
   });
 
@@ -1151,24 +1209,43 @@
     try {
       const flags = Array.from(selectedFlags).join('');
       const regex = new RegExp(pattern, flags);
-      const matches = text.match(regex);
+      
+      // Find all matches
+      const matches = [];
+      let match;
+      while ((match = regex.exec(text)) !== null) {
+        matches.push(match);
+      }
       
       const endTime = performance.now();
       const testTime = (endTime - startTime).toFixed(2);
       
       // Highlight matches
       let highlightedText = text;
-      if (matches) {
+      if (matches.length > 0) {
+        // Create a copy of the text to highlight
+        let lastIndex = 0;
+        let result = '';
+        
         matches.forEach(match => {
-          highlightedText = highlightedText.replace(
-            new RegExp(escapeRegExp(match), 'g'),
-            '<span class="regex-match">$&</span>'
-          );
+          // Add text before the match
+          result += escapeHtml(text.substring(lastIndex, match.index));
+          
+          // Add the highlighted match
+          result += `<span class="regex-match">${escapeHtml(match[0])}</span>`;
+          
+          // Update the last index
+          lastIndex = match.index + match[0].length;
         });
+        
+        // Add remaining text after the last match
+        result += escapeHtml(text.substring(lastIndex));
+        
+        highlightedText = result;
       }
       
       regexResult.innerHTML = highlightedText || '<div class="empty-state">No matches found</div>';
-      regexMatchCount.textContent = matches ? matches.length : 0;
+      regexMatchCount.textContent = matches.length;
       regexTestTime.textContent = testTime + 'ms';
       
       toast('Regex test completed', 'success');
@@ -1253,8 +1330,10 @@
       const line2 = lines2[i] || '';
       
       if (line1 === line2) {
+        // Lines are the same
         result += `<div class="diff-line same">${escapeHtml(line1)}</div>`;
       } else {
+        // Lines are different
         if (line1) {
           result += `<div class="diff-line removed">- ${escapeHtml(line1)}</div>`;
         }
@@ -1344,8 +1423,8 @@
     return code
       .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>') // Single-line comments
       .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>') // Multi-line comments
-      .replace(/(\b(function|var|let|const|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|from|as|new|this|super|typeof|instanceof|in|of|true|false|null|undefined)\b)/g, '<span class="keyword">$1</span>') // Keywords
-      .replace(/(\b(console|Math|Array|Object|String|Number|Boolean|Date|RegExp|Promise|Set|Map|WeakSet|WeakMap|Symbol|JSON|parseInt|parseFloat|isNaN|isFinite|eval|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)\b)/g, '<span class="builtin">$1</span>') // Built-in objects and functions
+      .replace(/(\b(function|var|let|const|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|from|as|new|this|super|typeof|instanceof|in|of|true|false|null|undefined|void|with|debugger|delete)\b)/g, '<span class="keyword">$1</span>') // Keywords
+      .replace(/(\b(console|Math|Array|Object|String|Number|Boolean|Date|RegExp|Promise|Set|Map|WeakSet|WeakMap|Symbol|JSON|parseInt|parseFloat|isNaN|isFinite|eval|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape|setTimeout|setInterval|clearTimeout|clearInterval)\b)/g, '<span class="builtin">$1</span>') // Built-in objects and functions
       .replace(/(`.*?`)/g, '<span class="string">$1</span>') // Template literals
       .replace(/('.*?'|".*?")/g, '<span class="string">$1</span>') // Strings
       .replace(/(\b\d+\.?\d*|\.\d+\b)/g, '<span class="number">$1</span>') // Numbers
