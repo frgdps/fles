@@ -661,3 +661,109 @@ Another 789 line</textarea>
     </div>
   </div>
 </section>
+    </main>
+  </div>
+
+  <!-- Find/Replace Modal -->
+  <div class="find-replace-container" id="findReplaceContainer" style="display: none;">
+    <div class="find-replace-header">
+      <div class="find-replace-title">Find and Replace</div>
+      <button class="icon-btn" id="closeFindReplace">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <input type="text" id="findInput" class="find-replace-input" placeholder="Find...">
+    <input type="text" id="replaceInput" class="find-replace-input" placeholder="Replace with...">
+    <div class="find-replace-actions">
+      <button class="btn" id="findNextBtn">
+        <i class="fas fa-arrow-down"></i> Next
+      </button>
+      <button class="btn" id="findPrevBtn">
+        <i class="fas fa-arrow-up"></i> Prev
+      </button>
+      <button class="btn btn-success" id="replaceBtn">
+        <i class="fas fa-exchange-alt"></i> Replace
+      </button>
+      <button class="btn btn-success" id="replaceAllBtn">
+        <i class="fas fa-exchange-alt"></i> All
+      </button>
+    </div>
+    <div class="find-replace-info" id="findReplaceInfo">Ready</div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="modal-container hidden" id="shortcutsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Keyboard Shortcuts</h3>
+        <button id="closeShortcuts" class="icon-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="shortcuts-table">
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>F</kbd></td>
+            <td>Find/Replace</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>T</kbd></td>
+            <td>Toggle Theme</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>S</kbd></td>
+            <td>Save/Download</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>H</kbd></td>
+            <td>Show Keyboard Shortcuts</td>
+          </tr>
+          <tr>
+            <td><kbd>Esc</kbd></td>
+            <td>Close Modals/Previews</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-container hidden" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Settings</h3>
+        <button id="closeSettings" class="icon-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-item">
+          <label for="autoSaveToggle">Auto Save</label>
+          <input type="checkbox" id="autoSaveToggle">
+        </div>
+        <div class="setting-item">
+          <label for="wordWrapToggle">Word Wrap</label>
+          <input type="checkbox" id="wordWrapToggle">
+        </div>
+        <div class="setting-item">
+          <label for="lineNumbersToggle">Line Numbers</label>
+          <input type="checkbox" id="lineNumbersToggle">
+        </div>
+        <div class="setting-actions">
+          <button id="saveSettings" class="btn btn-primary">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="sc.js"></script>
+</body>
+</html>
