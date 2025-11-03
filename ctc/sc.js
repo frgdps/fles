@@ -1,6 +1,6 @@
 /*
   Code Text Cleaner Pro - GitHub Dark Mode Edition
-  Features: text utils, code cleaner, html decoder, combine/split, regex tester, find/replace
+  Features: text utils, code cleaner, html decoder, combine/split, regex tester, find/replace, drag & drop, syntax highlighting
   Author: Thio Saputra
 */
 
@@ -13,6 +13,16 @@
       isActive: false,
       currentMatch: -1,
       matches: []
+    },
+    autoSave: {
+      enabled: true,
+      interval: 30000, // 30 seconds
+      lastSaved: null
+    },
+    settings: {
+      wordWrap: true,
+      lineNumbers: true,
+      autoSave: true
     }
   };
 
@@ -63,6 +73,9 @@
     
     // Show corresponding panel
     $$('.panel').forEach(panel => panel.classList.toggle('active', panel.dataset.tool === tool));
+    
+    // Save current tool to storage
+    storage.setItem('ctcpro:currentTool', tool);
   }
   
   navItems.forEach(item => {
@@ -141,6 +154,16 @@
         updateLineNumbers(textarea, lineNumbersId);
       });
       
+      // Update on value change (for paste operations)
+      const observer = new MutationObserver(() => {
+        updateLineNumbers(textarea, lineNumbersId);
+      });
+      
+      observer.observe(textarea, { 
+        attributes: true, 
+        attributeFilter: ['value'] 
+      });
+      
       // Sync scroll
       textarea.addEventListener('scroll', () => {
         lineNumbers.scrollTop = textarea.scrollTop;
@@ -161,6 +184,7 @@
   const findReplaceInfo = $('#findReplaceInfo');
   
   let currentEditor = null;
+  let highlightedEditor = null;
   
   function showFindReplace() {
     findReplaceContainer.style.display = 'block';
@@ -180,6 +204,108 @@
   function hideFindReplace() {
     findReplaceContainer.style.display = 'none';
     state.findReplace.isActive = false;
+    
+    // Remove highlights if any
+    if (highlightedEditor) {
+      removeHighlights(highlightedEditor);
+      highlightedEditor = null;
+    }
+  }
+  
+  function highlightMatches(editor, searchTerm) {
+    if (!editor || !searchTerm) return;
+    
+    // Remove previous highlights
+    removeHighlights(editor);
+    
+    const text = editor.value;
+    const regex = new RegExp(escapeRegExp(searchTerm), 'g');
+    const matches = [];
+    let match;
+    
+    while ((match = regex.exec(text)) !== null) {
+      matches.push({
+        start: match.index,
+        end: match.index + match[0].length
+      });
+    }
+    
+    if (matches.length > 0) {
+      // Create a wrapper div to contain the highlighted content
+      const wrapper = document.createElement('div');
+      wrapper.className = 'editor-highlight-wrapper';
+      wrapper.style.position = 'relative';
+      
+      // Create a pre element to maintain formatting
+      const pre = document.createElement('pre');
+      pre.className = 'editor-highlight-pre';
+      pre.style.position = 'absolute';
+      pre.style.top = '0';
+      pre.style.left = '0';
+      pre.style.width = '100%';
+      pre.style.height = '100%';
+      pre.style.margin = '0';
+      pre.style.padding = '0';
+      pre.style.overflow = 'hidden';
+      pre.style.pointerEvents = 'none';
+      pre.style.zIndex = '1';
+      
+      // Create spans for each line
+      const lines = text.split('\n');
+      let html = '';
+      
+      lines.forEach((line, lineIndex) => {
+        html += `<div class="highlight-line" style="height: ${parseInt(getComputedStyle(editor).lineHeight)}px;">`;
+        
+        // Add highlights for this line
+        let lineStart = text.indexOf(line);
+        let lineEnd = lineStart + line.length;
+        
+        matches.forEach(match => {
+          if (match.start >= lineStart && match.end <= lineEnd) {
+            const startPos = match.start - lineStart;
+            const endPos = match.end - lineStart;
+            
+            // Add text before highlight
+            html += `<span>${escapeHtml(line.substring(0, startPos))}</span>`;
+            
+            // Add highlight
+            html += `<span class="highlight-match" style="background-color: rgba(255, 230, 0, 0.3);">${escapeHtml(line.substring(startPos, endPos))}</span>`;
+            
+            // Add text after highlight
+            html += `<span>${escapeHtml(line.substring(endPos))}</span>`;
+          }
+        });
+        
+        html += `</div>`;
+      });
+      
+      pre.innerHTML = html;
+      wrapper.appendChild(pre);
+      
+      // Insert the wrapper before the editor
+      editor.parentNode.insertBefore(wrapper, editor);
+      
+      // Store reference to highlighted editor
+      highlightedEditor = editor;
+      
+      return matches.length;
+    }
+    
+    return 0;
+  }
+  
+  function removeHighlights(editor) {
+    const wrapper = editor.parentNode.querySelector('.editor-highlight-wrapper');
+    if (wrapper) {
+      wrapper.parentNode.removeChild(wrapper);
+    }
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
   
   function findInEditor(direction = 'next') {
@@ -188,6 +314,9 @@
     const searchText = findInput.value;
     const text = currentEditor.value;
     const currentIndex = currentEditor.selectionStart;
+    
+    // Highlight all matches
+    const matchCount = highlightMatches(currentEditor, searchText);
     
     let matchIndex = -1;
     
@@ -209,7 +338,7 @@
       currentEditor.scrollTop = currentEditor.scrollTop + 
         (matchIndex - currentEditor.selectionStart) * parseInt(getComputedStyle(currentEditor).lineHeight);
       
-      findReplaceInfo.textContent = `Found match at position ${matchIndex}`;
+      findReplaceInfo.textContent = `Match ${matchIndex + 1} of ${matchCount}`;
     } else {
       findReplaceInfo.textContent = 'No matches found';
     }
@@ -233,6 +362,9 @@
       const newCursorPos = selectionStart + replaceText.length;
       currentEditor.setSelectionRange(newCursorPos, newCursorPos);
       
+      // Re-highlight matches
+      highlightMatches(currentEditor, searchText);
+      
       findReplaceInfo.textContent = 'Replaced 1 occurrence';
     } else {
       findReplaceInfo.textContent = 'No match at cursor position';
@@ -251,6 +383,10 @@
     if (originalValue !== newValue) {
       currentEditor.value = newValue;
       const matchCount = (originalValue.match(regex) || []).length;
+      
+      // Re-highlight matches
+      highlightMatches(currentEditor, searchText);
+      
       findReplaceInfo.textContent = `Replaced ${matchCount} occurrences`;
     } else {
       findReplaceInfo.textContent = 'No matches found';
@@ -323,6 +459,105 @@
     }
   }
 
+  // --- Drag & Drop functionality
+  function setupDragAndDrop() {
+    const dropTargets = $$('.editor');
+    
+    dropTargets.forEach(target => {
+      target.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        target.classList.add('drag-over');
+      });
+      
+      target.addEventListener('dragleave', () => {
+        target.classList.remove('drag-over');
+      });
+      
+      target.addEventListener('drop', (e) => {
+        e.preventDefault();
+        target.classList.remove('drag-over');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          const file = files[0];
+          const reader = new FileReader();
+          
+          reader.onload = (event) => {
+            target.value = event.target.result;
+            
+            // Update line numbers
+            const lineNumbersId = target.id + 'LineNumbers';
+            updateLineNumbers(target, lineNumbersId);
+            
+            // Show success message
+            toast(`File "${file.name}" loaded successfully`, 'success');
+          };
+          
+          reader.onerror = () => {
+            toast('Error reading file', 'error');
+          };
+          
+          reader.readAsText(file);
+        }
+      });
+    });
+  }
+
+  // Initialize drag and drop
+  setupDragAndDrop();
+
+  // --- Auto-save functionality
+  function setupAutoSave() {
+    if (!state.settings.autoSave) return;
+    
+    setInterval(() => {
+      const activePanel = $('.panel.active');
+      if (!activePanel) return;
+      
+      const editors = activePanel.querySelectorAll('textarea.editor:not([readonly])');
+      const data = {};
+      
+      editors.forEach(editor => {
+        data[editor.id] = editor.value;
+      });
+      
+      storage.setItem('ctcpro:autosave:' + state.currentTool, JSON.stringify(data));
+      state.autoSave.lastSaved = new Date();
+    }, state.autoSave.interval);
+  }
+  
+  function loadAutoSavedData() {
+    const data = storage.getItem('ctcpro:autosave:' + state.currentTool);
+    if (!data) return;
+    
+    try {
+      const parsedData = JSON.parse(data);
+      
+      Object.keys(parsedData).forEach(editorId => {
+        const editor = $(`#${editorId}`);
+        if (editor && !editor.value) {
+          editor.value = parsedData[editorId];
+          
+          // Update line numbers
+          const lineNumbersId = editorId + 'LineNumbers';
+          updateLineNumbers(editor, lineNumbersId);
+        }
+      });
+    } catch (e) {
+      console.error('Error loading auto-saved data:', e);
+    }
+  }
+
+  // Initialize auto-save
+  setupAutoSave();
+
+  // Load auto-saved data when switching tools
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      setTimeout(loadAutoSavedData, 100);
+    });
+  });
+
   // --- TEXT TOOLS
   const inputText = $('#inputText');
   const outputText = $('#outputText');
@@ -362,6 +597,33 @@
       case 'sort':
         t = t.split('\n').sort().join('\n');
         break;
+      case 'removeEmptyLines':
+        t = t.replace(/^\s*\n/gm, '').replace(/\n\s*$/gm, '');
+        break;
+      case 'removeDuplicateLines':
+        const lines = t.split('\n');
+        const uniqueLines = [...new Set(lines)];
+        t = uniqueLines.join('\n');
+        break;
+      case 'addLineNumbers':
+        t = t.split('\n').map((line, i) => `${i + 1}. ${line}`).join('\n');
+        break;
+      case 'camelCase':
+        t = t.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+          return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        }).replace(/\s+/g, '');
+        break;
+      case 'snake_case':
+        t = t.replace(/\s+/g, '_').toLowerCase();
+        break;
+      case 'kebab-case':
+        t = t.replace(/\s+/g, '-').toLowerCase();
+        break;
+      case 'PascalCase':
+        t = t.replace(/(?:^\w|[A-Z]|\b\w)/g, (word) => {
+          return word.toUpperCase();
+        }).replace(/\s+/g, '');
+        break;
     }
     
     outputText.value = t;
@@ -389,7 +651,9 @@
   $('#downloadTxt').addEventListener('click', () => {
     const txt = outputText.value || inputText.value;
     if (!txt) return toast('No text to download', 'warning');
-    downloadBlob(txt, 'text/plain', 'output.txt');
+    
+    const encoding = $('#textEncoding')?.value || 'utf-8';
+    downloadBlob(txt, 'text/plain;charset=' + encoding, 'output.txt');
     toast('Downloading output.txt', 'success');
   });
 
@@ -592,7 +856,8 @@
     else if (sample.includes('{') && sample.includes('}')) ext = 'js';
     else if (sample.includes('{') && sample.includes('color')) ext = 'css';
     
-    downloadBlob(txt, 'text/plain', `code.${ext}`);
+    const encoding = $('#codeEncoding')?.value || 'utf-8';
+    downloadBlob(txt, 'text/plain;charset=' + encoding, `code.${ext}`);
     toast('Downloading code.' + ext, 'success');
   });
 
@@ -718,7 +983,9 @@
   $('#downloadCombined').addEventListener('click', () => {
     const html = combinedOutput.value;
     if (!html) return toast('No combined code to download', 'warning');
-    downloadBlob(html, 'text/html', 'combined.html');
+    
+    const encoding = $('#combinedEncoding')?.value || 'utf-8';
+    downloadBlob(html, 'text/html;charset=' + encoding, 'combined.html');
     toast('Downloading combined.html', 'success');
   });
 
@@ -765,21 +1032,27 @@
   $('#downloadHtml').addEventListener('click', () => {
     const t = splitHtml.value;
     if (!t) return toast('No HTML to download', 'warning');
-    downloadBlob(t, 'text/html', 'split.html');
+    
+    const encoding = $('#splitEncoding')?.value || 'utf-8';
+    downloadBlob(t, 'text/html;charset=' + encoding, 'split.html');
     toast('Downloading split.html', 'success');
   });
 
   $('#downloadCss').addEventListener('click', () => {
     const t = splitCss.value;
     if (!t) return toast('No CSS to download', 'warning');
-    downloadBlob(t, 'text/css', 'styles.css');
+    
+    const encoding = $('#splitEncoding')?.value || 'utf-8';
+    downloadBlob(t, 'text/css;charset=' + encoding, 'styles.css');
     toast('Downloading styles.css', 'success');
   });
 
   $('#downloadJs').addEventListener('click', () => {
     const t = splitJs.value;
     if (!t) return toast('No JavaScript to download', 'warning');
-    downloadBlob(t, 'application/javascript', 'script.js');
+    
+    const encoding = $('#splitEncoding')?.value || 'utf-8';
+    downloadBlob(t, 'application/javascript;charset=' + encoding, 'script.js');
     toast('Downloading script.js', 'success');
   });
 
@@ -871,6 +1144,72 @@
     }
   });
 
+  // --- TEXT COMPARISON TOOL
+  const compareText1 = $('#compareText1');
+  const compareText2 = $('#compareText2');
+  const compareResult = $('#compareResult');
+  const compareStats = $('#compareStats');
+  
+  $('#compareBtn').addEventListener('click', () => {
+    const text1 = compareText1.value;
+    const text2 = compareText2.value;
+    
+    if (!text1 || !text2) {
+      toast('Please enter text in both fields', 'warning');
+      return;
+    }
+    
+    const diff = diffText(text1, text2);
+    
+    // Display diff
+    compareResult.innerHTML = diff;
+    
+    // Calculate stats
+    const lines1 = text1.split('\n').length;
+    const lines2 = text2.split('\n').length;
+    const chars1 = text1.length;
+    const chars2 = text2.length;
+    
+    compareStats.innerHTML = `
+      <div class="stat">
+        <span class="stat-label">Text 1:</span>
+        <span>${lines1} lines, ${chars1} chars</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Text 2:</span>
+        <span>${lines2} lines, ${chars2} chars</span>
+      </div>
+    `;
+    
+    toast('Comparison complete', 'success');
+  });
+  
+  function diffText(text1, text2) {
+    const lines1 = text1.split('\n');
+    const lines2 = text2.split('\n');
+    
+    const maxLines = Math.max(lines1.length, lines2.length);
+    let result = '';
+    
+    for (let i = 0; i < maxLines; i++) {
+      const line1 = lines1[i] || '';
+      const line2 = lines2[i] || '';
+      
+      if (line1 === line2) {
+        result += `<div class="diff-line same">${escapeHtml(line1)}</div>`;
+      } else {
+        if (line1) {
+          result += `<div class="diff-line removed">- ${escapeHtml(line1)}</div>`;
+        }
+        if (line2) {
+          result += `<div class="diff-line added">+ ${escapeHtml(line2)}</div>`;
+        }
+      }
+    }
+    
+    return result;
+  }
+
   // --- Individual word wrap toggles for each editor
   function setupWordWrapToggle(buttonId, textareaId) {
     $(buttonId)?.addEventListener('click', () => {
@@ -880,6 +1219,10 @@
       textarea.classList.toggle('word-wrap');
       const isWrapped = textarea.classList.contains('word-wrap');
       toast(isWrapped ? 'Word wrap enabled' : 'Word wrap disabled', 'success');
+      
+      // Save setting
+      state.settings.wordWrap = isWrapped;
+      storage.setItem('ctcpro:settings', JSON.stringify(state.settings));
     });
   }
   
@@ -909,13 +1252,135 @@
       toggleTheme();
     }
     
+    // Ctrl/Cmd + S: Save
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      e.preventDefault();
+      const activePanel = $('.panel.active');
+      if (activePanel) {
+        const downloadBtn = activePanel.querySelector('[id^="download"]');
+        if (downloadBtn) {
+          downloadBtn.click();
+        }
+      }
+    }
+    
     // Escape: Close modals
     if (e.key === 'Escape') {
       if (state.findReplace.isActive) {
         hideFindReplace();
       }
+      
+      // Close any open preview
+      const previewWraps = $$('.preview-container:not(.hidden)');
+      previewWraps.forEach(wrap => {
+        const closeBtn = wrap.querySelector('[id^="close"]');
+        if (closeBtn) closeBtn.click();
+      });
+    }
+    
+    // Ctrl/Cmd + H: Show keyboard shortcuts
+    if ((e.ctrlKey || e.metaKey) && e.key === 'h') {
+      e.preventDefault();
+      $('#shortcutsModal').classList.remove('hidden');
     }
   });
+
+  // --- Keyboard Shortcuts Modal
+  $('#closeShortcuts').addEventListener('click', () => {
+    $('#shortcutsModal').classList.add('hidden');
+  });
+
+  // --- Settings Modal
+  $('#settingsBtn').addEventListener('click', () => {
+    $('#settingsModal').classList.remove('hidden');
+    
+    // Load current settings
+    $('#autoSaveToggle').checked = state.settings.autoSave;
+    $('#wordWrapToggle').checked = state.settings.wordWrap;
+    $('#lineNumbersToggle').checked = state.settings.lineNumbers;
+  });
+
+  $('#closeSettings').addEventListener('click', () => {
+    $('#settingsModal').classList.add('hidden');
+  });
+
+  $('#saveSettings').addEventListener('click', () => {
+    // Update settings
+    state.settings.autoSave = $('#autoSaveToggle').checked;
+    state.settings.wordWrap = $('#wordWrapToggle').checked;
+    state.settings.lineNumbers = $('#lineNumbersToggle').checked;
+    
+    // Save to storage
+    storage.setItem('ctcpro:settings', JSON.stringify(state.settings));
+    
+    // Apply settings
+    textareas.forEach(textarea => {
+      if (state.settings.wordWrap) {
+        textarea.classList.add('word-wrap');
+      } else {
+        textarea.classList.remove('word-wrap');
+      }
+    });
+    
+    const lineNumbers = $$('.line-numbers');
+    lineNumbers.forEach(lineNumber => {
+      lineNumber.style.display = state.settings.lineNumbers ? 'block' : 'none';
+    });
+    
+    toast('Settings saved', 'success');
+    $('#settingsModal').classList.add('hidden');
+  });
+
+  // --- Preview Device Mode
+  $('#deviceMode').addEventListener('change', (e) => {
+    const mode = e.target.value;
+    const previewFrame = $('#previewFrame');
+    
+    switch (mode) {
+      case 'desktop':
+        previewFrame.style.width = '100%';
+        previewFrame.style.height = '500px';
+        break;
+      case 'tablet':
+        previewFrame.style.width = '768px';
+        previewFrame.style.height = '1024px';
+        break;
+      case 'mobile':
+        previewFrame.style.width = '375px';
+        previewFrame.style.height = '667px';
+        break;
+    }
+  });
+
+  // --- Load saved settings
+  const savedSettings = storage.getItem('ctcpro:settings');
+  if (savedSettings) {
+    try {
+      state.settings = JSON.parse(savedSettings);
+      
+      // Apply settings
+      textareas.forEach(textarea => {
+        if (state.settings.wordWrap) {
+          textarea.classList.add('word-wrap');
+        } else {
+          textarea.classList.remove('word-wrap');
+        }
+      });
+      
+      const lineNumbers = $$('.line-numbers');
+      lineNumbers.forEach(lineNumber => {
+        lineNumber.style.display = state.settings.lineNumbers ? 'block' : 'none';
+      });
+    } catch (e) {
+      console.error('Error loading settings:', e);
+    }
+  }
+
+  // --- Load saved tool
+  const savedTool = storage.getItem('ctcpro:currentTool');
+  if (savedTool) {
+    switchTool(savedTool);
+  }
 
   // utility: download blob
   function downloadBlob(text, type, filename) {
