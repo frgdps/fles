@@ -1,7 +1,7 @@
 /*
-  Code & Text Cleaner Pro - Enhanced Edition
-  Features: text utils, code cleaner, html decoder, combine/split, regex tester, find/replace, syntax highlighting, history, theme switcher, keyboard shortcuts
-  Author: Thio Saputra / site:flessan.pages.dev
+  Code Text Cleaner Pro - GitHub Dark Mode Edition
+  Features: text utils, code cleaner, html decoder, combine/split, regex tester, find/replace
+  Author: Thio Saputra
 */
 
 (() => {
@@ -9,13 +9,6 @@
   const state = {
     currentTool: 'text',
     theme: 'dark',
-    settings: {
-      fontSize: 14,
-      lineNumbers: true,
-      wordWrap: false,
-      autoSave: true
-    },
-    history: [],
     findReplace: {
       isActive: false,
       currentMatch: -1,
@@ -26,7 +19,6 @@
   // --- Utility Functions
   const $ = sel => document.querySelector(sel);
   const $$ = sel => Array.from(document.querySelectorAll(sel));
-  const saveKey = key => `ctcpro:${key}`;
   const toastEl = $('#toast');
   
   // Safe localStorage wrapper
@@ -37,12 +29,10 @@
       localStorage.removeItem(test);
       return localStorage;
     } catch (e) {
-      console.error('localStorage is not available', e);
       return {
         getItem: () => null,
         setItem: () => {},
-        removeItem: () => {},
-        clear: () => {}
+        removeItem: () => {}
       };
     }
   })();
@@ -61,131 +51,23 @@
     }, timeout);
   }
 
-  // Add to history
-  function addToHistory(action, details = '') {
-    const historyItem = {
-      action,
-      details,
-      timestamp: new Date().toLocaleTimeString(),
-      tool: state.currentTool
-    };
-    
-    state.history.unshift(historyItem);
-    if (state.history.length > 20) {
-      state.history = state.history.slice(0, 20);
-    }
-    
-    updateHistoryDisplay();
-    storage.setItem(saveKey('history'), JSON.stringify(state.history));
-  }
-
-  // Update history display
-  function updateHistoryDisplay() {
-    const historyContainer = $(`#${state.currentTool}History`);
-    if (!historyContainer) return;
-    
-    const toolHistory = state.history.filter(item => item.tool === state.currentTool);
-    
-    if (toolHistory.length === 0) {
-      historyContainer.innerHTML = `
-        <div class="history-item">
-          <div>
-            <div class="history-action">No history yet</div>
-            <div class="history-time">Start using the tool</div>
-          </div>
-        </div>
-      `;
-      return;
-    }
-    
-    historyContainer.innerHTML = toolHistory.map(item => `
-      <div class="history-item">
-        <div>
-          <div class="history-action">${item.action}</div>
-          <div class="history-time">${item.timestamp}</div>
-        </div>
-        <button class="history-restore" data-action="${item.action}" data-details="${item.details}">
-          <i class="fas fa-undo"></i>
-        </button>
-      </div>
-    `).join('');
-    
-    // Add restore handlers
-    historyContainer.querySelectorAll('.history-restore').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const action = btn.dataset.action;
-        const details = btn.dataset.details;
-        restoreFromHistory(action, details);
-      });
-    });
-  }
-
-  // Restore from history
-  function restoreFromHistory(action, details) {
-    // Implementation depends on the action
-    toast(`Restored: ${action}`, 'success');
-  }
-
-  // --- VS Code style activity bar and sidebar
-  const activityIcons = $$('.activity-icon');
-  const sidebar = $('#sidebar');
-  const sidebarClose = $('#sidebarClose');
+  // --- Navigation
+  const navItems = $$('.nav-item');
   
-  // Toggle sidebar
-  function toggleSidebar() {
-    sidebar.classList.toggle('expanded');
-  }
-  
-  // Activity bar click handlers
-  activityIcons.forEach(icon => {
-    icon.addEventListener('click', () => {
-      const tool = icon.dataset.tool;
-      switchTool(tool);
-    });
-  });
-  
-  // Switch tool
   function switchTool(tool) {
     state.currentTool = tool;
     
     // Update active state
-    activityIcons.forEach(i => i.classList.remove('active'));
-    $(`.activity-icon[data-tool="${tool}"]`).classList.add('active');
-    
-    // Update sidebar active tab
-    const sidebarTab = $(`.sidebar .tab-btn[data-tool="${tool}"]`);
-    if (sidebarTab) {
-      $$('.sidebar .tab-btn').forEach(t => t.classList.remove('active'));
-      sidebarTab.classList.add('active');
-    }
+    navItems.forEach(item => item.classList.remove('active'));
+    $(`.nav-item[data-tool="${tool}"]`).classList.add('active');
     
     // Show corresponding panel
-    $$('.panel').forEach(p => p.classList.toggle('active', p.dataset.tool === tool));
-    
-    // Update tool title
-    const toolTitle = $('#toolTitle');
-    const toolName = $(`.activity-icon[data-tool="${tool}"] .tooltip`).textContent;
-    const toolIcon = $(`.activity-icon[data-tool="${tool}"] i`).className;
-    toolTitle.innerHTML = `<i class="${toolIcon}"></i> ${toolName}`;
-    
-    // Auto-expand sidebar on desktop
-    if (window.innerWidth > 768) {
-      sidebar.classList.add('expanded');
-    }
-    
-    // Update history display
-    updateHistoryDisplay();
+    $$('.panel').forEach(panel => panel.classList.toggle('active', panel.dataset.tool === tool));
   }
   
-  // Sidebar close button
-  sidebarClose.addEventListener('click', () => {
-    sidebar.classList.remove('expanded');
-  });
-  
-  // Sidebar tab buttons
-  $$('.sidebar .tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tool = btn.dataset.tool;
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const tool = item.dataset.tool;
       switchTool(tool);
     });
   });
@@ -195,31 +77,31 @@
   
   function toggleTheme() {
     const body = document.body;
-    const isDark = body.classList.contains('light-theme');
+    const isDark = !body.classList.contains('light-theme');
     
     if (isDark) {
       body.classList.remove('light-theme');
       state.theme = 'dark';
-      themeToggle.innerHTML = '<i class="fas fa-moon"></i> Theme';
+      themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
       toast('Switched to dark theme', 'success');
     } else {
       body.classList.add('light-theme');
       state.theme = 'light';
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i> Theme';
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
       toast('Switched to light theme', 'success');
     }
     
-    storage.setItem(saveKey('theme'), state.theme);
+    storage.setItem('ctcpro:theme', state.theme);
   }
   
   themeToggle.addEventListener('click', toggleTheme);
   
   // Load saved theme
-  const savedTheme = storage.getItem(saveKey('theme'));
+  const savedTheme = storage.getItem('ctcpro:theme');
   if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
     state.theme = 'light';
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Theme';
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
   }
 
   // --- Line numbers functionality
@@ -236,19 +118,15 @@
     
     // Adjust width based on number of digits
     const digitCount = lines.toString().length;
-    const width = Math.max(50, digitCount * 10 + 20);
+    const width = Math.max(40, digitCount * 8 + 20);
     lineNumbers.style.width = width + 'px';
     
-    // Adjust padding of editor content
-    const editorContent = lineNumbers.nextElementSibling;
-    if (editorContent) {
-      editorContent.style.paddingLeft = width + 'px';
-    }
+    // Adjust padding of editor
+    textarea.style.paddingLeft = width + 10 + 'px';
   }
 
   // Setup line numbers for all textareas
   const textareas = $$('textarea.editor');
-  const panels = $$('.panel');
   
   textareas.forEach(textarea => {
     const lineNumbersId = textarea.id + 'LineNumbers';
@@ -302,7 +180,6 @@
   function hideFindReplace() {
     findReplaceContainer.style.display = 'none';
     state.findReplace.isActive = false;
-    clearHighlights();
   }
   
   function findInEditor(direction = 'next') {
@@ -333,7 +210,6 @@
         (matchIndex - currentEditor.selectionStart) * parseInt(getComputedStyle(currentEditor).lineHeight);
       
       findReplaceInfo.textContent = `Found match at position ${matchIndex}`;
-      addToHistory('Find', `"${searchText}"`);
     } else {
       findReplaceInfo.textContent = 'No matches found';
     }
@@ -358,7 +234,6 @@
       currentEditor.setSelectionRange(newCursorPos, newCursorPos);
       
       findReplaceInfo.textContent = 'Replaced 1 occurrence';
-      addToHistory('Replace', `"${searchText}" → "${replaceText}"`);
     } else {
       findReplaceInfo.textContent = 'No match at cursor position';
     }
@@ -377,7 +252,6 @@
       currentEditor.value = newValue;
       const matchCount = (originalValue.match(regex) || []).length;
       findReplaceInfo.textContent = `Replaced ${matchCount} occurrences`;
-      addToHistory('Replace All', `"${searchText}" → "${replaceText}" (${matchCount} times)`);
     } else {
       findReplaceInfo.textContent = 'No matches found';
     }
@@ -385,10 +259,6 @@
   
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-  
-  function clearHighlights() {
-    // Implementation for clearing search highlights
   }
   
   findReplaceBtn.addEventListener('click', showFindReplace);
@@ -420,25 +290,6 @@
       hideFindReplace();
     }
   });
-
-  // --- Copy with line numbers
-  function copyWithLineNumbers(textareaId) {
-    const textarea = $(textareaId);
-    if (!textarea) return;
-    
-    const lines = textarea.value.split('\n');
-    const textWithNumbers = lines.map((line, index) => `${index + 1}: ${line}`).join('\n');
-    
-    copyToClipboard(textWithNumbers).then(() => {
-      toast('Copied with line numbers', 'success');
-      addToHistory('Copy', 'With line numbers');
-    }).catch(err => {
-      toast('Failed to copy: ' + err.message, 'error');
-    });
-  }
-  
-  $('#copyWithLineNumbers').addEventListener('click', () => copyWithLineNumbers('inputText'));
-  $('#copyCodeWithLineNumbers').addEventListener('click', () => copyWithLineNumbers('codeInput'));
 
   // --- Clipboard helper function
   function copyToClipboard(text) {
@@ -478,36 +329,19 @@
   const wordCount = $('#wordCount');
   const charCount = $('#charCount');
   const lineCount = $('#lineCount');
-  const detailedStats = $('#detailedStats');
   
   function updateCounts(txt) {
     const chars = txt.length;
     const words = (txt.trim().match(/\S+/g) || []).length;
     const lines = txt.split('\n').length;
-    const sentences = (txt.match(/[.!?]+/g) || []).length;
-    const paragraphs = (txt.match(/\n\s*\n/g) || []).length + 1;
-    const uniqueWords = new Set(txt.toLowerCase().match(/\b\w+\b/g) || []).size;
-    const readingTime = Math.ceil(words / 200); // Average reading speed: 200 words per minute
     
     charCount.textContent = chars;
     wordCount.textContent = words;
     lineCount.textContent = lines;
-    
-    // Update detailed stats
-    if (words > 0) {
-      detailedStats.style.display = 'grid';
-      $('#sentenceCount').textContent = sentences;
-      $('#paragraphCount').textContent = paragraphs;
-      $('#readingTime').textContent = readingTime + ' min';
-      $('#uniqueWords').textContent = uniqueWords;
-    } else {
-      detailedStats.style.display = 'none';
-    }
   }
 
   function transformText(action) {
     let t = inputText.value;
-    let actionName = action;
     
     switch (action) {
       case 'lower':
@@ -522,65 +356,21 @@
       case 'trimspaces':
         t = t.replace(/[ \t]{2,}/g, ' ');
         break;
-      case 'trimlines':
-        t = t.split('\n').filter(l => l.trim() !== '').join('\n');
-        break;
       case 'reverse':
         t = t.split('').reverse().join('');
         break;
       case 'sort':
         t = t.split('\n').sort().join('\n');
         break;
-      case 'dedupe':
-        t = [...new Set(t.split('\n'))].join('\n');
-        break;
     }
     
     outputText.value = t;
     updateCounts(t);
     toast('Transformation complete', 'success');
-    addToHistory(actionName);
   }
 
   document.querySelectorAll('[data-action]').forEach(btn => {
     btn.addEventListener('click', () => transformText(btn.dataset.action));
-  });
-
-  // Case conversion
-  document.querySelectorAll('[data-case]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const caseType = btn.dataset.case;
-      const text = inputText.value;
-      let result = '';
-      
-      switch (caseType) {
-        case 'camel':
-          result = text.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
-            return index === 0 ? word.toLowerCase() : word.toUpperCase();
-          }).replace(/\s+/g, '');
-          break;
-        case 'pascal':
-          result = text.replace(/(?:^\w|[A-Z]|\b\w)/g, word => word.toUpperCase()).replace(/\s+/g, '');
-          break;
-        case 'snake':
-          result = text.replace(/\s+/g, '_').toLowerCase();
-          break;
-        case 'kebab':
-          result = text.replace(/\s+/g, '-').toLowerCase();
-          break;
-        case 'constant':
-          result = text.replace(/\s+/g, '_').toUpperCase();
-          break;
-        case 'dot':
-          result = text.replace(/\s+/g, '.').toLowerCase();
-          break;
-      }
-      
-      outputText.value = result;
-      updateCounts(result);
-      toast(`Converted to ${caseType} case`, 'success');
-      addToHistory('Case Conversion', caseType);
-    });
   });
 
   inputText.addEventListener('input', e => {
@@ -591,9 +381,8 @@
     try {
       await copyToClipboard(outputText.value || inputText.value);
       toast('Copied to clipboard', 'success');
-      addToHistory('Copy', 'Output text');
     } catch (e) {
-      toast('Failed to copy: ' + (e.message || e), 'error');
+      toast('Failed to copy', 'error');
     }
   });
 
@@ -602,44 +391,6 @@
     if (!txt) return toast('No text to download', 'warning');
     downloadBlob(txt, 'text/plain', 'output.txt');
     toast('Downloading output.txt', 'success');
-    addToHistory('Download', 'Text file');
-  });
-
-  // Syntax highlighting
-  $('#syntaxHighlight').addEventListener('click', () => {
-    const text = outputText.value || inputText.value;
-    if (!text) return toast('No text to highlight', 'warning');
-    
-    // Determine language
-    let language = 'text';
-    const sample = text.slice(0, 200).toLowerCase();
-    if (sample.includes('<html') || sample.includes('<!doctype') || sample.includes('<div')) {
-      language = 'markup';
-    } else if (sample.includes('{') && sample.includes('}') && sample.includes('function')) {
-      language = 'javascript';
-    } else if (sample.includes('{') && sample.includes('color') || sample.includes('.class')) {
-      language = 'css';
-    } else if (sample.includes('{') && sample.includes('}')) {
-      try {
-        JSON.parse(text);
-        language = 'json';
-      } catch (e) {
-        // Not JSON
-      }
-    }
-    
-    const highlighted = Prism.highlight(text, Prism.languages[language], language);
-    const highlightedDiv = document.createElement('div');
-    highlightedDiv.className = 'syntax-highlighted';
-    highlightedDiv.innerHTML = `<pre><code class="language-${language}">${highlighted}</code></pre>`;
-    
-    // Replace output textarea with highlighted version
-    const outputWrapper = outputText.parentElement;
-    outputWrapper.innerHTML = '';
-    outputWrapper.appendChild(highlightedDiv);
-    
-    toast('Syntax highlighting applied', 'success');
-    addToHistory('Syntax Highlight', language);
   });
 
   // prettify JSON
@@ -651,22 +402,6 @@
       outputText.value = JSON.stringify(obj, null, 2);
       updateCounts(outputText.value);
       toast('JSON prettified successfully', 'success');
-      addToHistory('JSON', 'Prettify');
-    } catch (e) {
-      toast('Invalid JSON: ' + e.message, 'error');
-    }
-  });
-
-  // minify JSON
-  $('#minifyJson').addEventListener('click', () => {
-    const s = inputText.value.trim();
-    if (!s) return toast('Enter JSON in input', 'warning');
-    try {
-      const obj = JSON.parse(s);
-      outputText.value = JSON.stringify(obj);
-      updateCounts(outputText.value);
-      toast('JSON minified successfully', 'success');
-      addToHistory('JSON', 'Minify');
     } catch (e) {
       toast('Invalid JSON: ' + e.message, 'error');
     }
@@ -680,9 +415,8 @@
       outputText.value = btoa(unescape(encodeURIComponent(s)));
       updateCounts(outputText.value);
       toast('Text encoded to Base64', 'success');
-      addToHistory('Base64', 'Encode');
     } catch (e) {
-      toast('Encoding failed: ' + e.message, 'error');
+      toast('Encoding failed', 'error');
     }
   });
 
@@ -694,9 +428,8 @@
       outputText.value = decodeURIComponent(escape(atob(s)));
       updateCounts(outputText.value);
       toast('Base64 decoded successfully', 'success');
-      addToHistory('Base64', 'Decode');
     } catch (e) {
-      toast('Invalid Base64: ' + e.message, 'error');
+      toast('Invalid Base64', 'error');
     }
   });
 
@@ -708,9 +441,8 @@
       outputText.value = encodeURIComponent(s);
       updateCounts(outputText.value);
       toast('Text URL encoded', 'success');
-      addToHistory('URL', 'Encode');
     } catch (e) {
-      toast('Encoding failed: ' + e.message, 'error');
+      toast('Encoding failed', 'error');
     }
   });
 
@@ -722,9 +454,8 @@
       outputText.value = decodeURIComponent(s);
       updateCounts(outputText.value);
       toast('URL decoded', 'success');
-      addToHistory('URL', 'Decode');
     } catch (e) {
-      toast('Invalid URL encoding: ' + e.message, 'error');
+      toast('Invalid URL encoding', 'error');
     }
   });
 
@@ -735,120 +466,10 @@
       inputText.value = text;
       updateCounts(text);
       toast('Text pasted from clipboard', 'success');
-      addToHistory('Paste', 'From clipboard');
     } catch (e) {
-      toast('Failed to paste: ' + e.message, 'error');
+      toast('Failed to paste', 'error');
     }
   });
-
-  // save/load/reset (localStorage)
-  $('#saveLocal').addEventListener('click', () => {
-    storage.setItem(saveKey('text:input'), inputText.value);
-    storage.setItem(saveKey('text:output'), outputText.value);
-    toast('Saved to localStorage', 'success');
-    addToHistory('Save', 'To localStorage');
-  });
-
-  $('#loadLocal').addEventListener('click', () => {
-    const a = storage.getItem(saveKey('text:input')) || '';
-    const b = storage.getItem(saveKey('text:output')) || '';
-    inputText.value = a;
-    outputText.value = b;
-    updateCounts(inputText.value || outputText.value);
-    toast('Loaded from localStorage', 'success');
-    addToHistory('Load', 'From localStorage');
-  });
-
-  $('#reset').addEventListener('click', () => {
-    if (!confirm('Reset all areas?')) return;
-    inputText.value = '';
-    outputText.value = '';
-    updateCounts('');
-    toast('Reset complete', 'success');
-    addToHistory('Reset', 'All areas');
-  });
-
-  // autosave
-  let autoSaveInterval;
-  function setupAutoSave() {
-    if (autoSaveInterval) clearInterval(autoSaveInterval);
-    
-    if (state.settings.autoSave) {
-      autoSaveInterval = setInterval(() => {
-        storage.setItem(saveKey('text:auto'), inputText.value);
-      }, 5000);
-    }
-  }
-
-  setupAutoSave();
-
-  const autosaved = storage.getItem(saveKey('text:auto'));
-  if (autosaved) {
-    inputText.value = autosaved;
-    updateCounts(autosaved);
-  }
-
-  // --- drag & drop for text
-  const textDrop = $('#textDrop');
-  
-  function setupDrop(zone, targetTextarea, allowed = ['txt', 'md', 'json']) {
-    zone.addEventListener('dragover', e => {
-      e.preventDefault();
-      zone.classList.add('dragover');
-    });
-    
-    zone.addEventListener('dragleave', e => {
-      zone.classList.remove('dragover');
-    });
-    
-    zone.addEventListener('drop', async e => {
-      e.preventDefault();
-      zone.classList.remove('dragover');
-      const f = e.dataTransfer.files && e.dataTransfer.files[0];
-      if (!f) return;
-      const ext = f.name.split('.').pop().toLowerCase();
-      if (!allowed.includes(ext) && allowed.length) return toast('File type not supported: ' + ext, 'error');
-      
-      try {
-        const text = await f.text();
-        targetTextarea.value = text;
-        if (targetTextarea === inputText) {
-          updateCounts(text);
-        }
-        toast('File loaded: ' + f.name, 'success');
-        addToHistory('File Load', f.name);
-      } catch (err) {
-        toast('Failed to load file: ' + err.message, 'error');
-      }
-    });
-    
-    zone.addEventListener('click', () => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = allowed.map(ext => '.' + ext).join(',');
-      input.onchange = async e => {
-        const f = e.target.files[0];
-        if (!f) return;
-        const ext = f.name.split('.').pop().toLowerCase();
-        if (!allowed.includes(ext) && allowed.length) return toast('File type not supported: ' + ext, 'error');
-        
-        try {
-          const text = await f.text();
-          targetTextarea.value = text;
-          if (targetTextarea === inputText) {
-            updateCounts(text);
-          }
-          toast('File loaded: ' + f.name, 'success');
-          addToHistory('File Load', f.name);
-        } catch (err) {
-          toast('Failed to load file: ' + err.message, 'error');
-        }
-      };
-      input.click();
-    });
-  }
-  
-  setupDrop(textDrop, inputText, ['txt', 'md', 'json']);
 
   // --- CODE CLEANER
   const codeInput = $('#codeInput');
@@ -903,49 +524,40 @@
       const act = btn.dataset.codeAction;
       let src = codeInput.value;
       let out = '';
-      let actionName = '';
       
       switch (act) {
         case 'minify-html':
           out = minifyHTML(src);
-          actionName = 'Minify HTML';
           break;
         case 'minify-css':
           out = cleanCSS(src);
-          actionName = 'Minify CSS';
           break;
         case 'minify-js':
           out = cleanJS(src);
-          actionName = 'Minify JS';
           break;
         case 'remove-comments':
           out = removeCommentsCSSJS(src);
-          actionName = 'Remove Comments';
           break;
       }
       
       codeOutput.value = out;
-      toast('Operation completed: ' + actionName, 'success');
-      addToHistory('Code Cleaner', actionName);
+      toast('Operation completed', 'success');
     });
   });
 
   $('#formatHtml').addEventListener('click', () => {
     codeOutput.value = formatHTMLbasic(codeInput.value);
-    toast('HTML formatted (basic)', 'success');
-    addToHistory('Code Cleaner', 'Format HTML');
+    toast('HTML formatted', 'success');
   });
 
   $('#formatCss').addEventListener('click', () => {
     codeOutput.value = formatCSS(codeInput.value);
     toast('CSS formatted', 'success');
-    addToHistory('Code Cleaner', 'Format CSS');
   });
 
   $('#formatJs').addEventListener('click', () => {
     codeOutput.value = formatJS(codeInput.value);
     toast('JavaScript formatted', 'success');
-    addToHistory('Code Cleaner', 'Format JS');
   });
 
   $('#beautifyJson').addEventListener('click', () => {
@@ -955,9 +567,8 @@
       const obj = JSON.parse(s);
       codeOutput.value = JSON.stringify(obj, null, 2);
       toast('JSON beautified successfully', 'success');
-      addToHistory('Code Cleaner', 'Beautify JSON');
     } catch (e) {
-      toast('Invalid JSON: ' + e.message, 'error');
+      toast('Invalid JSON', 'error');
     }
   });
 
@@ -965,9 +576,8 @@
     try {
       await copyToClipboard(codeOutput.value || codeInput.value);
       toast('Copied to clipboard', 'success');
-      addToHistory('Copy', 'Code output');
     } catch (e) {
-      toast('Failed to copy: ' + e.message, 'error');
+      toast('Failed to copy', 'error');
     }
   });
 
@@ -984,7 +594,6 @@
     
     downloadBlob(txt, 'text/plain', `code.${ext}`);
     toast('Downloading code.' + ext, 'success');
-    addToHistory('Download', `Code file (.${ext})`);
   });
 
   // Paste functionality for code
@@ -993,15 +602,10 @@
       const text = await navigator.clipboard.readText();
       codeInput.value = text;
       toast('Code pasted from clipboard', 'success');
-      addToHistory('Paste', 'Code from clipboard');
     } catch (e) {
-      toast('Failed to paste: ' + e.message, 'error');
+      toast('Failed to paste', 'error');
     }
   });
-
-  // drag & drop for code files
-  const codeDrop = $('#codeDrop');
-  setupDrop(codeDrop, codeInput, ['html', 'css', 'js', 'txt']);
 
   // preview iframe for code
   $('#previewCode').addEventListener('click', () => {
@@ -1020,21 +624,6 @@
     iframe.srcdoc = doc;
     previewWrap.classList.remove('hidden');
     toast('Preview ready', 'success');
-    addToHistory('Preview', 'Code preview');
-  });
-
-  $('#refreshPreview').addEventListener('click', () => {
-    const src = codeOutput.value || codeInput.value;
-    if (!src) return toast('No code to preview', 'warning');
-    
-    const iframe = $('#previewFrame');
-    let doc = src;
-    if (!/<html/i.test(src)) {
-      doc = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>${src}</body></html>`;
-    }
-    
-    iframe.srcdoc = doc;
-    toast('Preview refreshed', 'success');
   });
 
   $('#closePreview').addEventListener('click', () => {
@@ -1049,33 +638,19 @@
   $('#decodeBtn').addEventListener('click', () => {
     decoded.value = decodeHTMLEntities(encoded.value);
     toast('Decode complete', 'success');
-    addToHistory('HTML Decoder', 'Decode entities');
   });
   
   $('#encodeBtn').addEventListener('click', () => {
     encoded.value = encodeHTMLEntities(decoded.value || encoded.value);
     toast('Encode complete', 'success');
-    addToHistory('HTML Decoder', 'Encode entities');
   });
   
   $('#copyDecoded').addEventListener('click', async () => {
     try {
       await copyToClipboard(decoded.value);
       toast('Copied to clipboard', 'success');
-      addToHistory('Copy', 'Decoded text');
     } catch (e) {
-      toast('Failed to copy: ' + e.message, 'error');
-    }
-  });
-  
-  $('#autoDetectEntities').addEventListener('click', () => {
-    const v = encoded.value;
-    if (/&[a-z0-9]+;/.test(v) || /&lt;|&gt;|&amp;/.test(v)) {
-      decoded.value = decodeHTMLEntities(v);
-      toast('Entities detected and decoded', 'success');
-      addToHistory('HTML Decoder', 'Auto-detect & decode');
-    } else {
-      toast('No HTML entities found in input', 'warning');
+      toast('Failed to copy', 'error');
     }
   });
   
@@ -1129,16 +704,14 @@
     
     combinedOutput.value = doc;
     toast('Combine complete', 'success');
-    addToHistory('Combine', 'HTML/CSS/JS');
   });
 
   $('#copyCombined').addEventListener('click', async () => {
     try {
       await copyToClipboard(combinedOutput.value);
       toast('Combined code copied', 'success');
-      addToHistory('Copy', 'Combined HTML');
     } catch (e) {
-      toast('Failed to copy: ' + e.message, 'error');
+      toast('Failed to copy', 'error');
     }
   });
 
@@ -1147,7 +720,6 @@
     if (!html) return toast('No combined code to download', 'warning');
     downloadBlob(html, 'text/html', 'combined.html');
     toast('Downloading combined.html', 'success');
-    addToHistory('Download', 'Combined HTML');
   });
 
   // combined preview
@@ -1160,16 +732,6 @@
     ifr.srcdoc = html;
     wrap.classList.remove('hidden');
     toast('Combined preview ready', 'success');
-    addToHistory('Preview', 'Combined HTML');
-  });
-
-  $('#refreshCombinedPreview').addEventListener('click', () => {
-    const html = combinedOutput.value;
-    if (!html) return toast('No combined code to preview', 'warning');
-    
-    const ifr = $('#previewCombined');
-    ifr.srcdoc = html;
-    toast('Combined preview refreshed', 'success');
   });
 
   $('#closeCombinedPreview').addEventListener('click', () => {
@@ -1198,7 +760,6 @@
     splitJs.value = js;
     splitHtml.value = htmlClean.trim();
     toast('Split complete', 'success');
-    addToHistory('Split', 'HTML into parts');
   });
 
   $('#downloadHtml').addEventListener('click', () => {
@@ -1206,7 +767,6 @@
     if (!t) return toast('No HTML to download', 'warning');
     downloadBlob(t, 'text/html', 'split.html');
     toast('Downloading split.html', 'success');
-    addToHistory('Download', 'Split HTML');
   });
 
   $('#downloadCss').addEventListener('click', () => {
@@ -1214,7 +774,6 @@
     if (!t) return toast('No CSS to download', 'warning');
     downloadBlob(t, 'text/css', 'styles.css');
     toast('Downloading styles.css', 'success');
-    addToHistory('Download', 'Split CSS');
   });
 
   $('#downloadJs').addEventListener('click', () => {
@@ -1222,18 +781,6 @@
     if (!t) return toast('No JavaScript to download', 'warning');
     downloadBlob(t, 'application/javascript', 'script.js');
     toast('Downloading script.js', 'success');
-    addToHistory('Download', 'Split JS');
-  });
-
-  $('#copySplitAll').addEventListener('click', async () => {
-    const combined = `HTML:\n${splitHtml.value}\n\nCSS:\n${splitCss.value}\n\nJS:\n${splitJs.value}`;
-    try {
-      await copyToClipboard(combined);
-      toast('All parts copied', 'success');
-      addToHistory('Copy', 'All split parts');
-    } catch (e) {
-      toast('Failed to copy: ' + e.message, 'error');
-    }
   });
 
   // --- REGEX TESTER
@@ -1290,12 +837,11 @@
         });
       }
       
-      regexResult.innerHTML = highlightedText || '<div style="color: var(--text-tertiary);">No matches found</div>';
+      regexResult.innerHTML = highlightedText || '<div class="empty-state">No matches found</div>';
       regexMatchCount.textContent = matches ? matches.length : 0;
       regexTestTime.textContent = testTime + 'ms';
       
       toast('Regex test completed', 'success');
-      addToHistory('Regex Test', pattern);
     } catch (e) {
       regexResult.innerHTML = `<div style="color: var(--accent-danger);">Invalid regex: ${e.message}</div>`;
       regexMatchCount.textContent = '0';
@@ -1307,7 +853,7 @@
   $('#clearRegex').addEventListener('click', () => {
     regexPattern.value = '';
     regexTestText.value = '';
-    regexResult.innerHTML = '<div style="color: var(--text-tertiary);">Enter a regex pattern and click "Test Regex" to see matches highlighted here.</div>';
+    regexResult.innerHTML = '<div class="empty-state">Enter a regex pattern and click "Test" to see matches</div>';
     regexMatchCount.textContent = '0';
     regexTestTime.textContent = '0ms';
     selectedFlags.clear();
@@ -1320,190 +866,8 @@
       const resultText = regexResult.innerText;
       await copyToClipboard(resultText);
       toast('Regex result copied', 'success');
-      addToHistory('Copy', 'Regex result');
     } catch (e) {
-      toast('Failed to copy: ' + e.message, 'error');
-    }
-  });
-
-  // --- SETTINGS
-  // Font size control
-  const fontSizeInput = $('#fontSize');
-  const fontSizeValue = $('#fontSizeValue');
-  
-  fontSizeInput.addEventListener('input', (e) => {
-    const size = e.target.value;
-    fontSizeValue.textContent = size + 'px';
-    document.documentElement.style.setProperty('--editor-font-size', size + 'px');
-    state.settings.fontSize = parseInt(size);
-    storage.setItem(saveKey('settings'), JSON.stringify(state.settings));
-  });
-  
-  // Line numbers toggle
-  const lineNumbersToggle = $('#lineNumbersToggle');
-  
-  lineNumbersToggle.addEventListener('change', (e) => {
-    const show = e.target.checked;
-    $$('.line-numbers').forEach(el => {
-      el.style.display = show ? 'block' : 'none';
-    });
-    
-    $$('.editor-content').forEach(el => {
-      if (show) {
-        el.classList.remove('no-line-numbers');
-      } else {
-        el.classList.add('no-line-numbers');
-      }
-    });
-    
-    state.settings.lineNumbers = show;
-    storage.setItem(saveKey('settings'), JSON.stringify(state.settings));
-  });
-  
-  // Word wrap toggle
-  const wordWrapToggle = $('#wordWrapToggle');
-  
-  wordWrapToggle.addEventListener('change', (e) => {
-    const wrap = e.target.checked;
-    textareas.forEach(textarea => {
-      if (wrap) {
-        textarea.classList.add('word-wrap');
-      } else {
-        textarea.classList.remove('word-wrap');
-      }
-    });
-    state.settings.wordWrap = wrap;
-    storage.setItem(saveKey('settings'), JSON.stringify(state.settings));
-  });
-  
-  // Auto save toggle
-  const autoSaveToggle = $('#autoSaveToggle');
-  
-  autoSaveToggle.addEventListener('change', (e) => {
-    state.settings.autoSave = e.target.checked;
-    storage.setItem(saveKey('settings'), JSON.stringify(state.settings));
-    setupAutoSave();
-    toast(state.settings.autoSave ? 'Auto save enabled' : 'Auto save disabled', 'success');
-  });
-  
-  // Load saved settings
-  const savedSettings = storage.getItem(saveKey('settings'));
-  if (savedSettings) {
-    try {
-      const settings = JSON.parse(savedSettings);
-      state.settings = { ...state.settings, ...settings };
-      
-      // Apply settings
-      fontSizeInput.value = state.settings.fontSize;
-      fontSizeValue.textContent = state.settings.fontSize + 'px';
-      document.documentElement.style.setProperty('--editor-font-size', state.settings.fontSize + 'px');
-      
-      lineNumbersToggle.checked = state.settings.lineNumbers;
-      lineNumbersToggle.dispatchEvent(new Event('change'));
-      
-      wordWrapToggle.checked = state.settings.wordWrap;
-      wordWrapToggle.dispatchEvent(new Event('change'));
-      
-      autoSaveToggle.checked = state.settings.autoSave;
-      setupAutoSave();
-    } catch (e) {
-      console.error('Failed to load settings:', e);
-    }
-  }
-  
-  // Export settings
-  $('#exportSettings').addEventListener('click', () => {
-    const settings = {
-      theme: state.theme,
-      settings: state.settings,
-      history: state.history
-    };
-    
-    const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ctcpro-settings.json';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast('Settings exported', 'success');
-  });
-  
-  // Import settings
-  $('#importSettings').addEventListener('click', () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.onchange = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const settings = JSON.parse(event.target.result);
-          
-          // Apply theme
-          if (settings.theme && settings.theme !== state.theme) {
-            if (settings.theme === 'light') {
-              document.body.classList.add('light-theme');
-              themeToggle.innerHTML = '<i class="fas fa-sun"></i> Theme';
-            } else {
-              document.body.classList.remove('light-theme');
-              themeToggle.innerHTML = '<i class="fas fa-moon"></i> Theme';
-            }
-            state.theme = settings.theme;
-          }
-          
-          // Apply settings
-          if (settings.settings) {
-            if (settings.settings.fontSize) {
-              fontSizeInput.value = settings.settings.fontSize;
-              fontSizeValue.textContent = settings.settings.fontSize + 'px';
-              document.documentElement.style.setProperty('--editor-font-size', settings.settings.fontSize + 'px');
-            }
-            
-            if (settings.settings.lineNumbers !== undefined) {
-              lineNumbersToggle.checked = settings.settings.lineNumbers;
-              lineNumbersToggle.dispatchEvent(new Event('change'));
-            }
-            
-            if (settings.settings.wordWrap !== undefined) {
-              wordWrapToggle.checked = settings.settings.wordWrap;
-              wordWrapToggle.dispatchEvent(new Event('change'));
-            }
-            
-            if (settings.settings.autoSave !== undefined) {
-              autoSaveToggle.checked = settings.settings.autoSave;
-              setupAutoSave();
-            }
-            
-            state.settings = { ...state.settings, ...settings.settings };
-          }
-          
-          // Apply history
-          if (settings.history) {
-            state.history = settings.history;
-            updateHistoryDisplay();
-          }
-          
-          toast('Settings imported', 'success');
-        } catch (e) {
-          toast('Invalid settings file', 'error');
-        }
-      };
-      reader.readAsText(file);
-    };
-    input.click();
-  });
-
-  // clear all storage
-  $('#clearAll').addEventListener('click', () => {
-    if (confirm('Are you sure you want to clear all localStorage data for this tool?')) {
-      Object.keys(storage).filter(k => k.startsWith('ctcpro:')).forEach(k => storage.removeItem(k));
-      state.history = [];
-      updateHistoryDisplay();
-      toast('Local data cleared', 'success');
+      toast('Failed to copy', 'error');
     }
   });
 
@@ -1533,18 +897,6 @@
 
   // --- Keyboard Shortcuts
   document.addEventListener('keydown', (e) => {
-    // Ctrl/Cmd + S: Save
-    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-      e.preventDefault();
-      $('#saveLocal').click();
-    }
-    
-    // Ctrl/Cmd + O: Load
-    if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
-      e.preventDefault();
-      $('#loadLocal').click();
-    }
-    
     // Ctrl/Cmd + F: Find/Replace
     if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
       e.preventDefault();
@@ -1557,24 +909,6 @@
       toggleTheme();
     }
     
-    // Ctrl/Cmd + Shift + C: Copy with line numbers
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
-      e.preventDefault();
-      const activePanel = $('.panel.active');
-      if (activePanel) {
-        const textarea = activePanel.querySelector('textarea.editor:not([readonly])');
-        if (textarea) {
-          copyWithLineNumbers(textarea.id);
-        }
-      }
-    }
-    
-    // Ctrl/Cmd + R: Reset
-    if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
-      e.preventDefault();
-      $('#reset').click();
-    }
-    
     // Escape: Close modals
     if (e.key === 'Escape') {
       if (state.findReplace.isActive) {
@@ -1582,17 +916,6 @@
       }
     }
   });
-
-  // --- Load history
-  const savedHistory = storage.getItem(saveKey('history'));
-  if (savedHistory) {
-    try {
-      state.history = JSON.parse(savedHistory);
-      updateHistoryDisplay();
-    } catch (e) {
-      console.error('Failed to load history:', e);
-    }
-  }
 
   // utility: download blob
   function downloadBlob(text, type, filename) {
