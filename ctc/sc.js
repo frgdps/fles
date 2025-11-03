@@ -558,33 +558,6 @@
     });
   });
 
-  // --- Delete Text functionality
-  function setupDeleteButtons() {
-    const deleteButtons = $$('.delete-btn');
-    
-    deleteButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const targetId = button.dataset.target;
-        const target = $(targetId);
-        
-        if (target) {
-          if (target.value && confirm('Are you sure you want to delete all text?')) {
-            target.value = '';
-            
-            // Update line numbers
-            const lineNumbersId = targetId + 'LineNumbers';
-            updateLineNumbers(target, lineNumbersId);
-            
-            toast('Text deleted', 'success');
-          }
-        }
-      });
-    });
-  }
-
-  // Initialize delete buttons
-  setupDeleteButtons();
-
   // --- TEXT TOOLS
   const inputText = $('#inputText');
   const outputText = $('#outputText');
@@ -650,12 +623,6 @@
         t = t.replace(/(?:^\w|[A-Z]|\b\w)/g, (word) => {
           return word.toUpperCase();
         }).replace(/\s+/g, '');
-        break;
-      case 'tabsToSpaces':
-        t = t.replace(/\t/g, '  '); // Convert tabs to 2 spaces
-        break;
-      case 'spacesToTabs':
-        t = t.replace(/  /g, '\t'); // Convert 2 spaces to tabs
         break;
     }
     
