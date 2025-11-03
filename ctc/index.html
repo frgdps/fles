@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Code Text Cleaner</title>
+  <title>Code Text Cleaner Pro</title>
   <meta name="description" content="Offline toolbox: text utilities, code cleaner, html decoder, combine/split html-css-js, drag & drop, preview." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -16,9 +16,15 @@
       <div class="header-content">
         <div class="logo">
           <i class="fas fa-code"></i>
-          <span>Code Text Cleaner</span>
+          <span>Code Text Cleaner Pro</span>
         </div>
         <div class="header-actions">
+          <button id="settingsBtn" class="icon-btn" title="Settings">
+            <i class="fas fa-cog"></i>
+          </button>
+          <button id="shortcutsBtn" class="icon-btn" title="Keyboard Shortcuts">
+            <i class="fas fa-keyboard"></i>
+          </button>
           <button id="themeToggle" class="icon-btn" title="Toggle theme">
             <i class="fas fa-moon"></i>
           </button>
@@ -56,6 +62,10 @@
           <i class="fas fa-search"></i>
           <span>Regex Tester</span>
         </button>
+        <button class="nav-item" data-tool="compare">
+          <i class="fas fa-columns"></i>
+          <span>Compare</span>
+        </button>
       </div>
     </nav>
 
@@ -75,6 +85,11 @@
             <button id="downloadTxt" class="btn" title="Download">
               <i class="fas fa-download"></i>
             </button>
+            <select id="textEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
           </div>
         </div>
         
@@ -111,6 +126,31 @@
               </button>
               <button class="btn" data-action="sort" title="Sort">
                 <i class="fas fa-sort-alpha-down"></i> Sort
+              </button>
+            </div>
+            <div class="control-group">
+              <button class="btn" data-action="removeEmptyLines" title="Remove Empty Lines">
+                <i class="fas fa-eraser"></i> Empty
+              </button>
+              <button class="btn" data-action="removeDuplicateLines" title="Remove Duplicates">
+                <i class="fas fa-copy"></i> Duplicates
+              </button>
+              <button class="btn" data-action="addLineNumbers" title="Add Line Numbers">
+                <i class="fas fa-list-ol"></i> Number
+              </button>
+            </div>
+            <div class="control-group">
+              <button class="btn" data-action="camelCase" title="camelCase">
+                <i class="fas fa-font"></i> camel
+              </button>
+              <button class="btn" data-action="snake_case" title="snake_case">
+                <i class="fas fa-font"></i> snake
+              </button>
+              <button class="btn" data-action="kebab-case" title="kebab-case">
+                <i class="fas fa-font"></i> kebab
+              </button>
+              <button class="btn" data-action="PascalCase" title="PascalCase">
+                <i class="fas fa-font"></i> Pascal
               </button>
             </div>
             <div class="control-group">
@@ -176,6 +216,11 @@
             <button id="previewCode" class="btn" title="Preview">
               <i class="fas fa-eye"></i>
             </button>
+            <select id="codeEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
           </div>
         </div>
         
@@ -238,9 +283,16 @@
         <div class="preview-container hidden" id="previewWrap">
           <div class="preview-header">
             <span>Preview</span>
-            <button id="closePreview" class="icon-btn" title="Close">
-              <i class="fas fa-times"></i>
-            </button>
+            <div class="preview-controls">
+              <select id="deviceMode" class="device-select">
+                <option value="desktop">Desktop</option>
+                <option value="tablet">Tablet</option>
+                <option value="mobile">Mobile</option>
+              </select>
+              <button id="closePreview" class="icon-btn" title="Close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
           </div>
           <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts"></iframe>
         </div>
@@ -308,6 +360,11 @@
             <button id="previewCombined" class="btn" title="Preview">
               <i class="fas fa-eye"></i>
             </button>
+            <select id="combinedEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
           </div>
         </div>
         
@@ -376,9 +433,16 @@
         <div class="preview-container hidden" id="previewCombinedWrap">
           <div class="preview-header">
             <span>Preview</span>
-            <button id="closeCombinedPreview" class="icon-btn" title="Close">
-              <i class="fas fa-times"></i>
-            </button>
+            <div class="preview-controls">
+              <select id="deviceModeCombined" class="device-select">
+                <option value="desktop">Desktop</option>
+                <option value="tablet">Tablet</option>
+                <option value="mobile">Mobile</option>
+              </select>
+              <button id="closeCombinedPreview" class="icon-btn" title="Close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
           </div>
           <iframe id="previewCombined" class="preview-frame" sandbox="allow-scripts"></iframe>
         </div>
@@ -398,6 +462,11 @@
             <button id="downloadJs" class="btn" title="Download JS">
               <i class="fas fa-download"></i> JS
             </button>
+            <select id="splitEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
           </div>
         </div>
         
@@ -530,6 +599,68 @@ Another 789 line</textarea>
           </div>
         </div>
       </section>
+
+      <!-- TEXT COMPARISON -->
+      <section class="panel" id="panel-compare" data-tool="compare">
+        <div class="panel-header">
+          <h2><i class="fas fa-columns"></i> Text Comparison</h2>
+          <div class="panel-actions">
+            <button id="copyCompareResult" class="btn" title="Copy Result">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Text 1</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="compareText1LineNumbers">1</div>
+              <textarea id="compareText1" class="editor" placeholder="Enter first text here..."></textarea>
+            </div>
+          </div>
+
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Text 2</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="compareText2LineNumbers">1</div>
+              <textarea id="compareText2" class="editor" placeholder="Enter second text here..."></textarea>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn btn-primary" id="compareBtn" title="Compare">
+                <i class="fas fa-columns"></i> Compare
+              </button>
+            </div>
+          </div>
+          
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Comparison Result</span>
+            </div>
+            <div class="compare-result" id="compareResult">
+              <div class="empty-state">Enter text in both fields and click "Compare" to see differences</div>
+            </div>
+          </div>
+          
+          <div class="stats" id="compareStats">
+            <div class="stat">
+              <span class="stat-label">Text 1:</span>
+              <span>0 lines, 0 chars</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Text 2:</span>
+              <span>0 lines, 0 chars</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -558,6 +689,71 @@ Another 789 line</textarea>
       </button>
     </div>
     <div class="find-replace-info" id="findReplaceInfo">Ready</div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="modal-container hidden" id="shortcutsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Keyboard Shortcuts</h3>
+        <button id="closeShortcuts" class="icon-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="shortcuts-table">
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>F</kbd></td>
+            <td>Find/Replace</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>T</kbd></td>
+            <td>Toggle Theme</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>S</kbd></td>
+            <td>Save/Download</td>
+          </tr>
+          <tr>
+            <td><kbd>Ctrl</kbd> + <kbd>H</kbd></td>
+            <td>Show Keyboard Shortcuts</td>
+          </tr>
+          <tr>
+            <td><kbd>Esc</kbd></td>
+            <td>Close Modals/Previews</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-container hidden" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Settings</h3>
+        <button id="closeSettings" class="icon-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-item">
+          <label for="autoSaveToggle">Auto Save</label>
+          <input type="checkbox" id="autoSaveToggle">
+        </div>
+        <div class="setting-item">
+          <label for="wordWrapToggle">Word Wrap</label>
+          <input type="checkbox" id="wordWrapToggle">
+        </div>
+        <div class="setting-item">
+          <label for="lineNumbersToggle">Line Numbers</label>
+          <input type="checkbox" id="lineNumbersToggle">
+        </div>
+        <div class="setting-actions">
+          <button id="saveSettings" class="btn btn-primary">Save Settings</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Toast -->
