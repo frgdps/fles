@@ -200,467 +200,467 @@
       </section>
 
       <!-- CODE CLEANER -->
-<section class="panel" id="panel-code" data-tool="code">
-  <div class="panel-header">
-    <h2><i class="fas fa-code"></i> Code Cleaner</h2>
-    <div class="panel-actions">
-      <button id="pasteCode" class="btn" title="Paste">
-        <i class="fas fa-paste"></i>
-      </button>
-      <button id="copyCode" class="btn" title="Copy">
-        <i class="fas fa-copy"></i>
-      </button>
-      <button id="downloadCode" class="btn" title="Download">
-        <i class="fas fa-download"></i>
-      </button>
-      <button id="previewCode" class="btn" title="Preview">
-        <i class="fas fa-eye"></i>
-      </button>
-      <select id="codeEncoding" class="encoding-select">
-        <option value="utf-8">UTF-8</option>
-        <option value="iso-8859-1">ISO-8859-1</option>
-        <option value="windows-1252">Windows-1252</option>
-      </select>
-    </div>
-  </div>
-  
-  <div class="editor-section">
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Input (HTML / CSS / JS)</span>
-        <button id="toggleCodeWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="codeInputLineNumbers">1</div>
-        <textarea id="codeInput" class="editor" placeholder="Paste HTML/CSS/JS here..."></textarea>
-      </div>
-    </div>
+      <section class="panel" id="panel-code" data-tool="code">
+        <div class="panel-header">
+          <h2><i class="fas fa-code"></i> Code Cleaner</h2>
+          <div class="panel-actions">
+            <button id="pasteCode" class="btn" title="Paste">
+              <i class="fas fa-paste"></i>
+            </button>
+            <button id="copyCode" class="btn" title="Copy">
+              <i class="fas fa-copy"></i>
+            </button>
+            <button id="downloadCode" class="btn" title="Download">
+              <i class="fas fa-download"></i>
+            </button>
+            <button id="previewCode" class="btn" title="Preview">
+              <i class="fas fa-eye"></i>
+            </button>
+            <select id="codeEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Input (HTML / CSS / JS)</span>
+              <button id="toggleCodeWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="codeInputLineNumbers">1</div>
+              <textarea id="codeInput" class="editor" placeholder="Paste HTML/CSS/JS here..."></textarea>
+            </div>
+          </div>
 
-    <div class="controls">
-      <div class="control-group">
-        <button class="btn" data-code-action="minify-html" title="Minify HTML">
-          <i class="fas fa-compress"></i> HTML
-        </button>
-        <button class="btn" data-code-action="minify-css" title="Minify CSS">
-          <i class="fas fa-compress"></i> CSS
-        </button>
-        <button class="btn" data-code-action="minify-js" title="Minify JS">
-          <i class="fas fa-compress"></i> JS
-        </button>
-        <button class="btn" data-code-action="remove-comments" title="Remove Comments">
-          <i class="fas fa-comment-slash"></i> Comments
-        </button>
-      </div>
-      <div class="control-group">
-        <button class="btn" id="formatHtml" title="Format HTML">
-          <i class="fas fa-code"></i> HTML
-        </button>
-        <button class="btn" id="formatCss" title="Format CSS">
-          <i class="fas fa-code"></i> CSS
-        </button>
-        <button class="btn" id="formatJs" title="Format JS">
-          <i class="fas fa-code"></i> JS
-        </button>
-        <button class="btn" id="beautifyJson" title="Beautify JSON">
-          <i class="fas fa-code"></i> JSON
-        </button>
-      </div>
-    </div>
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn" data-code-action="minify-html" title="Minify HTML">
+                <i class="fas fa-compress"></i> HTML
+              </button>
+              <button class="btn" data-code-action="minify-css" title="Minify CSS">
+                <i class="fas fa-compress"></i> CSS
+              </button>
+              <button class="btn" data-code-action="minify-js" title="Minify JS">
+                <i class="fas fa-compress"></i> JS
+              </button>
+              <button class="btn" data-code-action="remove-comments" title="Remove Comments">
+                <i class="fas fa-comment-slash"></i> Comments
+              </button>
+            </div>
+            <div class="control-group">
+              <button class="btn" id="formatHtml" title="Format HTML">
+                <i class="fas fa-code"></i> HTML
+              </button>
+              <button class="btn" id="formatCss" title="Format CSS">
+                <i class="fas fa-code"></i> CSS
+              </button>
+              <button class="btn" id="formatJs" title="Format JS">
+                <i class="fas fa-code"></i> JS
+              </button>
+              <button class="btn" id="beautifyJson" title="Beautify JSON">
+                <i class="fas fa-code"></i> JSON
+              </button>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Output</span>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="codeOutputLineNumbers">1</div>
-        <textarea id="codeOutput" class="editor" readonly placeholder="Cleaned code will appear here..."></textarea>
-      </div>
-    </div>
-  </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Output</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="codeOutputLineNumbers">1</div>
+              <textarea id="codeOutput" class="editor" readonly placeholder="Cleaned code will appear here..."></textarea>
+            </div>
+          </div>
+        </div>
 
-  <div class="preview-container hidden" id="previewWrap">
-    <div class="preview-header">
-      <span>Preview</span>
-      <div class="preview-controls">
-        <select id="deviceMode" class="device-select">
-          <option value="desktop">Desktop</option>
-          <option value="tablet">Tablet</option>
-          <option value="mobile">Mobile</option>
-        </select>
-        <button id="closePreview" class="icon-btn" title="Close">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
-    <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts"></iframe>
-  </div>
-</section>
+        <div class="preview-container hidden" id="previewWrap">
+          <div class="preview-header">
+            <span>Preview</span>
+            <div class="preview-controls">
+              <select id="deviceMode" class="device-select">
+                <option value="desktop">Desktop</option>
+                <option value="tablet">Tablet</option>
+                <option value="mobile">Mobile</option>
+              </select>
+              <button id="closePreview" class="icon-btn" title="Close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts"></iframe>
+        </div>
+      </section>
 
-<!-- DECODER -->
-<section class="panel" id="panel-decoder" data-tool="decoder">
-  <div class="panel-header">
-    <h2><i class="fas fa-lock"></i> HTML Entity Decoder</h2>
-    <div class="panel-actions">
-      <button id="copyDecoded" class="btn" title="Copy">
-        <i class="fas fa-copy"></i>
-      </button>
-    </div>
-  </div>
-  
-  <div class="editor-section">
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Encoded</span>
-        <button id="toggleDecoderWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="encodedLineNumbers">1</div>
-        <textarea id="encoded" class="editor" placeholder="&amp;lt;div&amp;gt;Hello&amp;lt;/div&amp;gt;"></textarea>
-      </div>
-    </div>
+      <!-- DECODER -->
+      <section class="panel" id="panel-decoder" data-tool="decoder">
+        <div class="panel-header">
+          <h2><i class="fas fa-lock"></i> HTML Entity Decoder</h2>
+          <div class="panel-actions">
+            <button id="copyDecoded" class="btn" title="Copy">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Encoded</span>
+              <button id="toggleDecoderWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="encodedLineNumbers">1</div>
+              <textarea id="encoded" class="editor" placeholder="&amp;lt;div&amp;gt;Hello&amp;lt;/div&amp;gt;"></textarea>
+            </div>
+          </div>
 
-    <div class="controls">
-      <div class="control-group">
-        <button class="btn btn-primary" id="decodeBtn" title="Decode">
-          <i class="fas fa-unlock"></i> Decode
-        </button>
-        <button class="btn" id="encodeBtn" title="Encode">
-          <i class="fas fa-lock"></i> Encode
-        </button>
-      </div>
-    </div>
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn btn-primary" id="decodeBtn" title="Decode">
+                <i class="fas fa-unlock"></i> Decode
+              </button>
+              <button class="btn" id="encodeBtn" title="Encode">
+                <i class="fas fa-lock"></i> Encode
+              </button>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Decoded</span>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="decodedLineNumbers">1</div>
-        <textarea id="decoded" class="editor" readonly placeholder="<div>Hello</div>"></textarea>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Decoded</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="decodedLineNumbers">1</div>
+              <textarea id="decoded" class="editor" readonly placeholder="<div>Hello</div>"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- COMBINE -->
-<section class="panel" id="panel-combine" data-tool="combine">
-  <div class="panel-header">
-    <h2><i class="fas fa-object-group"></i> Combine HTML/CSS/JS</h2>
-    <div class="panel-actions">
-      <button id="copyCombined" class="btn" title="Copy">
-        <i class="fas fa-copy"></i>
-      </button>
-      <button id="downloadCombined" class="btn" title="Download">
-        <i class="fas fa-download"></i>
-      </button>
-      <button id="previewCombined" class="btn" title="Preview">
-        <i class="fas fa-eye"></i>
-      </button>
-      <select id="combinedEncoding" class="encoding-select">
-        <option value="utf-8">UTF-8</option>
-        <option value="iso-8859-1">ISO-8859-1</option>
-        <option value="windows-1252">Windows-1252</option>
-      </select>
-    </div>
-  </div>
-  
-  <div class="editor-section">
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>HTML</span>
-        <button id="toggleCombineHtmlWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="combineHtmlLineNumbers">1</div>
-        <textarea id="combineHtml" class="editor" placeholder="Enter HTML (body or full HTML)"></textarea>
-      </div>
-    </div>
+      <!-- COMBINE -->
+      <section class="panel" id="panel-combine" data-tool="combine">
+        <div class="panel-header">
+          <h2><i class="fas fa-object-group"></i> Combine HTML/CSS/JS</h2>
+          <div class="panel-actions">
+            <button id="copyCombined" class="btn" title="Copy">
+              <i class="fas fa-copy"></i>
+            </button>
+            <button id="downloadCombined" class="btn" title="Download">
+              <i class="fas fa-download"></i>
+            </button>
+            <button id="previewCombined" class="btn" title="Preview">
+              <i class="fas fa-eye"></i>
+            </button>
+            <select id="combinedEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>HTML</span>
+              <button id="toggleCombineHtmlWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="combineHtmlLineNumbers">1</div>
+              <textarea id="combineHtml" class="editor" placeholder="Enter HTML (body or full HTML)"></textarea>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>CSS</span>
-        <button id="toggleCombineCssWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="combineCssLineNumbers">1</div>
-        <textarea id="combineCss" class="editor" placeholder="Enter CSS"></textarea>
-      </div>
-    </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>CSS</span>
+              <button id="toggleCombineCssWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="combineCssLineNumbers">1</div>
+              <textarea id="combineCss" class="editor" placeholder="Enter CSS"></textarea>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>JavaScript</span>
-        <button id="toggleCombineJsWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="combineJsLineNumbers">1</div>
-        <textarea id="combineJs" class="editor" placeholder="Enter JavaScript"></textarea>
-      </div>
-    </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>JavaScript</span>
+              <button id="toggleCombineJsWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="combineJsLineNumbers">1</div>
+              <textarea id="combineJs" class="editor" placeholder="Enter JavaScript"></textarea>
+            </div>
+          </div>
 
-    <div class="controls">
-      <div class="control-group">
-        <button class="btn btn-primary" id="combineBtn" title="Combine">
-          <i class="fas fa-object-group"></i> Combine
-        </button>
-      </div>
-    </div>
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn btn-primary" id="combineBtn" title="Combine">
+                <i class="fas fa-object-group"></i> Combine
+              </button>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Combined Output</span>
-        <button id="toggleCombinedOutputWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="combinedOutputLineNumbers">1</div>
-        <textarea id="combinedOutput" class="editor" readonly></textarea>
-      </div>
-    </div>
-  </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Combined Output</span>
+              <button id="toggleCombinedOutputWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="combinedOutputLineNumbers">1</div>
+              <textarea id="combinedOutput" class="editor" readonly></textarea>
+            </div>
+          </div>
+        </div>
 
-  <div class="preview-container hidden" id="previewCombinedWrap">
-    <div class="preview-header">
-      <span>Preview</span>
-      <div class="preview-controls">
-        <select id="deviceModeCombined" class="device-select">
-          <option value="desktop">Desktop</option>
-          <option value="tablet">Tablet</option>
-          <option value="mobile">Mobile</option>
-        </select>
-        <button id="closeCombinedPreview" class="icon-btn" title="Close">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
-    <iframe id="previewCombined" class="preview-frame" sandbox="allow-scripts"></iframe>
-  </div>
-</section>
+        <div class="preview-container hidden" id="previewCombinedWrap">
+          <div class="preview-header">
+            <span>Preview</span>
+            <div class="preview-controls">
+              <select id="deviceModeCombined" class="device-select">
+                <option value="desktop">Desktop</option>
+                <option value="tablet">Tablet</option>
+                <option value="mobile">Mobile</option>
+              </select>
+              <button id="closeCombinedPreview" class="icon-btn" title="Close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <iframe id="previewCombined" class="preview-frame" sandbox="allow-scripts"></iframe>
+        </div>
+      </section>
 
-<!-- SPLIT -->
-<section class="panel" id="panel-split" data-tool="split">
-  <div class="panel-header">
-    <h2><i class="fas fa-code-branch"></i> Split HTML</h2>
-    <div class="panel-actions">
-      <button id="downloadHtml" class="btn" title="Download HTML">
-        <i class="fas fa-download"></i> HTML
-      </button>
-      <button id="downloadCss" class="btn" title="Download CSS">
-        <i class="fas fa-download"></i> CSS
-      </button>
-      <button id="downloadJs" class="btn" title="Download JS">
-        <i class="fas fa-download"></i> JS
-      </button>
-      <select id="splitEncoding" class="encoding-select">
-        <option value="utf-8">UTF-8</option>
-        <option value="iso-8859-1">ISO-8859-1</option>
-        <option value="windows-1252">Windows-1252</option>
-      </select>
-    </div>
-  </div>
-  
-  <div class="editor-section">
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Input HTML</span>
-        <button id="toggleSplitInputWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="splitInputLineNumbers">1</div>
-        <textarea id="splitInput" class="editor" placeholder="Paste full HTML here..."></textarea>
-      </div>
-    </div>
+      <!-- SPLIT -->
+      <section class="panel" id="panel-split" data-tool="split">
+        <div class="panel-header">
+          <h2><i class="fas fa-code-branch"></i> Split HTML</h2>
+          <div class="panel-actions">
+            <button id="downloadHtml" class="btn" title="Download HTML">
+              <i class="fas fa-download"></i> HTML
+            </button>
+            <button id="downloadCss" class="btn" title="Download CSS">
+              <i class="fas fa-download"></i> CSS
+            </button>
+            <button id="downloadJs" class="btn" title="Download JS">
+              <i class="fas fa-download"></i> JS
+            </button>
+            <select id="splitEncoding" class="encoding-select">
+              <option value="utf-8">UTF-8</option>
+              <option value="iso-8859-1">ISO-8859-1</option>
+              <option value="windows-1252">Windows-1252</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Input HTML</span>
+              <button id="toggleSplitInputWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="splitInputLineNumbers">1</div>
+              <textarea id="splitInput" class="editor" placeholder="Paste full HTML here..."></textarea>
+            </div>
+          </div>
 
-    <div class="controls">
-      <div class="control-group">
-        <button class="btn btn-primary" id="splitBtn" title="Split">
-          <i class="fas fa-code-branch"></i> Split
-        </button>
-      </div>
-    </div>
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn btn-primary" id="splitBtn" title="Split">
+                <i class="fas fa-code-branch"></i> Split
+              </button>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>HTML</span>
-        <button id="toggleSplitHtmlWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="splitHtmlLineNumbers">1</div>
-        <textarea id="splitHtml" class="editor" readonly></textarea>
-      </div>
-    </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>HTML</span>
+              <button id="toggleSplitHtmlWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="splitHtmlLineNumbers">1</div>
+              <textarea id="splitHtml" class="editor" readonly></textarea>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>CSS</span>
-        <button id="toggleSplitCssWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="splitCssLineNumbers">1</div>
-        <textarea id="splitCss" class="editor" readonly></textarea>
-      </div>
-    </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>CSS</span>
+              <button id="toggleSplitCssWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="splitCssLineNumbers">1</div>
+              <textarea id="splitCss" class="editor" readonly></textarea>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>JavaScript</span>
-        <button id="toggleSplitJsWordWrap" class="icon-btn" title="Toggle word wrap">
-          <i class="fas fa-text-width"></i>
-        </button>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="splitJsLineNumbers">1</div>
-        <textarea id="splitJs" class="editor" readonly></textarea>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>JavaScript</span>
+              <button id="toggleSplitJsWordWrap" class="icon-btn" title="Toggle word wrap">
+                <i class="fas fa-text-width"></i>
+              </button>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="splitJsLineNumbers">1</div>
+              <textarea id="splitJs" class="editor" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- REGEX TESTER -->
-<section class="panel" id="panel-regex" data-tool="regex">
-  <div class="panel-header">
-    <h2><i class="fas fa-search"></i> Regex Tester</h2>
-    <div class="panel-actions">
-      <button id="copyRegexResult" class="btn" title="Copy">
-        <i class="fas fa-copy"></i>
-      </button>
-    </div>
-  </div>
-  
-  <div class="editor-section">
-    <div class="regex-input-group">
-      <input type="text" id="regexPattern" class="regex-input" placeholder="Enter regex pattern (e.g., \d+)" />
-      <div class="regex-flags">
-        <div class="regex-flag" data-flag="g" title="Global">g</div>
-        <div class="regex-flag" data-flag="i" title="Case-insensitive">i</div>
-        <div class="regex-flag" data-flag="m" title="Multiline">m</div>
-        <div class="regex-flag" data-flag="s" title="Dotall">s</div>
-      </div>
-    </div>
-    
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Test Text</span>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="regexTestLineNumbers">1</div>
-        <textarea id="regexTestText" class="editor" placeholder="Enter text to test against the regex pattern...">Hello World 123
+      <!-- REGEX TESTER -->
+      <section class="panel" id="panel-regex" data-tool="regex">
+        <div class="panel-header">
+          <h2><i class="fas fa-search"></i> Regex Tester</h2>
+          <div class="panel-actions">
+            <button id="copyRegexResult" class="btn" title="Copy">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="regex-input-group">
+            <input type="text" id="regexPattern" class="regex-input" placeholder="Enter regex pattern (e.g., \d+)" />
+            <div class="regex-flags">
+              <div class="regex-flag" data-flag="g" title="Global">g</div>
+              <div class="regex-flag" data-flag="i" title="Case-insensitive">i</div>
+              <div class="regex-flag" data-flag="m" title="Multiline">m</div>
+              <div class="regex-flag" data-flag="s" title="Dotall">s</div>
+            </div>
+          </div>
+          
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Test Text</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="regexTestLineNumbers">1</div>
+              <textarea id="regexTestText" class="editor" placeholder="Enter text to test against the regex pattern...">Hello World 123
 Test 456
 Another 789 line</textarea>
-      </div>
-    </div>
-    
-    <div class="controls">
-      <div class="control-group">
-        <button class="btn btn-primary" id="testRegex" title="Test">
-          <i class="fas fa-play"></i> Test
-        </button>
-        <button class="btn" id="clearRegex" title="Clear">
-          <i class="fas fa-eraser"></i> Clear
-        </button>
-      </div>
-    </div>
-    
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Result</span>
-      </div>
-      <div class="regex-result" id="regexResult">
-        <div class="empty-state">Enter a regex pattern and click "Test" to see matches</div>
-      </div>
-    </div>
-    
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-label">Matches:</span>
-        <span id="regexMatchCount">0</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Time:</span>
-        <span id="regexTestTime">0ms</span>
-      </div>
-    </div>
-  </div>
-</section>
+            </div>
+          </div>
+          
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn btn-primary" id="testRegex" title="Test">
+                <i class="fas fa-play"></i> Test
+              </button>
+              <button class="btn" id="clearRegex" title="Clear">
+                <i class="fas fa-eraser"></i> Clear
+              </button>
+            </div>
+          </div>
+          
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Result</span>
+            </div>
+            <div class="regex-result" id="regexResult">
+              <div class="empty-state">Enter a regex pattern and click "Test" to see matches</div>
+            </div>
+          </div>
+          
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-label">Matches:</span>
+              <span id="regexMatchCount">0</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Time:</span>
+              <span id="regexTestTime">0ms</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- TEXT COMPARISON -->
-<section class="panel" id="panel-compare" data-tool="compare">
-  <div class="panel-header">
-    <h2><i class="fas fa-columns"></i> Text Comparison</h2>
-    <div class="panel-actions">
-      <button id="copyCompareResult" class="btn" title="Copy Result">
-        <i class="fas fa-copy"></i>
-      </button>
-    </div>
-  </div>
-  
-  <div class="editor-section">
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Text 1</span>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="compareText1LineNumbers">1</div>
-        <textarea id="compareText1" class="editor" placeholder="Enter first text here..."></textarea>
-      </div>
-    </div>
+      <!-- TEXT COMPARISON -->
+      <section class="panel" id="panel-compare" data-tool="compare">
+        <div class="panel-header">
+          <h2><i class="fas fa-columns"></i> Text Comparison</h2>
+          <div class="panel-actions">
+            <button id="copyCompareResult" class="btn" title="Copy Result">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="editor-section">
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Text 1</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="compareText1LineNumbers">1</div>
+              <textarea id="compareText1" class="editor" placeholder="Enter first text here..."></textarea>
+            </div>
+          </div>
 
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Text 2</span>
-      </div>
-      <div class="editor-wrapper">
-        <div class="line-numbers" id="compareText2LineNumbers">1</div>
-        <textarea id="compareText2" class="editor" placeholder="Enter second text here..."></textarea>
-      </div>
-    </div>
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Text 2</span>
+            </div>
+            <div class="editor-wrapper">
+              <div class="line-numbers" id="compareText2LineNumbers">1</div>
+              <textarea id="compareText2" class="editor" placeholder="Enter second text here..."></textarea>
+            </div>
+          </div>
 
-    <div class="controls">
-      <div class="control-group">
-        <button class="btn btn-primary" id="compareBtn" title="Compare">
-          <i class="fas fa-columns"></i> Compare
-        </button>
-      </div>
-    </div>
-    
-    <div class="editor-container">
-      <div class="editor-header">
-        <span>Comparison Result</span>
-      </div>
-      <div class="compare-result" id="compareResult">
-        <div class="empty-state">Enter text in both fields and click "Compare" to see differences</div>
-      </div>
-    </div>
-    
-    <div class="stats" id="compareStats">
-      <div class="stat">
-        <span class="stat-label">Text 1:</span>
-        <span>0 lines, 0 chars</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Text 2:</span>
-        <span>0 lines, 0 chars</span>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="controls">
+            <div class="control-group">
+              <button class="btn btn-primary" id="compareBtn" title="Compare">
+                <i class="fas fa-columns"></i> Compare
+              </button>
+            </div>
+          </div>
+          
+          <div class="editor-container">
+            <div class="editor-header">
+              <span>Comparison Result</span>
+            </div>
+            <div class="compare-result" id="compareResult">
+              <div class="empty-state">Enter text in both fields and click "Compare" to see differences</div>
+            </div>
+          </div>
+          
+          <div class="stats" id="compareStats">
+            <div class="stat">
+              <span class="stat-label">Text 1:</span>
+              <span>0 lines, 0 chars</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Text 2:</span>
+              <span>0 lines, 0 chars</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
