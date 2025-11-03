@@ -213,7 +213,7 @@
   }
   
   function highlightMatches(editor, searchTerm) {
-    if (!editor || !searchTerm) return;
+    if (!editor || !searchTerm) return 0;
     
     // Remove previous highlights
     removeHighlights(editor);
@@ -231,10 +231,15 @@
     }
     
     if (matches.length > 0) {
+      // Store matches in state
+      state.findReplace.matches = matches;
+      
       // Create a wrapper div to contain the highlighted content
       const wrapper = document.createElement('div');
       wrapper.className = 'editor-highlight-wrapper';
       wrapper.style.position = 'relative';
+      wrapper.style.width = '100%';
+      wrapper.style.height = '100%';
       
       // Create a pre element to maintain formatting
       const pre = document.createElement('pre');
@@ -249,17 +254,31 @@
       pre.style.overflow = 'hidden';
       pre.style.pointerEvents = 'none';
       pre.style.zIndex = '1';
+      pre.style.whiteSpace = 'pre-wrap';
+      pre.style.wordBreak = 'break-all';
+      
+      // Clone the textarea's styles
+      const computedStyle = getComputedStyle(editor);
+      pre.style.fontFamily = computedStyle.fontFamily;
+      pre.style.fontSize = computedStyle.fontSize;
+      pre.style.lineHeight = computedStyle.lineHeight;
+      pre.style.paddingTop = computedStyle.paddingTop;
+      pre.style.paddingLeft = computedStyle.paddingLeft;
       
       // Create spans for each line
       const lines = text.split('\n');
       let html = '';
+      let charIndex = 0;
       
       lines.forEach((line, lineIndex) => {
-        html += `<div class="highlight-line" style="height: ${parseInt(getComputedStyle(editor).lineHeight)}px;">`;
+        html += `<div class="highlight-line" style="height: ${parseInt(computedStyle.lineHeight)}px; min-height: ${parseInt(computedStyle.lineHeight)}px;">`;
         
         // Add highlights for this line
-        let lineStart = text.indexOf(line);
+        let lineStart = charIndex;
         let lineEnd = lineStart + line.length;
+        
+        let lastIndex = 0;
+        let highlighted = false;
         
         matches.forEach(match => {
           if (match.start >= lineStart && match.end <= lineEnd) {
@@ -267,17 +286,30 @@
             const endPos = match.end - lineStart;
             
             // Add text before highlight
-            html += `<span>${escapeHtml(line.substring(0, startPos))}</span>`;
+            if (startPos > lastIndex) {
+              html += `<span>${escapeHtml(line.substring(lastIndex, startPos))}</span>`;
+            }
             
             // Add highlight
             html += `<span class="highlight-match" style="background-color: rgba(255, 230, 0, 0.3);">${escapeHtml(line.substring(startPos, endPos))}</span>`;
             
-            // Add text after highlight
-            html += `<span>${escapeHtml(line.substring(endPos))}</span>`;
+            lastIndex = endPos;
+            highlighted = true;
           }
         });
         
+        // Add remaining text if any
+        if (lastIndex < line.length) {
+          html += `<span>${escapeHtml(line.substring(lastIndex))}</span>`;
+        }
+        
+        // If no highlights in this line, add the whole line
+        if (!highlighted) {
+          html += `<span>${escapeHtml(line)}</span>`;
+        }
+        
         html += `</div>`;
+        charIndex += line.length + 1; // +1 for the newline character
       });
       
       pre.innerHTML = html;
@@ -319,25 +351,50 @@
     const matchCount = highlightMatches(currentEditor, searchText);
     
     let matchIndex = -1;
+    let match;
     
     if (direction === 'next') {
-      matchIndex = text.indexOf(searchText, currentIndex);
-      if (matchIndex === -1) {
-        matchIndex = text.indexOf(searchText); // Wrap around
+      // Find next match after current cursor position
+      for (let i = 0; i < state.findReplace.matches.length; i++) {
+        if (state.findReplace.matches[i].start >= currentIndex) {
+          matchIndex = i;
+          break;
+        }
+      }
+      
+      // If no match found after cursor, wrap around to first match
+      if (matchIndex === -1 && state.findReplace.matches.length > 0) {
+        matchIndex = 0;
       }
     } else {
-      matchIndex = text.lastIndexOf(searchText, currentIndex - 1);
-      if (matchIndex === -1) {
-        matchIndex = text.lastIndexOf(searchText); // Wrap around
+      // Find previous match before current cursor position
+      for (let i = state.findReplace.matches.length - 1; i >= 0; i--) {
+        if (state.findReplace.matches[i].start < currentIndex) {
+          matchIndex = i;
+          break;
+        }
+      }
+      
+      // If no match found before cursor, wrap around to last match
+      if (matchIndex === -1 && state.findReplace.matches.length > 0) {
+        matchIndex = state.findReplace.matches.length - 1;
       }
     }
     
     if (matchIndex !== -1) {
+      match = state.findReplace.matches[matchIndex];
       currentEditor.focus();
-      currentEditor.setSelectionRange(matchIndex, matchIndex + searchText.length);
-      currentEditor.scrollTop = currentEditor.scrollTop + 
-        (matchIndex - currentEditor.selectionStart) * parseInt(getComputedStyle(currentEditor).lineHeight);
+      currentEditor.setSelectionRange(match.start, match.end);
       
+      // Scroll to match
+      const lineHeight = parseInt(getComputedStyle(currentEditor).lineHeight);
+      const cursorLine = text.substring(0, match.start).split('\n').length - 1;
+      const visibleLines = Math.floor(currentEditor.clientHeight / lineHeight);
+      const scrollTop = cursorLine * lineHeight - Math.floor(visibleLines / 2) * lineHeight;
+      
+      currentEditor.scrollTop = Math.max(0, scrollTop);
+      
+      state.findReplace.currentMatch = matchIndex;
       findReplaceInfo.textContent = `Match ${matchIndex + 1} of ${matchCount}`;
     } else {
       findReplaceInfo.textContent = 'No matches found';
@@ -1210,6 +1267,146 @@
     return result;
   }
 
+  // --- SYNTAX HIGHLIGHTING
+  function applySyntaxHighlighting(textarea, language) {
+    if (!textarea || !language) return;
+    
+    const code = textarea.value;
+    let highlightedCode = '';
+    
+    switch (language) {
+      case 'javascript':
+      case 'js':
+        highlightedCode = highlightJavaScript(code);
+        break;
+      case 'html':
+        highlightedCode = highlightHTML(code);
+        break;
+      case 'css':
+        highlightedCode = highlightCSS(code);
+        break;
+      case 'json':
+        highlightedCode = highlightJSON(code);
+        break;
+      default:
+        highlightedCode = escapeHtml(code);
+    }
+    
+    // Create or update the highlighted display
+    let highlightContainer = textarea.nextElementSibling;
+    
+    if (!highlightContainer || !highlightContainer.classList.contains('syntax-highlight')) {
+      highlightContainer = document.createElement('div');
+      highlightContainer.className = 'syntax-highlight';
+      textarea.parentNode.insertBefore(highlightContainer, textarea.nextSibling);
+    }
+    
+    // Copy textarea styles to highlight container
+    const computedStyle = getComputedStyle(textarea);
+    highlightContainer.style.width = computedStyle.width;
+    highlightContainer.style.height = computedStyle.height;
+    highlightContainer.style.fontFamily = computedStyle.fontFamily;
+    highlightContainer.style.fontSize = computedStyle.fontSize;
+    highlightContainer.style.lineHeight = computedStyle.lineHeight;
+    highlightContainer.style.paddingTop = computedStyle.paddingTop;
+    highlightContainer.style.paddingLeft = computedStyle.paddingLeft;
+    highlightContainer.style.paddingRight = computedStyle.paddingRight;
+    highlightContainer.style.paddingBottom = computedStyle.paddingBottom;
+    highlightContainer.style.border = computedStyle.border;
+    highlightContainer.style.borderRadius = computedStyle.borderRadius;
+    highlightContainer.style.overflow = 'auto';
+    highlightContainer.style.whiteSpace = 'pre-wrap';
+    highlightContainer.style.wordBreak = 'break-all';
+    highlightContainer.style.position = 'absolute';
+    highlightContainer.style.top = textarea.offsetTop + 'px';
+    highlightContainer.style.left = textarea.offsetLeft + 'px';
+    highlightContainer.style.zIndex = '1';
+    highlightContainer.style.pointerEvents = 'none';
+    highlightContainer.style.backgroundColor = 'transparent';
+    
+    highlightContainer.innerHTML = highlightedCode;
+    
+    // Make textarea transparent so highlighted code shows through
+    textarea.style.color = 'transparent';
+    textarea.style.caretColor = 'auto'; // Keep cursor visible
+    textarea.style.zIndex = '2';
+    textarea.style.position = 'relative';
+    
+    // Sync scrolling
+    textarea.addEventListener('scroll', () => {
+      highlightContainer.scrollTop = textarea.scrollTop;
+      highlightContainer.scrollLeft = textarea.scrollLeft;
+    });
+  }
+  
+  function highlightJavaScript(code) {
+    // Simple JavaScript syntax highlighting
+    return code
+      .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>') // Single-line comments
+      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>') // Multi-line comments
+      .replace(/(\b(function|var|let|const|if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|class|extends|import|export|default|async|await|from|as|new|this|super|typeof|instanceof|in|of|true|false|null|undefined)\b)/g, '<span class="keyword">$1</span>') // Keywords
+      .replace(/(\b(console|Math|Array|Object|String|Number|Boolean|Date|RegExp|Promise|Set|Map|WeakSet|WeakMap|Symbol|JSON|parseInt|parseFloat|isNaN|isFinite|eval|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)\b)/g, '<span class="builtin">$1</span>') // Built-in objects and functions
+      .replace(/(`.*?`)/g, '<span class="string">$1</span>') // Template literals
+      .replace(/('.*?'|".*?")/g, '<span class="string">$1</span>') // Strings
+      .replace(/(\b\d+\.?\d*|\.\d+\b)/g, '<span class="number">$1</span>') // Numbers
+      .replace(/([+\-*/%=&|<>!~^?:;,.()[\]{}])/g, '<span class="operator">$1</span>'); // Operators and punctuation
+  }
+  
+  function highlightHTML(code) {
+    // Simple HTML syntax highlighting
+    return code
+      .replace(/(<!--[\s\S]*?-->)/g, '<span class="comment">$1</span>') // Comments
+      .replace(/(&lt;\/?[a-zA-Z0-9]+&gt;)/g, '<span class="tag">$1</span>') // Tags
+      .replace(/(&lt;[a-zA-Z0-9]+)(\s+[^&gt;]*?)?(&gt;)/g, '<span class="tag">$1</span><span class="attribute">$2</span><span class="tag">$3</span>') // Tags with attributes
+      .replace(/([a-zA-Z0-9-]+)=(&quot;.*?&quot;|'.*?'|[^\s&gt;]+)/g, '<span class="attribute-name">$1</span>=<span class="attribute-value">$2</span>') // Attributes
+      .replace(/(&amp;[a-zA-Z0-9#]+;)/g, '<span class="entity">$1</span>'); // Entities
+  }
+  
+  function highlightCSS(code) {
+    // Simple CSS syntax highlighting
+    return code
+      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>') // Comments
+      .replace(/(@[a-zA-Z-]+\b)/g, '<span class="at-rule">$1</span>') // At-rules
+      .replace(/([a-zA-Z-]+\s*)(?=:)/g, '<span class="property">$1</span>') // Properties
+      .replace(/(:\s*)([^;{}]+)/g, '$1<span class="value">$2</span>') // Values
+      .replace(/([.#]?[a-zA-Z][a-zA-Z0-9_-]*)(?=\s*{)/g, '<span class="selector">$1</span>') // Selectors
+      .replace(/(\{|\}|;|,)/g, '<span class="punctuation">$1</span>'); // Punctuation
+  }
+  
+  function highlightJSON(code) {
+    // Simple JSON syntax highlighting
+    return code
+      .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>') // Single-line comments (non-standard but common)
+      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>') // Multi-line comments (non-standard but common)
+      .replace(/(".*?")(?=\s*:)/g, '<span class="key">$1</span>') // Keys
+      .replace(/(:\s*)(".*?"|'.*?'|\d+\.?\d*|true|false|null)/g, '$1<span class="value">$2</span>') // Values
+      .replace(/(\{|\}|\[|\]|,)/g, '<span class="punctuation">$1</span>'); // Punctuation
+  }
+  
+  // Apply syntax highlighting to code editors
+  function setupSyntaxHighlighting() {
+    // Apply to code input/output when they change
+    codeInput?.addEventListener('input', () => {
+      applySyntaxHighlighting(codeInput, 'javascript');
+    });
+    
+    codeOutput?.addEventListener('input', () => {
+      applySyntaxHighlighting(codeOutput, 'javascript');
+    });
+    
+    // Initial highlighting
+    if (codeInput?.value) {
+      applySyntaxHighlighting(codeInput, 'javascript');
+    }
+    
+    if (codeOutput?.value) {
+      applySyntaxHighlighting(codeOutput, 'javascript');
+    }
+  }
+  
+  // Initialize syntax highlighting
+  setupSyntaxHighlighting();
+
   // --- Individual word wrap toggles for each editor
   function setupWordWrapToggle(buttonId, textareaId) {
     $(buttonId)?.addEventListener('click', () => {
@@ -1402,6 +1599,7 @@
     cleanJS,
     toast,
     state,
-    switchTool
+    switchTool,
+    applySyntaxHighlighting
   };
 })();
