@@ -76,124 +76,84 @@
             color: #f0f6fc;
         }
         
-        .header-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .header-btn {
-            width: 36px;
-            height: 36px;
-            border: none;
-            background-color: #21262d;
-            border-radius: 6px;
-            color: #8b949e;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-        
-        .header-btn:hover {
-            background-color: #30363d;
-            color: #f0f6fc;
-        }
-        
-        .header-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .webview-container {
+        .content {
             flex: 1;
-            position: relative;
-            background-color: #0d1117;
-        }
-        
-        #webview {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #ffffff;
-        }
-        
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #0d1117;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 50;
-            transition: opacity 0.3s ease;
-        }
-        
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 3px solid #21262d;
-            border-top-color: #58a6ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .loading-text {
-            margin-top: 16px;
-            color: #8b949e;
-            font-size: 14px;
-        }
-        
-        .error-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            padding: 20px;
             text-align: center;
-            padding: 24px;
-            background-color: #161b22;
-            border-radius: 8px;
-            border: 1px solid #30363d;
-            display: none;
         }
         
-        .error-message h3 {
-            color: #f85149;
-            margin-bottom: 8px;
+        .github-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .github-logo svg {
+            width: 100%;
+            height: 100%;
+            fill: #f0f6fc;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 12px;
+        }
+        
+        .subtitle {
             font-size: 16px;
-        }
-        
-        .error-message p {
             color: #8b949e;
-            font-size: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 32px;
+            max-width: 300px;
         }
         
-        .retry-btn {
+        .open-btn {
             background-color: #238636;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
         }
         
-        .retry-btn:hover {
+        .open-btn:hover {
             background-color: #2ea043;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+        }
+        
+        .open-btn:active {
+            transform: translateY(0);
+        }
+        
+        .open-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: #8b949e;
+            margin-top: 24px;
+            line-height: 1.5;
         }
         
         .install-prompt {
@@ -211,6 +171,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             z-index: 1000;
             animation: slideUp 0.3s ease;
+            max-width: 90%;
         }
         
         @keyframes slideUp {
@@ -242,6 +203,7 @@
             font-size: 14px;
             cursor: pointer;
             transition: background-color 0.2s ease;
+            white-space: nowrap;
         }
         
         .install-btn:hover {
@@ -266,9 +228,17 @@
                 font-size: 14px;
             }
             
-            .header-btn {
-                width: 32px;
-                height: 32px;
+            .title {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            .open-btn {
+                padding: 12px 24px;
+                font-size: 14px;
             }
         }
     </style>
@@ -284,39 +254,29 @@
                 </div>
                 <h1 class="app-title">GitHub WebView</h1>
             </div>
-            <div class="header-actions">
-                <button class="header-btn" id="refreshBtn" title="Refresh">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-                    </svg>
-                </button>
-                <button class="header-btn" id="homeBtn" title="Home">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-                    </svg>
-                </button>
-            </div>
         </header>
         
-        <div class="webview-container">
-            <div class="loading-overlay" id="loadingOverlay">
-                <div class="spinner"></div>
-                <div class="loading-text">Memuat GitHub...</div>
+        <div class="content">
+            <div class="github-logo">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
             </div>
             
-            <div class="error-message" id="errorMessage">
-                <h3>Gagal Memuat</h3>
-                <p>Tidak dapat mengakses GitHub. Periksa koneksi internet Anda.</p>
-                <button class="retry-btn" id="retryBtn">Coba Lagi</button>
-            </div>
+            <h2 class="title">GitHub WebView</h2>
+            <p class="subtitle">Akses GitHub dengan pengalaman aplikasi native di perangkat Anda</p>
             
-            <iframe 
-                id="webview" 
-                src="https://github.com" 
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation"
-                allowfullscreen
-            ></iframe>
+            <button class="open-btn" id="openGithubBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Buka GitHub
+            </button>
+            
+            <p class="info-text">
+                Klik tombol di atas untuk membuka GitHub di browser.<br>
+                Aplikasi ini akan terinstall di homescreen Anda untuk akses cepat.
+            </p>
         </div>
     </div>
     
@@ -393,68 +353,25 @@
             installPrompt.classList.add('hidden');
         });
         
-        // WebView Controls
-        const webview = document.getElementById('webview');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const errorMessage = document.getElementById('errorMessage');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const homeBtn = document.getElementById('homeBtn');
-        const retryBtn = document.getElementById('retryBtn');
+        // Open GitHub Button
+        const openGithubBtn = document.getElementById('openGithubBtn');
         
-        // Hide loading when iframe loads
-        webview.addEventListener('load', () => {
-            setTimeout(() => {
-                loadingOverlay.classList.add('hidden');
-                errorMessage.style.display = 'none';
-            }, 500);
-        });
-        
-        // Show loading on navigation
-        webview.addEventListener('loadstart', () => {
-            loadingOverlay.classList.remove('hidden');
-            errorMessage.style.display = 'none';
-        });
-        
-        // Handle errors
-        webview.addEventListener('error', () => {
-            loadingOverlay.classList.add('hidden');
-            errorMessage.style.display = 'block';
-        });
-        
-        // Refresh button
-        refreshBtn.addEventListener('click', () => {
-            webview.src = webview.src;
-        });
-        
-        // Home button
-        homeBtn.addEventListener('click', () => {
-            webview.src = 'https://github.com';
-        });
-        
-        // Retry button
-        retryBtn.addEventListener('click', () => {
-            webview.src = 'https://github.com';
-        });
-        
-        // Handle iframe navigation restrictions
-        webview.addEventListener('load', () => {
-            try {
-                // Try to access iframe content (will fail due to same-origin policy)
-                const iframeDoc = webview.contentDocument || webview.contentWindow.document;
-            } catch (e) {
-                // This is expected due to cross-origin restrictions
-                console.log('Cross-origin iframe loaded');
+        openGithubBtn.addEventListener('click', () => {
+            // Open GitHub in new tab
+            window.open('https://github.com', '_blank');
+            
+            // If in PWA mode, try to open in system browser
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                // For Android PWA
+                window.location.href = 'https://github.com';
             }
         });
         
-        // Prevent back navigation in PWA
-        window.addEventListener('popstate', (e) => {
-            e.preventDefault();
-            window.history.pushState(null, '', window.location.href);
+        // Auto-open GitHub on app launch (optional)
+        window.addEventListener('load', () => {
+            // Uncomment the line below if you want to auto-open GitHub when app launches
+            // window.open('https://github.com', '_blank');
         });
-        
-        // Initialize
-        window.history.pushState(null, '', window.location.href);
         
         // Check if running as PWA
         if (window.matchMedia('(display-mode: standalone)').matches) {
