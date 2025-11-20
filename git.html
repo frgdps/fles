@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#24292e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GitHub WebView">
+    
+    <title>GitHub WebView</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkdpdEh1YiBXZWJWaWV3IiwKICAic2hvcnRfbmFtZSI6ICJHaXRIdWIiLAogICJkZXNjcmlwdGlvbiI6ICJBcGxpa2FzaSBXZWJWaWV3IEdpdEh1YiB1bnR1ayBQV0EiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzI0MjkyZSIsCiAgInRoZW1lX2NvbG9yIjogIiMyNDI5MmUiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMjQgMjQnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCc+JTNDcGF0aCBmaWxsPSclMjMyNDI5MmUnIGQ9J00xMiAwYy02LjYyNiAwLTEyIDUuMzczLTEyIDEyczUuMzc0IDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzc0LTEyLTEyLTEyem0wIDIyQzUuMzczIDIyIDAgMTYuNjI3IDAgMTBTNS4zNzMgMCAxMiAwczEyIDUuMzczIDEyIDEyLTUuMzczIDEyLTEyIDEyem0wLTE4Yy0zLjMxMyAwLTYgMi42ODctNiA2czIuNjg3IDYgNiA2IDYtMi42ODcgNi02LTIuNjg3LTYtNi02em0wIDEwYy0yLjIwNiAwLTQtMS43OTQtNC00czEuNzk0LTQgNC00IDQgMS43OTQgNCA0LTEuNzk0IDQtNCA0eicvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMic+JTNDcGF0aCBmaWxsPSclMjMyNDI5MmUnIGQ9J00yNTYgMEMxMTQuNiAwIDAgMTE0LjYgMCAyNTZzMTE0LjYgMjU2IDI1NiAyNTYgMjU2LTExNC42IDI1Ni0yNTZTMzk3LjQgMCAyNTYgMHptMCA0NzZjLTEyMS43IDAtMjIwLTk4LjMtMjIwLTIyMFMxMzQuMyAzNiAyNTYgMzZzMjIwIDk4LjMgMjIwIDIyMC05OC4zIDIyMC0yMjAgMjIwem0wLTQwMGMtOTkuNCAwLTE4MCA4MC42LTE4MCAxODBzODAuNiAxODAgMTgwIDE4MCAxODAtODAuNiAxODAtMTgwLTgwLjYtMTgwLTE4MC0xODB6bTAgMzIwYy03Ny4yIDAtMTQwLTYyLjgtMTQwLTE0MHM2Mi44LTE0MCAxNDAtMTQwIDE0MCA2Mi44IDE0MCAxNDAtNjIuOCAxNDAtMTQwIDE0MHonLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgNTEyIDUxMicgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInPiUzQ3BhdGggZmlsbD0nJTIzMjQyOTJlJyBkPSdNMjU2IDBDMTE0LjYgMCAwIDExNC42IDAgMjU2czExNC42IDI1NiAyNTYgMjU2IDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDB6bTAgNDc2Yy0xMjEuNyAwLTIyMC05OC4zLTIyMC0yMjBTMTM0LjMgMzYgMjU2IDM2czIyMCA5OC4zIDIyMCAyMjAtOTguMyAyMjAtMjIwIDIyMHptMC00MDBjLTk5LjQgMC0xODAgODAuNi0xODAgMTgwaDQwYzAtNzcuMiA2Mi44LTE0MCAxNDAtMTQwczE0MCA2Mi44IDE0MCAxNDBoNDBjMC05OS40LTgwLjYtMTgwLTE4MC0xODB6Jy8lM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%2324292e' d='M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C5.373 22 0 16.627 0 10S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-18c-3.313 0-6 2.687-6 6s2.687 6 6 6 6-2.687 6-6-2.687-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z'/%3E%3C/svg%3E">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .app-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background-color: #161b22;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #30363d;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo svg {
+            width: 24px;
+            height: 24px;
+            fill: #f0f6fc;
+        }
+        
+        .app-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f0f6fc;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background-color: #21262d;
+            border-radius: 6px;
+            color: #8b949e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .header-btn:hover {
+            background-color: #30363d;
+            color: #f0f6fc;
+        }
+        
+        .header-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .webview-container {
+            flex: 1;
+            position: relative;
+            background-color: #0d1117;
+        }
+        
+        #webview {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #ffffff;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #0d1117;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #21262d;
+            border-top-color: #58a6ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 16px;
+            color: #8b949e;
+            font-size: 14px;
+        }
+        
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 24px;
+            background-color: #161b22;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            display: none;
+        }
+        
+        .error-message h3 {
+            color: #f85149;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .error-message p {
+            color: #8b949e;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .retry-btn {
+            background-color: #238636;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .retry-btn:hover {
+            background-color: #2ea043;
+        }
+        
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .install-prompt.hidden {
+            display: none;
+        }
+        
+        .install-text {
+            font-size: 14px;
+            color: #c9d1d9;
+        }
+        
+        .install-btn {
+            background-color: #238636;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .install-btn:hover {
+            background-color: #2ea043;
+        }
+        
+        .dismiss-btn {
+            background: none;
+            border: none;
+            color: #8b949e;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 8px 12px;
+            }
+            
+            .app-title {
+                font-size: 14px;
+            }
+            
+            .header-btn {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </div>
+                <h1 class="app-title">GitHub WebView</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="refreshBtn" title="Refresh">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                    </svg>
+                </button>
+                <button class="header-btn" id="homeBtn" title="Home">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        
+        <div class="webview-container">
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="spinner"></div>
+                <div class="loading-text">Memuat GitHub...</div>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                <h3>Gagal Memuat</h3>
+                <p>Tidak dapat mengakses GitHub. Periksa koneksi internet Anda.</p>
+                <button class="retry-btn" id="retryBtn">Coba Lagi</button>
+            </div>
+            
+            <iframe 
+                id="webview" 
+                src="https://github.com" 
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation"
+                allowfullscreen
+            ></iframe>
+        </div>
+    </div>
+    
+    <div class="install-prompt hidden" id="installPrompt">
+        <div class="install-text">Install aplikasi ini untuk pengalaman yang lebih baik</div>
+        <button class="install-btn" id="installBtn">Install</button>
+        <button class="dismiss-btn" id="dismissBtn">×</button>
+    </div>
+    
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swContent = `
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open('github-webview-v1').then(cache => {
+                                return cache.addAll([
+                                    '/',
+                                    'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBmaWxsPSIjMjQyOTJlIiBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMnM1LjM3NCAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3NC0xMi0xMi0xMnptMCAyMkM1LjM3MyAyMiAwIDE2LjYyNyAwIDEwUzUuMzczIDAgMTIgMCAxMiA1LjM3MyAxMiAxMi01LjM3MyAxMi0xMiAxMnptMC0xOGMtMy4zMTMgMC02IDIuNjg3LTYgNnMyLjY4NyA2IDYgNiA2LTIuNjg3IDYtNi0yLjY4Ny02LTYtNnptMCAxMGMtMi4yMDYgMC00LTEuNzk0LTQtNHMxLjc5NC00IDQtNCA0IDEuNzk0IDQgNC0xLjc5NCA0LTQgNHoiLz48L3N2Zz4='
+                                ]);
+                            })
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request).then(response => {
+                                return response || fetch(event.request);
+                            })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swContent], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+        const dismissBtn = document.getElementById('dismissBtn');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.classList.remove('hidden');
+        });
+        
+        installBtn.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+            installPrompt.classList.add('hidden');
+        });
+        
+        dismissBtn.addEventListener('click', () => {
+            installPrompt.classList.add('hidden');
+        });
+        
+        // WebView Controls
+        const webview = document.getElementById('webview');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorMessage = document.getElementById('errorMessage');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const homeBtn = document.getElementById('homeBtn');
+        const retryBtn = document.getElementById('retryBtn');
+        
+        // Hide loading when iframe loads
+        webview.addEventListener('load', () => {
+            setTimeout(() => {
+                loadingOverlay.classList.add('hidden');
+                errorMessage.style.display = 'none';
+            }, 500);
+        });
+        
+        // Show loading on navigation
+        webview.addEventListener('loadstart', () => {
+            loadingOverlay.classList.remove('hidden');
+            errorMessage.style.display = 'none';
+        });
+        
+        // Handle errors
+        webview.addEventListener('error', () => {
+            loadingOverlay.classList.add('hidden');
+            errorMessage.style.display = 'block';
+        });
+        
+        // Refresh button
+        refreshBtn.addEventListener('click', () => {
+            webview.src = webview.src;
+        });
+        
+        // Home button
+        homeBtn.addEventListener('click', () => {
+            webview.src = 'https://github.com';
+        });
+        
+        // Retry button
+        retryBtn.addEventListener('click', () => {
+            webview.src = 'https://github.com';
+        });
+        
+        // Handle iframe navigation restrictions
+        webview.addEventListener('load', () => {
+            try {
+                // Try to access iframe content (will fail due to same-origin policy)
+                const iframeDoc = webview.contentDocument || webview.contentWindow.document;
+            } catch (e) {
+                // This is expected due to cross-origin restrictions
+                console.log('Cross-origin iframe loaded');
+            }
+        });
+        
+        // Prevent back navigation in PWA
+        window.addEventListener('popstate', (e) => {
+            e.preventDefault();
+            window.history.pushState(null, '', window.location.href);
+        });
+        
+        // Initialize
+        window.history.pushState(null, '', window.location.href);
+        
+        // Check if running as PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Running in standalone mode');
+            document.body.style.backgroundColor = '#0d1117';
+        }
+    </script>
+</body>
+</html>
