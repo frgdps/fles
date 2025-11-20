@@ -1,0 +1,3476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy Gratis - Platform Deployment Terlengkap di Dunia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 150px 0 80px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 55px 18px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        /* Filter Buttons */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 60px 0;
+            margin-top: 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        /* Platform Grid */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .platform-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .platform-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .platform-type {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-static {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #1565c0;
+        }
+
+        .type-dynamic {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            color: #6a1b9a;
+        }
+
+        .type-both {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            color: #2e7d32;
+        }
+
+        .platform-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .platform-features {
+            list-style: none;
+            margin-bottom: 1.8rem;
+        }
+
+        .platform-features li {
+            padding: 0.4rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.8rem;
+            font-size: 0.95rem;
+        }
+
+        .platform-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .platform-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .free-badge {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .deploy-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .deploy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-container {
+                justify-content: center;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .platform-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .platform-card:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        .platform-card:nth-child(3n) {
+            animation-delay: 0.2s;
+        }
+
+        .platform-card:nth-child(4n) {
+            animation-delay: 0.3s;
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Category Labels */
+        .category-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Popular Badge */
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">
+                <i class="fas fa-rocket"></i> DeployGratis
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#platforms">Platform</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>30+ Platform Deployment Gratis</h1>
+            <p>Koleksi terlengkap platform deployment untuk project Anda - Static, Dynamic, dan Enterprise</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Platform</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Gratis</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Project</span>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Cari platform deployment..." id="searchInput">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="static">Static</button>
+                <button class="filter-btn" data-filter="dynamic">Dynamic</button>
+                <button class="filter-btn" data-filter="both">Keduanya</button>
+                <button class="filter-btn" data-filter="enterprise">Enterprise</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="section-title">Platform Deployment Terlengkap di Dunia</h2>
+            <p class="section-subtitle">Semua platform di bawah ini menawarkan layanan gratis untuk memulai project Anda</p>
+
+            <div class="platforms-grid" id="platformsGrid">
+                <!-- Cloudflare Pages -->
+                <div class="platform-card" data-type="static">
+                    <div class="popular-badge">POPULER</div>
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #f38020, #ff6b35);">
+                            <i class="fab fa-cloudflare"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Cloudflare Pages</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform hosting static site gratis dari Cloudflare dengan CDN global tercepat dan SSL otomatis.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100% gratis tanpa batas bandwidth</li>
+                        <li>CDN global 200+ locations</li>
+                        <li>SSL certificate otomatis</li>
+                        <li>Integrasi Git seamless</li>
+                        <li>Custom domain gratis</li>
+                        <li>Serverless functions</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://dash.cloudflare.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Netlify -->
+                <div class="platform-card" data-type="static">
+                    <div class="popular-badge">POPULER</div>
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d084, #00b870);">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Netlify</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform modern untuk deploy static site dengan fitur CI/CD otomatis dan serverless functions.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100GB bandwidth gratis/bulan</li>
+                        <li>CI/CD otomatis dari Git</li>
+                        <li>Serverless functions</li>
+                        <li>Form handling gratis</li>
+                        <li>Deploy preview untuk PR</li>
+                        <li>A/B testing</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://netlify.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vercel -->
+                <div class="platform-card" data-type="both">
+                    <div class="popular-badge">POPULER</div>
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Vercel</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform optimal untuk Next.js dan React dengan preview deployment otomatis dan analytics.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited projects</li>
+                        <li>Preview deployments</li>
+                        <li>Serverless functions</li>
+                        <li>Analytics gratis</li>
+                        <li>Custom domain</li>
+                        <li>Edge functions</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://vercel.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GitHub Pages -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #333, #555);">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>GitHub Pages</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Hosting static site gratis langsung dari repository GitHub Anda.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited repositories</li>
+                        <li>Custom domain support</li>
+                        <li>HTTPS otomatis</li>
+                        <li>Jekyll support</li>
+                        <li>Integrasi GitHub seamless</li>
+                        <li>1GB storage</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://pages.github.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Firebase Hosting -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ffca28, #ffc107);">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Firebase Hosting</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Hosting web production-grade dengan CDN global dan SSL otomatis dari Google.
+                    </p>
+                    <ul class="platform-features">
+                        <li>10GB storage gratis</li>
+                        <li>360MB transfer/hari</li>
+                        <li>CDN global</li>
+                        <li>One-click rollback</li>
+                        <li>Custom domain</li>
+                        <li>Cloud Functions integration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://firebase.google.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Heroku -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #430098, #6a1b9a);">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Heroku</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform cloud untuk deploy aplikasi web dengan berbagai bahasa pemrograman.
+                    </p>
+                    <ul class="platform-features">
+                        <li>550 dyno hours/bulan</li>
+                        <li>Support multiple languages</li>
+                        <li>Add-ons marketplace</li>
+                        <li>Git deployment</li>
+                        <li>Automatic scaling</li>
+                        <li>PostgreSQL gratis</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://heroku.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Render -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #46e3b7, #26d0ce);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Render</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Unified cloud untuk build dan run aplikasi dan website dengan mudah.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Static sites gratis</li>
+                        <li>Web services gratis</li>
+                        <li>Auto-deploy dari Git</li>
+                        <li>SSL otomatis</li>
+                        <li>Private network</li>
+                        <li>Databases gratis</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://render.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Railway -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #0b0d0e, #2c3e50);">
+                            <i class="fas fa-train"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Railway</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform deployment infrastructure yang sederhana untuk developer.
+                    </p>
+                    <ul class="platform-features">
+                        <li>$5 credit gratis</li>
+                        <li>Unlimited projects</li>
+                        <li>Build dari GitHub</li>
+                        <li>Custom domains</li>
+                        <li>Auto scaling</li>
+                        <li>PostgreSQL gratis</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://railway.app" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Surge -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Surge</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        CLI tool untuk deploy static sites ke CDN global dalam hitungan detik.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited projects</li>
+                        <li>Custom domain</li>
+                        <li>HTTPS otomatis</li>
+                        <li>Form handling</li>
+                        <li>Basic auth</li>
+                        <li>Collaboration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://surge.sh" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 000webhost -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>000webhost</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Hosting PHP gratis dengan cPanel dan support MySQL database.
+                    </p>
+                    <ul class="platform-features">
+                        <li>300MB storage</li>
+                        <li>3GB bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>Website builder</li>
+                        <li>Auto installer</li>
+                        <li>Free SSL</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.000webhost.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- InfinityFree -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #4a90e2, #357abd);">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>InfinityFree</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Hosting gratis dengan unlimited disk space dan bandwidth untuk website dinamis.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited disk space</li>
+                        <li>Unlimited bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>Softaculous installer</li>
+                        <li>Free SSL</li>
+                        <li>Auto backup</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://infinityfree.net" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GitLab Pages -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #fc6d26, #e24329);">
+                            <i class="fab fa-gitlab"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>GitLab Pages</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Hosting static sites gratis terintegrasi dengan GitLab CI/CD.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited sites</li>
+                        <li>Custom domains</li>
+                        <li>HTTPS otomatis</li>
+                        <li>Access control</li>
+                        <li>CI/CD integration</li>
+                        <li>GitLab LFS support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://pages.gitlab.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bitbucket Cloud -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #0052cc, #0747a6);">
+                            <i class="fab fa-bitbucket"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Bitbucket Cloud</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform Git dengan integrated static site hosting untuk teams.
+                    </p>
+                    <ul class="platform-features">
+                        <li>5 users gratis</li>
+                        <li>1GB storage</li>
+                        <li>Static site hosting</li>
+                        <li>Pipelines CI/CD</li>
+                        <li>Integration with Jira</li>
+                        <li>Custom domain</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://bitbucket.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PythonAnywhere -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ffd43b, #fab005);">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>PythonAnywhere</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Hosting Python gratis dengan web app support dan development environment.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 web app gratis</li>
+                        <li>512MB storage</li>
+                        <li>Python 2.7 & 3.x</li>
+                        <li>MySQL database</li>
+                        <li>Bash console</li>
+                        <li>Scheduled tasks</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.pythonanywhere.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Replit -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Replit</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Online IDE dengan hosting built-in untuk 50+ programming languages.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited public repls</li>
+                        <li>50+ languages</li>
+                        <li>Web hosting</li>
+                        <li>Database support</li>
+                        <li>Collaboration</li>
+                        <li>Custom domains</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://replit.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Glitch -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff3366, #ff1744);">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Glitch</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform untuk create and deploy web apps dengan real-time collaboration.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited projects</li>
+                        <li>Node.js support</li>
+                        <li>Real-time collaboration</li>
+                        <li>Custom domains</li>
+                        <li>Import from GitHub</li>
+                        <li>Community projects</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://glitch.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Deno Deploy -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-dharmachakra"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Deno Deploy</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Edge computing platform untuk Deno runtime dengan global distribution.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100k requests/hari</li>
+                        <li>1GB storage</li>
+                        <li>Global edge network</li>
+                        <li>Deno runtime</li>
+                        <li>TypeScript support</li>
+                        <li>Custom domains</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://deno.com/deploy" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fly.io -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #4801ff, #6a0dad);">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Fly.io</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Run apps globally on Fly.io's edge network with full-stack apps support.
+                    </p>
+                    <ul class="platform-features">
+                        <li>3 shared-cpu-1x VMs</li>
+                        <li>3GB persistent volume</li>
+                        <li>160ms global latency</li>
+                        <li>Docker support</li>
+                        <li>Postgres database</li>
+                        <li>Custom domains</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://fly.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Netlify Functions -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d084, #00b870);">
+                            <i class="fas fa-function"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Netlify Functions</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Serverless functions platform integrated with Netlify hosting.
+                    </p>
+                    <ul class="platform-features">
+                        <li>125k requests/month</li>
+                        <li>100GB bandwidth</li>
+                        <li>JavaScript/Go support</li>
+                        <li>Identity functions</li>
+                        <li>Background functions</li>
+                        <li>Edge functions</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://functions.netlify.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vercel Edge Functions -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Vercel Edge Functions</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Edge computing platform untuk Vercel dengan global distribution.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited edge functions</li>
+                        <li>Global edge network</li>
+                        <li>JavaScript/TypeScript</li>
+                        <li>Zero cold starts</li>
+                        <li>Custom domains</li>
+                        <li>Analytics included</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://vercel.com/docs/concepts/functions/edge-functions" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AWS Amplify -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff9900, #ff6600);">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>AWS Amplify</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Full-stack platform untuk build dan deploy web & mobile apps dengan AWS services.
+                    </p>
+                    <ul class="platform-features">
+                        <li>5GB storage gratis</li>
+                        <li>15GB bandwidth</li>
+                        <li>CI/CD pipeline</li>
+                        <li>Custom domains</li>
+                        <li>Serverless backend</li>
+                        <li>Analytics & monitoring</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://aws.amazon.com/amplify" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Azure Static Web Apps -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #0078d4, #005a9e);">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Azure Static Web Apps</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Modern web app hosting dari Microsoft Azure dengan serverless API integration.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100 static apps gratis</li>
+                        <li>5 Azure Functions</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                        <li>GitHub integration</li>
+                        <li>Global distribution</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://azure.microsoft.com/services/app-service/static" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Cloud Run -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #4285f4, #1a73e8);">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Google Cloud Run</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Serverless container platform dari Google Cloud dengan automatic scaling.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2M requests/month</li>
+                        <li>360,000 vCPU-seconds</li>
+                        <li>1GB memory</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                        <li>Global endpoints</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://cloud.google.com/run" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Oracle Cloud Free Tier -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #f80000, #cc0000);">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Oracle Cloud Free Tier</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Cloud infrastructure gratis dari Oracle dengan compute dan storage resources.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2 AMD-based VMs</li>
+                        <li>1 ARM-based VM</li>
+                        <li>20GB block storage</li>
+                        <li>10GB object storage</li>
+                        <li>Autonomous Database</li>
+                        <li>Load balancer</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.oracle.com/cloud/free" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DigitalOcean App Platform -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #0080ff, #0066cc);">
+                            <i class="fab fa-digital-ocean"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>DigitalOcean App Platform</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        PaaS platform dari DigitalOcean untuk build, deploy, dan scale apps.
+                    </p>
+                    <ul class="platform-features">
+                        <li>3 static sites gratis</li>
+                        <li>550 app hours/month</li>
+                        <li>1GB RAM</li>
+                        <li>1GB storage</li>
+                        <li>Custom domains</li>
+                        <li>GitHub integration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.digitalocean.com/products/app-platform" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Back4App -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00b894, #00a085);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Back4App</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Backend-as-a-Service platform dengan Parse Server integration.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1GB database</li>
+                        <li>10GB file storage</li>
+                        <li>25k API requests/month</li>
+                        <li>Real-time database</li>
+                        <li>User authentication</li>
+                        <li>Push notifications</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.back4app.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Supabase -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #3ecf8e, #2fb87a);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Supabase</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Open source Firebase alternative dengan PostgreSQL database.
+                    </p>
+                    <ul class="platform-features">
+                        <li>500MB database</li>
+                        <li>1GB file storage</li>
+                        <li>2M API requests/month</li>
+                        <li>Real-time subscriptions</li>
+                        <li>Auth & user management</li>
+                        <li>Edge functions</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://supabase.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Netlify Drop -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d084, #00b870);">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Netlify Drop</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Drag-and-drop static site hosting tanpa perlu Git atau command line.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Drag & drop deployment</li>
+                        <li>Instant preview</li>
+                        <li>Custom domains</li>
+                        <li>HTTPS otomatis</li>
+                        <li>Form handling</li>
+                        <li>No configuration needed</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://app.netlify.com/drop" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tiiny Host -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Tiiny Host</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Simple static site hosting dengan ZIP file upload dan custom domain.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>1GB storage</li>
+                        <li>Custom domain</li>
+                        <li>HTTPS otomatis</li>
+                        <li>ZIP file upload</li>
+                        <li>Password protection</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://tiiny.host" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Neocities -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Neocities</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Static site hosting dengan social features dan community-driven approach.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1GB storage gratis</li>
+                        <li>200GB bandwidth</li>
+                        <li>Custom domains</li>
+                        <li>HTTPS support</li>
+                        <li>Site editor</li>
+                        <li>Community features</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://neocities.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GitHub Codespaces -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #333, #555);">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>GitHub Codespaces</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Cloud development environment dengan integrated development dan deployment.
+                    </p>
+                    <ul class="platform-features">
+                        <li>60 hours/month gratis</li>
+                        <li>2-core processor</li>
+                        <li>8GB RAM</li>
+                        <li>16GB storage</li>
+                        <li>VS Code integration</li>
+                        <li>Prebuilt dev containers</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://github.com/features/codespaces" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CodeSandbox -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>CodeSandbox</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Online code editor dengan instant preview dan deployment untuk web apps.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited public sandboxes</li>
+                        <li>React, Vue, Angular support</li>
+                        <li>Live collaboration</li>
+                        <li>GitHub integration</li>
+                        <li>Custom domains</li>
+                        <li>Server containers</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://codesandbox.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- StackBlitz -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #137cbd, #0e5a8a);">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>StackBlitz</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Online IDE dengan WebContainer technology untuk instant development environment.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited projects</li>
+                        <li>Node.js in browser</li>
+                        <li>Real-time collaboration</li>
+                        <li>GitHub integration</li>
+                        <li>Custom domains</li>
+                        <li>Package manager support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://stackblitz.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CodePen -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fab fa-codepen"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>CodePen</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Social development environment untuk front-end developers dengan live preview.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited public pens</li>
+                        <li>HTML, CSS, JS support</li>
+                        <li>Live preview</li>
+                        <li>Collaboration mode</li>
+                        <li>Embed anywhere</li>
+                        <li>Preprocessor support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://codepen.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- JSFiddle -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #467fcf, #3a6bb5);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>JSFiddle</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Online playground untuk web developers dengan code sharing capabilities.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited public fiddles</li>
+                        <li>HTML, CSS, JS support</li>
+                        <li>Multiple frameworks</li>
+                        <li>Collaboration</li>
+                        <li>Embed support</li>
+                        <li>Version control</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://jsfiddle.net" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CodeSandbox -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Expo</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Platform untuk build dan deploy React Native apps dengan web support.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited projects</li>
+                        <li>React Native support</li>
+                        <li>Web deployment</li>
+                        <li>OTA updates</li>
+                        <li>Push notifications</li>
+                        <li>Analytics included</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://expo.dev" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Deta -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Deta</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Simple backend platform untuk microservices dan APIs dengan NoSQL database.
+                    </p>
+                    <ul class="platform-features">
+                        <li>3 microservices gratis</li>
+                        <li>1GB database</li>
+                        <li>Python & Node.js support</li>
+                        <li>Custom domains</li>
+                        <li>Auto scaling</li>
+                        <li>Simple CLI</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://deta.sh" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Zeabur -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Zeabur</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Modern deployment platform dengan auto-scaling dan global CDN.
+                    </p>
+                    <ul class="platform-features">
+                        <li>3 services gratis</li>
+                        <li>100GB bandwidth</li>
+                        <li>Auto-deploy dari Git</li>
+                        <li>Custom domains</li>
+                        <li>Database included</li>
+                        <li>Analytics dashboard</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://zeabur.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Koyeb -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Koyeb</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Serverless platform untuk deploy apps dengan global edge network.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2 services gratis</li>
+                        <li>512MB RAM</li>
+                        <li>1 vCPU</li>
+                        <li>10GB storage</li>
+                        <li>Custom domains</li>
+                        <li>Auto scaling</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://koyeb.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coolify -->
+                <div class="platform-card" data-type="both">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Coolify</h3>
+                            <span class="platform-type type-both">Static & Dynamic</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Self-hostable alternative to Vercel/Netlify with auto-deployment.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Open source</li>
+                        <li>Self-hostable</li>
+                        <li>Docker support</li>
+                        <li>Multiple applications</li>
+                        <li>Database management</li>
+                        <li>Auto deployment</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://coolify.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- UptimeRobot -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>UptimeRobot Status Pages</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free status page hosting untuk monitoring dan incident communication.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 status page gratis</li>
+                        <li>50 monitors</li>
+                        <li>Custom domain</li>
+                        <li>SSL certificate</li>
+                        <li>Incident management</li>
+                        <li>Public & private pages</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://uptimerobot.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ReadMe -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>ReadMe</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Documentation hosting dengan interactive API explorer and developer portal.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>Custom domain</li>
+                        <li>API explorer</li>
+                        <li>Version control</li>
+                        <li>Analytics included</li>
+                        <li>Markdown support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://readme.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GitBook -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>GitBook</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Modern documentation platform dengan collaboration features dan beautiful design.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 space gratis</li>
+                        <li>Unlimited collaborators</li>
+                        <li>Custom domain</li>
+                        <li>Version control</li>
+                        <li>Analytics dashboard</li>
+                        <li>API integration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://gitbook.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Notion Sites -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Notion Sites</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Convert Notion pages into beautiful websites with custom domains.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited pages</li>
+                        <li>Custom domain</li>
+                        <li>SSL certificate</li>
+                        <li>SEO optimization</li>
+                        <li>Analytics integration</li>
+                        <li>Template library</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://notion.so" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Teleport -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-portal-enter"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Teleport</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Simple static site generator with hosting included and instant deployment.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited sites</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                        <li>CDN included</li>
+                        <li>Git integration</li>
+                        <li>Analytics dashboard</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://teleport.sh" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pika -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-feather"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Pika</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Ultra-lightweight static site hosting with focus on performance and simplicity.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited sites</li>
+                        <li>100MB storage/site</li>
+                        <li>Custom domains</li>
+                        <li>Global CDN</li>
+                        <li>Instant deployment</li>
+                        <li>Performance analytics</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://pika.sh" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pages.dev -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #f38020, #ff6b35);">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Pages.dev</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Cloudflare Pages alternative dengan focus on developer experience and performance.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited projects</li>
+                        <li>Unlimited bandwidth</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                        <li>Git integration</li>
+                        <li>Edge functions</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://pages.dev" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hostinger Free Hosting -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Hostinger Free Hosting</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free web hosting with cPanel and website builder for beginners.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 website gratis</li>
+                        <li>30GB bandwidth</li>
+                        <li>3 email accounts</li>
+                        <li>1-click WordPress install</li>
+                        <li>Website builder</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.hostinger.com/free-hosting" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AwardSpace -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>AwardSpace</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free web hosting with PHP, MySQL, and website builder included.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 website gratis</li>
+                        <li>1GB storage</li>
+                        <li>5GB bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>Website builder</li>
+                        <li>Free subdomain</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.awardspace.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FreeHosting -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>FreeHosting</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Completely free web hosting with no ads and full features.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited websites</li>
+                        <li>10GB storage</li>
+                        <li>Unlimited bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>Auto script installer</li>
+                        <li>Free SSL</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://freehosting.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Byet.host -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Byet.host</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free hosting with VistaPanel control panel and generous resources.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1GB storage</li>
+                        <li>50GB bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>Website builder</li>
+                        <li>Softaculous installer</li>
+                        <li>Free subdomain</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://byet.host" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FreeWebHostingArea -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>FreeWebHostingArea</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free hosting since 2005 with PHP, MySQL, and no forced ads.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1.5GB storage</li>
+                        <li>100GB bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>FTP access</li>
+                        <li>Free subdomain</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.freewebhostingarea.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FreeHostia -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>FreeHostia</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free hosting with Chocolate control panel and 1-click app installer.
+                    </p>
+                    <ul class="platform-features">
+                        <li>250MB storage</li>
+                        <li>6GB bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>1-click installer</li>
+                        <li>Website builder</li>
+                        <li>Free subdomain</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.freehostia.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- x10Hosting -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>x10Hosting</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free hosting with cPanel and generous resource limits.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2GB storage</li>
+                        <li>50GB bandwidth</li>
+                        <li>PHP & MySQL</li>
+                        <li>Softaculous installer</li>
+                        <li>Free SSL</li>
+                        <li>Website builder</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://x10hosting.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- HelioHost -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>HelioHost</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Non-profit free hosting with cPanel and advanced features.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1GB storage</li>
+                        <li>50GB bandwidth</li>
+                        <li>PHP, Python, Ruby</li>
+                        <li>MySQL & PostgreSQL</li>
+                        <li>SSH access</li>
+                        <li>Cron jobs</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://heliohost.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FreeNom -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>FreeNom</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free domain registration with DNS management and URL forwarding.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Free .tk, .ml, .ga domains</li>
+                        <li>DNS management</li>
+                        <li>URL forwarding</li>
+                        <li>Email forwarding</li>
+                        <li>Domain parking</li>
+                        <li>Mobile management</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.freenom.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GitHub Gist -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #333, #555);">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>GitHub Gist</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Simple code sharing with instant hosting for HTML, CSS, and JavaScript snippets.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited public gists</li>
+                        <li>Instant HTML preview</li>
+                        <li>Version control</li>
+                        <li>Embed support</li>
+                        <li>Collaboration</li>
+                        <li>Markdown support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://gist.github.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Codeberg -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #2185d0, #1e70bf);">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Codeberg Pages</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free static site hosting from Codeberg, the open-source Git platform.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited repositories</li>
+                        <li>Static site hosting</li>
+                        <li>Custom domains</li>
+                        <li>HTTPS certificates</li>
+                        <li>Git integration</li>
+                        <li>Open source</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://codeberg.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SourceHut -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>SourceHut Pages</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Minimalist static site hosting from the open-source SourceHut platform.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1GB storage gratis</li>
+                        <li>Custom domains</li>
+                        <li>HTTPS certificates</li>
+                        <li>Git integration</li>
+                        <li>No JavaScript required</li>
+                        <li>Privacy-focused</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://srht.site" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Netlify CMS -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d084, #00b870);">
+                            <i class="fas fa-cms"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Netlify CMS</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Open-source content management system for static site generators.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Git-based CMS</li>
+                        <li>Editor interface</li>
+                        <li>Media library</li>
+                        <li>Custom widgets</li>
+                        <li>Multi-user support</li>
+                        <li>Netlify integration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.netlifycms.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Decap CMS -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-cms"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Decap CMS</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Fork of Netlify CMS with continued development and improvements.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Git-based CMS</li>
+                        <li>WYSIWYG editor</li>
+                        <li>Media management</li>
+                        <li>Custom fields</li>
+                        <li>Multi-language support</li>
+                        <li>Open source</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://decapcms.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Strapi Cloud -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Strapi Cloud</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS hosting with Strapi and automatic deployment.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>1GB database</li>
+                        <li>10GB storage</li>
+                        <li>Auto scaling</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://strapi.io/cloud" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contentful -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Contentful</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with content infrastructure and API-first approach.
+                    </p>
+                    <ul class="platform-features">
+                        <li>5 content types</li>
+                        <li>48,000 API requests/month</li>
+                        <li>2 users</li>
+                        <li>Webhooks</li>
+                        <li>Media library</li>
+                        <li>GraphQL API</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.contentful.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sanity -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #f03e2e, #d63031);">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Sanity</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with real-time collaboration and customizable content studio.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>3 users</li>
+                        <li>10GB bandwidth</li>
+                        <li>Real-time API</li>
+                        <li>Custom studio</li>
+                        <li>GROQ query language</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.sanity.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Prismic -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Prismic</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with visual builder and slice components.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2 custom types</li>
+                        <li>5 documents</li>
+                        <li>2 users</li>
+                        <li>Visual builder</li>
+                        <li>Slice machine</li>
+                        <li>Webhooks</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://prismic.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Storyblok -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Storyblok</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with visual editor and component-based approach.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 space gratis</li>
+                        <li>10,000 API requests/month</li>
+                        <li>2 users</li>
+                        <li>Visual editor</li>
+                        <li>Component library</li>
+                        <li>Asset management</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.storyblok.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DatoCMS -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>DatoCMS</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with GraphQL API and real-time updates.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>3 users</li>
+                        <li>50,000 API requests/month</li>
+                        <li>GraphQL API</li>
+                        <li>Media library</li>
+                        <li>Webhooks</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.datocms.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cosmic -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Cosmic</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with cloud functions and object storage.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 bucket gratis</li>
+                        <li>5 objects</li>
+                        <li>1GB media storage</li>
+                        <li>Cloud functions</li>
+                        <li>Webhooks</li>
+                        <li>REST API</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://cosmicjs.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ButterCMS -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-butter"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>ButterCMS</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with blog engine and page types.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 content type</li>
+                        <li>5 pages</li>
+                        <li>2 users</li>
+                        <li>Blog engine</li>
+                        <li>Media library</li>
+                        <li>Webhooks</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://buttercms.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kontent.ai -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Kontent.ai</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with AI-powered content insights and workflow automation.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>2 content types</li>
+                        <li>2 users</li>
+                        <li>AI insights</li>
+                        <li>Workflow automation</li>
+                        <li>GraphQL API</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://kontent.ai" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GraphCMS -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>GraphCMS</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Headless CMS with GraphQL API and content modeling.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>1M API requests/month</li>
+                        <li>2 users</li>
+                        <li>GraphQL API</li>
+                        <li>Content modeling</li>
+                        <li>Webhooks</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://graphcms.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Strapi -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Strapi (Self-hosted)</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Open-source headless CMS that can be self-hosted on any platform.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100% open source</li>
+                        <li>Self-hostable</li>
+                        <li>Node.js based</li>
+                        <li>REST & GraphQL APIs</li>
+                        <li>Admin panel</li>
+                        <li>Plugin system</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://strapi.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Directus -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Directus</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Open-source headless CMS that wraps your SQL database with API.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100% open source</li>
+                        <li>Self-hostable</li>
+                        <li>SQL database support</li>
+                        <li>REST & GraphQL APIs</li>
+                        <li>Real-time updates</li>
+                        <li>App SDK</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://directus.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Payload CMS -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Payload CMS</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Open-source headless CMS built with TypeScript and React.
+                    </p>
+                    <ul class="platform-features">
+                        <li>100% open source</li>
+                        <li>Self-hostable</li>
+                        <li>TypeScript based</li>
+                        <li>React admin panel</li>
+                        <li>GraphQL & REST APIs</li>
+                        <li>Local API</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://payloadcms.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Ghost -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #15171a, #2c3e50);">
+                            <i class="fas fa-ghost"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Ghost (Pro)</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Professional publishing platform with 14-day free trial for hosted version.
+                    </p>
+                    <ul class="platform-features">
+                        <li>14-day free trial</li>
+                        <li>Professional themes</li>
+                        <li>Email newsletter</li>
+                        <li>Membership features</li>
+                        <li>Analytics dashboard</li>
+                        <li>SEO optimization</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">Free Trial</span>
+                        <a href="https://ghost.org" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- WordPress.com -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #0073aa, #005a87);">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>WordPress.com</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Free WordPress hosting with subdomain and basic features.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 website gratis</li>
+                        <li>3GB storage</li>
+                        <li>WordPress subdomain</li>
+                        <li>Free themes</li>
+                        <li>Basic customization</li>
+                        <li>Community support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://wordpress.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Wix -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #0c6efd, #0a58ca);">
+                            <i class="fas fa-w"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Wix</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Website builder with drag-and-drop editor and free hosting.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 website gratis</li>
+                        <li>500MB storage</li>
+                        <li>Wix subdomain</li>
+                        <li>Drag & drop editor</li>
+                        <li>Free templates</li>
+                        <li>Mobile optimization</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.wix.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Weebly -->
+                <div class="platform-card" data-type="dynamic">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #39c0ed, #2196f3);">
+                            <i class="fas fa-w"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Weebly</h3>
+                            <span class="platform-type type-dynamic">Dynamic Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Website builder with e-commerce features and free hosting.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 website gratis</li>
+                        <li>500MB storage</li>
+                        <li>Weebly subdomain</li>
+                        <li>Drag & drop builder</li>
+                        <li>Free templates</li>
+                        <li>Basic SEO tools</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.weebly.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Carrd -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Carrd</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Simple one-page website builder with free tier for basic sites.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>Carrd subdomain</li>
+                        <li>Simple editor</li>
+                        <li>Responsive design</li>
+                        <li>Form integration</li>
+                        <li>Analytics</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://carrd.co" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Webflow -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #4353ff, #3249ff);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Webflow</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Visual web design platform with free starter sites.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2 starter sites</li>
+                        <li>Webflow subdomain</li>
+                        <li>Visual designer</li>
+                        <li>CMS functionality</li>
+                        <li>Responsive design</li>
+                        <li>SEO tools</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://webflow.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Framer -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #000, #333);">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Framer</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Design and publish websites with free tier for personal projects.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>Framer subdomain</li>
+                        <li>Visual editor</li>
+                        <li>Interactive components</li>
+                        <li>Responsive design</li>
+                        <li>Analytics</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://www.framer.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Readymag -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Readymag</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Design tool for creating websites and digital publications.
+                    </p>
+                    <ul class="platform-features">
+                        <li>3 projects gratis</li>
+                        <li>Readymag subdomain</li>
+                        <li>Visual editor</li>
+                        <li>Animation tools</li>
+                        <li>Responsive design</li>
+                        <li>Collaboration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://readymag.com" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tilda -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Tilda</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Website builder with block-based design and free tier.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>50 blocks</li>
+                        <li>Tilda subdomain</li>
+                        <li>Block library</li>
+                        <li>Responsive design</li>
+                        <li>Analytics</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://tilda.cc" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Siter.io -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Siter.io</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        No-code website builder with free hosting and custom domains.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>1GB storage</li>
+                        <li>Custom domain</li>
+                        <li>Drag & drop editor</li>
+                        <li>Responsive design</li>
+                        <li>Analytics</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://siter.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dorik -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Dorik</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        No-code website builder with free tier and AI assistance.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>Dorik subdomain</li>
+                        <li>AI website builder</li>
+                        <li>Template library</li>
+                        <li>Responsive design</li>
+                        <li>Basic analytics</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://dorik.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TeleportHQ -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>TeleportHQ</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Visual development platform with free hosting and collaboration.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 project gratis</li>
+                        <li>1GB storage</li>
+                        <li>Custom domain</li>
+                        <li>Visual editor</li>
+                        <li>Component library</li>
+                        <li>Team collaboration</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://teleporthq.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Plasmic -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Plasmic</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Visual builder for React apps with free tier and code export.
+                    </p>
+                    <ul class="platform-features">
+                        <li>2 projects gratis</li>
+                        <li>Plasmic subdomain</li>
+                        <li>Visual React builder</li>
+                        <li>Code export</li>
+                        <li>Component library</li>
+                        <li>Integration with frameworks</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://plasmic.app" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Builder.io -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Builder.io</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Visual development platform with free tier for developers.
+                    </p>
+                    <ul class="platform-features">
+                                                  <li>Visual development platform</li>
+                            <li>React component library</li>
+                            <li>Drag & drop editor</li>
+                            <li>Code export</li>
+                            <li>Custom domains</li>
+                            <li>Integration with frameworks</li>
+                        </ul>
+                        <div class="platform-footer">
+                            <span class="free-badge">100% Gratis</span>
+                            <a href="https://builder.io" class="deploy-btn" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Kunjungi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wasmer -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Wasmer</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        WebAssembly runtime platform with free static site hosting and edge computing.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited static sites</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                        <li>Global CDN</li>
+                        <li>Analytics included</li>
+                        <li>WebAssembly support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://wasmer.io" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Static.app -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Static.app</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        All-in-one static website hosting with simple deployment and management.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>100MB storage</li>
+                        <li>Custom domain</li>
+                        <li>SSL certificate</li>
+                        <li>One-click deploy</li>
+                        <li>Form handling</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://static.app" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kinsta Static Site Hosting -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Kinsta Static Site Hosting</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Enterprise-grade static site hosting with global CDN and free tier.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1 site gratis</li>
+                        <li>100GB bandwidth</li>
+                        <li>Global CDN</li>
+                        <li>SSL certificates</li>
+                        <li>Git integration</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://kinsta.com/static-site-hosting" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fleek -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Fleek</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Decentralized hosting platform with IPFS and blockchain integration.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Unlimited sites</li>
+                        <li>IPFS hosting</li>
+                        <li>Custom domains</li>
+                        <li>SSL certificates</li>
+                        <li>Blockchain integration</li>
+                        <li>Continuous deployment</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://fleek.co" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Netlify Drop -->
+                <div class="platform-card" data-type="static">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: linear-gradient(135deg, #00d084, #00b870);">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Netlify Drop</h3>
+                            <span class="platform-type type-static">Static Site</span>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        Drag-and-drop static site hosting tanpa perlu Git atau command line.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Drag & drop deployment</li>
+                        <li>Instant preview</li>
+                        <li>Custom domains</li>
+                        <li>HTTPS otomatis</li>
+                        <li>Form handling</li>
+                        <li>No configuration needed</li>
+                    </ul>
+                    <div class="platform-footer">
+                        <span class="free-badge">100% Gratis</span>
+                        <a href="https://app.netlify.com/drop" class="deploy-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3><i class="fas fa-rocket"></i> DeployGratis</h3>
+            <p>Platform terlengkap untuk menemukan layanan deployment gratis di seluruh dunia. Kami mengumpulkan dan mengkurasi platform-platform terbaik untuk memudahkan Anda dalam memulai project tanpa biaya.</p>
+            <p>&copy; 2024 DeployGratis. Dibuat dengan <i class="fas fa-heart" style="color: #ff6b6b;"></i> untuk developer Indonesia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const platformCards = document.querySelectorAll('.platform-card');
+        const searchInput = document.getElementById('searchInput');
+
+        // Filter by type
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                platformCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else if (filter === 'enterprise') {
+                        // Show enterprise platforms (those with enterprise features)
+                        const hasEnterpriseFeatures = card.querySelector('.platform-features li:nth-child(1)')?.textContent.includes('enterprise') ||
+                                                    card.querySelector('.platform-features li:nth-child(2)')?.textContent.includes('scalability') ||
+                                                    card.querySelector('.platform-features li:nth-child(3)')?.textContent.includes('global');
+                        card.style.display = hasEnterpriseFeatures ? 'block' : 'none';
+                    } else {
+                        const cardType = card.getAttribute('data-type');
+                        card.style.display = cardType === filter ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            platformCards.forEach(card => {
+                const platformName = card.querySelector('h3').textContent.toLowerCase();
+                const platformDescription = card.querySelector('.platform-description').textContent.toLowerCase();
+                const platformFeatures = Array.from(card.querySelectorAll('.platform-features li'))
+                    .map(li => li.textContent.toLowerCase())
+                    .join(' ');
+                
+                const isMatch = platformName.includes(searchTerm) || 
+                               platformDescription.includes(searchTerm) || 
+                               platformFeatures.includes(searchTerm);
+                
+                card.style.display = isMatch ? 'block' : 'none';
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Add loading animation for platform cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        platformCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add click tracking for deploy buttons
+        document.querySelectorAll('.deploy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const platformName = e.target.closest('.platform-card').querySelector('h3').textContent;
+                console.log(`User clicked on ${platformName}`);
+                // Here you could add analytics tracking
+            });
+        });
+
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+            }
+            
+            if (e.key === '/' && document.activeElement !== searchInput) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // Add copy to clipboard functionality for platform names
+        document.querySelectorAll('.platform-card h3').forEach(title => {
+            title.style.cursor = 'pointer';
+            title.title = 'Click to copy platform name';
+            title.addEventListener('click', () => {
+                navigator.clipboard.writeText(title.textContent).then(() => {
+                    const originalText = title.textContent;
+                    title.textContent = 'Copied!';
+                    title.style.color = '#4caf50';
+                    setTimeout(() => {
+                        title.textContent = originalText;
+                        title.style.color = '';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+                          
