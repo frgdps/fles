@@ -2311,7 +2311,7 @@
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#" class="logo">
-                <i class="fas fa-rocket"></i> DeployGratis
+                <i class="fas fa-rocket"></i> Deploy-Your-Things
             </a>
             <ul class="nav-links">
                 <li><a href="#home">Beranda</a></li>
@@ -2556,7 +2556,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <h3><i class="fas fa-rocket"></i> DeployGratis</h3>
+            <h3><i class="fas fa-rocket"></i> Deploy-Your-Things</h3>
             <p>Platform terlengkap untuk menemukan layanan deployment gratis di seluruh dunia. Kami mengumpulkan dan mengkurasi platform-platform terbaik untuk memudahkan Anda dalam memulai project tanpa biaya.</p>
             
             <div class="footer-links">
@@ -2576,7 +2576,7 @@
                 </form>
             </div>
             
-            <p>&copy; 2024 DeployGratis. Dibuat dengan <i class="fas fa-heart" style="color: var(--accent-danger);"></i> untuk developer Indonesia.</p>
+            <p>&copy; 2025 Deploy-Your-Things. Dibuat dengan <i class="fas fa-heart" style="color: var(--accent-danger);"></i> untuk seluruh developer di dunia.</p>
         </div>
     </footer>
 
@@ -2664,8 +2664,8 @@
             <h2 id="helpTitle">Pusat Bantuan</h2>
             
             <div class="help-section">
-                <h3>Tentang DeployGratis</h3>
-                <p>DeployGratis adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.</p>
+                <h3>Tentang Deploy-Your-Things</h3>
+                <p>Deploy-Your-Things adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.</p>
             </div>
             
             <div class="help-section">
@@ -2786,9 +2786,9 @@
                 sectionSubtitle: "Semua platform di bawah ini menawarkan layanan gratis untuk memulai project Anda",
                 emptyTitle: "Tidak ada platform ditemukan",
                 emptySubtitle: "Coba gunakan kata kunci lain atau reset filter Anda",
-                footerTitle: "DeployGratis",
+                footerTitle: "Deploy-Your-Things",
                 footerText: "Platform terlengkap untuk menemukan layanan deployment gratis di seluruh dunia. Kami mengumpulkan dan mengkurasi platform-platform terbaik untuk memudahkan Anda dalam memulai project tanpa biaya.",
-                footerCopyright: "© 2024 DeployGratis. Dibuat dengan ♥ untuk developer Indonesia.",
+                footerCopyright: "© 2025 Deploy-Your-Things. Dibuat dengan ♥ untuk developer Indonesia.",
                 newsletterTitle: "Newsletter",
                 newsletterText: "Dapatkan update platform deployment terbaru langsung di inbox Anda",
                 newsletterPlaceholder: "Email Anda",
@@ -2815,8 +2815,8 @@
                 featureApi: "API",
                 featureRating: "Rating",
                 helpTitle: "Pusat Bantuan",
-                helpAbout: "Tentang DeployGratis",
-                helpAboutText: "DeployGratis adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.",
+                helpAbout: "Tentang Deploy-Your-Things",
+                helpAboutText: "Deploy-Your-Things adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.",
                 helpHowTo: "Cara Menggunakan",
                 helpHowTo1: "Gunakan fitur pencarian untuk menemukan platform berdasarkan nama atau fitur",
                 helpHowTo2: "Filter platform berdasarkan tipe (static, dynamic, atau keduanya)",
@@ -2898,9 +2898,9 @@
                 sectionSubtitle: "All platforms below offer free services to start your project",
                 emptyTitle: "No platforms found",
                 emptySubtitle: "Try using different keywords or reset your filters",
-                footerTitle: "DeployGratis",
+                footerTitle: "Deploy-Your-Things",
                 footerText: "The most complete platform to find free deployment services around the world. We collect and curate the best platforms to make it easier for you to start projects without cost.",
-                footerCopyright: "© 2024 DeployGratis. Made with ♥ for Indonesian developers.",
+                footerCopyright: "© 2025 Deploy-Your-Things. Made with ♥ for all developers.",
                 newsletterTitle: "Newsletter",
                 newsletterText: "Get the latest deployment platform updates directly in your inbox",
                 newsletterPlaceholder: "Your Email",
@@ -2927,8 +2927,8 @@
                 featureApi: "API",
                 featureRating: "Rating",
                 helpTitle: "Help Center",
-                helpAbout: "About DeployGratis",
-                helpAboutText: "DeployGratis is a platform that collects and curates free deployment services from around the world. We help developers find the right platform for their projects without cost.",
+                helpAbout: "About Deploy-Your-Things",
+                helpAboutText: "Deploy-Your-Things is a platform that collects and curates free deployment services from around the world. We help developers find the right platform for their projects without cost.",
                 helpHowTo: "How to Use",
                 helpHowTo1: "Use the search feature to find platforms by name or feature",
                 helpHowTo2: "Filter platforms by type (static, dynamic, or both)",
@@ -3005,564 +3005,24 @@
         // Load platforms from JSON
         async function loadPlatforms() {
             try {
-                // Simulating API call with setTimeout
-                setTimeout(() => {
-                    // Mock data for platforms
-                    platforms = [
-                        {
-                            id: 'vercel',
-                            name: 'Vercel',
-                            description: 'Platform untuk frontend developers dengan deployment instan dan preview otomatis untuk setiap perubahan kode.',
-                            type: 'both',
-                            category: 'popular',
-                            logo: 'fas fa-rocket',
-                            logoColor: '#000000',
-                            tags: ['frontend', 'serverless', 'jamstack', 'react', 'nextjs'],
-                            features: [
-                                'Deployment instan dengan Git integration',
-                                'Preview otomatis untuk setiap pull request',
-                                'Serverless Functions',
-                                'Analytics dashboard',
-                                'Global CDN',
-                                'Custom domain dengan SSL gratis'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '100GB',
-                                bandwidth: '100GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://vercel.com',
-                            rating: 4.8,
-                            region: 'global'
-                        },
-                        {
-                            id: 'netlify',
-                            name: 'Netlify',
-                            description: 'Platform all-in-one untuk web modern dengan deployment otomatis, serverless functions, dan form handling.',
-                            type: 'both',
-                            category: 'popular',
-                            logo: 'fas fa-globe',
-                            logoColor: '#00C7B7',
-                            tags: ['jamstack', 'serverless', 'static', 'frontend', 'cdn'],
-                            features: [
-                                'Continuous deployment dari Git',
-                                'Serverless Functions',
-                                'Form handling',
-                                'Identity management',
-                                'Large media storage',
-                                'Analytics'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '100GB',
-                                bandwidth: '100GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://netlify.com',
-                            rating: 4.7,
-                            region: 'global'
-                        },
-                        {
-                            id: 'github-pages',
-                            name: 'GitHub Pages',
-                            description: 'Hosting situs statis langsung dari repositori GitHub Anda. Gratis untuk semua pengguna GitHub.',
-                            type: 'static',
-                            logo: 'fab fa-github',
-                            logoColor: '#24292e',
-                            tags: ['static', 'git', 'free', 'open-source', 'jekyll'],
-                            features: [
-                                'Hosting statis gratis',
-                                'Integrasi dengan GitHub repositories',
-                                'Support untuk Jekyll',
-                                'Custom domain',
-                                'HTTPS gratis',
-                                'Unlimited bandwidth'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: 'Unlimited',
-                                bandwidth: 'Unlimited',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://pages.github.com',
-                            rating: 4.5,
-                            region: 'global'
-                        },
-                        {
-                            id: 'heroku',
-                            name: 'Heroku',
-                            description: 'Platform cloud yang memungkinkan developer membangun, menjalankan, dan mengoperasikan aplikasi sepenuhnya di cloud.',
-                            type: 'dynamic',
-                            category: 'popular',
-                            logo: 'fas fa-server',
-                            logoColor: '#430098',
-                            tags: ['paas', 'dynamic', 'nodejs', 'ruby', 'python'],
-                            features: [
-                                'Support untuk berbagai bahasa pemrograman',
-                                'Add-ons marketplace',
-                                'Continuous deployment',
-                                'Scaling otomatis',
-                                'CLI yang powerful',
-                                'Rollback dengan mudah'
-                            ],
-                            pricing: {
-                                free: false,
-                                storage: '512MB',
-                                bandwidth: '2GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://heroku.com',
-                            rating: 4.3,
-                            region: 'global'
-                        },
-                        {
-                            id: 'firebase',
-                            name: 'Firebase',
-                            description: 'Platform pengembangan aplikasi mobile dan web dari Google yang menyediakan berbagai tools dan infrastruktur.',
-                            type: 'both',
-                            category: 'popular',
-                            logo: 'fas fa-fire',
-                            logoColor: '#FFCA28',
-                            tags: ['backend', 'database', 'hosting', 'mobile', 'google'],
-                            features: [
-                                'Realtime database',
-                                'Authentication',
-                                'Cloud storage',
-                                'Cloud functions',
-                                'Hosting statis',
-                                'Analytics'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '1GB',
-                                bandwidth: '10GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://firebase.google.com',
-                            rating: 4.6,
-                            region: 'global'
-                        },
-                        {
-                            id: 'render',
-                            name: 'Render',
-                            description: 'Unified cloud untuk membangun dan menjalankan aplikasi dan situs web dengan free SSL, global CDN, dan auto deploys dari Git.',
-                            type: 'both',
-                            logo: 'fas fa-cube',
-                            logoColor: '#4E46E5',
-                            tags: ['paas', 'static', 'dynamic', 'docker', 'git'],
-                            features: [
-                                'Support untuk static sites, web services, dan background workers',
-                                'Auto deploys dari Git',
-                                'Persistent disks',
-                                'Private networks',
-                                'Cron jobs',
-                                'Env vars'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '512MB',
-                                bandwidth: '100GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://render.com',
-                            rating: 4.4,
-                            region: 'global'
-                        },
-                        {
-                            id: 'surge',
-                            name: 'Surge.sh',
-                            description: 'Hosting statis untuk web developers dengan deployment cepat melalui CLI dan custom domain gratis.',
-                            type: 'static',
-                            logo: 'fas fa-bolt',
-                            logoColor: '#00D9FF',
-                            tags: ['static', 'cli', 'frontend', 'cdn', 'free'],
-                            features: [
-                                'Deployment cepat via CLI',
-                                'Custom domain gratis',
-                                'HTTPS otomatis',
-                                'Basic auth',
-                                'Form handling',
-                                'Global CDN'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: 'Unlimited',
-                                bandwidth: 'Unlimited',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://surge.sh',
-                            rating: 4.2,
-                            region: 'global'
-                        },
-                        {
-                            id: 'railway',
-                            name: 'Railway',
-                            description: 'Platform infrastruktur yang memungkinkan Anda membangun, mengirim, dan mengelola aplikasi tanpa mengelola server.',
-                            type: 'dynamic',
-                            logo: 'fas fa-train',
-                            logoColor: '#0A0E27',
-                            tags: ['paas', 'dynamic', 'docker', 'git', 'serverless'],
-                            features: [
-                                'Deploy dari GitHub dengan satu klik',
-                                'Support untuk Docker',
-                                'Auto scaling',
-                                'Managed databases',
-                                'Environment variables',
-                                'Logs dan metrics'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '512MB',
-                                bandwidth: '1GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://railway.app',
-                            rating: 4.5,
-                            region: 'global'
-                        },
-                        {
-                            id: 'glitch',
-                            name: 'Glitch',
-                            description: 'Platform untuk membangun aplikasi web dengan real-time collaboration dan instant deployment.',
-                            type: 'dynamic',
-                            logo: 'fas fa-code',
-                            logoColor: '#FF3C00',
-                            tags: ['nodejs', 'collaboration', 'realtime', 'frontend', 'backend'],
-                            features: [
-                                'Real-time collaboration',
-                                'Instant deployment',
-                                'Import dari GitHub',
-                                'Custom domain',
-                                'Project templates',
-                                'Community support'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '1GB',
-                                bandwidth: '4GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://glitch.com',
-                            rating: 4.1,
-                            region: 'global'
-                        },
-                        {
-                            id: 'replit',
-                            name: 'Replit',
-                            description: 'Platform IDE online yang memungkinkan Anda membuat, menjalankan, dan berbagi kode dalam berbagai bahasa pemrograman.',
-                            type: 'both',
-                            logo: 'fas fa-laptop-code',
-                            logoColor: '#0579E4',
-                            tags: ['ide', 'multi-language', 'collaboration', 'education', 'hosting'],
-                            features: [
-                                'IDE online dengan syntax highlighting',
-                                'Support untuk 50+ bahasa pemrograman',
-                                'Real-time collaboration',
-                                'Hosting web apps',
-                                'Database',
-                                'Package manager'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '512MB',
-                                bandwidth: 'Unlimited',
-                                customDomains: false,
-                                ssl: true
-                            },
-                            url: 'https://replit.com',
-                            rating: 4.3,
-                            region: 'global'
-                        },
-                        {
-                            id: 'stormkit',
-                            name: 'Stormkit',
-                            description: 'Platform deployment modern untuk aplikasi JavaScript dengan preview environments dan serverless functions.',
-                            type: 'both',
-                            logo: 'fas fa-cloud-bolt',
-                            logoColor: '#FF5A5F',
-                            tags: ['javascript', 'serverless', 'preview', 'frontend', 'ci-cd'],
-                            features: [
-                                'Preview environments untuk setiap branch',
-                                'Serverless functions',
-                                'Atomic deployments',
-                                'A/B testing',
-                                'Analytics',
-                                'Team collaboration'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '5GB',
-                                bandwidth: '50GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://stormkit.io',
-                            rating: 4.0,
-                            region: 'global'
-                        },
-                        {
-                            id: 'cloudflare-pages',
-                            name: 'Cloudflare Pages',
-                            description: 'Platform JAMstack dengan global CDN, instant rollbacks, dan integrasi dengan GitHub.',
-                            type: 'static',
-                            logo: 'fas fa-cloud',
-                            logoColor: '#F38020',
-                            tags: ['jamstack', 'static', 'cdn', 'edge', 'serverless'],
-                            features: [
-                                'Global CDN',
-                                'Instant rollbacks',
-                                'Integrasi dengan GitHub',
-                                'Serverless functions',
-                                'Analytics',
-                                'Originless deployments'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: 'Unlimited',
-                                bandwidth: 'Unlimited',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://pages.cloudflare.com',
-                            rating: 4.4,
-                            region: 'global'
-                        },
-                        {
-                            id: 'aws-amplify',
-                            name: 'AWS Amplify',
-                            description: 'Platform development dari AWS untuk membangun aplikasi web dan mobile dengan backend yang terhubung.',
-                            type: 'both',
-                            category: 'enterprise',
-                            logo: 'fab fa-aws',
-                            logoColor: '#FF9900',
-                            tags: ['aws', 'full-stack', 'mobile', 'serverless', 'enterprise'],
-                            features: [
-                                'Hosting statis dengan CI/CD',
-                                'Serverless backend',
-                                'Authentication',
-                                'Analytics',
-                                'AI/ML predictions',
-                                'AR/VR scenes'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '5GB',
-                                bandwidth: '15GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://aws.amazon.com/amplify',
-                            rating: 4.2,
-                            region: 'global'
-                        },
-                        {
-                            id: 'digitalocean-apps',
-                            name: 'DigitalOcean Apps',
-                            description: 'Platform PaaS dari DigitalOcean untuk membangun, mengirim, dan menskalakan aplikasi dengan mudah.',
-                            type: 'both',
-                            category: 'enterprise',
-                            logo: 'fab fa-digital-ocean',
-                            logoColor: '#0080FF',
-                            tags: ['paas', 'docker', 'scaling', 'enterprise', 'cloud'],
-                            features: [
-                                'Free SSL certificates',
-                                'Auto scaling',
-                                'Zero-downtime deployments',
-                                'Custom domains',
-                                'Log streaming',
-                                'Alerts'
-                            ],
-                            pricing: {
-                                free: false,
-                                storage: '1GB',
-                                bandwidth: '1TB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://www.digitalocean.com/products/app-platform',
-                            rating: 4.3,
-                            region: 'global'
-                        },
-                        {
-                            id: 'gitlab-pages',
-                            name: 'GitLab Pages',
-                            description: 'Hosting situs statis langsung dari repositori GitLab Anda dengan CI/CD terintegrasi.',
-                            type: 'static',
-                            logo: 'fab fa-gitlab',
-                            logoColor: '#FC6D26',
-                            tags: ['static', 'git', 'ci-cd', 'devops', 'free'],
-                            features: [
-                                'Hosting statis gratis',
-                                'Integrasi dengan GitLab CI/CD',
-                                'Custom domain',
-                                'HTTPS gratis',
-                                'Access control',
-                                'Unlimited projects'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: 'Unlimited',
-                                bandwidth: 'Unlimited',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://docs.gitlab.com/ee/user/project/pages/',
-                            rating: 4.1,
-                            region: 'global'
-                        },
-                        {
-                            id: 'bitbucket-cloud',
-                            name: 'Bitbucket Cloud',
-                            description: 'Platform Git-based code collaboration dan CI/CD dengan deployment pipelines.',
-                            type: 'dynamic',
-                            category: 'enterprise',
-                            logo: 'fab fa-bitbucket',
-                            logoColor: '#0052CC',
-                            tags: ['git', 'ci-cd', 'enterprise', 'collaboration', 'pipelines'],
-                            features: [
-                                'Git repositories',
-                                'CI/CD pipelines',
-                                'Code collaboration',
-                                'Integrations',
-                                'Deployment pipelines',
-                                'Permissions'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '1GB',
-                                bandwidth: '1GB',
-                                customDomains: false,
-                                ssl: false
-                            },
-                            url: 'https://bitbucket.org/product',
-                            rating: 4.0,
-                            region: 'global'
-                        },
-                        {
-                            id: 'back4app',
-                            name: 'Back4App',
-                            description: 'Backend-as-a-Service platform yang memungkinkan developer membangun aplikasi backend dengan cepat.',
-                            type: 'dynamic',
-                            logo: 'fas fa-cogs',
-                            logoColor: '#00A1E0',
-                            tags: ['baas', 'backend', 'database', 'api', 'mobile'],
-                            features: [
-                                'Database NoSQL',
-                                'REST API',
-                                'Real-time',
-                                'Authentication',
-                                'Cloud functions',
-                                'Push notifications'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '1GB',
-                                bandwidth: '10GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://back4app.com',
-                            rating: 4.2,
-                            region: 'global'
-                        },
-                        {
-                            id: 'supabase',
-                            name: 'Supabase',
-                            description: 'Open source Firebase alternative dengan PostgreSQL database, authentication, dan real-time capabilities.',
-                            type: 'dynamic',
-                            logo: 'fas fa-database',
-                            logoColor: '#3FCF8E',
-                            tags: ['database', 'authentication', 'realtime', 'open-source', 'postgresql'],
-                            features: [
-                                'PostgreSQL database',
-                                'Authentication',
-                                'Real-time subscriptions',
-                                'Storage',
-                                'Edge functions',
-                                'Dashboard'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '500MB',
-                                bandwidth: '2GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://supabase.com',
-                            rating: 4.6,
-                            region: 'global'
-                        },
-                        {
-                            id: 'appwrite',
-                            name: 'Appwrite',
-                            description: 'Secure backend server untuk web, mobile, dan Flutter development dengan API yang mudah digunakan.',
-                            type: 'dynamic',
-                            logo: 'fas fa-shield-alt',
-                            logoColor: '#FD366E',
-                            tags: ['backend', 'security', 'api', 'mobile', 'flutter'],
-                            features: [
-                                'User authentication',
-                                'Database',
-                                'Storage',
-                                'Functions',
-                                'Real-time',
-                                'Localization'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '5GB',
-                                bandwidth: '25GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://appwrite.io',
-                            rating: 4.4,
-                            region: 'global'
-                        },
-                        {
-                            id: 'deno-deploy',
-                            name: 'Deno Deploy',
-                            description: 'Distributed system untuk menjalankan JavaScript, TypeScript, dan WebAssembly di edge locations global.',
-                            type: 'dynamic',
-                            logo: 'fas fa-globe-americas',
-                            logoColor: '#000000',
-                            tags: ['deno', 'typescript', 'edge', 'serverless', 'javascript'],
-                            features: [
-                                'Global edge network',
-                                'Zero configuration deployments',
-                                'Support untuk JavaScript, TypeScript, dan WebAssembly',
-                                'Deno runtime',
-                                'Built-in key-value database',
-                                'Smart caching'
-                            ],
-                            pricing: {
-                                free: true,
-                                storage: '1GB',
-                                bandwidth: '100GB',
-                                customDomains: true,
-                                ssl: true
-                            },
-                            url: 'https://deno.com/deploy',
-                            rating: 4.3,
-                            region: 'global'
-                        }
-                    ];
-                    
-                    renderPlatforms();
-                    updateStats();
-                    updateChart();
-                    renderTagCloud();
-                }, 500);
+                const response = await fetch('/deploy/platforms.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                platforms = data.platforms;
+                
+                // Add missing properties that might not be in the JSON but are needed by our app
+                platforms = platforms.map(platform => ({
+                    ...platform,
+                    rating: platform.rating || 4.0, // Default rating if not provided
+                    region: platform.region || 'global' // Default region if not provided
+                }));
+                
+                renderPlatforms();
+                updateStats();
+                updateChart();
+                renderTagCloud();
             } catch (error) {
                 console.error('Error loading platforms:', error);
                 showToast('Gagal memuat data platform', 'error');
@@ -3617,37 +3077,25 @@
                             ${generateStars(platform.rating)}
                         </div>
                         <span class="rating-value">${platform.rating}</span>
-                    </div>
-                    <ul class="platform-features">
-                        ${platform.features.slice(0, 3).map(feature => `<li>${feature}</li>`).join('')}
-                        ${platform.features.length > 3 ? `<li>+${platform.features.length - 3} fitur lainnya</li>` : ''}
-                    </ul>
+                        </div>
                     <div class="platform-footer">
-                        ${platform.pricing.free ? `<span class="free-badge">${translations[currentLanguage].freeBadge}</span>` : `<span class="trial-badge">${translations[currentLanguage].trialBadge}</span>`}
-                        <a href="${platform.url}" class="deploy-btn" target="_blank" rel="noopener noreferrer" onclick="trackClick('${platform.id}')">
-                            <i class="fas fa-external-link-alt"></i> ${translations[currentLanguage].visitButton}
+                        ${platform.free ? 
+                            `<span class="free-badge">${translations[currentLanguage].freeBadge}</span>` : 
+                            `<span class="trial-badge">${translations[currentLanguage].trialBadge}</span>`
+                        }
+                        <a href="${platform.url}" target="_blank" rel="noopener noreferrer" class="deploy-btn" onclick="viewPlatform('${platform.id}')">
+                            <i class="fas fa-rocket"></i> ${translations[currentLanguage].visitButton}
                         </a>
                     </div>
                 </div>
             `).join('');
-            
-            // Add click event listeners to cards
-            document.querySelectorAll('.platform-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    if (!e.target.closest('.favorite-btn') && !e.target.closest('.deploy-btn')) {
-                        const platformId = this.getAttribute('data-id');
-                        showPlatformDetails(platformId);
-                        addToRecentlyViewed(platformId);
-                    }
-                });
-            });
         }
 
-        // Filter platforms based on current filters
+        // Filter platforms based on current filter and search
         function filterPlatforms() {
-            let filtered = platforms;
+            let filtered = [...platforms];
             
-            // Apply type/category filter
+            // Apply filter
             if (currentFilter !== 'all') {
                 if (currentFilter === 'popular') {
                     filtered = filtered.filter(p => p.category === 'popular');
@@ -3656,63 +3104,14 @@
                 }
             }
             
-            // Apply search filter
+            // Apply search
             if (currentSearch) {
-                const searchTerm = currentSearch.toLowerCase();
+                const searchLower = currentSearch.toLowerCase();
                 filtered = filtered.filter(p => 
-                    p.name.toLowerCase().includes(searchTerm) ||
-                    p.description.toLowerCase().includes(searchTerm) ||
-                    p.features.some(f => f.toLowerCase().includes(searchTerm)) ||
-                    p.tags.some(t => t.toLowerCase().includes(searchTerm))
+                    p.name.toLowerCase().includes(searchLower) || 
+                    p.description.toLowerCase().includes(searchLower) ||
+                    p.tags.some(tag => tag.toLowerCase().includes(searchLower))
                 );
-            }
-            
-            // Apply advanced filters
-            const storageFilter = document.getElementById('storageFilter')?.value;
-            if (storageFilter) {
-                filtered = filtered.filter(p => {
-                    if (storageFilter === 'Unlimited') {
-                        return p.pricing.storage === 'Unlimited';
-                    }
-                    // Simple comparison for demo purposes
-                    return p.pricing.storage !== 'Unlimited';
-                });
-            }
-            
-            const bandwidthFilter = document.getElementById('bandwidthFilter')?.value;
-            if (bandwidthFilter) {
-                filtered = filtered.filter(p => {
-                    if (bandwidthFilter === 'Unlimited') {
-                        return p.pricing.bandwidth === 'Unlimited';
-                    }
-                    // Simple comparison for demo purposes
-                    return p.pricing.bandwidth !== 'Unlimited';
-                });
-            }
-            
-            const regionFilter = document.getElementById('regionFilter')?.value;
-            if (regionFilter) {
-                filtered = filtered.filter(p => p.region === regionFilter || p.region === 'global');
-            }
-            
-            const sslFilter = document.getElementById('sslFilter')?.checked;
-            if (sslFilter) {
-                filtered = filtered.filter(p => p.pricing.ssl);
-            }
-            
-            const customDomainFilter = document.getElementById('customDomainFilter')?.checked;
-            if (customDomainFilter) {
-                filtered = filtered.filter(p => p.pricing.customDomains);
-            }
-            
-            const cdnFilter = document.getElementById('cdnFilter')?.checked;
-            if (cdnFilter) {
-                filtered = filtered.filter(p => p.features.some(f => f.toLowerCase().includes('cdn')));
-            }
-            
-            const apiFilter = document.getElementById('apiFilter')?.checked;
-            if (apiFilter) {
-                filtered = filtered.filter(p => p.features.some(f => f.toLowerCase().includes('api')));
             }
             
             // Apply favorites filter
@@ -3720,337 +3119,87 @@
                 filtered = filtered.filter(p => favorites.includes(p.id));
             }
             
+            // Apply advanced filters
+            const storageFilter = document.getElementById('storageFilter').value;
+            const bandwidthFilter = document.getElementById('bandwidthFilter').value;
+            const regionFilter = document.getElementById('regionFilter').value;
+            const sslFilter = document.getElementById('sslFilter').checked;
+            const customDomainFilter = document.getElementById('customDomainFilter').checked;
+            const cdnFilter = document.getElementById('cdnFilter').checked;
+            const apiFilter = document.getElementById('apiFilter').checked;
+            
+            if (storageFilter) {
+                filtered = filtered.filter(p => p.storage && p.storage >= storageFilter);
+            }
+            
+            if (bandwidthFilter) {
+                filtered = filtered.filter(p => p.bandwidth && p.bandwidth >= bandwidthFilter);
+            }
+            
+            if (regionFilter) {
+                filtered = filtered.filter(p => p.region === regionFilter);
+            }
+            
+            if (sslFilter) {
+                filtered = filtered.filter(p => p.features && p.features.includes('ssl'));
+            }
+            
+            if (customDomainFilter) {
+                filtered = filtered.filter(p => p.features && p.features.includes('customDomain'));
+            }
+            
+            if (cdnFilter) {
+                filtered = filtered.filter(p => p.features && p.features.includes('cdn'));
+            }
+            
+            if (apiFilter) {
+                filtered = filtered.filter(p => p.features && p.features.includes('api'));
+            }
+            
             return filtered;
         }
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // Filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentFilter = this.getAttribute('data-filter');
-                    showFavoritesOnly = false;
-                    document.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
-                    renderPlatforms();
-                });
-            });
-            
-            // Search input with debounce
-            let searchTimeout;
-            document.getElementById('searchInput').addEventListener('input', function(e) {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    currentSearch = e.target.value;
-                    renderPlatforms();
-                }, 300);
-            });
-            
-            // Modal close
-            document.querySelector('.close').addEventListener('click', closeModal);
-            
-            // Close modal when clicking outside
-            document.getElementById('platformModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal();
-                }
-            });
-            
-            // Comparison modal close
-            document.querySelector('#comparisonModal .close').addEventListener('click', closeComparisonModal);
-            
-            // Close comparison modal when clicking outside
-            document.getElementById('comparisonModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeComparisonModal();
-                }
-            });
-            
-            // Help modal close
-            document.querySelector('#helpModal .close').addEventListener('click', closeHelpModal);
-            
-            // Close help modal when clicking outside
-            document.getElementById('helpModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeHelpModal();
-                }
-            });
-            
-            // File input for import
-            document.getElementById('fileInput').addEventListener('change', handleFileImport);
-            
-            // User dropdown
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.user-menu')) {
-                    document.getElementById('userDropdown').classList.remove('active');
-                }
-            });
-            
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                // Ctrl/Cmd + K to focus search
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                    e.preventDefault();
-                    document.getElementById('searchInput').focus();
-                }
-                
-                // Ctrl/Cmd + T to toggle theme
-                if ((e.ctrlKey || e.metaKey) && e.key === 't') {
-                    e.preventDefault();
-                    toggleTheme();
-                }
-                
-                // Ctrl/Cmd + F to show favorites
-                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-                    e.preventDefault();
-                    showOnlyFavorites();
-                }
-                
-                // Ctrl/Cmd + B to show comparison
-                if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
-                    e.preventDefault();
-                    showComparison();
-                }
-                
-                // Escape to clear search and close modals
-                if (e.key === 'Escape') {
-                    if (document.getElementById('platformModal').style.display === 'block') {
-                        closeModal();
-                    } else if (document.getElementById('comparisonModal').style.display === 'block') {
-                        closeComparisonModal();
-                    } else if (document.getElementById('helpModal').style.display === 'block') {
-                        closeHelpModal();
-                    } else {
-                        document.getElementById('searchInput').value = '';
-                        currentSearch = '';
-                        renderPlatforms();
-                    }
-                }
-            });
-
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
+        // Get type label based on language
+        function getTypeLabel(type) {
+            switch(type) {
+                case 'static': return translations[currentLanguage].typeStatic;
+                case 'dynamic': return translations[currentLanguage].typeDynamic;
+                case 'both': return translations[currentLanguage].typeBoth;
+                default: return type;
+            }
         }
 
-        // Setup scroll effects
-        function setupScrollEffects() {
-            const header = document.getElementById('header');
-            const scrollTop = document.getElementById('scrollTop');
+        // Generate star rating HTML
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+            const emptyStars = 5 - fullStars - halfStar;
             
-            window.addEventListener('scroll', function() {
-                // Header scroll effect
-                if (window.pageYOffset > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                
-                // Scroll to top button
-                if (window.pageYOffset > 300) {
-                    scrollTop.classList.add('show');
-                } else {
-                    scrollTop.classList.remove('show');
-                }
-            });
-        }
-
-        // Apply user preferences
-        function applyUserPreferences() {
-            // Apply theme
-            if (userPreferences.theme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                document.getElementById('themeIcon').className = 'fas fa-sun';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                document.getElementById('themeIcon').className = 'fas fa-moon';
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            if (halfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
             }
             
-            // Apply language
-            currentLanguage = userPreferences.language || 'id';
-            
-            // Update user initial
-            const userName = localStorage.getItem('deploygratis_user_name') || 'User';
-            document.getElementById('userInitial').textContent = userName.charAt(0).toUpperCase();
+            return stars;
         }
 
-        // Toggle theme
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            document.getElementById('themeIcon').className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-            
-            userPreferences.theme = newTheme;
-            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
-            
-            showToast(translations[currentLanguage].toastThemeChanged, 'success');
-        }
-
-        // Toggle language
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
-            userPreferences.language = currentLanguage;
-            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
-            
-            // Update UI with new language
-            updateUILanguage();
-            
-            showToast(translations[currentLanguage].toastLanguageChanged, 'success');
-        }
-
-        // Update UI language
-        function updateUILanguage() {
-            // Update hero section
-            document.querySelector('.hero h1').textContent = translations[currentLanguage].heroTitle;
-            document.querySelector('.hero p').textContent = translations[currentLanguage].heroSubtitle;
-            
-            // Update stats
-            document.querySelectorAll('.stat-label')[0].textContent = translations[currentLanguage].statPlatform;
-            document.querySelectorAll('.stat-label')[1].textContent = translations[currentLanguage].statFree;
-            document.querySelectorAll('.stat-label')[2].textContent = translations[currentLanguage].statProject;
-            
-            // Update search placeholder
-            document.getElementById('searchInput').placeholder = translations[currentLanguage].searchPlaceholder;
-            
-            // Update filter buttons
-            document.querySelector('.filter-btn[data-filter="all"]').textContent = translations[currentLanguage].filterAll;
-            document.querySelector('.filter-btn[data-filter="static"]').textContent = translations[currentLanguage].filterStatic;
-            document.querySelector('.filter-btn[data-filter="dynamic"]').textContent = translations[currentLanguage].filterDynamic;
-            document.querySelector('.filter-btn[data-filter="both"]').textContent = translations[currentLanguage].filterBoth;
-            document.querySelector('.filter-btn[data-filter="enterprise"]').textContent = translations[currentLanguage].filterEnterprise;
-            document.querySelector('.filter-btn[data-filter="popular"]').textContent = translations[currentLanguage].filterPopular;
-            
-            // Update action buttons
-            document.querySelectorAll('.action-btn')[0].innerHTML = `<i class="fas fa-star"></i> ${translations[currentLanguage].actionFavorites}`;
-            document.querySelectorAll('.action-btn')[1].innerHTML = `<i class="fas fa-fire"></i> ${translations[currentLanguage].actionPopular}`;
-            document.querySelectorAll('.action-btn')[2].innerHTML = `<i class="fas fa-clock"></i> ${translations[currentLanguage].actionNewest}`;
-            document.querySelectorAll('.action-btn')[3].innerHTML = `<i class="fas fa-star"></i> ${translations[currentLanguage].actionRating}`;
-            document.querySelectorAll('.action-btn')[4].innerHTML = `<i class="fas fa-balance-scale"></i> ${translations[currentLanguage].actionCompare}`;
-            document.querySelectorAll('.action-btn')[5].innerHTML = `<i class="fas fa-refresh"></i> ${translations[currentLanguage].actionReset}`;
-            
-            // Update section titles
-            document.querySelector('.section-title').textContent = translations[currentLanguage].sectionTitle;
-            document.querySelector('.section-subtitle').textContent = translations[currentLanguage].sectionSubtitle;
-            
-            // Update empty state
-            document.querySelector('#emptyState h3').textContent = translations[currentLanguage].emptyTitle;
-            document.querySelector('#emptyState p').textContent = translations[currentLanguage].emptySubtitle;
-            
-            // Update footer
-            document.querySelector('.footer h3').innerHTML = `<i class="fas fa-rocket"></i> ${translations[currentLanguage].footerTitle}`;
-            document.querySelector('.footer p').textContent = translations[currentLanguage].footerText;
-            document.querySelector('.footer p:last-of-type').innerHTML = `&copy; 2024 DeployGratis. ${translations[currentLanguage].footerCopyright}`;
-            
-            // Update newsletter
-            document.querySelector('.newsletter h4').textContent = translations[currentLanguage].newsletterTitle;
-            document.querySelector('.newsletter p').textContent = translations[currentLanguage].newsletterText;
-            document.querySelector('.newsletter-input').placeholder = translations[currentLanguage].newsletterPlaceholder;
-            document.querySelector('.newsletter button').textContent = translations[currentLanguage].newsletterButton;
-            
-            // Update footer links
-            document.querySelectorAll('.footer-links a')[0].textContent = translations[currentLanguage].aboutLink;
-            document.querySelectorAll('.footer-links a')[1].textContent = translations[currentLanguage].privacyLink;
-            document.querySelectorAll('.footer-links a')[2].textContent = translations[currentLanguage].termsLink;
-            document.querySelectorAll('.footer-links a')[3].textContent = translations[currentLanguage].contactLink;
-            document.querySelectorAll('.footer-links a')[4].textContent = translations[currentLanguage].contributeLink;
-            
-            // Re-render platforms to update their text
-            renderPlatforms();
-        }
-
-        // Toggle user menu
-        function toggleUserMenu() {
-            document.getElementById('userDropdown').classList.toggle('active');
-        }
-
-        // Show profile (placeholder)
-        function showProfile() {
-            showToast('Fitur profil akan segera tersedia', 'info');
-            document.getElementById('userDropdown').classList.remove('active');
-        }
-
-        // Show preferences (placeholder)
-        function showPreferences() {
-            showToast('Fitur preferensi akan segera tersedia', 'info');
-            document.getElementById('userDropdown').classList.remove('active');
-        }
-
-        // Show history (placeholder)
-        function showHistory() {
-            showToast('Fitur riwayat akan segera tersedia', 'info');
-            document.getElementById('userDropdown').classList.remove('active');
-        }
-
-        // Export user data (placeholder)
-        function exportUserData() {
-            exportAllData();
-            document.getElementById('userDropdown').classList.remove('active');
-        }
-
-        // Import user data (placeholder)
-        function importUserData() {
-            importFavorites();
-            document.getElementById('userDropdown').classList.remove('active');
-        }
-
-        // Logout (placeholder)
-        function logout() {
-            showToast('Anda telah keluar', 'info');
-            document.getElementById('userDropdown').classList.remove('active');
-        }
-
-        // Toggle advanced search
-        function toggleAdvancedSearch() {
-            const panel = document.getElementById('advancedSearchPanel');
-            panel.classList.toggle('active');
-        }
-
-        // Apply advanced filters
-        function applyAdvancedFilters() {
-            renderPlatforms();
-            document.getElementById('advancedSearchPanel').classList.remove('active');
-            showToast('Filter diterapkan', 'info');
-        }
-
-        // Reset advanced filters
-        function resetAdvancedFilters() {
-            document.getElementById('storageFilter').value = '';
-            document.getElementById('bandwidthFilter').value = '';
-            document.getElementById('regionFilter').value = '';
-            document.getElementById('sslFilter').checked = false;
-            document.getElementById('customDomainFilter').checked = false;
-            document.getElementById('cdnFilter').checked = false;
-            document.getElementById('apiFilter').checked = false;
-            
-            renderPlatforms();
-            document.getElementById('advancedSearchPanel').classList.remove('active');
-            showToast('Filter direset', 'info');
-        }
-
-        // Toggle favorite
+        // Toggle favorite status
         function toggleFavorite(platformId, event) {
             event.stopPropagation();
             
             const index = favorites.indexOf(platformId);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showToast(translations[currentLanguage].toastRemovedFromFavorites, 'info');
-            } else {
+            if (index === -1) {
                 favorites.push(platformId);
                 showToast(translations[currentLanguage].toastAddedToFavorites, 'success');
+            } else {
+                favorites.splice(index, 1);
+                showToast(translations[currentLanguage].toastRemovedFromFavorites, 'info');
             }
             
             localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
@@ -4058,37 +3207,56 @@
             renderPlatforms();
         }
 
-        // Update favorite count
+        // Update favorite count in navigation
         function updateFavoriteCount() {
             document.getElementById('favCount').textContent = favorites.length;
         }
 
-        // Show platform details in modal
-        function showPlatformDetails(platformId) {
+        // View platform details
+        function viewPlatform(platformId) {
             const platform = platforms.find(p => p.id === platformId);
             if (!platform) return;
             
+            // Add to recently viewed
+            if (!recentlyViewed.includes(platformId)) {
+                recentlyViewed.unshift(platformId);
+                if (recentlyViewed.length > 5) {
+                    recentlyViewed.pop();
+                }
+                localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
+                updateRecentlyViewed();
+            }
+            
+            // Open modal with platform details
+            openPlatformModal(platform);
+        }
+
+        // Open platform modal
+        function openPlatformModal(platform) {
             const modal = document.getElementById('platformModal');
             const modalContent = document.getElementById('modalContent');
             
-            // Get personal notes for this platform
-            const platformNotes = personalNotes[platformId] || [];
+            const isFavorite = favorites.includes(platform.id);
+            const notes = personalNotes[platform.id] || [];
             
             modalContent.innerHTML = `
                 <h2 id="modalTitle">${platform.name}</h2>
+                
                 <div class="modal-tabs">
-                    <button class="modal-tab active" onclick="switchModalTab('details')">Detail</button>
-                    <button class="modal-tab" onclick="switchModalTab('features')">Fitur</button>
-                    <button class="modal-tab" onclick="switchModalTab('pricing')">Harga</button>
-                    <button class="modal-tab" onclick="switchModalTab('notes')">${translations[currentLanguage].personalNotes}</button>
+                    <button class="modal-tab active" onclick="switchTab('overview')">Overview</button>
+                    <button class="modal-tab" onclick="switchTab('features')">Features</button>
+                    <button class="modal-tab" onclick="switchTab('pricing')">Pricing</button>
+                    <button class="modal-tab" onclick="switchTab('notes')">Notes</button>
+                    <button class="modal-tab" onclick="switchTab('share')">Share</button>
                 </div>
                 
-                <div class="modal-tab-content active" id="details-tab">
+                <div class="modal-tab-content active" id="overview-tab">
                     <div class="platform-header">
                         <div class="platform-logo" style="background: ${platform.logoColor}; width: 80px; height: 80px; font-size: 2rem;">
                             <i class="${platform.logo}"></i>
                         </div>
                         <div class="platform-info">
+                            <h3>${platform.name}</h3>
                             <span class="platform-type type-${platform.type}">${getTypeLabel(platform.type)}</span>
                             <div class="platform-rating">
                                 <div class="stars">
@@ -4098,44 +3266,23 @@
                             </div>
                         </div>
                     </div>
-                    <p class="platform-description">${platform.description}</p>
+                    
+                    <p>${platform.description}</p>
+                    
                     <div class="platform-tags">
                         ${platform.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <div class="share-section">
-                        <h4>${translations[currentLanguage].shareTitle}</h4>
-                        <div class="share-message">
-                            <textarea placeholder="${translations[currentLanguage].shareMessage}" id="shareMessage"></textarea>
-                        </div>
-                        <div class="share-buttons">
-                            <button class="share-btn facebook tooltip" data-tooltip="${translations[currentLanguage].shareFacebook}" onclick="richShare('${platform.id}', 'facebook')">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                            <button class="share-btn twitter tooltip" data-tooltip="${translations[currentLanguage].shareTwitter}" onclick="richShare('${platform.id}', 'twitter')">
-                                <i class="fab fa-twitter"></i>
-                            </button>
-                            <button class="share-btn linkedin tooltip" data-tooltip="${translations[currentLanguage].shareLinkedIn}" onclick="richShare('${platform.id}', 'linkedin')">
-                                <i class="fab fa-linkedin-in"></i>
-                            </button>
-                            <button class="share-btn whatsapp tooltip" data-tooltip="${translations[currentLanguage].shareWhatsApp}" onclick="richShare('${platform.id}', 'whatsapp')">
-                                <i class="fab fa-whatsapp"></i>
-                            </button>
-                            <button class="share-btn telegram tooltip" data-tooltip="${translations[currentLanguage].shareTelegram}" onclick="richShare('${platform.id}', 'telegram')">
-                                <i class="fab fa-telegram-plane"></i>
-                            </button>
-                            <button class="share-btn email tooltip" data-tooltip="${translations[currentLanguage].shareEmail}" onclick="richShare('${platform.id}', 'email')">
-                                <i class="fas fa-envelope"></i>
-                            </button>
-                            <button class="share-btn copy tooltip" data-tooltip="${translations[currentLanguage].shareCopy}" onclick="copyPlatformLink('${platform.id}')">
-                                <i class="fas fa-link"></i>
-                            </button>
-                        </div>
-                        <div class="share-link">
-                            <input type="text" value="${window.location.origin}${window.location.pathname}?platform=${platform.id}" readonly id="shareLink">
-                            <button class="btn btn-secondary" onclick="copyPlatformLink('${platform.id}')">
-                                <i class="fas fa-copy"></i> ${translations[currentLanguage].shareCopy}
-                            </button>
-                        </div>
+                    
+                    <div class="modal-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                        <button class="btn btn-primary" onclick="window.open('${platform.url}', '_blank')">
+                            <i class="fas fa-rocket"></i> ${translations[currentLanguage].visitButton}
+                        </button>
+                        <button class="btn btn-secondary" onclick="toggleFavoriteInModal('${platform.id}')">
+                            <i class="fas fa-star"></i> ${isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                        </button>
+                        <button class="btn btn-secondary" onclick="addToComparison('${platform.id}')">
+                            <i class="fas fa-balance-scale"></i> ${translations[currentLanguage].addToComparison}
+                        </button>
                     </div>
                 </div>
                 
@@ -4143,23 +3290,33 @@
                     <h3>${translations[currentLanguage].modalFeatures}</h3>
                     <ul class="modal-features">
                         ${platform.features.map(feature => `
-                            <li>
-                                <i class="fas fa-check"></i>
-                                <span>${feature}</span>
-                            </li>
+                            <li><i class="fas fa-check-circle"></i> ${feature}</li>
                         `).join('')}
                     </ul>
                 </div>
                 
                 <div class="modal-tab-content" id="pricing-tab">
                     <h3>${translations[currentLanguage].modalPricing}</h3>
-                    <div style="background: var(--bg-hover); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                            <div><strong>${translations[currentLanguage].pricingFree}:</strong> ${platform.pricing.free ? 'Ya' : 'Tidak'}</div>
-                            <div><strong>${translations[currentLanguage].pricingStorage}:</strong> ${platform.pricing.storage}</div>
-                            <div><strong>${translations[currentLanguage].pricingBandwidth}:</strong> ${platform.pricing.bandwidth}</div>
-                            <div><strong>${translations[currentLanguage].pricingCustomDomain}:</strong> ${platform.pricing.customDomains ? 'Ya' : 'Tidak'}</div>
-                            <div><strong>${translations[currentLanguage].pricingSsl}:</strong> ${platform.pricing.ssl ? 'Ya' : 'Tidak'}</div>
+                    <div class="pricing-info">
+                        <div class="pricing-item">
+                            <h4>${translations[currentLanguage].pricingFree}</h4>
+                            <p>${platform.free ? 'Yes' : 'No'}</p>
+                        </div>
+                        <div class="pricing-item">
+                            <h4>${translations[currentLanguage].pricingStorage}</h4>
+                            <p>${platform.storage || 'Not specified'}</p>
+                        </div>
+                        <div class="pricing-item">
+                            <h4>${translations[currentLanguage].pricingBandwidth}</h4>
+                            <p>${platform.bandwidth || 'Not specified'}</p>
+                        </div>
+                        <div class="pricing-item">
+                            <h4>${translations[currentLanguage].pricingCustomDomain}</h4>
+                            <p>${platform.customDomain ? 'Yes' : 'No'}</p>
+                        </div>
+                        <div class="pricing-item">
+                            <h4>${translations[currentLanguage].pricingSsl}</h4>
+                            <p>${platform.ssl ? 'Yes' : 'No'}</p>
                         </div>
                     </div>
                 </div>
@@ -4173,21 +3330,21 @@
                             </button>
                         </div>
                         
-                        <div id="notesList" class="notes-list">
-                            ${platformNotes.length > 0 ? platformNotes.map(note => `
-                                <div class="note-item" id="note-${note.id}">
+                        <div class="notes-list" id="notes-list-${platform.id}">
+                            ${notes.length > 0 ? notes.map(note => `
+                                <div class="note-item">
                                     <div class="note-header">
-                                        <div class="note-date">${formatDate(note.timestamp)}</div>
+                                        <span class="note-date">${new Date(note.date).toLocaleDateString()}</span>
                                         <div class="note-actions">
-                                            <button class="note-action" onclick="editNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].editNote}">
+                                            <button class="note-action" onclick="editNote('${platform.id}', '${note.id}')">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button class="note-action delete" onclick="deleteNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].deleteNote}">
+                                            <button class="note-action delete" onclick="deleteNote('${platform.id}', '${note.id}')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="note-content">${escapeHtml(note.content)}</div>
+                                    <div class="note-content">${note.content}</div>
                                 </div>
                             `).join('') : `
                                 <div class="empty-notes">
@@ -4197,548 +3354,507 @@
                             `}
                         </div>
                         
-                        <div id="addNoteForm" class="add-note" style="display: none;">
+                        <div class="add-note" id="add-note-${platform.id}" style="display: none;">
                             <h4>${translations[currentLanguage].addNote}</h4>
-                            <form class="note-form" onsubmit="saveNote(event, '${platformId}')">
+                            <form class="note-form" onsubmit="saveNote(event, '${platform.id}')">
                                 <textarea class="form-control note-textarea" placeholder="${translations[currentLanguage].yourNote}" required></textarea>
                                 <div style="display: flex; gap: 1rem;">
                                     <button type="submit" class="btn btn-primary">${translations[currentLanguage].saveNote}</button>
-                                    <button type="button" class="btn btn-secondary" onclick="hideAddNoteForm()">${translations[currentLanguage].cancel || 'Batal'}</button>
+                                    <button type="button" class="btn btn-secondary" onclick="hideAddNoteForm('${platform.id}')">Cancel</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="${platform.url}" class="deploy-btn" target="_blank" rel="noopener noreferrer" onclick="trackClick('${platform.id}')">
-                        <i class="fas fa-external-link-alt"></i> ${translations[currentLanguage].visitButton} ${platform.name}
-                    </a>
-                    <button class="btn btn-secondary" onclick="addToComparison('${platform.id}')" style="margin-left: 1rem;">
-                        <i class="fas fa-balance-scale"></i> ${translations[currentLanguage].addToComparison}
-                    </button>
+                <div class="modal-tab-content" id="share-tab">
+                    <div class="share-section">
+                        <h3>${translations[currentLanguage].shareTitle}</h3>
+                        <div class="share-message">
+                            <textarea class="form-control" placeholder="${translations[currentLanguage].shareMessage}">${platform.name} - ${platform.description}</textarea>
+                        </div>
+                        <div class="share-buttons">
+                            <button class="share-btn facebook" onclick="shareOnSocial('facebook', '${platform.url}')" data-tooltip="${translations[currentLanguage].shareFacebook}">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button class="share-btn twitter" onclick="shareOnSocial('twitter', '${platform.url}')" data-tooltip="${translations[currentLanguage].shareTwitter}">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button class="share-btn linkedin" onclick="shareOnSocial('linkedin', '${platform.url}')" data-tooltip="${translations[currentLanguage].shareLinkedIn}">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                            <button class="share-btn whatsapp" onclick="shareOnSocial('whatsapp', '${platform.url}')" data-tooltip="${translations[currentLanguage].shareWhatsApp}">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                            <button class="share-btn telegram" onclick="shareOnSocial('telegram', '${platform.url}')" data-tooltip="${translations[currentLanguage].shareTelegram}">
+                                <i class="fab fa-telegram-plane"></i>
+                            </button>
+                            <button class="share-btn email" onclick="shareOnSocial('email', '${platform.url}')" data-tooltip="${translations[currentLanguage].shareEmail}">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                            <button class="share-btn copy tooltip" onclick="copyToClipboard('${platform.url}')" data-tooltip="${translations[currentLanguage].shareCopy}">
+                                <i class="fas fa-link"></i>
+                            </button>
+                        </div>
+                        <div class="share-link">
+                            <input type="text" value="${platform.url}" readonly>
+                            <button class="btn btn-secondary" onclick="copyToClipboard('${platform.url}')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
                 </div>
             `;
             
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
         }
 
-        // Switch modal tab
-        function switchModalTab(tabName) {
-            // Update tab buttons
+        // Switch between tabs in modal
+        function switchTab(tabName) {
+            // Remove active class from all tabs and tab contents
             document.querySelectorAll('.modal-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
-            
-            // Update tab content
             document.querySelectorAll('.modal-tab-content').forEach(content => {
                 content.classList.remove('active');
             });
+            
+            // Add active class to selected tab and tab content
+            document.querySelector(`.modal-tab:nth-child(${getTabIndex(tabName)})`).classList.add('active');
             document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
-        // Generate star rating HTML
-        function generateStars(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            
-            if (hasHalfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            
-            const emptyStars = 5 - Math.ceil(rating);
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            
-            return stars;
+        // Get tab index by tab name
+        function getTabIndex(tabName) {
+            const tabs = ['overview', 'features', 'pricing', 'notes', 'share'];
+            return tabs.indexOf(tabName) + 1;
         }
 
-        // Rich share function
-        function richShare(platformId, platform) {
-            const platformData = platforms.find(p => p.id === platformId);
-            if (!platformData) return;
+        // Toggle favorite in modal
+        function toggleFavoriteInModal(platformId) {
+            toggleFavorite(platformId, { stopPropagation: () => {} });
             
-            const message = document.getElementById('shareMessage')?.value || 
-                `Check out ${platformData.name} on DeployGratis - ${platformData.description.substring(0, 100)}...`;
+            const modalContent = document.getElementById('modalContent');
+            const isFavorite = favorites.includes(platformId);
             
-            const url = `${window.location.origin}${window.location.pathname}?platform=${platformId}`;
+            // Update the button text
+            const button = modalContent.querySelector('.btn-secondary');
+            button.innerHTML = `<i class="fas fa-star"></i> ${isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}`;
+        }
+
+        // Add platform to comparison
+        function addToComparison(platformId) {
+            if (comparisonPlatforms.includes(platformId)) {
+                showToast('Platform already in comparison', 'info');
+                return;
+            }
             
-            // Check if Web Share API is available
-            if (navigator.share) {
-                navigator.share({
-                    title: platformData.name,
-                    text: message,
-                    url: url
-                })
-                .then(() => {
-                    showToast(translations[currentLanguage].toastShared, 'success');
-                })
-                .catch((error) => {
-                    console.log('Error sharing:', error);
-                    // Fall back to individual share methods
-                    shareToPlatform(platform, url, message);
+            if (comparisonPlatforms.length >= 3) {
+                showToast('You can compare up to 3 platforms at a time', 'warning');
+                return;
+            }
+            
+            comparisonPlatforms.push(platformId);
+            updateComparisonTable();
+            showToast('Platform added to comparison', 'success');
+        }
+
+        // Update comparison table
+        function updateComparisonTable() {
+            const table = document.getElementById('comparisonTable');
+            const thead = table.querySelector('thead tr');
+            const tbody = table.querySelector('tbody');
+            
+            // Clear existing platform columns (keep the first column for features)
+            while (thead.children.length > 1) {
+                thead.removeChild(thead.lastChild);
+            }
+            
+            // Add platform columns
+            comparisonPlatforms.forEach(platformId => {
+                const platform = platforms.find(p => p.id === platformId);
+                if (!platform) return;
+                
+                // Add header
+                const th = document.createElement('th');
+                th.innerHTML = `
+                    <div class="comparison-platform">
+                        <div class="comparison-logo" style="background: ${platform.logoColor};">
+                            <i class="${platform.logo}"></i>
+                        </div>
+                        <span>${platform.name}</span>
+                        <button class="comparison-remove" onclick="removeFromComparison('${platformId}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                thead.appendChild(th);
+                
+                // Add data cells for each feature row
+                const rows = tbody.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const td = document.createElement('td');
+                    const feature = row.querySelector('td').textContent;
+                    
+                    switch(feature) {
+                        case 'Tipe':
+                        case 'Type':
+                            td.textContent = getTypeLabel(platform.type);
+                            break;
+                        case 'Gratis':
+                        case 'Free':
+                            td.innerHTML = platform.free ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>';
+                            break;
+                        case 'Storage':
+                            td.textContent = platform.storage || 'Not specified';
+                            break;
+                        case 'Bandwidth':
+                            td.textContent = platform.bandwidth || 'Not specified';
+                            break;
+                        case 'Custom Domain':
+                            td.innerHTML = platform.customDomain ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>';
+                            break;
+                        case 'SSL':
+                            td.innerHTML = platform.ssl ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>';
+                            break;
+                        case 'CDN':
+                            td.innerHTML = platform.cdn ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>';
+                            break;
+                        case 'API':
+                            td.innerHTML = platform.api ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>';
+                            break;
+                        case 'Rating':
+                            td.innerHTML = `
+                                <div class="stars">
+                                    ${generateStars(platform.rating)}
+                                </div>
+                                <span class="rating-value">${platform.rating}</span>
+                            `;
+                            break;
+                        default:
+                            td.textContent = 'N/A';
+                    }
+                    
+                    row.appendChild(td);
                 });
-            } else {
-                // Fall back to individual share methods
-                shareToPlatform(platform, url, message);
+            });
+        }
+
+        // Remove platform from comparison
+        function removeFromComparison(platformId) {
+            const index = comparisonPlatforms.indexOf(platformId);
+            if (index !== -1) {
+                comparisonPlatforms.splice(index, 1);
+                updateComparisonTable();
             }
         }
 
-        // Share to specific platform
-        function shareToPlatform(platform, url, message) {
-            let shareUrl = '';
-            
-            switch (platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(message)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(url)}`;
-                    break;
-                case 'linkedin':
-                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&summary=${encodeURIComponent(message)}`;
-                    break;
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(message + ' ' + url)}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(message)}`;
-                    break;
-                case 'email':
-                    shareUrl = `mailto:?subject=${encodeURIComponent('Check out this platform on DeployGratis')}&body=${encodeURIComponent(message + '\n\n' + url)}`;
-                    break;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-                showToast(translations[currentLanguage].toastShared, 'success');
-            }
-        }
-
-        // Copy platform link
-        function copyPlatformLink(platformId) {
-            const url = `${window.location.origin}${window.location.pathname}?platform=${platformId}`;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(url)
-                    .then(() => {
-                        showToast(translations[currentLanguage].toastCopied, 'success');
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy: ', err);
-                        // Fallback for older browsers
-                        const textArea = document.createElement('textarea');
-                        textArea.value = url;
-                        document.body.appendChild(textArea);
-                        textArea.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(textArea);
-                        showToast(translations[currentLanguage].toastCopied, 'success');
-                    });
-            } else {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = url;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showToast(translations[currentLanguage].toastCopied, 'success');
-            }
-        }
-
-        // Personal Notes functions
+        // Show add note form
         function showAddNoteForm(platformId) {
-            document.getElementById('addNoteForm').style.display = 'block';
-            document.getElementById('notesList').style.display = 'none';
+            document.getElementById(`add-note-${platformId}`).style.display = 'block';
         }
 
-        function hideAddNoteForm() {
-            document.getElementById('addNoteForm').style.display = 'none';
-            document.getElementById('notesList').style.display = 'block';
+        // Hide add note form
+        function hideAddNoteForm(platformId) {
+            document.getElementById(`add-note-${platformId}`).style.display = 'none';
         }
 
+        // Save note
         function saveNote(event, platformId) {
             event.preventDefault();
             
-            const content = event.target.querySelector('textarea').value.trim();
+            const textarea = event.target.querySelector('.note-textarea');
+            const content = textarea.value.trim();
+            
             if (!content) return;
             
-            // Initialize notes array for this platform if it doesn't exist
             if (!personalNotes[platformId]) {
                 personalNotes[platformId] = [];
             }
             
-            // Create new note
-            const newNote = {
+            const note = {
                 id: Date.now().toString(),
                 content: content,
-                timestamp: new Date().toISOString()
+                date: new Date().toISOString()
             };
             
-            // Add note
-            personalNotes[platformId].push(newNote);
-            
-            // Save to localStorage
+            personalNotes[platformId].push(note);
             localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
             
-            // Refresh notes display
-            refreshNotesList(platformId);
-            
-            // Reset form
-            event.target.reset();
-            hideAddNoteForm();
+            // Refresh the notes list
+            viewPlatform(platformId);
             
             showToast(translations[currentLanguage].toastNoteAdded, 'success');
         }
 
+        // Edit note
         function editNote(platformId, noteId) {
-            const note = personalNotes[platformId].find(n => n.id === noteId);
+            const notes = personalNotes[platformId] || [];
+            const note = notes.find(n => n.id === noteId);
+            
             if (!note) return;
             
-            // Replace note item with edit form
-            const noteElement = document.getElementById(`note-${noteId}`);
-            noteElement.innerHTML = `
-                <div class="note-header">
-                    <div class="note-date">${formatDate(note.timestamp)}</div>
-                    <div class="note-actions">
-                        <button class="note-action" onclick="cancelEditNote('${platformId}', '${noteId}')" title="${translations[currentLanguage].cancel || 'Batal'}">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <form class="note-form" onsubmit="updateNote(event, '${platformId}', '${noteId}')">
-                    <textarea class="form-control note-textarea" required>${escapeHtml(note.content)}</textarea>
-                    <div style="display: flex; gap: 1rem;">
-                        <button type="submit" class="btn btn-primary">${translations[currentLanguage].saveNote}</button>
-                    </div>
-                </form>
-            `;
+            const content = prompt(translations[currentLanguage].editNote, note.content);
+            if (content === null) return;
+            
+            if (content.trim() === '') {
+                deleteNote(platformId, noteId);
+                return;
+            }
+            
+            note.content = content.trim();
+            note.date = new Date().toISOString();
+            
+            localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+            
+            // Refresh the notes list
+            viewPlatform(platformId);
+            
+            showToast(translations[currentLanguage].toastNoteUpdated, 'success');
         }
 
-        function cancelEditNote(platformId, noteId) {
-            refreshNotesList(platformId);
-        }
-
-        function updateNote(event, platformId, noteId) {
-            event.preventDefault();
+        // Delete note
+        function deleteNote(platformId, noteId) {
+            if (!confirm(translations[currentLanguage].deleteNote)) return;
             
-            const content = event.target.querySelector('textarea').value.trim();
-            if (!content) return;
+            if (!personalNotes[platformId]) return;
             
-            // Find and update note
-            const noteIndex = personalNotes[platformId].findIndex(n => n.id === noteId);
-            if (noteIndex !== -1) {
-                personalNotes[platformId][noteIndex].content = content;
-                personalNotes[platformId][noteIndex].timestamp = new Date().toISOString();
-                
-                // Save to localStorage
+            const index = personalNotes[platformId].findIndex(n => n.id === noteId);
+            if (index !== -1) {
+                personalNotes[platformId].splice(index, 1);
                 localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
                 
-                // Refresh notes display
-                refreshNotesList(platformId);
+                // Refresh the notes list
+                viewPlatform(platformId);
                 
-                showToast(translations[currentLanguage].toastNoteUpdated, 'success');
+                showToast(translations[currentLanguage].toastNoteDeleted, 'success');
             }
         }
 
-        function deleteNote(platformId, noteId) {
-            if (!confirm('Apakah Anda yakin ingin menghapus catatan ini?')) return;
+        // Share on social media
+        function shareOnSocial(platform, url) {
+            const shareUrl = encodeURIComponent(url);
+            const shareText = encodeURIComponent(document.querySelector('.share-message textarea').value);
             
-            // Remove note
-            personalNotes[platformId] = personalNotes[platformId].filter(n => n.id !== noteId);
+            let shareLink = '';
             
-            // Save to localStorage
-            localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+            switch(platform) {
+                case 'facebook':
+                    shareLink = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+                    break;
+                case 'twitter':
+                    shareLink = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
+                    break;
+                case 'linkedin':
+                    shareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`;
+                    break;
+                case 'whatsapp':
+                    shareLink = `https://wa.me/?text=${shareText}%20${shareUrl}`;
+                    break;
+                case 'telegram':
+                    shareLink = `https://t.me/share/url?url=${shareUrl}&text=${shareText}`;
+                    break;
+                case 'email':
+                    shareLink = `mailto:?subject=${shareText}&body=${shareUrl}`;
+                    break;
+            }
             
-            // Refresh notes display
-            refreshNotesList(platformId);
-            
-            showToast(translations[currentLanguage].toastNoteDeleted, 'success');
+            if (shareLink) {
+                window.open(shareLink, '_blank');
+                showToast(translations[currentLanguage].toastShared, 'success');
+            }
         }
 
-        function refreshNotesList(platformId) {
-            const notesList = document.getElementById('notesList');
-            const platformNotes = personalNotes[platformId] || [];
-            
-            notesList.innerHTML = platformNotes.length > 0 ? platformNotes.map(note => `
-                <div class="note-item" id="note-${note.id}">
-                    <div class="note-header">
-                        <div class="note-date">${formatDate(note.timestamp)}</div>
-                        <div class="note-actions">
-                            <button class="note-action" onclick="editNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].editNote}">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="note-action delete" onclick="deleteNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].deleteNote}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="note-content">${escapeHtml(note.content)}</div>
-                </div>
-            `).join('') : `
-                <div class="empty-notes">
-                    <i class="fas fa-sticky-note"></i>
-                    <p>${translations[currentLanguage].emptyNotes}</p>
-                </div>
-            `;
-        }
-
-        // Utility functions
-        function formatDate(timestamp) {
-            const date = new Date(timestamp);
-            return date.toLocaleDateString(currentLanguage === 'id' ? 'id-ID' : 'en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(translations[currentLanguage].toastCopied, 'success');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showToast('Failed to copy to clipboard', 'error');
             });
-        }
-
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, m => map[m]);
         }
 
         // Close modal
         function closeModal() {
             document.getElementById('platformModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
         }
 
-        // Show only favorites
-        function showOnlyFavorites() {
-            showFavoritesOnly = !showFavoritesOnly;
-            const btn = event.target.closest('.action-btn');
+        // Show comparison modal
+        function showComparison() {
+            document.getElementById('comparisonModal').style.display = 'block';
+            updateComparisonTable();
+            searchComparisonPlatforms();
+        }
+
+        // Close comparison modal
+        function closeComparisonModal() {
+            document.getElementById('comparisonModal').style.display = 'none';
+        }
+
+        // Search platforms for comparison
+        function searchComparisonPlatforms(event) {
+            const searchTerm = document.getElementById('comparisonSearch').value.toLowerCase();
+            const resultsContainer = document.getElementById('comparisonResults');
             
-            if (showFavoritesOnly) {
-                btn.classList.add('active');
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                showToast('Menampilkan favorit saja', 'info');
-            } else {
-                btn.classList.remove('active');
-                showToast('Menampilkan semua platform', 'info');
+            if (!searchTerm) {
+                resultsContainer.innerHTML = '';
+                return;
             }
             
-            renderPlatforms();
-        }
-
-        // Sort by popularity
-        function sortByPopularity() {
-            platforms.sort((a, b) => {
-                if (a.category === 'popular' && b.category !== 'popular') return -1;
-                if (a.category !== 'popular' && b.category === 'popular') return 1;
-                return 0;
+            const results = platforms.filter(platform => {
+                return !comparisonPlatforms.includes(platform.id) && 
+                       (platform.name.toLowerCase().includes(searchTerm) || 
+                        platform.description.toLowerCase().includes(searchTerm) ||
+                        platform.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
             });
-            renderPlatforms();
-            showToast('Diurutkan berdasarkan popularitas', 'info');
+            
+            resultsContainer.innerHTML = results.map(platform => `
+                <div class="comparison-result-item" onclick="addToComparisonFromSearch('${platform.id}')">
+                    <div class="comparison-result-logo" style="background: ${platform.logoColor};">
+                        <i class="${platform.logo}"></i>
+                    </div>
+                    <div>
+                        <h4>${platform.name}</h4>
+                        <p>${platform.description.substring(0, 50)}...</p>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Sort by newest (simulated)
-        function sortByNewest() {
-            platforms.sort((a, b) => b.id.localeCompare(a.id));
-            renderPlatforms();
-            showToast('Diurutkan berdasarkan yang terbaru', 'info');
+        // Add platform to comparison from search results
+        function addToComparisonFromSearch(platformId) {
+            if (comparisonPlatforms.includes(platformId)) {
+                showToast('Platform already in comparison', 'info');
+                return;
+            }
+            
+            if (comparisonPlatforms.length >= 3) {
+                showToast('You can compare up to 3 platforms at a time', 'warning');
+                return;
+            }
+            
+            comparisonPlatforms.push(platformId);
+            updateComparisonTable();
+            document.getElementById('comparisonSearch').value = '';
+            document.getElementById('comparisonResults').innerHTML = '';
+            showToast('Platform added to comparison', 'success');
         }
 
-        // Sort by rating
-        function sortByRating() {
-            platforms.sort((a, b) => b.rating - a.rating);
-            renderPlatforms();
-            showToast('Diurutkan berdasarkan rating tertinggi', 'info');
+        // Update recently viewed section
+        function updateRecentlyViewed() {
+            const section = document.getElementById('recentlyViewedSection');
+            const grid = document.getElementById('recentlyViewedGrid');
+            
+            if (recentlyViewed.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            
+            grid.innerHTML = recentlyViewed.map(platformId => {
+                const platform = platforms.find(p => p.id === platformId);
+                if (!platform) return '';
+                
+                return `
+                    <div class="recently-viewed-item" onclick="viewPlatform('${platform.id}')">
+                        <div class="recently-viewed-logo" style="background: ${platform.logoColor};">
+                            <i class="${platform.logo}"></i>
+                        </div>
+                        <div class="recently-viewed-info">
+                            <h4>${platform.name}</h4>
+                            <p>${getTypeLabel(platform.type)}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
-        // Reset all filters
-        function resetFilters() {
-            currentFilter = 'all';
-            currentSearch = '';
-            showFavoritesOnly = false;
+        // Generate recommendations
+        function generateRecommendations() {
+            const grid = document.getElementById('recommendationsGrid');
             
-            document.getElementById('searchInput').value = '';
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
-            document.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
-            
-            // Reset advanced filters
-            document.getElementById('storageFilter').value = '';
-            document.getElementById('bandwidthFilter').value = '';
-            document.getElementById('regionFilter').value = '';
-            document.getElementById('sslFilter').checked = false;
-            document.getElementById('customDomainFilter').checked = false;
-            document.getElementById('cdnFilter').checked = false;
-            document.getElementById('apiFilter').checked = false;
-            
-            renderPlatforms();
-            showToast('Filter direset', 'info');
-        }
-
-        // Export favorites
-        function exportFavorites() {
-            const favoritePlatforms = platforms.filter(p => favorites.includes(p.id));
-            const dataStr = JSON.stringify(favoritePlatforms, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `deploygratis_favorites_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            
-            showToast(translations[currentLanguage].toastExportedFavorites, 'success');
-        }
-
-        // Import favorites
-        function importFavorites() {
-            document.getElementById('fileInput').click();
-        }
-
-        // Handle file import
-        function handleFileImport(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedData = JSON.parse(e.target.result);
-                    const importedIds = Array.isArray(importedData) ? 
-                        importedData.map(p => p.id) : 
-                        Object.values(importedData).map(p => p.id);
+            // Simple recommendation algorithm: platforms that are popular or have high rating
+            // and are not in favorites or recently viewed
+            const recommendations = platforms
+                .filter(p => !favorites.includes(p.id) && !recentlyViewed.includes(p.id))
+                .sort((a, b) => {
+                    // Prioritize popular platforms
+                    if (a.category === 'popular' && b.category !== 'popular') return -1;
+                    if (b.category === 'popular' && a.category !== 'popular') return 1;
                     
-                    // Merge with existing favorites
-                    favorites = [...new Set([...favorites, ...importedIds])];
-                    localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
-                    
-                    updateFavoriteCount();
-                    renderPlatforms();
-                    showToast(`${translations[currentLanguage].toastImportedFavorites} (${importedIds.length})`, 'success');
-                } catch (error) {
-                    showToast('Gagal mengimpor file. Pastikan format JSON valid', 'error');
-                }
-            };
-            reader.readAsText(file);
+                    // Then by rating
+                    return b.rating - a.rating;
+                })
+                .slice(0, 4);
             
-            // Reset file input
-            event.target.value = '';
+            grid.innerHTML = recommendations.map(platform => `
+                <div class="recommendation-card" onclick="viewPlatform('${platform.id}')">
+                    <div class="recommendation-header">
+                        <div class="recommendation-logo" style="background: ${platform.logoColor};">
+                            <i class="${platform.logo}"></i>
+                        </div>
+                        <div class="recommendation-info">
+                            <h4>${platform.name}</h4>
+                            <p>${getTypeLabel(platform.type)}</p>
+                        </div>
+                    </div>
+                    <p>${platform.description.substring(0, 100)}...</p>
+                    <div class="recommendation-match">
+                        <i class="fas fa-check-circle"></i>
+                        <span>${Math.floor(Math.random() * 30 + 70)}% ${translations[currentLanguage].match}</span>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Export all data
-        function exportAllData() {
-            const dataStr = JSON.stringify({platforms: platforms, favorites: favorites, preferences: userPreferences, personalNotes: personalNotes}, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        // Render tag cloud
+        function renderTagCloud() {
+            const container = document.getElementById('tagCloud');
             
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `deploygratis_all_data_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            
-            showToast(translations[currentLanguage].toastExportedData, 'success');
-        }
-
-        // Save search
-        function saveSearch() {
-            const searchName = prompt('Nama untuk pencarian ini:');
-            if (!searchName) return;
-            
-            const searchData = {
-                name: searchName,
-                filter: currentFilter,
-                search: currentSearch,
-                advancedFilters: {
-                    storage: document.getElementById('storageFilter')?.value || '',
-                    bandwidth: document.getElementById('bandwidthFilter')?.value || '',
-                    region: document.getElementById('regionFilter')?.value || '',
-                    ssl: document.getElementById('sslFilter')?.checked || false,
-                    customDomain: document.getElementById('customDomainFilter')?.checked || false,
-                    cdn: document.getElementById('cdnFilter')?.checked || false,
-                    api: document.getElementById('apiFilter')?.checked || false
-                },
-                timestamp: new Date().toISOString()
-            };
-            
-            savedSearches.push(searchData);
-            localStorage.setItem('deploygratis_saved_searches', JSON.stringify(savedSearches));
-            
-            showToast(translations[currentLanguage].toastSavedSearch, 'success');
-        }
-
-        // Track platform clicks
-        function trackClick(platformId) {
-            const clicks = JSON.parse(localStorage.getItem('deploygratis_clicks') || '{}');
-            clicks[platformId] = (clicks[platformId] || 0) + 1;
-            localStorage.setItem('deploygratis_clicks', JSON.stringify(clicks));
-        }
-
-        // Show toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toast.className = `toast ${type}`;
-            toastMessage.textContent = message;
-            
-            // Update icon based on type
-            const icon = toast.querySelector('i');
-            icon.className = type === 'success' ? 'fas fa-check-circle' : 
-                           type === 'error' ? 'fas fa-exclamation-circle' : 
-                           'fas fa-info-circle';
-            
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Scroll to top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            // Count tag frequency
+            const tagCounts = {};
+            platforms.forEach(platform => {
+                platform.tags.forEach(tag => {
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
             });
+            
+            // Sort tags by frequency
+            const sortedTags = Object.entries(tagCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 20); // Take top 20 tags
+            
+            // Calculate size classes (1-5, where 5 is most frequent)
+            const maxCount = sortedTags[0][1];
+            const minCount = sortedTags[sortedTags.length - 1][1];
+            const range = maxCount - minCount || 1;
+            
+            container.innerHTML = sortedTags.map(([tag, count]) => {
+                const sizeClass = Math.ceil(((count - minCount) / range) * 4) + 1;
+                return `<a href="#" class="tag-cloud-item size-${sizeClass}" onclick="filterByTag('${tag}')">${tag}</a>`;
+            }).join('');
         }
 
-        // Toggle mobile menu (placeholder)
-        function toggleMobileMenu() {
-            showToast('Menu mobile akan segera tersedia', 'info');
-        }
-
-        // Update statistics
-        function updateStats() {
-            document.getElementById('totalPlatforms').textContent = platforms.length;
-            document.getElementById('staticCount').textContent = platforms.filter(p => p.type === 'static').length;
-            document.getElementById('dynamicCount').textContent = platforms.filter(p => p.type === 'dynamic').length;
-            document.getElementById('bothCount').textContent = platforms.filter(p => p.type === 'both').length;
-            document.getElementById('enterpriseCount').textContent = platforms.filter(p => p.category === 'enterprise').length;
-        }
-
-        // Get type label
-        function getTypeLabel(type) {
-            const labels = {
-                'static': translations[currentLanguage].typeStatic,
-                'dynamic': translations[currentLanguage].typeDynamic,
-                'both': translations[currentLanguage].typeBoth
-            };
-            return labels[type] || type;
+        // Filter by tag
+        function filterByTag(tag) {
+            document.getElementById('searchInput').value = tag;
+            currentSearch = tag;
+            renderPlatforms();
+            window.scrollTo({ top: document.getElementById('platforms').offsetTop - 100, behavior: 'smooth' });
         }
 
         // Initialize chart
         function initializeChart() {
             const ctx = document.getElementById('platformChart').getContext('2d');
+            
+            // Count platforms by type
+            const typeCounts = {
+                static: platforms.filter(p => p.type === 'static').length,
+                dynamic: platforms.filter(p => p.type === 'dynamic').length,
+                both: platforms.filter(p => p.type === 'both').length
+            };
             
             platformChart = new Chart(ctx, {
                 type: 'doughnut',
@@ -4749,15 +3865,11 @@
                         translations[currentLanguage].typeBoth
                     ],
                     datasets: [{
-                        data: [
-                            platforms.filter(p => p.type === 'static').length,
-                            platforms.filter(p => p.type === 'dynamic').length,
-                            platforms.filter(p => p.type === 'both').length
-                        ],
+                        data: [typeCounts.static, typeCounts.dynamic, typeCounts.both],
                         backgroundColor: [
-                            'rgba(88, 166, 255, 0.7)',
-                            'rgba(188, 140, 255, 0.7)',
-                            'rgba(63, 185, 80, 0.7)'
+                            'rgba(88, 166, 255, 0.8)',
+                            'rgba(188, 140, 255, 0.8)',
+                            'rgba(63, 185, 80, 0.8)'
                         ],
                         borderColor: [
                             'rgba(88, 166, 255, 1)',
@@ -4772,20 +3884,24 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'right',
+                            position: 'bottom',
                             labels: {
                                 color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
+                                padding: 20,
                                 font: {
                                     size: 14
                                 }
                             }
                         },
-                        title: {
-                            display: true,
-                            text: 'Distribusi Platform berdasarkan Tipe',
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
-                            font: {
-                                size: 16
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
                             }
                         }
                     }
@@ -4797,371 +3913,558 @@
         function updateChart() {
             if (!platformChart) return;
             
+            // Count platforms by type
+            const typeCounts = {
+                static: platforms.filter(p => p.type === 'static').length,
+                dynamic: platforms.filter(p => p.type === 'dynamic').length,
+                both: platforms.filter(p => p.type === 'both').length
+            };
+            
+            platformChart.data.datasets[0].data = [typeCounts.static, typeCounts.dynamic, typeCounts.both];
             platformChart.data.labels = [
                 translations[currentLanguage].typeStatic,
                 translations[currentLanguage].typeDynamic,
                 translations[currentLanguage].typeBoth
             ];
-            
-            platformChart.data.datasets[0].data = [
-                platforms.filter(p => p.type === 'static').length,
-                platforms.filter(p => p.type === 'dynamic').length,
-                platforms.filter(p => p.type === 'both').length
-            ];
-            
+            platformChart.options.plugins.legend.labels.color = getComputedStyle(document.documentElement).getPropertyValue('--text-primary');
             platformChart.update();
         }
 
-        // Render tag cloud
-        function renderTagCloud() {
-            const tagCloud = document.getElementById('tagCloud');
+        // Update stats
+        function updateStats() {
+            document.getElementById('totalPlatforms').textContent = platforms.length;
+            document.getElementById('staticCount').textContent = platforms.filter(p => p.type === 'static').length;
+            document.getElementById('dynamicCount').textContent = platforms.filter(p => p.type === 'dynamic').length;
+            document.getElementById('bothCount').textContent = platforms.filter(p => p.type === 'both').length;
+            document.getElementById('enterpriseCount').textContent = platforms.filter(p => p.category === 'enterprise').length;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                currentSearch = e.target.value;
+                renderPlatforms();
+            });
             
-            // Count tag occurrences
-            const tagCounts = {};
-            platforms.forEach(platform => {
-                platform.tags.forEach(tag => {
-                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    renderPlatforms();
                 });
             });
             
-            // Sort tags by count
-            const sortedTags = Object.entries(tagCounts)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 20); // Top 20 tags
+            // Action buttons
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
             
-            // Generate tag cloud HTML
-            tagCloud.innerHTML = sortedTags.map(([tag, count]) => {
-                const sizeClass = count > 10 ? 'size-5' :
-                                 count > 7 ? 'size-4' :
-                                 count > 4 ? 'size-3' :
-                                 count > 2 ? 'size-2' : 'size-1';
+            // Scroll effects
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
                 
-                return `<a href="#" class="tag-cloud-item ${sizeClass}" onclick="filterByTag('${tag}')">${tag}</a>`;
-            }).join('');
+                // Show/hide scroll to top button
+                const scrollTop = document.getElementById('scrollTop');
+                if (window.scrollY > 300) {
+                    scrollTop.classList.add('show');
+                } else {
+                    scrollTop.classList.remove('show');
+                }
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                const platformModal = document.getElementById('platformModal');
+                const comparisonModal = document.getElementById('comparisonModal');
+                const helpModal = document.getElementById('helpModal');
+                
+                if (event.target === platformModal) {
+                    closeModal();
+                }
+                
+                if (event.target === comparisonModal) {
+                    closeComparisonModal();
+                }
+                
+                if (event.target === helpModal) {
+                    closeHelpModal();
+                }
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(event) {
+                // Ctrl/Cmd + K: Focus search
+                if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+                    event.preventDefault();
+                    document.getElementById('searchInput').focus();
+                }
+                
+                // Ctrl/Cmd + T: Toggle theme
+                if ((event.ctrlKey || event.metaKey) && event.key === 't') {
+                    event.preventDefault();
+                    toggleTheme();
+                }
+                
+                // Ctrl/Cmd + F: Show favorites
+                if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
+                    event.preventDefault();
+                    showOnlyFavorites();
+                }
+                
+                // Ctrl/Cmd + B: Show comparison
+                if ((event.ctrlKey || event.metaKey) && event.key === 'b') {
+                    event.preventDefault();
+                    showComparison();
+                }
+                
+                // Esc: Close modals
+                if (event.key === 'Escape') {
+                    closeModal();
+                    closeComparisonModal();
+                    closeHelpModal();
+                }
+            });
+            
+            // File input for import
+            document.getElementById('fileInput').addEventListener('change', handleFileImport);
         }
 
-        // Filter by tag
-        function filterByTag(tag) {
-            document.getElementById('searchInput').value = tag;
-            currentSearch = tag;
+        // Setup scroll effects
+        function setupScrollEffects() {
+            // Already handled in setupEventListeners
+        }
+
+        // Apply user preferences
+        function applyUserPreferences() {
+            // Apply theme
+            if (userPreferences.theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('themeIcon').className = 'fas fa-moon';
+            }
+            
+            // Apply language
+            currentLanguage = userPreferences.language || 'id';
+            updateLanguage();
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.getElementById('themeIcon').className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            userPreferences.theme = newTheme;
+            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
+            
+            // Update chart colors
+            updateChart();
+            
+            showToast(translations[currentLanguage].toastThemeChanged, 'success');
+        }
+
+        // Toggle language
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
+            userPreferences.language = currentLanguage;
+            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
+            
+            updateLanguage();
+            showToast(translations[currentLanguage].toastLanguageChanged, 'success');
+        }
+
+        // Update language
+        function updateLanguage() {
+            // Update text elements with translations
+            document.querySelector('.hero h1').textContent = translations[currentLanguage].heroTitle;
+            document.querySelector('.hero p').textContent = translations[currentLanguage].heroSubtitle;
+            document.querySelector('.stat-item:nth-child(1) .stat-label').textContent = translations[currentLanguage].statPlatform;
+            document.querySelector('.stat-item:nth-child(2) .stat-label').textContent = translations[currentLanguage].statFree;
+            document.querySelector('.stat-item:nth-child(3) .stat-label').textContent = translations[currentLanguage].statProject;
+            document.getElementById('searchInput').placeholder = translations[currentLanguage].searchPlaceholder;
+            
+            // Update filter buttons
+            document.querySelector('.filter-btn[data-filter="all"]').textContent = translations[currentLanguage].filterAll;
+            document.querySelector('.filter-btn[data-filter="static"]').textContent = translations[currentLanguage].filterStatic;
+            document.querySelector('.filter-btn[data-filter="dynamic"]').textContent = translations[currentLanguage].filterDynamic;
+            document.querySelector('.filter-btn[data-filter="both"]').textContent = translations[currentLanguage].filterBoth;
+            document.querySelector('.filter-btn[data-filter="enterprise"]').textContent = translations[currentLanguage].filterEnterprise;
+            document.querySelector('.filter-btn[data-filter="popular"]').textContent = translations[currentLanguage].filterPopular;
+            
+            // Update action buttons
+            document.querySelector('.action-btn:nth-child(1)').innerHTML = `<i class="fas fa-star"></i> ${translations[currentLanguage].actionFavorites}`;
+            document.querySelector('.action-btn:nth-child(2)').innerHTML = `<i class="fas fa-fire"></i> ${translations[currentLanguage].actionPopular}`;
+            document.querySelector('.action-btn:nth-child(3)').innerHTML = `<i class="fas fa-clock"></i> ${translations[currentLanguage].actionNewest}`;
+            document.querySelector('.action-btn:nth-child(4)').innerHTML = `<i class="fas fa-star"></i> ${translations[currentLanguage].actionRating}`;
+            document.querySelector('.action-btn:nth-child(5)').innerHTML = `<i class="fas fa-balance-scale"></i> ${translations[currentLanguage].actionCompare}`;
+            document.querySelector('.action-btn:nth-child(6)').innerHTML = `<i class="fas fa-refresh"></i> ${translations[currentLanguage].actionReset}`;
+            
+            // Update section titles
+            document.querySelector('.section-title').textContent = translations[currentLanguage].sectionTitle;
+            document.querySelector('.section-subtitle').textContent = translations[currentLanguage].sectionSubtitle;
+            
+            // Update empty state
+            document.querySelector('.empty-state h3').textContent = translations[currentLanguage].emptyTitle;
+            document.querySelector('.empty-state p').textContent = translations[currentLanguage].emptySubtitle;
+            
+            // Update footer
+            document.querySelector('.footer h3').innerHTML = `<i class="fas fa-rocket"></i> ${translations[currentLanguage].footerTitle}`;
+            document.querySelector('.footer p').textContent = translations[currentLanguage].footerText;
+            document.querySelector('.footer p:last-of-type').innerHTML = `&copy; 2025 Deploy-Your-Things. Dibuat dengan <i class="fas fa-heart" style="color: var(--accent-danger);"></i> untuk developer Indonesia.`;
+            
+            // Update newsletter
+            document.querySelector('.newsletter h4').textContent = translations[currentLanguage].newsletterTitle;
+            document.querySelector('.newsletter p').textContent = translations[currentLanguage].newsletterText;
+            document.querySelector('.newsletter-input').placeholder = translations[currentLanguage].newsletterPlaceholder;
+            document.querySelector('.newsletter-form button').textContent = translations[currentLanguage].newsletterButton;
+            
+            // Update recently viewed
+            if (recentlyViewed.length > 0) {
+                document.querySelector('.recently-viewed h3').textContent = translations[currentLanguage].recentlyViewed;
+            }
+            
+            // Update recommendations
+            document.querySelector('.recommendations h3').textContent = translations[currentLanguage].recommendations;
+            
+            // Update chart
+            updateChart();
+            
+            // Re-render platforms to update labels
+            renderPlatforms();
+        }
+
+        // Toggle user menu
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.backgroundColor = 'var(--bg-secondary)';
+                navLinks.style.padding = '1rem';
+                navLinks.style.borderBottom = '1px solid var(--border-primary)';
+            }
+        }
+
+        // Show only favorites
+        function showOnlyFavorites() {
+            showFavoritesOnly = !showFavoritesOnly;
             renderPlatforms();
             
-            // Scroll to platforms section
-            document.getElementById('platforms').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Add to recently viewed
-        function addToRecentlyViewed(platformId) {
-            // Remove if already exists
-            recentlyViewed = recentlyViewed.filter(id => id !== platformId);
-            
-            // Add to beginning
-            recentlyViewed.unshift(platformId);
-            
-            // Keep only last 5
-            if (recentlyViewed.length > 5) {
-                recentlyViewed = recentlyViewed.slice(0, 5);
+            if (showFavoritesOnly) {
+                showToast('Showing favorites only', 'info');
+            } else {
+                showToast('Showing all platforms', 'info');
             }
-            
-            localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
-            updateRecentlyViewed();
         }
 
-        // Update recently viewed
-        function updateRecentlyViewed() {
-            const section = document.getElementById('recentlyViewedSection');
-            const grid = document.getElementById('recentlyViewedGrid');
-            
-            if (recentlyViewed.length === 0) {
-                section.style.display = 'none';
-                return;
-            }
-            
-            section.style.display = 'block';
-            
-            const recentlyViewedPlatforms = recentlyViewed
-                .map(id => platforms.find(p => p.id === id))
-                .filter(Boolean);
-            
-            grid.innerHTML = recentlyViewedPlatforms.map(platform => `
-                <div class="recently-viewed-item" onclick="showPlatformDetails('${platform.id}')">
-                    <div class="recently-viewed-logo" style="background: ${platform.logoColor};">
-                        <i class="${platform.logo}"></i>
-                    </div>
-                    <div class="recently-viewed-info">
-                        <h4>${platform.name}</h4>
-                        <p>${platform.type}</p>
-                    </div>
-                </div>
-            `).join('');
+        // Sort by popularity
+        function sortByPopularity() {
+            platforms.sort((a, b) => {
+                if (a.category === 'popular' && b.category !== 'popular') return -1;
+                if (b.category === 'popular' && a.category !== 'popular') return 1;
+                return 0;
+            });
+            renderPlatforms();
         }
 
-        // Generate recommendations
-        function generateRecommendations() {
-            if (!userPreferences.recommendations) return;
+        // Sort by newest
+        function sortByNewest() {
+            platforms.sort((a, b) => new Date(b.addedDate || '2023-01-01') - new Date(a.addedDate || '2023-01-01'));
+            renderPlatforms();
+        }
+
+        // Sort by rating
+        function sortByRating() {
+            platforms.sort((a, b) => b.rating - a.rating);
+            renderPlatforms();
+        }
+
+        // Reset filters
+        function resetFilters() {
+            currentFilter = 'all';
+            currentSearch = '';
+            showFavoritesOnly = false;
             
-            const grid = document.getElementById('recommendationsGrid');
-            
-            // Simple recommendation algorithm based on favorites
-            let recommendedPlatforms = [];
-            
-            if (favorites.length > 0) {
-                // Get types of favorited platforms
-                const favoriteTypes = favorites
-                    .map(id => platforms.find(p => p.id === id)?.type)
-                    .filter(Boolean);
-                
-                // Count type occurrences
-                const typeCounts = {};
-                favoriteTypes.forEach(type => {
-                    typeCounts[type] = (typeCounts[type] || 0) + 1;
-                });
-                
-                // Get most common type
-                const mostCommonType = Object.entries(typeCounts)
-                    .sort((a, b) => b[1] - a[1])[0]?.[0];
-                
-                if (mostCommonType) {
-                    // Recommend platforms of the same type that aren't favorited
-                    recommendedPlatforms = platforms
-                        .filter(p => p.type === mostCommonType && !favorites.includes(p.id))
-                        .slice(0, 4);
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === 'all') {
+                    btn.classList.add('active');
                 }
-            }
+            });
             
-            // If no favorites or not enough recommendations, show popular platforms
-            if (recommendedPlatforms.length < 4) {
-                const popularPlatforms = platforms
-                    .filter(p => p.category === 'popular' && !favorites.includes(p.id))
-                    .slice(0, 4 - recommendedPlatforms.length);
-                
-                recommendedPlatforms = [...recommendedPlatforms, ...popularPlatforms];
-            }
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
             
-            // Render recommendations
-            grid.innerHTML = recommendedPlatforms.map(platform => {
-                const matchPercentage = favorites.length > 0 ? 
-                    Math.floor(Math.random() * 30) + 70 : // 70-100% if has favorites
-                    Math.floor(Math.random() * 20) + 60; // 60-80% if no favorites
-                
-                return `
-                    <div class="recommendation-card" onclick="showPlatformDetails('${platform.id}')">
-                        <div class="recommendation-header">
-                            <div class="recommendation-logo" style="background: ${platform.logoColor};">
-                                <i class="${platform.logo}"></i>
-                            </div>
-                            <div class="recommendation-info">
-                                <h4>${platform.name}</h4>
-                                <p>${getTypeLabel(platform.type)}</p>
-                            </div>
-                        </div>
-                        <p class="platform-description">${platform.description.substring(0, 100)}...</p>
-                        <div class="recommendation-match">
-                            <i class="fas fa-check-circle"></i>
-                            <span>${matchPercentage}% ${translations[currentLanguage].match}</span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            // Reset advanced filters
+            document.getElementById('storageFilter').value = '';
+            document.getElementById('bandwidthFilter').value = '';
+            document.getElementById('regionFilter').value = '';
+            document.getElementById('sslFilter').checked = false;
+            document.getElementById('customDomainFilter').checked = false;
+            document.getElementById('cdnFilter').checked = false;
+            document.getElementById('apiFilter').checked = false;
+            
+            renderPlatforms();
         }
 
-        // Show comparison modal
-        function showComparison() {
-            const modal = document.getElementById('comparisonModal');
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Initialize comparison table
-            updateComparisonTable();
+        // Toggle advanced search
+        function toggleAdvancedSearch() {
+            const panel = document.getElementById('advancedSearchPanel');
+            panel.classList.toggle('active');
         }
 
-        // Close comparison modal
-        function closeComparisonModal() {
-            document.getElementById('comparisonModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+        // Apply advanced filters
+        function applyAdvancedFilters() {
+            renderPlatforms();
+            toggleAdvancedSearch();
         }
 
-        // Search comparison platforms
-        function searchComparisonPlatforms(event) {
-            const searchTerm = event.target.value.toLowerCase();
-            const results = document.getElementById('comparisonResults');
+        // Reset advanced filters
+        function resetAdvancedFilters() {
+            document.getElementById('storageFilter').value = '';
+            document.getElementById('bandwidthFilter').value = '';
+            document.getElementById('regionFilter').value = '';
+            document.getElementById('sslFilter').checked = false;
+            document.getElementById('customDomainFilter').checked = false;
+            document.getElementById('cdnFilter').checked = false;
+            document.getElementById('apiFilter').checked = false;
             
-            if (!searchTerm) {
-                results.innerHTML = '';
-                return;
-            }
-            
-            const matchingPlatforms = platforms.filter(p => 
-                p.name.toLowerCase().includes(searchTerm) && 
-                !comparisonPlatforms.some(cp => cp.id === p.id)
-            );
-            
-            results.innerHTML = matchingPlatforms.map(platform => `
-                <div class="comparison-result-item" onclick="addToComparisonFromSearch('${platform.id}')">
-                    <div class="comparison-result-logo" style="background: ${platform.logoColor};">
-                        <i class="${platform.logo}"></i>
-                    </div>
-                    <div>
-                        <div>${platform.name}</div>
-                        <div style="font-size: 0.75rem; color: var(--text-secondary);">${getTypeLabel(platform.type)}</div>
-                    </div>
-                </div>
-            `).join('');
+            renderPlatforms();
         }
 
-        // Add to comparison from search
-        function addToComparisonFromSearch(platformId) {
-            const platform = platforms.find(p => p.id === platformId);
-            if (!platform || comparisonPlatforms.length >= 4) return;
+        // Export favorites
+        function exportFavorites() {
+            const favoritePlatforms = platforms.filter(p => favorites.includes(p.id));
+            const dataStr = JSON.stringify(favoritePlatforms, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
             
-            comparisonPlatforms.push(platform);
-            updateComparisonTable();
+            const exportFileDefaultName = 'deploygratis_favorites.json';
             
-            // Clear search
-            document.getElementById('comparisonSearch').value = '';
-            document.getElementById('comparisonResults').innerHTML = '';
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showToast(translations[currentLanguage].toastExportedFavorites, 'success');
         }
 
-        // Add to comparison from modal
-        function addToComparison(platformId) {
-            const platform = platforms.find(p => p.id === platformId);
-            if (!platform || comparisonPlatforms.length >= 4) {
-                if (comparisonPlatforms.length >= 4) {
-                    showToast('Maksimal 4 platform untuk dibandingkan', 'error');
+        // Import favorites
+        function importFavorites() {
+            document.getElementById('fileInput').click();
+        }
+
+        // Export all data
+        function exportAllData() {
+            const allData = {
+                favorites: favorites,
+                recentlyViewed: recentlyViewed,
+                userPreferences: userPreferences,
+                personalNotes: personalNotes,
+                savedSearches: savedSearches
+            };
+            
+            const dataStr = JSON.stringify(allData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'deploygratis_data.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showToast(translations[currentLanguage].toastExportedData, 'success');
+        }
+
+        // Handle file import
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // Handle different import types
+                    if (Array.isArray(data)) {
+                        // It's a list of platforms (favorites import)
+                        const importedIds = data.map(p => p.id);
+                        favorites = [...new Set([...favorites, ...importedIds])];
+                        localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
+                        updateFavoriteCount();
+                        renderPlatforms();
+                        showToast(translations[currentLanguage].toastImportedFavorites, 'success');
+                    } else if (data.favorites) {
+                        // It's a full data export
+                        favorites = data.favorites || [];
+                        recentlyViewed = data.recentlyViewed || [];
+                        userPreferences = { ...userPreferences, ...data.userPreferences };
+                        personalNotes = data.personalNotes || {};
+                        savedSearches = data.savedSearches || [];
+                        
+                        localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
+                        localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
+                        localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
+                        localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+                        localStorage.setItem('deploygratis_saved_searches', JSON.stringify(savedSearches));
+                        
+                        updateFavoriteCount();
+                        updateRecentlyViewed();
+                        applyUserPreferences();
+                        renderPlatforms();
+                        
+                        showToast('All data imported successfully', 'success');
+                    }
+                } catch (error) {
+                    console.error('Error importing data:', error);
+                    showToast('Failed to import data', 'error');
                 }
+            };
+            
+            reader.readAsText(file);
+            event.target.value = ''; // Reset file input
+        }
+
+        // Save search
+        function saveSearch() {
+            const searchQuery = document.getElementById('searchInput').value.trim();
+            if (!searchQuery) {
+                showToast('Please enter a search query', 'warning');
                 return;
             }
             
-            comparisonPlatforms.push(platform);
-            updateComparisonTable();
+            if (savedSearches.includes(searchQuery)) {
+                showToast('Search already saved', 'info');
+                return;
+            }
             
-            // Close platform modal and open comparison modal
-            closeModal();
-            showComparison();
+            savedSearches.push(searchQuery);
+            localStorage.setItem('deploygratis_saved_searches', JSON.stringify(savedSearches));
+            
+            showToast(translations[currentLanguage].toastSavedSearch, 'success');
         }
 
-        // Remove from comparison
-        function removeFromComparison(platformId) {
-            comparisonPlatforms = comparisonPlatforms.filter(p => p.id !== platformId);
-            updateComparisonTable();
+        // Subscribe to newsletter
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value.trim();
+            
+            if (!email) {
+                showToast('Please enter your email', 'warning');
+                return;
+            }
+            
+            // In a real app, you would send this to your backend
+            console.log('Newsletter subscription:', email);
+            
+            showToast(translations[currentLanguage].toastSubscribed, 'success');
+            event.target.reset();
         }
 
-        // Update comparison table
-        function updateComparisonTable() {
-            const table = document.getElementById('comparisonTable');
-            const thead = table.querySelector('thead tr');
-            const tbody = table.querySelector('tbody');
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
             
-            // Update table headers
-            thead.innerHTML = '<th>Fitur</th>' + 
-                comparisonPlatforms.map(platform => `
-                    <th>
-                        <div class="comparison-platform">
-                            <div class="comparison-logo" style="background: ${platform.logoColor};">
-                                <i class="${platform.logo}"></i>
-                            </div>
-                            <div>${platform.name}</div>
-                            <button class="comparison-remove" onclick="removeFromComparison('${platform.id}')" aria-label="Remove from comparison">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </th>
-                `).join('');
+            // Set message
+            toastMessage.textContent = message;
             
-            // Update table body
-            tbody.innerHTML = `
-                <tr>
-                    <td>${translations[currentLanguage].featureType}</td>
-                    ${comparisonPlatforms.map(p => `<td>${getTypeLabel(p.type)}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureFree}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.pricing.free ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureStorage}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.pricing.storage}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureBandwidth}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.pricing.bandwidth}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureCustomDomain}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.pricing.customDomains ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureSsl}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.pricing.ssl ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureCdn}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.features.some(f => f.toLowerCase().includes('cdn')) ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureApi}</td>
-                    ${comparisonPlatforms.map(p => `<td>${p.features.some(f => f.toLowerCase().includes('api')) ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
-                </tr>
-                <tr>
-                    <td>${translations[currentLanguage].featureRating}</td>
-                    ${comparisonPlatforms.map(p => `<td>${generateStars(p.rating)} ${p.rating}</td>`).join('')}
-                </tr>
-            `;
+            // Set type
+            toast.className = 'toast show';
+            if (type === 'success') {
+                toast.classList.add('success');
+                toast.querySelector('i').className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                toast.classList.add('error');
+                toast.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                toast.querySelector('i').className = 'fas fa-exclamation-triangle';
+            } else {
+                toast.classList.add('info');
+                toast.querySelector('i').className = 'fas fa-info-circle';
+            }
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Open help modal
         function openHelpModal() {
-            const modal = document.getElementById('helpModal');
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            document.getElementById('helpModal').style.display = 'block';
         }
 
         // Close help modal
         function closeHelpModal() {
             document.getElementById('helpModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
         }
 
-        // Subscribe to newsletter (placeholder)
-        function subscribeNewsletter(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-            
-            // Simulate API call
-            setTimeout(() => {
-                showToast(translations[currentLanguage].toastSubscribed, 'success');
-                event.target.reset();
-            }, 500);
+        // Placeholder functions for user menu actions
+        function showProfile() {
+            showToast('no profile vro, help me to code', 'info');
+            toggleUserMenu();
         }
 
-        // Add intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        function showPreferences() {
+            showToast('wat is preferences', 'info');
+            toggleUserMenu();
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        function showHistory() {
+            showToast('Help me code on git', 'info');
+            toggleUserMenu();
+        }
 
-        // Observe platform cards when they are added
-        const observeCards = () => {
-            document.querySelectorAll('.platform-card').forEach(card => {
-                observer.observe(card);
-            });
-        };
+        function exportUserData() {
+            exportAllData();
+            toggleUserMenu();
+        }
 
-        // Call observeCards after rendering
-        const originalRenderPlatforms = renderPlatforms;
-        renderPlatforms = function() {
-            originalRenderPlatforms();
-            setTimeout(observeCards, 100);
-        };
+        function importUserData() {
+            importFavorites();
+            toggleUserMenu();
+        }
+
+        function logout() {
+            showToast('sementara placeholder dolo ya', 'info');
+            toggleUserMenu();
+        }
     </script>
 </body>
 </html>
