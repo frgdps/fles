@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deploy Gratis - Platform Deployment Terlengkap di Dunia</title>
+    <title>Deploy-Your-Things - Platform Deployment Terlengkap di Dunia</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.css" rel="stylesheet">
     <style>
@@ -2329,7 +2329,7 @@
                 </button>
                 <div class="user-menu">
                     <div class="user-avatar" onclick="toggleUserMenu()" aria-label="User menu">
-                        <span id="userInitial">U</span>
+                        <span id="userInitial">F</span>
                     </div>
                     <div class="user-dropdown" id="userDropdown">
                         <a href="#" onclick="showProfile()"><i class="fas fa-user"></i> Profil Saya</a>
@@ -2373,12 +2373,8 @@
                         <span class="stat-label">Platform</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">100%</span>
+                        <span class="stat-number">97%</span>
                         <span class="stat-label">Gratis</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">∞</span>
-                        <span class="stat-label">Project</span>
                     </div>
                 </div>
 
@@ -3005,7 +3001,8 @@
         // Load platforms from JSON
         async function loadPlatforms() {
             try {
-                const response = await fetch('/deploy/platforms.json');
+                // Fixed: Use the correct URL for the platforms.json file
+                const response = await fetch('https://flessan.pages.dev/deploy/platforms.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -3015,6 +3012,14 @@
                 // Add missing properties that might not be in the JSON but are needed by our app
                 platforms = platforms.map(platform => ({
                     ...platform,
+                    // Fixed: Use pricing object properties if available
+                    free: platform.pricing ? platform.pricing.free : true,
+                    storage: platform.pricing ? platform.pricing.storage : "Unlimited",
+                    bandwidth: platform.pricing ? platform.pricing.bandwidth : "Unlimited",
+                    customDomain: platform.pricing ? platform.pricing.customDomains : true,
+                    ssl: platform.pricing ? platform.pricing.ssl : true,
+                    cdn: platform.features ? platform.features.includes('CDN') : false,
+                    api: platform.features ? platform.features.includes('API') : false,
                     rating: platform.rating || 4.0, // Default rating if not provided
                     region: platform.region || 'global' // Default region if not provided
                 }));
@@ -3077,7 +3082,7 @@
                             ${generateStars(platform.rating)}
                         </div>
                         <span class="rating-value">${platform.rating}</span>
-                        </div>
+                    </div>
                     <div class="platform-footer">
                         ${platform.free ? 
                             `<span class="free-badge">${translations[currentLanguage].freeBadge}</span>` : 
@@ -3141,19 +3146,19 @@
             }
             
             if (sslFilter) {
-                filtered = filtered.filter(p => p.features && p.features.includes('ssl'));
+                filtered = filtered.filter(p => p.ssl);
             }
             
             if (customDomainFilter) {
-                filtered = filtered.filter(p => p.features && p.features.includes('customDomain'));
+                filtered = filtered.filter(p => p.customDomain);
             }
             
             if (cdnFilter) {
-                filtered = filtered.filter(p => p.features && p.features.includes('cdn'));
+                filtered = filtered.filter(p => p.cdn);
             }
             
             if (apiFilter) {
-                filtered = filtered.filter(p => p.features && p.features.includes('api'));
+                filtered = filtered.filter(p => p.api);
             }
             
             return filtered;
@@ -3469,6 +3474,13 @@
             while (thead.children.length > 1) {
                 thead.removeChild(thead.lastChild);
             }
+            
+            // Clear existing data cells
+            tbody.querySelectorAll('tr').forEach(row => {
+                while (row.children.length > 1) {
+                    row.removeChild(row.lastChild);
+                }
+            });
             
             // Add platform columns
             comparisonPlatforms.forEach(platformId => {
@@ -4435,19 +4447,19 @@
             document.getElementById('helpModal').style.display = 'none';
         }
 
-        // Placeholder functions for user menu actions
+        // Fixed functions for user menu actions
         function showProfile() {
-            showToast('no profile vro, help me to code', 'info');
+            showToast('Profile feature coming soon!', 'info');
             toggleUserMenu();
         }
 
         function showPreferences() {
-            showToast('wat is preferences', 'info');
+            showToast('Preferences feature coming soon!', 'info');
             toggleUserMenu();
         }
 
         function showHistory() {
-            showToast('Help me code on git', 'info');
+            showToast('History feature coming soon!', 'info');
             toggleUserMenu();
         }
 
@@ -4462,7 +4474,7 @@
         }
 
         function logout() {
-            showToast('sementara placeholder dolo ya', 'info');
+            showToast('Logout feature coming soon!', 'info');
             toggleUserMenu();
         }
     </script>
