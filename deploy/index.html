@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deploy Gratis - Platform Deployment Terlengkap di Dunia</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.css" rel="stylesheet">
     <style>
         /* Modern CSS Reset and Variables */
         *, *::before, *::after {
@@ -41,6 +42,30 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #f3f4f6;
+            --bg-hover: #e1e4e8;
+            --bg-card: #ffffff;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --text-muted: #6e7781;
+            --border-primary: #d1d9e0;
+            --border-secondary: #e1e4e8;
+            --accent-primary: #0969da;
+            --accent-secondary: #0860ca;
+            --accent-success: #1a7f37;
+            --accent-warning: #9a6700;
+            --accent-danger: #d1242f;
+            --accent-purple: #8250df;
+            --accent-pink: #bc4c00;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
             line-height: 1.6;
@@ -48,6 +73,7 @@
             background: var(--bg-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            transition: var(--transition);
         }
 
         /* Container */
@@ -146,6 +172,91 @@
             color: white;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            min-width: 200px;
+            z-index: 1001;
+            display: none;
+        }
+
+        .user-dropdown.active {
+            display: block;
+        }
+
+        .user-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .user-dropdown a:hover {
+            background: var(--bg-hover);
+            color: var(--accent-primary);
+        }
+
+        .user-dropdown-divider {
+            height: 1px;
+            background: var(--border-primary);
+            margin: 0.5rem 0;
+        }
+
         /* Mobile Menu */
         .mobile-menu-toggle {
             display: none;
@@ -163,10 +274,48 @@
             background: var(--bg-hover);
         }
 
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--bg-secondary);
+            padding: 1rem 0;
+            margin-top: 70px;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-item {
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--accent-primary);
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--text-primary);
+        }
+
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 8rem 0 4rem;
+            padding: 4rem 0;
             background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             position: relative;
             overflow: hidden;
@@ -250,7 +399,7 @@
 
         /* Search Container */
         .search-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto 2rem;
             position: relative;
             animation: fadeInUp 0.8s ease-out 0.6s both;
@@ -280,6 +429,138 @@
             transform: translateY(-50%);
             color: var(--text-secondary);
             font-size: 1.2rem;
+        }
+
+        .advanced-search-toggle {
+            position: absolute;
+            right: 3.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .advanced-search-toggle:hover {
+            color: var(--accent-primary);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .advanced-search-panel {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .advanced-search-panel.active {
+            display: block;
+        }
+
+        .advanced-search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .checkbox-item input {
+            margin: 0;
+        }
+
+        .advanced-search-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-secondary);
+        }
+
+        .btn-secondary {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
         }
 
         /* Filter Container */
@@ -433,6 +714,208 @@
 
         .stat-box p {
             color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            height: 300px;
+            position: relative;
+        }
+
+        /* Tag Cloud */
+        .tag-cloud {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .tag-cloud h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .tag-cloud-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .tag-cloud-item {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.875rem;
+        }
+
+        .tag-cloud-item:hover {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        .tag-cloud-item.size-1 { font-size: 0.75rem; }
+        .tag-cloud-item.size-2 { font-size: 0.875rem; }
+        .tag-cloud-item.size-3 { font-size: 1rem; }
+        .tag-cloud-item.size-4 { font-size: 1.125rem; }
+        .tag-cloud-item.size-5 { font-size: 1.25rem; }
+
+        /* Recently Viewed */
+        .recently-viewed {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .recently-viewed h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .recently-viewed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .recently-viewed-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .recently-viewed-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        .recently-viewed-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .recently-viewed-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .recently-viewed-info h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recently-viewed-info p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .recommendations h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .recommendation-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .recommendation-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .recommendation-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .recommendation-info p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .recommendation-match {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: var(--accent-success);
             font-size: 0.875rem;
         }
 
@@ -681,6 +1164,22 @@
             box-shadow: var(--shadow-md);
         }
 
+        .platform-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .stars {
+            color: var(--accent-warning);
+        }
+
+        .rating-value {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
         /* Tags */
         .platform-tags {
             display: flex;
@@ -784,6 +1283,428 @@
             flex-shrink: 0;
         }
 
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-primary);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .modal-tab:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-tab.active {
+            color: var(--accent-primary);
+        }
+
+        .modal-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-primary);
+        }
+
+        .modal-tab-content {
+            display: none;
+        }
+
+        .modal-tab-content.active {
+            display: block;
+        }
+
+        /* Personal Notes Section */
+        .notes-section {
+            margin-top: 2rem;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .notes-list {
+            margin-bottom: 1.5rem;
+        }
+
+        .note-item {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .note-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .note-action {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .note-action:hover {
+            color: var(--accent-primary);
+            background: var(--bg-hover);
+        }
+
+        .note-action.delete:hover {
+            color: var(--accent-danger);
+        }
+
+        .note-content {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .add-note {
+            margin-top: 1.5rem;
+        }
+
+        .add-note h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .note-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .note-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .empty-notes {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-notes i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Rich Share Section */
+        .share-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-primary);
+        }
+
+        .share-section h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .share-message {
+            margin-bottom: 1rem;
+        }
+
+        .share-message textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .share-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.linkedin { background: #0077b5; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn.telegram { background: #0088cc; }
+        .share-btn.email { background: #ea4335; }
+        .share-btn.copy { background: var(--text-secondary); }
+
+        .share-btn.tooltip {
+            position: relative;
+        }
+
+        .share-btn.tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .share-btn.tooltip:hover::after {
+            opacity: 1;
+        }
+
+        .share-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .share-link input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        /* Comparison Modal */
+        .comparison-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .comparison-content {
+            background: var(--bg-tertiary);
+            margin: 3% auto;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            width: 95%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-primary);
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            overflow-x: auto;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .comparison-table thead,
+        .comparison-table tbody {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-primary);
+            vertical-align: top;
+        }
+
+        .comparison-table th {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .comparison-platform {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .comparison-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .comparison-remove {
+            background: var(--accent-danger);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: auto;
+            transition: var(--transition);
+        }
+
+        .comparison-remove:hover {
+            background: #da3633;
+        }
+
+        .comparison-check {
+            color: var(--accent-success);
+        }
+
+        .comparison-cross {
+            color: var(--accent-danger);
+        }
+
+        .add-to-comparison {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .add-to-comparison h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .comparison-search {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-search input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .comparison-results {
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .comparison-result-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .comparison-result-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .comparison-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-result-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
         /* Footer */
         .footer {
             background: var(--bg-secondary);
@@ -809,6 +1730,51 @@
             margin-bottom: 1rem;
             color: var(--text-secondary);
             line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .newsletter {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .newsletter h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            color: var(--text-primary);
         }
 
         /* Toast Notification */
@@ -953,6 +1919,102 @@
             display: none;
         }
 
+        /* Help Button */
+        .help-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-purple);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .help-button:hover {
+            background: var(--accent-pink);
+            transform: translateY(-5px);
+        }
+
+        /* Help Modal */
+        .help-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .help-content {
+            background: var(--bg-tertiary);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-primary);
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .help-section {
+            margin-bottom: 2rem;
+        }
+
+        .help-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .help-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .keyboard-shortcuts {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .shortcut-item:last-child {
+            border-bottom: none;
+        }
+
+        .shortcut-key {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -974,6 +2036,17 @@
             from {
                 opacity: 0;
                 transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -1057,6 +2130,21 @@
                 padding: 1.5rem;
             }
 
+            .comparison-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+            }
+
             .toast {
                 right: 1rem;
                 left: 1rem;
@@ -1076,6 +2164,42 @@
                 left: 1rem;
                 width: 45px;
                 height: 45px;
+            }
+
+            .help-button {
+                bottom: 1rem;
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .advanced-search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-tabs {
+                padding-bottom: 0.5rem;
+            }
+
+            .modal-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .share-buttons {
+                justify-content: center;
+            }
+
+            .share-link {
+                flex-direction: column;
+            }
+
+            .share-link input {
+                margin-bottom: 0.5rem;
             }
         }
 
@@ -1109,17 +2233,46 @@
             .platform-info h3 {
                 font-size: 1.1rem;
             }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .comparison-table thead,
+            .comparison-table tbody {
+                display: table;
+                width: 100%;
+                table-layout: auto;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                min-width: 120px;
+            }
+
+            .share-buttons {
+                gap: 0.5rem;
+            }
+
+            .share-btn {
+                width: 36px;
+                height: 36px;
+            }
         }
 
         /* Print Styles */
         @media print {
             .header,
             .hero,
+            .breadcrumb,
             .filter-container,
             .action-buttons,
             .data-actions,
             .scroll-top,
             .toast,
+            .help-button,
             .footer {
                 display: none !important;
             }
@@ -1167,11 +2320,45 @@
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle language">
+                    <i class="fas fa-language"></i>
+                </button>
+                <div class="user-menu">
+                    <div class="user-avatar" onclick="toggleUserMenu()" aria-label="User menu">
+                        <span id="userInitial">U</span>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" onclick="showProfile()"><i class="fas fa-user"></i> Profil Saya</a>
+                        <a href="#" onclick="showPreferences()"><i class="fas fa-cog"></i> Preferensi</a>
+                        <a href="#" onclick="showHistory()"><i class="fas fa-history"></i> Riwayat</a>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="#" onclick="exportUserData()"><i class="fas fa-download"></i> Export Data</a>
+                        <a href="#" onclick="importUserData()"><i class="fas fa-upload"></i> Import Data</a>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+                    </div>
+                </div>
+            </div>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
     </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="#home">Beranda</a></li>
+                <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+                <li class="breadcrumb-item active">Platform Deployment</li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1198,6 +2385,68 @@
                 <div class="search-container">
                     <input type="text" class="search-input" placeholder="Cari platform deployment..." id="searchInput" aria-label="Search platforms">
                     <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <span class="advanced-search-toggle" onclick="toggleAdvancedSearch()" aria-label="Advanced search">
+                        <i class="fas fa-filter"></i>
+                    </span>
+                    <div class="advanced-search-panel" id="advancedSearchPanel">
+                        <div class="advanced-search-grid">
+                            <div class="form-group">
+                                <label for="storageFilter">Storage Minimum</label>
+                                <select class="form-control" id="storageFilter">
+                                    <option value="">Semua</option>
+                                    <option value="100MB">100MB+</option>
+                                    <option value="1GB">1GB+</option>
+                                    <option value="5GB">5GB+</option>
+                                    <option value="10GB">10GB+</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bandwidthFilter">Bandwidth Minimum</label>
+                                <select class="form-control" id="bandwidthFilter">
+                                    <option value="">Semua</option>
+                                    <option value="1GB">1GB+</option>
+                                    <option value="10GB">10GB+</option>
+                                    <option value="100GB">100GB+</option>
+                                    <option value="Unlimited">Tak Terbatas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="regionFilter">Region</label>
+                                <select class="form-control" id="regionFilter">
+                                    <option value="">Semua</option>
+                                    <option value="global">Global</option>
+                                    <option value="asia">Asia</option>
+                                    <option value="europe">Eropa</option>
+                                    <option value="america">Amerika</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Fitur</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="sslFilter" value="ssl">
+                                        <label for="sslFilter">SSL</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="customDomainFilter" value="customDomain">
+                                        <label for="customDomainFilter">Domain Kustom</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="cdnFilter" value="cdn">
+                                        <label for="cdnFilter">CDN</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="apiFilter" value="api">
+                                        <label for="apiFilter">API</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="advanced-search-actions">
+                            <button class="btn btn-secondary" onclick="resetAdvancedFilters()">Reset</button>
+                            <button class="btn btn-primary" onclick="applyAdvancedFilters()">Terapkan</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="filter-container">
@@ -1219,6 +2468,12 @@
                     <button class="action-btn" onclick="sortByNewest()" aria-label="Sort by newest">
                         <i class="fas fa-clock"></i> Terbaru
                     </button>
+                    <button class="action-btn" onclick="sortByRating()" aria-label="Sort by rating">
+                        <i class="fas fa-star"></i> Rating Tertinggi
+                    </button>
+                    <button class="action-btn" onclick="showComparison()" aria-label="Compare platforms">
+                        <i class="fas fa-balance-scale"></i> Bandingkan
+                    </button>
                     <button class="action-btn" onclick="resetFilters()" aria-label="Reset filters">
                         <i class="fas fa-refresh"></i> Reset
                     </button>
@@ -1230,6 +2485,7 @@
     <!-- Main Content -->
     <main class="main-content" id="platforms">
         <div class="container">
+            <!-- Stats Panel -->
             <div class="stats-panel">
                 <div class="stats-grid">
                     <div class="stat-box">
@@ -1248,6 +2504,35 @@
                         <h4 id="enterpriseCount">0</h4>
                         <p>Enterprise</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="chart-container">
+                <canvas id="platformChart"></canvas>
+            </div>
+
+            <!-- Tag Cloud -->
+            <div class="tag-cloud">
+                <h3>Tag Populer</h3>
+                <div class="tag-cloud-items" id="tagCloud">
+                    <!-- Tags will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Recently Viewed -->
+            <div class="recently-viewed" id="recentlyViewedSection" style="display: none;">
+                <h3>Baru Dilihat</h3>
+                <div class="recently-viewed-grid" id="recentlyViewedGrid">
+                    <!-- Recently viewed items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="recommendations">
+                <h3>Rekomendasi Untuk Anda</h3>
+                <div class="recommendations-grid" id="recommendationsGrid">
+                    <!-- Recommendations will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -1273,16 +2558,149 @@
         <div class="footer-content">
             <h3><i class="fas fa-rocket"></i> DeployGratis</h3>
             <p>Platform terlengkap untuk menemukan layanan deployment gratis di seluruh dunia. Kami mengumpulkan dan mengkurasi platform-platform terbaik untuk memudahkan Anda dalam memulai project tanpa biaya.</p>
+            
+            <div class="footer-links">
+                <a href="#about">Tentang Kami</a>
+                <a href="#privacy">Kebijakan Privasi</a>
+                <a href="#terms">Syarat & Ketentuan</a>
+                <a href="#contact">Hubungi Kami</a>
+                <a href="#contribute">Kontribusi</a>
+            </div>
+            
+            <div class="newsletter">
+                <h4>Newsletter</h4>
+                <p>Dapatkan update platform deployment terbaru langsung di inbox Anda</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Email Anda" required>
+                    <button type="submit" class="btn btn-primary">Berlangganan</button>
+                </form>
+            </div>
+            
             <p>&copy; 2024 DeployGratis. Dibuat dengan <i class="fas fa-heart" style="color: var(--accent-danger);"></i> untuk developer Indonesia.</p>
         </div>
     </footer>
 
-    <!-- Modal -->
+    <!-- Platform Modal -->
     <div id="platformModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <button class="close" onclick="closeModal()" aria-label="Close modal">&times;</button>
             <div id="modalContent">
                 <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div id="comparisonModal" class="comparison-modal" role="dialog" aria-modal="true" aria-labelledby="comparisonTitle">
+        <div class="comparison-content">
+            <button class="close" onclick="closeComparisonModal()" aria-label="Close comparison modal">&times;</button>
+            <h2 id="comparisonTitle">Bandingkan Platform</h2>
+            
+            <div class="add-to-comparison">
+                <h4>Tambah Platform untuk Dibandingkan</h4>
+                <div class="comparison-search">
+                    <input type="text" class="form-control" placeholder="Cari platform..." id="comparisonSearch" oninput="searchComparisonPlatforms(event)">
+                </div>
+                <div class="comparison-results" id="comparisonResults">
+                    <!-- Comparison search results will be populated here -->
+                </div>
+            </div>
+            
+            <div class="comparison-table-container">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th>Fitur</th>
+                            <!-- Comparison platforms will be added here -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tipe</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>Gratis</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>Storage</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>Bandwidth</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>Custom Domain</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>SSL</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>CDN</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>API</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                        <tr>
+                            <td>Rating</td>
+                            <!-- Comparison data will be added here -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="help-content">
+            <button class="close" onclick="closeHelpModal()" aria-label="Close help modal">&times;</button>
+            <h2 id="helpTitle">Pusat Bantuan</h2>
+            
+            <div class="help-section">
+                <h3>Tentang DeployGratis</h3>
+                <p>DeployGratis adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>Cara Menggunakan</h3>
+                <p>1. Gunakan fitur pencarian untuk menemukan platform berdasarkan nama atau fitur</p>
+                <p>2. Filter platform berdasarkan tipe (static, dynamic, atau keduanya)</p>
+                <p>3. Tandai platform favorit Anda dengan mengeklik ikon bintang</p>
+                <p>4. Klik pada platform untuk melihat detail lengkap</p>
+                <p>5. Bandingkan beberapa platform untuk memilih yang terbaik</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>Pintasan Keyboard</h3>
+                <div class="keyboard-shortcuts">
+                    <div class="shortcut-item">
+                        <span>Fokus Pencarian</span>
+                        <span class="shortcut-key">Ctrl/Cmd + K</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>Tutup Modal</span>
+                        <span class="shortcut-key">Esc</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>Ganti Tema</span>
+                        <span class="shortcut-key">Ctrl/Cmd + T</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>Favorit</span>
+                        <span class="shortcut-key">Ctrl/Cmd + F</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span>Bandingkan</span>
+                        <span class="shortcut-key">Ctrl/Cmd + B</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1298,6 +2716,11 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Help Button -->
+    <button class="help-button" onclick="openHelpModal()" aria-label="Help">
+        <i class="fas fa-question"></i>
+    </button>
+
     <!-- Data Actions -->
     <div class="data-actions">
         <button class="data-btn" onclick="exportFavorites()" title="Export Favorit" aria-label="Export favorites">
@@ -1309,18 +2732,261 @@
         <button class="data-btn" onclick="exportAllData()" title="Export Semua Data" aria-label="Export all data">
             <i class="fas fa-file-export"></i>
         </button>
+        <button class="data-btn" onclick="saveSearch()" title="Simpan Pencarian" aria-label="Save search">
+            <i class="fas fa-save"></i>
+        </button>
     </div>
 
     <!-- Hidden file input for import -->
     <input type="file" id="fileInput" accept=".json" aria-label="Import file input">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script>
         // Global variables
         let platforms = [];
         let favorites = JSON.parse(localStorage.getItem('deploygratis_favorites')) || [];
+        let recentlyViewed = JSON.parse(localStorage.getItem('deploygratis_recently_viewed')) || [];
+        let userPreferences = JSON.parse(localStorage.getItem('deploygratis_preferences')) || {
+            theme: 'dark',
+            language: 'id',
+            recommendations: true
+        };
+        let savedSearches = JSON.parse(localStorage.getItem('deploygratis_saved_searches')) || [];
         let currentFilter = 'all';
         let currentSearch = '';
         let showFavoritesOnly = false;
+        let comparisonPlatforms = [];
+        let platformChart = null;
+        let currentLanguage = 'id';
+        let personalNotes = JSON.parse(localStorage.getItem('deploygratis_personal_notes')) || {};
+        
+        // Translations
+        const translations = {
+            id: {
+                // Indonesian translations
+                heroTitle: "Platform Deployment Gratis",
+                heroSubtitle: "Koleksi terlengkap platform deployment untuk project Anda - Static, Dynamic, dan Enterprise",
+                statPlatform: "Platform",
+                statFree: "Gratis",
+                statProject: "Project",
+                searchPlaceholder: "Cari platform deployment...",
+                filterAll: "Semua",
+                filterStatic: "Static",
+                filterDynamic: "Dynamic",
+                filterBoth: "Keduanya",
+                filterEnterprise: "Enterprise",
+                filterPopular: "Populer",
+                actionFavorites: "Favorit Saya",
+                actionPopular: "Terpopuler",
+                actionNewest: "Terbaru",
+                actionRating: "Rating Tertinggi",
+                actionCompare: "Bandingkan",
+                actionReset: "Reset",
+                sectionTitle: "Platform Deployment Terlengkap di Dunia",
+                sectionSubtitle: "Semua platform di bawah ini menawarkan layanan gratis untuk memulai project Anda",
+                emptyTitle: "Tidak ada platform ditemukan",
+                emptySubtitle: "Coba gunakan kata kunci lain atau reset filter Anda",
+                footerTitle: "DeployGratis",
+                footerText: "Platform terlengkap untuk menemukan layanan deployment gratis di seluruh dunia. Kami mengumpulkan dan mengkurasi platform-platform terbaik untuk memudahkan Anda dalam memulai project tanpa biaya.",
+                footerCopyright: "© 2024 DeployGratis. Dibuat dengan ♥ untuk developer Indonesia.",
+                newsletterTitle: "Newsletter",
+                newsletterText: "Dapatkan update platform deployment terbaru langsung di inbox Anda",
+                newsletterPlaceholder: "Email Anda",
+                newsletterButton: "Berlangganan",
+                modalFeatures: "Fitur Lengkap:",
+                modalPricing: "Informasi Harga:",
+                pricingFree: "Gratis",
+                pricingStorage: "Storage",
+                pricingBandwidth: "Bandwidth",
+                pricingCustomDomain: "Custom Domain",
+                pricingSsl: "SSL",
+                visitButton: "Kunjungi",
+                addToComparison: "Tambah ke Perbandingan",
+                comparisonTitle: "Bandingkan Platform",
+                comparisonAdd: "Tambah Platform untuk Dibandingkan",
+                comparisonSearch: "Cari platform...",
+                featureType: "Tipe",
+                featureFree: "Gratis",
+                featureStorage: "Storage",
+                featureBandwidth: "Bandwidth",
+                featureCustomDomain: "Custom Domain",
+                featureSsl: "SSL",
+                featureCdn: "CDN",
+                featureApi: "API",
+                featureRating: "Rating",
+                helpTitle: "Pusat Bantuan",
+                helpAbout: "Tentang DeployGratis",
+                helpAboutText: "DeployGratis adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.",
+                helpHowTo: "Cara Menggunakan",
+                helpHowTo1: "Gunakan fitur pencarian untuk menemukan platform berdasarkan nama atau fitur",
+                helpHowTo2: "Filter platform berdasarkan tipe (static, dynamic, atau keduanya)",
+                helpHowTo3: "Tandai platform favorit Anda dengan mengeklik ikon bintang",
+                helpHowTo4: "Klik pada platform untuk melihat detail lengkap",
+                helpHowTo5: "Bandingkan beberapa platform untuk memilih yang terbaik",
+                helpShortcuts: "Pintasan Keyboard",
+                shortcutSearch: "Fokus Pencarian",
+                shortcutClose: "Tutup Modal",
+                shortcutTheme: "Ganti Tema",
+                shortcutFavorites: "Favorit",
+                shortcutCompare: "Bandingkan",
+                toastAddedToFavorites: "Ditambahkan ke favorit",
+                toastRemovedFromFavorites: "Dihapus dari favorit",
+                toastExportedFavorites: "Favorit berhasil diekspor",
+                toastImportedFavorites: "Favorit berhasil diimpor",
+                toastExportedData: "Semua data berhasil diekspor",
+                toastSavedSearch: "Pencarian berhasil disimpan",
+                toastSubscribed: "Berhasil berlangganan newsletter",
+                toastThemeChanged: "Tema berhasil diubah",
+                toastLanguageChanged: "Bahasa berhasil diubah",
+                toastNoteAdded: "Catatan berhasil ditambahkan",
+                toastNoteDeleted: "Catatan berhasil dihapus",
+                toastNoteUpdated: "Catatan berhasil diperbarui",
+                toastCopied: "Tautan berhasil disalin",
+                toastShared: "Berhasil dibagikan",
+                typeStatic: "Static Site",
+                typeDynamic: "Dynamic Site",
+                typeBoth: "Static & Dynamic",
+                popularBadge: "POPULER",
+                freeBadge: "100% Gratis",
+                trialBadge: "Free Trial",
+                recentlyViewed: "Baru Dilihat",
+                recommendations: "Rekomendasi Untuk Anda",
+                match: "Cocok",
+                personalNotes: "Catatan Pribadi",
+                addNote: "Tambah Catatan",
+                yourNote: "Catatan Anda",
+                saveNote: "Simpan Catatan",
+                editNote: "Edit Catatan",
+                deleteNote: "Hapus Catatan",
+                emptyNotes: "Belum ada catatan untuk platform ini",
+                shareTitle: "Bagikan Platform",
+                shareMessage: "Pesan kustom (opsional)",
+                shareFacebook: "Facebook",
+                shareTwitter: "Twitter",
+                shareLinkedIn: "LinkedIn",
+                shareWhatsApp: "WhatsApp",
+                shareTelegram: "Telegram",
+                shareEmail: "Email",
+                shareCopy: "Salin Tautan",
+                aboutLink: "Tentang Kami",
+                privacyLink: "Kebijakan Privasi",
+                termsLink: "Syarat & Ketentuan",
+                contactLink: "Hubungi Kami",
+                contributeLink: "Kontribusi"
+            },
+            en: {
+                // English translations
+                heroTitle: "Free Deployment Platforms",
+                heroSubtitle: "The most complete collection of deployment platforms for your projects - Static, Dynamic, and Enterprise",
+                statPlatform: "Platforms",
+                statFree: "Free",
+                statProject: "Projects",
+                searchPlaceholder: "Search deployment platforms...",
+                filterAll: "All",
+                filterStatic: "Static",
+                filterDynamic: "Dynamic",
+                filterBoth: "Both",
+                filterEnterprise: "Enterprise",
+                filterPopular: "Popular",
+                actionFavorites: "My Favorites",
+                actionPopular: "Most Popular",
+                actionNewest: "Newest",
+                actionRating: "Highest Rated",
+                actionCompare: "Compare",
+                actionReset: "Reset",
+                sectionTitle: "The Most Complete Deployment Platforms in the World",
+                sectionSubtitle: "All platforms below offer free services to start your project",
+                emptyTitle: "No platforms found",
+                emptySubtitle: "Try using different keywords or reset your filters",
+                footerTitle: "DeployGratis",
+                footerText: "The most complete platform to find free deployment services around the world. We collect and curate the best platforms to make it easier for you to start projects without cost.",
+                footerCopyright: "© 2024 DeployGratis. Made with ♥ for Indonesian developers.",
+                newsletterTitle: "Newsletter",
+                newsletterText: "Get the latest deployment platform updates directly in your inbox",
+                newsletterPlaceholder: "Your Email",
+                newsletterButton: "Subscribe",
+                modalFeatures: "Complete Features:",
+                modalPricing: "Pricing Information:",
+                pricingFree: "Free",
+                pricingStorage: "Storage",
+                pricingBandwidth: "Bandwidth",
+                pricingCustomDomain: "Custom Domain",
+                pricingSsl: "SSL",
+                visitButton: "Visit",
+                addToComparison: "Add to Comparison",
+                comparisonTitle: "Compare Platforms",
+                comparisonAdd: "Add Platforms to Compare",
+                comparisonSearch: "Search platforms...",
+                featureType: "Type",
+                featureFree: "Free",
+                featureStorage: "Storage",
+                featureBandwidth: "Bandwidth",
+                featureCustomDomain: "Custom Domain",
+                featureSsl: "SSL",
+                featureCdn: "CDN",
+                featureApi: "API",
+                featureRating: "Rating",
+                helpTitle: "Help Center",
+                helpAbout: "About DeployGratis",
+                helpAboutText: "DeployGratis is a platform that collects and curates free deployment services from around the world. We help developers find the right platform for their projects without cost.",
+                helpHowTo: "How to Use",
+                helpHowTo1: "Use the search feature to find platforms by name or feature",
+                helpHowTo2: "Filter platforms by type (static, dynamic, or both)",
+                helpHowTo3: "Mark your favorite platforms by clicking the star icon",
+                helpHowTo4: "Click on a platform to see complete details",
+                helpHowTo5: "Compare multiple platforms to choose the best one",
+                helpShortcuts: "Keyboard Shortcuts",
+                shortcutSearch: "Focus Search",
+                shortcutClose: "Close Modal",
+                shortcutTheme: "Toggle Theme",
+                shortcutFavorites: "Favorites",
+                shortcutCompare: "Compare",
+                toastAddedToFavorites: "Added to favorites",
+                toastRemovedFromFavorites: "Removed from favorites",
+                toastExportedFavorites: "Favorites successfully exported",
+                toastImportedFavorites: "Favorites successfully imported",
+                toastExportedData: "All data successfully exported",
+                toastSavedSearch: "Search successfully saved",
+                toastSubscribed: "Successfully subscribed to newsletter",
+                toastThemeChanged: "Theme successfully changed",
+                toastLanguageChanged: "Language successfully changed",
+                toastNoteAdded: "Note added successfully",
+                toastNoteDeleted: "Note deleted successfully",
+                toastNoteUpdated: "Note updated successfully",
+                toastCopied: "Link copied successfully",
+                toastShared: "Shared successfully",
+                typeStatic: "Static Site",
+                typeDynamic: "Dynamic Site",
+                typeBoth: "Static & Dynamic",
+                popularBadge: "POPULAR",
+                freeBadge: "100% Free",
+                trialBadge: "Free Trial",
+                recentlyViewed: "Recently Viewed",
+                recommendations: "Recommendations For You",
+                match: "Match",
+                personalNotes: "Personal Notes",
+                addNote: "Add Note",
+                yourNote: "Your Note",
+                saveNote: "Save Note",
+                editNote: "Edit Note",
+                deleteNote: "Delete Note",
+                emptyNotes: "No notes yet for this platform",
+                shareTitle: "Share Platform",
+                shareMessage: "Custom message (optional)",
+                shareFacebook: "Facebook",
+                shareTwitter: "Twitter",
+                shareLinkedIn: "LinkedIn",
+                shareWhatsApp: "WhatsApp",
+                shareTelegram: "Telegram",
+                shareEmail: "Email",
+                shareCopy: "Copy Link",
+                aboutLink: "About Us",
+                privacyLink: "Privacy Policy",
+                termsLink: "Terms & Conditions",
+                contactLink: "Contact Us",
+                contributeLink: "Contribute"
+            }
+        };
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
@@ -1329,16 +2995,574 @@
             setupEventListeners();
             updateStats();
             setupScrollEffects();
+            applyUserPreferences();
+            updateRecentlyViewed();
+            generateRecommendations();
+            renderTagCloud();
+            initializeChart();
         });
 
         // Load platforms from JSON
         async function loadPlatforms() {
             try {
-                const response = await fetch('platforms.json');
-                const data = await response.json();
-                platforms = data.platforms;
-                renderPlatforms();
-                updateStats();
+                // Simulating API call with setTimeout
+                setTimeout(() => {
+                    // Mock data for platforms
+                    platforms = [
+                        {
+                            id: 'vercel',
+                            name: 'Vercel',
+                            description: 'Platform untuk frontend developers dengan deployment instan dan preview otomatis untuk setiap perubahan kode.',
+                            type: 'both',
+                            category: 'popular',
+                            logo: 'fas fa-rocket',
+                            logoColor: '#000000',
+                            tags: ['frontend', 'serverless', 'jamstack', 'react', 'nextjs'],
+                            features: [
+                                'Deployment instan dengan Git integration',
+                                'Preview otomatis untuk setiap pull request',
+                                'Serverless Functions',
+                                'Analytics dashboard',
+                                'Global CDN',
+                                'Custom domain dengan SSL gratis'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '100GB',
+                                bandwidth: '100GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://vercel.com',
+                            rating: 4.8,
+                            region: 'global'
+                        },
+                        {
+                            id: 'netlify',
+                            name: 'Netlify',
+                            description: 'Platform all-in-one untuk web modern dengan deployment otomatis, serverless functions, dan form handling.',
+                            type: 'both',
+                            category: 'popular',
+                            logo: 'fas fa-globe',
+                            logoColor: '#00C7B7',
+                            tags: ['jamstack', 'serverless', 'static', 'frontend', 'cdn'],
+                            features: [
+                                'Continuous deployment dari Git',
+                                'Serverless Functions',
+                                'Form handling',
+                                'Identity management',
+                                'Large media storage',
+                                'Analytics'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '100GB',
+                                bandwidth: '100GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://netlify.com',
+                            rating: 4.7,
+                            region: 'global'
+                        },
+                        {
+                            id: 'github-pages',
+                            name: 'GitHub Pages',
+                            description: 'Hosting situs statis langsung dari repositori GitHub Anda. Gratis untuk semua pengguna GitHub.',
+                            type: 'static',
+                            logo: 'fab fa-github',
+                            logoColor: '#24292e',
+                            tags: ['static', 'git', 'free', 'open-source', 'jekyll'],
+                            features: [
+                                'Hosting statis gratis',
+                                'Integrasi dengan GitHub repositories',
+                                'Support untuk Jekyll',
+                                'Custom domain',
+                                'HTTPS gratis',
+                                'Unlimited bandwidth'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: 'Unlimited',
+                                bandwidth: 'Unlimited',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://pages.github.com',
+                            rating: 4.5,
+                            region: 'global'
+                        },
+                        {
+                            id: 'heroku',
+                            name: 'Heroku',
+                            description: 'Platform cloud yang memungkinkan developer membangun, menjalankan, dan mengoperasikan aplikasi sepenuhnya di cloud.',
+                            type: 'dynamic',
+                            category: 'popular',
+                            logo: 'fas fa-server',
+                            logoColor: '#430098',
+                            tags: ['paas', 'dynamic', 'nodejs', 'ruby', 'python'],
+                            features: [
+                                'Support untuk berbagai bahasa pemrograman',
+                                'Add-ons marketplace',
+                                'Continuous deployment',
+                                'Scaling otomatis',
+                                'CLI yang powerful',
+                                'Rollback dengan mudah'
+                            ],
+                            pricing: {
+                                free: false,
+                                storage: '512MB',
+                                bandwidth: '2GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://heroku.com',
+                            rating: 4.3,
+                            region: 'global'
+                        },
+                        {
+                            id: 'firebase',
+                            name: 'Firebase',
+                            description: 'Platform pengembangan aplikasi mobile dan web dari Google yang menyediakan berbagai tools dan infrastruktur.',
+                            type: 'both',
+                            category: 'popular',
+                            logo: 'fas fa-fire',
+                            logoColor: '#FFCA28',
+                            tags: ['backend', 'database', 'hosting', 'mobile', 'google'],
+                            features: [
+                                'Realtime database',
+                                'Authentication',
+                                'Cloud storage',
+                                'Cloud functions',
+                                'Hosting statis',
+                                'Analytics'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '1GB',
+                                bandwidth: '10GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://firebase.google.com',
+                            rating: 4.6,
+                            region: 'global'
+                        },
+                        {
+                            id: 'render',
+                            name: 'Render',
+                            description: 'Unified cloud untuk membangun dan menjalankan aplikasi dan situs web dengan free SSL, global CDN, dan auto deploys dari Git.',
+                            type: 'both',
+                            logo: 'fas fa-cube',
+                            logoColor: '#4E46E5',
+                            tags: ['paas', 'static', 'dynamic', 'docker', 'git'],
+                            features: [
+                                'Support untuk static sites, web services, dan background workers',
+                                'Auto deploys dari Git',
+                                'Persistent disks',
+                                'Private networks',
+                                'Cron jobs',
+                                'Env vars'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '512MB',
+                                bandwidth: '100GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://render.com',
+                            rating: 4.4,
+                            region: 'global'
+                        },
+                        {
+                            id: 'surge',
+                            name: 'Surge.sh',
+                            description: 'Hosting statis untuk web developers dengan deployment cepat melalui CLI dan custom domain gratis.',
+                            type: 'static',
+                            logo: 'fas fa-bolt',
+                            logoColor: '#00D9FF',
+                            tags: ['static', 'cli', 'frontend', 'cdn', 'free'],
+                            features: [
+                                'Deployment cepat via CLI',
+                                'Custom domain gratis',
+                                'HTTPS otomatis',
+                                'Basic auth',
+                                'Form handling',
+                                'Global CDN'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: 'Unlimited',
+                                bandwidth: 'Unlimited',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://surge.sh',
+                            rating: 4.2,
+                            region: 'global'
+                        },
+                        {
+                            id: 'railway',
+                            name: 'Railway',
+                            description: 'Platform infrastruktur yang memungkinkan Anda membangun, mengirim, dan mengelola aplikasi tanpa mengelola server.',
+                            type: 'dynamic',
+                            logo: 'fas fa-train',
+                            logoColor: '#0A0E27',
+                            tags: ['paas', 'dynamic', 'docker', 'git', 'serverless'],
+                            features: [
+                                'Deploy dari GitHub dengan satu klik',
+                                'Support untuk Docker',
+                                'Auto scaling',
+                                'Managed databases',
+                                'Environment variables',
+                                'Logs dan metrics'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '512MB',
+                                bandwidth: '1GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://railway.app',
+                            rating: 4.5,
+                            region: 'global'
+                        },
+                        {
+                            id: 'glitch',
+                            name: 'Glitch',
+                            description: 'Platform untuk membangun aplikasi web dengan real-time collaboration dan instant deployment.',
+                            type: 'dynamic',
+                            logo: 'fas fa-code',
+                            logoColor: '#FF3C00',
+                            tags: ['nodejs', 'collaboration', 'realtime', 'frontend', 'backend'],
+                            features: [
+                                'Real-time collaboration',
+                                'Instant deployment',
+                                'Import dari GitHub',
+                                'Custom domain',
+                                'Project templates',
+                                'Community support'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '1GB',
+                                bandwidth: '4GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://glitch.com',
+                            rating: 4.1,
+                            region: 'global'
+                        },
+                        {
+                            id: 'replit',
+                            name: 'Replit',
+                            description: 'Platform IDE online yang memungkinkan Anda membuat, menjalankan, dan berbagi kode dalam berbagai bahasa pemrograman.',
+                            type: 'both',
+                            logo: 'fas fa-laptop-code',
+                            logoColor: '#0579E4',
+                            tags: ['ide', 'multi-language', 'collaboration', 'education', 'hosting'],
+                            features: [
+                                'IDE online dengan syntax highlighting',
+                                'Support untuk 50+ bahasa pemrograman',
+                                'Real-time collaboration',
+                                'Hosting web apps',
+                                'Database',
+                                'Package manager'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '512MB',
+                                bandwidth: 'Unlimited',
+                                customDomains: false,
+                                ssl: true
+                            },
+                            url: 'https://replit.com',
+                            rating: 4.3,
+                            region: 'global'
+                        },
+                        {
+                            id: 'stormkit',
+                            name: 'Stormkit',
+                            description: 'Platform deployment modern untuk aplikasi JavaScript dengan preview environments dan serverless functions.',
+                            type: 'both',
+                            logo: 'fas fa-cloud-bolt',
+                            logoColor: '#FF5A5F',
+                            tags: ['javascript', 'serverless', 'preview', 'frontend', 'ci-cd'],
+                            features: [
+                                'Preview environments untuk setiap branch',
+                                'Serverless functions',
+                                'Atomic deployments',
+                                'A/B testing',
+                                'Analytics',
+                                'Team collaboration'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '5GB',
+                                bandwidth: '50GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://stormkit.io',
+                            rating: 4.0,
+                            region: 'global'
+                        },
+                        {
+                            id: 'cloudflare-pages',
+                            name: 'Cloudflare Pages',
+                            description: 'Platform JAMstack dengan global CDN, instant rollbacks, dan integrasi dengan GitHub.',
+                            type: 'static',
+                            logo: 'fas fa-cloud',
+                            logoColor: '#F38020',
+                            tags: ['jamstack', 'static', 'cdn', 'edge', 'serverless'],
+                            features: [
+                                'Global CDN',
+                                'Instant rollbacks',
+                                'Integrasi dengan GitHub',
+                                'Serverless functions',
+                                'Analytics',
+                                'Originless deployments'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: 'Unlimited',
+                                bandwidth: 'Unlimited',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://pages.cloudflare.com',
+                            rating: 4.4,
+                            region: 'global'
+                        },
+                        {
+                            id: 'aws-amplify',
+                            name: 'AWS Amplify',
+                            description: 'Platform development dari AWS untuk membangun aplikasi web dan mobile dengan backend yang terhubung.',
+                            type: 'both',
+                            category: 'enterprise',
+                            logo: 'fab fa-aws',
+                            logoColor: '#FF9900',
+                            tags: ['aws', 'full-stack', 'mobile', 'serverless', 'enterprise'],
+                            features: [
+                                'Hosting statis dengan CI/CD',
+                                'Serverless backend',
+                                'Authentication',
+                                'Analytics',
+                                'AI/ML predictions',
+                                'AR/VR scenes'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '5GB',
+                                bandwidth: '15GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://aws.amazon.com/amplify',
+                            rating: 4.2,
+                            region: 'global'
+                        },
+                        {
+                            id: 'digitalocean-apps',
+                            name: 'DigitalOcean Apps',
+                            description: 'Platform PaaS dari DigitalOcean untuk membangun, mengirim, dan menskalakan aplikasi dengan mudah.',
+                            type: 'both',
+                            category: 'enterprise',
+                            logo: 'fab fa-digital-ocean',
+                            logoColor: '#0080FF',
+                            tags: ['paas', 'docker', 'scaling', 'enterprise', 'cloud'],
+                            features: [
+                                'Free SSL certificates',
+                                'Auto scaling',
+                                'Zero-downtime deployments',
+                                'Custom domains',
+                                'Log streaming',
+                                'Alerts'
+                            ],
+                            pricing: {
+                                free: false,
+                                storage: '1GB',
+                                bandwidth: '1TB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://www.digitalocean.com/products/app-platform',
+                            rating: 4.3,
+                            region: 'global'
+                        },
+                        {
+                            id: 'gitlab-pages',
+                            name: 'GitLab Pages',
+                            description: 'Hosting situs statis langsung dari repositori GitLab Anda dengan CI/CD terintegrasi.',
+                            type: 'static',
+                            logo: 'fab fa-gitlab',
+                            logoColor: '#FC6D26',
+                            tags: ['static', 'git', 'ci-cd', 'devops', 'free'],
+                            features: [
+                                'Hosting statis gratis',
+                                'Integrasi dengan GitLab CI/CD',
+                                'Custom domain',
+                                'HTTPS gratis',
+                                'Access control',
+                                'Unlimited projects'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: 'Unlimited',
+                                bandwidth: 'Unlimited',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://docs.gitlab.com/ee/user/project/pages/',
+                            rating: 4.1,
+                            region: 'global'
+                        },
+                        {
+                            id: 'bitbucket-cloud',
+                            name: 'Bitbucket Cloud',
+                            description: 'Platform Git-based code collaboration dan CI/CD dengan deployment pipelines.',
+                            type: 'dynamic',
+                            category: 'enterprise',
+                            logo: 'fab fa-bitbucket',
+                            logoColor: '#0052CC',
+                            tags: ['git', 'ci-cd', 'enterprise', 'collaboration', 'pipelines'],
+                            features: [
+                                'Git repositories',
+                                'CI/CD pipelines',
+                                'Code collaboration',
+                                'Integrations',
+                                'Deployment pipelines',
+                                'Permissions'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '1GB',
+                                bandwidth: '1GB',
+                                customDomains: false,
+                                ssl: false
+                            },
+                            url: 'https://bitbucket.org/product',
+                            rating: 4.0,
+                            region: 'global'
+                        },
+                        {
+                            id: 'back4app',
+                            name: 'Back4App',
+                            description: 'Backend-as-a-Service platform yang memungkinkan developer membangun aplikasi backend dengan cepat.',
+                            type: 'dynamic',
+                            logo: 'fas fa-cogs',
+                            logoColor: '#00A1E0',
+                            tags: ['baas', 'backend', 'database', 'api', 'mobile'],
+                            features: [
+                                'Database NoSQL',
+                                'REST API',
+                                'Real-time',
+                                'Authentication',
+                                'Cloud functions',
+                                'Push notifications'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '1GB',
+                                bandwidth: '10GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://back4app.com',
+                            rating: 4.2,
+                            region: 'global'
+                        },
+                        {
+                            id: 'supabase',
+                            name: 'Supabase',
+                            description: 'Open source Firebase alternative dengan PostgreSQL database, authentication, dan real-time capabilities.',
+                            type: 'dynamic',
+                            logo: 'fas fa-database',
+                            logoColor: '#3FCF8E',
+                            tags: ['database', 'authentication', 'realtime', 'open-source', 'postgresql'],
+                            features: [
+                                'PostgreSQL database',
+                                'Authentication',
+                                'Real-time subscriptions',
+                                'Storage',
+                                'Edge functions',
+                                'Dashboard'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '500MB',
+                                bandwidth: '2GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://supabase.com',
+                            rating: 4.6,
+                            region: 'global'
+                        },
+                        {
+                            id: 'appwrite',
+                            name: 'Appwrite',
+                            description: 'Secure backend server untuk web, mobile, dan Flutter development dengan API yang mudah digunakan.',
+                            type: 'dynamic',
+                            logo: 'fas fa-shield-alt',
+                            logoColor: '#FD366E',
+                            tags: ['backend', 'security', 'api', 'mobile', 'flutter'],
+                            features: [
+                                'User authentication',
+                                'Database',
+                                'Storage',
+                                'Functions',
+                                'Real-time',
+                                'Localization'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '5GB',
+                                bandwidth: '25GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://appwrite.io',
+                            rating: 4.4,
+                            region: 'global'
+                        },
+                        {
+                            id: 'deno-deploy',
+                            name: 'Deno Deploy',
+                            description: 'Distributed system untuk menjalankan JavaScript, TypeScript, dan WebAssembly di edge locations global.',
+                            type: 'dynamic',
+                            logo: 'fas fa-globe-americas',
+                            logoColor: '#000000',
+                            tags: ['deno', 'typescript', 'edge', 'serverless', 'javascript'],
+                            features: [
+                                'Global edge network',
+                                'Zero configuration deployments',
+                                'Support untuk JavaScript, TypeScript, dan WebAssembly',
+                                'Deno runtime',
+                                'Built-in key-value database',
+                                'Smart caching'
+                            ],
+                            pricing: {
+                                free: true,
+                                storage: '1GB',
+                                bandwidth: '100GB',
+                                customDomains: true,
+                                ssl: true
+                            },
+                            url: 'https://deno.com/deploy',
+                            rating: 4.3,
+                            region: 'global'
+                        }
+                    ];
+                    
+                    renderPlatforms();
+                    updateStats();
+                    updateChart();
+                    renderTagCloud();
+                }, 500);
             } catch (error) {
                 console.error('Error loading platforms:', error);
                 showToast('Gagal memuat data platform', 'error');
@@ -1370,7 +3594,7 @@
             
             grid.innerHTML = filteredPlatforms.map((platform, index) => `
                 <div class="platform-card" data-id="${platform.id}" data-type="${platform.type}" data-category="${platform.category}" style="animation-delay: ${index * 0.05}s">
-                    ${platform.category === 'popular' ? '<div class="popular-badge">POPULER</div>' : ''}
+                    ${platform.category === 'popular' ? `<div class="popular-badge">${translations[currentLanguage].popularBadge}</div>` : ''}
                     <button class="favorite-btn ${favorites.includes(platform.id) ? 'active' : ''}" onclick="toggleFavorite('${platform.id}', event)" aria-label="${favorites.includes(platform.id) ? 'Remove from favorites' : 'Add to favorites'}">
                         <i class="fas fa-star"></i>
                     </button>
@@ -1388,14 +3612,20 @@
                         ${platform.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
                         ${platform.tags.length > 3 ? `<span class="tag">+${platform.tags.length - 3}</span>` : ''}
                     </div>
+                    <div class="platform-rating">
+                        <div class="stars">
+                            ${generateStars(platform.rating)}
+                        </div>
+                        <span class="rating-value">${platform.rating}</span>
+                    </div>
                     <ul class="platform-features">
                         ${platform.features.slice(0, 3).map(feature => `<li>${feature}</li>`).join('')}
                         ${platform.features.length > 3 ? `<li>+${platform.features.length - 3} fitur lainnya</li>` : ''}
                     </ul>
                     <div class="platform-footer">
-                        ${platform.pricing.free ? '<span class="free-badge">100% Gratis</span>' : '<span class="trial-badge">Free Trial</span>'}
+                        ${platform.pricing.free ? `<span class="free-badge">${translations[currentLanguage].freeBadge}</span>` : `<span class="trial-badge">${translations[currentLanguage].trialBadge}</span>`}
                         <a href="${platform.url}" class="deploy-btn" target="_blank" rel="noopener noreferrer" onclick="trackClick('${platform.id}')">
-                            <i class="fas fa-external-link-alt"></i> Kunjungi
+                            <i class="fas fa-external-link-alt"></i> ${translations[currentLanguage].visitButton}
                         </a>
                     </div>
                 </div>
@@ -1407,6 +3637,7 @@
                     if (!e.target.closest('.favorite-btn') && !e.target.closest('.deploy-btn')) {
                         const platformId = this.getAttribute('data-id');
                         showPlatformDetails(platformId);
+                        addToRecentlyViewed(platformId);
                     }
                 });
             });
@@ -1434,6 +3665,54 @@
                     p.features.some(f => f.toLowerCase().includes(searchTerm)) ||
                     p.tags.some(t => t.toLowerCase().includes(searchTerm))
                 );
+            }
+            
+            // Apply advanced filters
+            const storageFilter = document.getElementById('storageFilter')?.value;
+            if (storageFilter) {
+                filtered = filtered.filter(p => {
+                    if (storageFilter === 'Unlimited') {
+                        return p.pricing.storage === 'Unlimited';
+                    }
+                    // Simple comparison for demo purposes
+                    return p.pricing.storage !== 'Unlimited';
+                });
+            }
+            
+            const bandwidthFilter = document.getElementById('bandwidthFilter')?.value;
+            if (bandwidthFilter) {
+                filtered = filtered.filter(p => {
+                    if (bandwidthFilter === 'Unlimited') {
+                        return p.pricing.bandwidth === 'Unlimited';
+                    }
+                    // Simple comparison for demo purposes
+                    return p.pricing.bandwidth !== 'Unlimited';
+                });
+            }
+            
+            const regionFilter = document.getElementById('regionFilter')?.value;
+            if (regionFilter) {
+                filtered = filtered.filter(p => p.region === regionFilter || p.region === 'global');
+            }
+            
+            const sslFilter = document.getElementById('sslFilter')?.checked;
+            if (sslFilter) {
+                filtered = filtered.filter(p => p.pricing.ssl);
+            }
+            
+            const customDomainFilter = document.getElementById('customDomainFilter')?.checked;
+            if (customDomainFilter) {
+                filtered = filtered.filter(p => p.pricing.customDomains);
+            }
+            
+            const cdnFilter = document.getElementById('cdnFilter')?.checked;
+            if (cdnFilter) {
+                filtered = filtered.filter(p => p.features.some(f => f.toLowerCase().includes('cdn')));
+            }
+            
+            const apiFilter = document.getElementById('apiFilter')?.checked;
+            if (apiFilter) {
+                filtered = filtered.filter(p => p.features.some(f => f.toLowerCase().includes('api')));
             }
             
             // Apply favorites filter
@@ -1478,8 +3757,35 @@
                 }
             });
             
+            // Comparison modal close
+            document.querySelector('#comparisonModal .close').addEventListener('click', closeComparisonModal);
+            
+            // Close comparison modal when clicking outside
+            document.getElementById('comparisonModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeComparisonModal();
+                }
+            });
+            
+            // Help modal close
+            document.querySelector('#helpModal .close').addEventListener('click', closeHelpModal);
+            
+            // Close help modal when clicking outside
+            document.getElementById('helpModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeHelpModal();
+                }
+            });
+            
             // File input for import
             document.getElementById('fileInput').addEventListener('change', handleFileImport);
+            
+            // User dropdown
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.user-menu')) {
+                    document.getElementById('userDropdown').classList.remove('active');
+                }
+            });
             
             // Keyboard shortcuts
             document.addEventListener('keydown', function(e) {
@@ -1489,10 +3795,32 @@
                     document.getElementById('searchInput').focus();
                 }
                 
-                // Escape to clear search and close modal
+                // Ctrl/Cmd + T to toggle theme
+                if ((e.ctrlKey || e.metaKey) && e.key === 't') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+                
+                // Ctrl/Cmd + F to show favorites
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    showOnlyFavorites();
+                }
+                
+                // Ctrl/Cmd + B to show comparison
+                if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+                    e.preventDefault();
+                    showComparison();
+                }
+                
+                // Escape to clear search and close modals
                 if (e.key === 'Escape') {
                     if (document.getElementById('platformModal').style.display === 'block') {
                         closeModal();
+                    } else if (document.getElementById('comparisonModal').style.display === 'block') {
+                        closeComparisonModal();
+                    } else if (document.getElementById('helpModal').style.display === 'block') {
+                        closeHelpModal();
                     } else {
                         document.getElementById('searchInput').value = '';
                         currentSearch = '';
@@ -1538,6 +3866,180 @@
             });
         }
 
+        // Apply user preferences
+        function applyUserPreferences() {
+            // Apply theme
+            if (userPreferences.theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').className = 'fas fa-moon';
+            }
+            
+            // Apply language
+            currentLanguage = userPreferences.language || 'id';
+            
+            // Update user initial
+            const userName = localStorage.getItem('deploygratis_user_name') || 'User';
+            document.getElementById('userInitial').textContent = userName.charAt(0).toUpperCase();
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.getElementById('themeIcon').className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            userPreferences.theme = newTheme;
+            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
+            
+            showToast(translations[currentLanguage].toastThemeChanged, 'success');
+        }
+
+        // Toggle language
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
+            userPreferences.language = currentLanguage;
+            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
+            
+            // Update UI with new language
+            updateUILanguage();
+            
+            showToast(translations[currentLanguage].toastLanguageChanged, 'success');
+        }
+
+        // Update UI language
+        function updateUILanguage() {
+            // Update hero section
+            document.querySelector('.hero h1').textContent = translations[currentLanguage].heroTitle;
+            document.querySelector('.hero p').textContent = translations[currentLanguage].heroSubtitle;
+            
+            // Update stats
+            document.querySelectorAll('.stat-label')[0].textContent = translations[currentLanguage].statPlatform;
+            document.querySelectorAll('.stat-label')[1].textContent = translations[currentLanguage].statFree;
+            document.querySelectorAll('.stat-label')[2].textContent = translations[currentLanguage].statProject;
+            
+            // Update search placeholder
+            document.getElementById('searchInput').placeholder = translations[currentLanguage].searchPlaceholder;
+            
+            // Update filter buttons
+            document.querySelector('.filter-btn[data-filter="all"]').textContent = translations[currentLanguage].filterAll;
+            document.querySelector('.filter-btn[data-filter="static"]').textContent = translations[currentLanguage].filterStatic;
+            document.querySelector('.filter-btn[data-filter="dynamic"]').textContent = translations[currentLanguage].filterDynamic;
+            document.querySelector('.filter-btn[data-filter="both"]').textContent = translations[currentLanguage].filterBoth;
+            document.querySelector('.filter-btn[data-filter="enterprise"]').textContent = translations[currentLanguage].filterEnterprise;
+            document.querySelector('.filter-btn[data-filter="popular"]').textContent = translations[currentLanguage].filterPopular;
+            
+            // Update action buttons
+            document.querySelectorAll('.action-btn')[0].innerHTML = `<i class="fas fa-star"></i> ${translations[currentLanguage].actionFavorites}`;
+            document.querySelectorAll('.action-btn')[1].innerHTML = `<i class="fas fa-fire"></i> ${translations[currentLanguage].actionPopular}`;
+            document.querySelectorAll('.action-btn')[2].innerHTML = `<i class="fas fa-clock"></i> ${translations[currentLanguage].actionNewest}`;
+            document.querySelectorAll('.action-btn')[3].innerHTML = `<i class="fas fa-star"></i> ${translations[currentLanguage].actionRating}`;
+            document.querySelectorAll('.action-btn')[4].innerHTML = `<i class="fas fa-balance-scale"></i> ${translations[currentLanguage].actionCompare}`;
+            document.querySelectorAll('.action-btn')[5].innerHTML = `<i class="fas fa-refresh"></i> ${translations[currentLanguage].actionReset}`;
+            
+            // Update section titles
+            document.querySelector('.section-title').textContent = translations[currentLanguage].sectionTitle;
+            document.querySelector('.section-subtitle').textContent = translations[currentLanguage].sectionSubtitle;
+            
+            // Update empty state
+            document.querySelector('#emptyState h3').textContent = translations[currentLanguage].emptyTitle;
+            document.querySelector('#emptyState p').textContent = translations[currentLanguage].emptySubtitle;
+            
+            // Update footer
+            document.querySelector('.footer h3').innerHTML = `<i class="fas fa-rocket"></i> ${translations[currentLanguage].footerTitle}`;
+            document.querySelector('.footer p').textContent = translations[currentLanguage].footerText;
+            document.querySelector('.footer p:last-of-type').innerHTML = `&copy; 2024 DeployGratis. ${translations[currentLanguage].footerCopyright}`;
+            
+            // Update newsletter
+            document.querySelector('.newsletter h4').textContent = translations[currentLanguage].newsletterTitle;
+            document.querySelector('.newsletter p').textContent = translations[currentLanguage].newsletterText;
+            document.querySelector('.newsletter-input').placeholder = translations[currentLanguage].newsletterPlaceholder;
+            document.querySelector('.newsletter button').textContent = translations[currentLanguage].newsletterButton;
+            
+            // Update footer links
+            document.querySelectorAll('.footer-links a')[0].textContent = translations[currentLanguage].aboutLink;
+            document.querySelectorAll('.footer-links a')[1].textContent = translations[currentLanguage].privacyLink;
+            document.querySelectorAll('.footer-links a')[2].textContent = translations[currentLanguage].termsLink;
+            document.querySelectorAll('.footer-links a')[3].textContent = translations[currentLanguage].contactLink;
+            document.querySelectorAll('.footer-links a')[4].textContent = translations[currentLanguage].contributeLink;
+            
+            // Re-render platforms to update their text
+            renderPlatforms();
+        }
+
+        // Toggle user menu
+        function toggleUserMenu() {
+            document.getElementById('userDropdown').classList.toggle('active');
+        }
+
+        // Show profile (placeholder)
+        function showProfile() {
+            showToast('Fitur profil akan segera tersedia', 'info');
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        // Show preferences (placeholder)
+        function showPreferences() {
+            showToast('Fitur preferensi akan segera tersedia', 'info');
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        // Show history (placeholder)
+        function showHistory() {
+            showToast('Fitur riwayat akan segera tersedia', 'info');
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        // Export user data (placeholder)
+        function exportUserData() {
+            exportAllData();
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        // Import user data (placeholder)
+        function importUserData() {
+            importFavorites();
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        // Logout (placeholder)
+        function logout() {
+            showToast('Anda telah keluar', 'info');
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        // Toggle advanced search
+        function toggleAdvancedSearch() {
+            const panel = document.getElementById('advancedSearchPanel');
+            panel.classList.toggle('active');
+        }
+
+        // Apply advanced filters
+        function applyAdvancedFilters() {
+            renderPlatforms();
+            document.getElementById('advancedSearchPanel').classList.remove('active');
+            showToast('Filter diterapkan', 'info');
+        }
+
+        // Reset advanced filters
+        function resetAdvancedFilters() {
+            document.getElementById('storageFilter').value = '';
+            document.getElementById('bandwidthFilter').value = '';
+            document.getElementById('regionFilter').value = '';
+            document.getElementById('sslFilter').checked = false;
+            document.getElementById('customDomainFilter').checked = false;
+            document.getElementById('cdnFilter').checked = false;
+            document.getElementById('apiFilter').checked = false;
+            
+            renderPlatforms();
+            document.getElementById('advancedSearchPanel').classList.remove('active');
+            showToast('Filter direset', 'info');
+        }
+
         // Toggle favorite
         function toggleFavorite(platformId, event) {
             event.stopPropagation();
@@ -1545,10 +4047,10 @@
             const index = favorites.indexOf(platformId);
             if (index > -1) {
                 favorites.splice(index, 1);
-                showToast('Dihapus dari favorit', 'info');
+                showToast(translations[currentLanguage].toastRemovedFromFavorites, 'info');
             } else {
                 favorites.push(platformId);
-                showToast('Ditambahkan ke favorit', 'success');
+                showToast(translations[currentLanguage].toastAddedToFavorites, 'success');
             }
             
             localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
@@ -1569,48 +4071,448 @@
             const modal = document.getElementById('platformModal');
             const modalContent = document.getElementById('modalContent');
             
+            // Get personal notes for this platform
+            const platformNotes = personalNotes[platformId] || [];
+            
             modalContent.innerHTML = `
                 <h2 id="modalTitle">${platform.name}</h2>
-                <div class="platform-header">
-                    <div class="platform-logo" style="background: ${platform.logoColor}; width: 80px; height: 80px; font-size: 2rem;">
-                        <i class="${platform.logo}"></i>
+                <div class="modal-tabs">
+                    <button class="modal-tab active" onclick="switchModalTab('details')">Detail</button>
+                    <button class="modal-tab" onclick="switchModalTab('features')">Fitur</button>
+                    <button class="modal-tab" onclick="switchModalTab('pricing')">Harga</button>
+                    <button class="modal-tab" onclick="switchModalTab('notes')">${translations[currentLanguage].personalNotes}</button>
+                </div>
+                
+                <div class="modal-tab-content active" id="details-tab">
+                    <div class="platform-header">
+                        <div class="platform-logo" style="background: ${platform.logoColor}; width: 80px; height: 80px; font-size: 2rem;">
+                            <i class="${platform.logo}"></i>
+                        </div>
+                        <div class="platform-info">
+                            <span class="platform-type type-${platform.type}">${getTypeLabel(platform.type)}</span>
+                            <div class="platform-rating">
+                                <div class="stars">
+                                    ${generateStars(platform.rating)}
+                                </div>
+                                <span class="rating-value">${platform.rating}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="platform-info">
-                        <span class="platform-type type-${platform.type}">${getTypeLabel(platform.type)}</span>
+                    <p class="platform-description">${platform.description}</p>
+                    <div class="platform-tags">
+                        ${platform.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="share-section">
+                        <h4>${translations[currentLanguage].shareTitle}</h4>
+                        <div class="share-message">
+                            <textarea placeholder="${translations[currentLanguage].shareMessage}" id="shareMessage"></textarea>
+                        </div>
+                        <div class="share-buttons">
+                            <button class="share-btn facebook tooltip" data-tooltip="${translations[currentLanguage].shareFacebook}" onclick="richShare('${platform.id}', 'facebook')">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button class="share-btn twitter tooltip" data-tooltip="${translations[currentLanguage].shareTwitter}" onclick="richShare('${platform.id}', 'twitter')">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button class="share-btn linkedin tooltip" data-tooltip="${translations[currentLanguage].shareLinkedIn}" onclick="richShare('${platform.id}', 'linkedin')">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                            <button class="share-btn whatsapp tooltip" data-tooltip="${translations[currentLanguage].shareWhatsApp}" onclick="richShare('${platform.id}', 'whatsapp')">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                            <button class="share-btn telegram tooltip" data-tooltip="${translations[currentLanguage].shareTelegram}" onclick="richShare('${platform.id}', 'telegram')">
+                                <i class="fab fa-telegram-plane"></i>
+                            </button>
+                            <button class="share-btn email tooltip" data-tooltip="${translations[currentLanguage].shareEmail}" onclick="richShare('${platform.id}', 'email')">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                            <button class="share-btn copy tooltip" data-tooltip="${translations[currentLanguage].shareCopy}" onclick="copyPlatformLink('${platform.id}')">
+                                <i class="fas fa-link"></i>
+                            </button>
+                        </div>
+                        <div class="share-link">
+                            <input type="text" value="${window.location.origin}${window.location.pathname}?platform=${platform.id}" readonly id="shareLink">
+                            <button class="btn btn-secondary" onclick="copyPlatformLink('${platform.id}')">
+                                <i class="fas fa-copy"></i> ${translations[currentLanguage].shareCopy}
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <p class="platform-description">${platform.description}</p>
-                <div class="platform-tags">
-                    ${platform.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                
+                <div class="modal-tab-content" id="features-tab">
+                    <h3>${translations[currentLanguage].modalFeatures}</h3>
+                    <ul class="modal-features">
+                        ${platform.features.map(feature => `
+                            <li>
+                                <i class="fas fa-check"></i>
+                                <span>${feature}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
                 </div>
-                <h3>Fitur Lengkap:</h3>
-                <ul class="modal-features">
-                    ${platform.features.map(feature => `
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span>${feature}</span>
-                        </li>
-                    `).join('')}
-                </ul>
-                <h3>Informasi Harga:</h3>
-                <div style="background: var(--bg-hover); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div><strong>Gratis:</strong> ${platform.pricing.free ? 'Ya' : 'Tidak'}</div>
-                        <div><strong>Storage:</strong> ${platform.pricing.storage}</div>
-                        <div><strong>Bandwidth:</strong> ${platform.pricing.bandwidth}</div>
-                        <div><strong>Custom Domain:</strong> ${platform.pricing.customDomains ? 'Ya' : 'Tidak'}</div>
-                        <div><strong>SSL:</strong> ${platform.pricing.ssl ? 'Ya' : 'Tidak'}</div>
+                
+                <div class="modal-tab-content" id="pricing-tab">
+                    <h3>${translations[currentLanguage].modalPricing}</h3>
+                    <div style="background: var(--bg-hover); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div><strong>${translations[currentLanguage].pricingFree}:</strong> ${platform.pricing.free ? 'Ya' : 'Tidak'}</div>
+                            <div><strong>${translations[currentLanguage].pricingStorage}:</strong> ${platform.pricing.storage}</div>
+                            <div><strong>${translations[currentLanguage].pricingBandwidth}:</strong> ${platform.pricing.bandwidth}</div>
+                            <div><strong>${translations[currentLanguage].pricingCustomDomain}:</strong> ${platform.pricing.customDomains ? 'Ya' : 'Tidak'}</div>
+                            <div><strong>${translations[currentLanguage].pricingSsl}:</strong> ${platform.pricing.ssl ? 'Ya' : 'Tidak'}</div>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="modal-tab-content" id="notes-tab">
+                    <div class="notes-section">
+                        <div class="notes-header">
+                            <h3>${translations[currentLanguage].personalNotes}</h3>
+                            <button class="btn btn-primary" onclick="showAddNoteForm('${platform.id}')">
+                                <i class="fas fa-plus"></i> ${translations[currentLanguage].addNote}
+                            </button>
+                        </div>
+                        
+                        <div id="notesList" class="notes-list">
+                            ${platformNotes.length > 0 ? platformNotes.map(note => `
+                                <div class="note-item" id="note-${note.id}">
+                                    <div class="note-header">
+                                        <div class="note-date">${formatDate(note.timestamp)}</div>
+                                        <div class="note-actions">
+                                            <button class="note-action" onclick="editNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].editNote}">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="note-action delete" onclick="deleteNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].deleteNote}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="note-content">${escapeHtml(note.content)}</div>
+                                </div>
+                            `).join('') : `
+                                <div class="empty-notes">
+                                    <i class="fas fa-sticky-note"></i>
+                                    <p>${translations[currentLanguage].emptyNotes}</p>
+                                </div>
+                            `}
+                        </div>
+                        
+                        <div id="addNoteForm" class="add-note" style="display: none;">
+                            <h4>${translations[currentLanguage].addNote}</h4>
+                            <form class="note-form" onsubmit="saveNote(event, '${platformId}')">
+                                <textarea class="form-control note-textarea" placeholder="${translations[currentLanguage].yourNote}" required></textarea>
+                                <div style="display: flex; gap: 1rem;">
+                                    <button type="submit" class="btn btn-primary">${translations[currentLanguage].saveNote}</button>
+                                    <button type="button" class="btn btn-secondary" onclick="hideAddNoteForm()">${translations[currentLanguage].cancel || 'Batal'}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
                 <div style="text-align: center; margin-top: 2rem;">
                     <a href="${platform.url}" class="deploy-btn" target="_blank" rel="noopener noreferrer" onclick="trackClick('${platform.id}')">
-                        <i class="fas fa-external-link-alt"></i> Kunjungi ${platform.name}
+                        <i class="fas fa-external-link-alt"></i> ${translations[currentLanguage].visitButton} ${platform.name}
                     </a>
+                    <button class="btn btn-secondary" onclick="addToComparison('${platform.id}')" style="margin-left: 1rem;">
+                        <i class="fas fa-balance-scale"></i> ${translations[currentLanguage].addToComparison}
+                    </button>
                 </div>
             `;
             
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+        }
+
+        // Switch modal tab
+        function switchModalTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.modal-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.modal-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Generate star rating HTML
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Rich share function
+        function richShare(platformId, platform) {
+            const platformData = platforms.find(p => p.id === platformId);
+            if (!platformData) return;
+            
+            const message = document.getElementById('shareMessage')?.value || 
+                `Check out ${platformData.name} on DeployGratis - ${platformData.description.substring(0, 100)}...`;
+            
+            const url = `${window.location.origin}${window.location.pathname}?platform=${platformId}`;
+            
+            // Check if Web Share API is available
+            if (navigator.share) {
+                navigator.share({
+                    title: platformData.name,
+                    text: message,
+                    url: url
+                })
+                .then(() => {
+                    showToast(translations[currentLanguage].toastShared, 'success');
+                })
+                .catch((error) => {
+                    console.log('Error sharing:', error);
+                    // Fall back to individual share methods
+                    shareToPlatform(platform, url, message);
+                });
+            } else {
+                // Fall back to individual share methods
+                shareToPlatform(platform, url, message);
+            }
+        }
+
+        // Share to specific platform
+        function shareToPlatform(platform, url, message) {
+            let shareUrl = '';
+            
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(message)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&summary=${encodeURIComponent(message)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(message + ' ' + url)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(message)}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${encodeURIComponent('Check out this platform on DeployGratis')}&body=${encodeURIComponent(message + '\n\n' + url)}`;
+                    break;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+                showToast(translations[currentLanguage].toastShared, 'success');
+            }
+        }
+
+        // Copy platform link
+        function copyPlatformLink(platformId) {
+            const url = `${window.location.origin}${window.location.pathname}?platform=${platformId}`;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url)
+                    .then(() => {
+                        showToast(translations[currentLanguage].toastCopied, 'success');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = url;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        showToast(translations[currentLanguage].toastCopied, 'success');
+                    });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast(translations[currentLanguage].toastCopied, 'success');
+            }
+        }
+
+        // Personal Notes functions
+        function showAddNoteForm(platformId) {
+            document.getElementById('addNoteForm').style.display = 'block';
+            document.getElementById('notesList').style.display = 'none';
+        }
+
+        function hideAddNoteForm() {
+            document.getElementById('addNoteForm').style.display = 'none';
+            document.getElementById('notesList').style.display = 'block';
+        }
+
+        function saveNote(event, platformId) {
+            event.preventDefault();
+            
+            const content = event.target.querySelector('textarea').value.trim();
+            if (!content) return;
+            
+            // Initialize notes array for this platform if it doesn't exist
+            if (!personalNotes[platformId]) {
+                personalNotes[platformId] = [];
+            }
+            
+            // Create new note
+            const newNote = {
+                id: Date.now().toString(),
+                content: content,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add note
+            personalNotes[platformId].push(newNote);
+            
+            // Save to localStorage
+            localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+            
+            // Refresh notes display
+            refreshNotesList(platformId);
+            
+            // Reset form
+            event.target.reset();
+            hideAddNoteForm();
+            
+            showToast(translations[currentLanguage].toastNoteAdded, 'success');
+        }
+
+        function editNote(platformId, noteId) {
+            const note = personalNotes[platformId].find(n => n.id === noteId);
+            if (!note) return;
+            
+            // Replace note item with edit form
+            const noteElement = document.getElementById(`note-${noteId}`);
+            noteElement.innerHTML = `
+                <div class="note-header">
+                    <div class="note-date">${formatDate(note.timestamp)}</div>
+                    <div class="note-actions">
+                        <button class="note-action" onclick="cancelEditNote('${platformId}', '${noteId}')" title="${translations[currentLanguage].cancel || 'Batal'}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form class="note-form" onsubmit="updateNote(event, '${platformId}', '${noteId}')">
+                    <textarea class="form-control note-textarea" required>${escapeHtml(note.content)}</textarea>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn btn-primary">${translations[currentLanguage].saveNote}</button>
+                    </div>
+                </form>
+            `;
+        }
+
+        function cancelEditNote(platformId, noteId) {
+            refreshNotesList(platformId);
+        }
+
+        function updateNote(event, platformId, noteId) {
+            event.preventDefault();
+            
+            const content = event.target.querySelector('textarea').value.trim();
+            if (!content) return;
+            
+            // Find and update note
+            const noteIndex = personalNotes[platformId].findIndex(n => n.id === noteId);
+            if (noteIndex !== -1) {
+                personalNotes[platformId][noteIndex].content = content;
+                personalNotes[platformId][noteIndex].timestamp = new Date().toISOString();
+                
+                // Save to localStorage
+                localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+                
+                // Refresh notes display
+                refreshNotesList(platformId);
+                
+                showToast(translations[currentLanguage].toastNoteUpdated, 'success');
+            }
+        }
+
+        function deleteNote(platformId, noteId) {
+            if (!confirm('Apakah Anda yakin ingin menghapus catatan ini?')) return;
+            
+            // Remove note
+            personalNotes[platformId] = personalNotes[platformId].filter(n => n.id !== noteId);
+            
+            // Save to localStorage
+            localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+            
+            // Refresh notes display
+            refreshNotesList(platformId);
+            
+            showToast(translations[currentLanguage].toastNoteDeleted, 'success');
+        }
+
+        function refreshNotesList(platformId) {
+            const notesList = document.getElementById('notesList');
+            const platformNotes = personalNotes[platformId] || [];
+            
+            notesList.innerHTML = platformNotes.length > 0 ? platformNotes.map(note => `
+                <div class="note-item" id="note-${note.id}">
+                    <div class="note-header">
+                        <div class="note-date">${formatDate(note.timestamp)}</div>
+                        <div class="note-actions">
+                            <button class="note-action" onclick="editNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].editNote}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="note-action delete" onclick="deleteNote('${platformId}', '${note.id}')" title="${translations[currentLanguage].deleteNote}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="note-content">${escapeHtml(note.content)}</div>
+                </div>
+            `).join('') : `
+                <div class="empty-notes">
+                    <i class="fas fa-sticky-note"></i>
+                    <p>${translations[currentLanguage].emptyNotes}</p>
+                </div>
+            `;
+        }
+
+        // Utility functions
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleDateString(currentLanguage === 'id' ? 'id-ID' : 'en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
         }
 
         // Close modal
@@ -1654,6 +4556,13 @@
             showToast('Diurutkan berdasarkan yang terbaru', 'info');
         }
 
+        // Sort by rating
+        function sortByRating() {
+            platforms.sort((a, b) => b.rating - a.rating);
+            renderPlatforms();
+            showToast('Diurutkan berdasarkan rating tertinggi', 'info');
+        }
+
         // Reset all filters
         function resetFilters() {
             currentFilter = 'all';
@@ -1664,6 +4573,15 @@
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
             document.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
+            
+            // Reset advanced filters
+            document.getElementById('storageFilter').value = '';
+            document.getElementById('bandwidthFilter').value = '';
+            document.getElementById('regionFilter').value = '';
+            document.getElementById('sslFilter').checked = false;
+            document.getElementById('customDomainFilter').checked = false;
+            document.getElementById('cdnFilter').checked = false;
+            document.getElementById('apiFilter').checked = false;
             
             renderPlatforms();
             showToast('Filter direset', 'info');
@@ -1680,7 +4598,7 @@
             link.download = `deploygratis_favorites_${new Date().toISOString().split('T')[0]}.json`;
             link.click();
             
-            showToast('Favorit berhasil diekspor', 'success');
+            showToast(translations[currentLanguage].toastExportedFavorites, 'success');
         }
 
         // Import favorites
@@ -1707,7 +4625,7 @@
                     
                     updateFavoriteCount();
                     renderPlatforms();
-                    showToast(`Berhasil mengimpor ${importedIds.length} favorit`, 'success');
+                    showToast(`${translations[currentLanguage].toastImportedFavorites} (${importedIds.length})`, 'success');
                 } catch (error) {
                     showToast('Gagal mengimpor file. Pastikan format JSON valid', 'error');
                 }
@@ -1720,7 +4638,7 @@
 
         // Export all data
         function exportAllData() {
-            const dataStr = JSON.stringify({platforms: platforms, favorites: favorites}, null, 2);
+            const dataStr = JSON.stringify({platforms: platforms, favorites: favorites, preferences: userPreferences, personalNotes: personalNotes}, null, 2);
             const dataBlob = new Blob([dataStr], {type: 'application/json'});
             
             const link = document.createElement('a');
@@ -1728,7 +4646,34 @@
             link.download = `deploygratis_all_data_${new Date().toISOString().split('T')[0]}.json`;
             link.click();
             
-            showToast('Semua data berhasil diekspor', 'success');
+            showToast(translations[currentLanguage].toastExportedData, 'success');
+        }
+
+        // Save search
+        function saveSearch() {
+            const searchName = prompt('Nama untuk pencarian ini:');
+            if (!searchName) return;
+            
+            const searchData = {
+                name: searchName,
+                filter: currentFilter,
+                search: currentSearch,
+                advancedFilters: {
+                    storage: document.getElementById('storageFilter')?.value || '',
+                    bandwidth: document.getElementById('bandwidthFilter')?.value || '',
+                    region: document.getElementById('regionFilter')?.value || '',
+                    ssl: document.getElementById('sslFilter')?.checked || false,
+                    customDomain: document.getElementById('customDomainFilter')?.checked || false,
+                    cdn: document.getElementById('cdnFilter')?.checked || false,
+                    api: document.getElementById('apiFilter')?.checked || false
+                },
+                timestamp: new Date().toISOString()
+            };
+            
+            savedSearches.push(searchData);
+            localStorage.setItem('deploygratis_saved_searches', JSON.stringify(savedSearches));
+            
+            showToast(translations[currentLanguage].toastSavedSearch, 'success');
         }
 
         // Track platform clicks
@@ -1784,11 +4729,409 @@
         // Get type label
         function getTypeLabel(type) {
             const labels = {
-                'static': 'Static Site',
-                'dynamic': 'Dynamic Site',
-                'both': 'Static & Dynamic'
+                'static': translations[currentLanguage].typeStatic,
+                'dynamic': translations[currentLanguage].typeDynamic,
+                'both': translations[currentLanguage].typeBoth
             };
             return labels[type] || type;
+        }
+
+        // Initialize chart
+        function initializeChart() {
+            const ctx = document.getElementById('platformChart').getContext('2d');
+            
+            platformChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        translations[currentLanguage].typeStatic,
+                        translations[currentLanguage].typeDynamic,
+                        translations[currentLanguage].typeBoth
+                    ],
+                    datasets: [{
+                        data: [
+                            platforms.filter(p => p.type === 'static').length,
+                            platforms.filter(p => p.type === 'dynamic').length,
+                            platforms.filter(p => p.type === 'both').length
+                        ],
+                        backgroundColor: [
+                            'rgba(88, 166, 255, 0.7)',
+                            'rgba(188, 140, 255, 0.7)',
+                            'rgba(63, 185, 80, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(88, 166, 255, 1)',
+                            'rgba(188, 140, 255, 1)',
+                            'rgba(63, 185, 80, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribusi Platform berdasarkan Tipe',
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update chart
+        function updateChart() {
+            if (!platformChart) return;
+            
+            platformChart.data.labels = [
+                translations[currentLanguage].typeStatic,
+                translations[currentLanguage].typeDynamic,
+                translations[currentLanguage].typeBoth
+            ];
+            
+            platformChart.data.datasets[0].data = [
+                platforms.filter(p => p.type === 'static').length,
+                platforms.filter(p => p.type === 'dynamic').length,
+                platforms.filter(p => p.type === 'both').length
+            ];
+            
+            platformChart.update();
+        }
+
+        // Render tag cloud
+        function renderTagCloud() {
+            const tagCloud = document.getElementById('tagCloud');
+            
+            // Count tag occurrences
+            const tagCounts = {};
+            platforms.forEach(platform => {
+                platform.tags.forEach(tag => {
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            });
+            
+            // Sort tags by count
+            const sortedTags = Object.entries(tagCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 20); // Top 20 tags
+            
+            // Generate tag cloud HTML
+            tagCloud.innerHTML = sortedTags.map(([tag, count]) => {
+                const sizeClass = count > 10 ? 'size-5' :
+                                 count > 7 ? 'size-4' :
+                                 count > 4 ? 'size-3' :
+                                 count > 2 ? 'size-2' : 'size-1';
+                
+                return `<a href="#" class="tag-cloud-item ${sizeClass}" onclick="filterByTag('${tag}')">${tag}</a>`;
+            }).join('');
+        }
+
+        // Filter by tag
+        function filterByTag(tag) {
+            document.getElementById('searchInput').value = tag;
+            currentSearch = tag;
+            renderPlatforms();
+            
+            // Scroll to platforms section
+            document.getElementById('platforms').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add to recently viewed
+        function addToRecentlyViewed(platformId) {
+            // Remove if already exists
+            recentlyViewed = recentlyViewed.filter(id => id !== platformId);
+            
+            // Add to beginning
+            recentlyViewed.unshift(platformId);
+            
+            // Keep only last 5
+            if (recentlyViewed.length > 5) {
+                recentlyViewed = recentlyViewed.slice(0, 5);
+            }
+            
+            localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
+            updateRecentlyViewed();
+        }
+
+        // Update recently viewed
+        function updateRecentlyViewed() {
+            const section = document.getElementById('recentlyViewedSection');
+            const grid = document.getElementById('recentlyViewedGrid');
+            
+            if (recentlyViewed.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            
+            const recentlyViewedPlatforms = recentlyViewed
+                .map(id => platforms.find(p => p.id === id))
+                .filter(Boolean);
+            
+            grid.innerHTML = recentlyViewedPlatforms.map(platform => `
+                <div class="recently-viewed-item" onclick="showPlatformDetails('${platform.id}')">
+                    <div class="recently-viewed-logo" style="background: ${platform.logoColor};">
+                        <i class="${platform.logo}"></i>
+                    </div>
+                    <div class="recently-viewed-info">
+                        <h4>${platform.name}</h4>
+                        <p>${platform.type}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Generate recommendations
+        function generateRecommendations() {
+            if (!userPreferences.recommendations) return;
+            
+            const grid = document.getElementById('recommendationsGrid');
+            
+            // Simple recommendation algorithm based on favorites
+            let recommendedPlatforms = [];
+            
+            if (favorites.length > 0) {
+                // Get types of favorited platforms
+                const favoriteTypes = favorites
+                    .map(id => platforms.find(p => p.id === id)?.type)
+                    .filter(Boolean);
+                
+                // Count type occurrences
+                const typeCounts = {};
+                favoriteTypes.forEach(type => {
+                    typeCounts[type] = (typeCounts[type] || 0) + 1;
+                });
+                
+                // Get most common type
+                const mostCommonType = Object.entries(typeCounts)
+                    .sort((a, b) => b[1] - a[1])[0]?.[0];
+                
+                if (mostCommonType) {
+                    // Recommend platforms of the same type that aren't favorited
+                    recommendedPlatforms = platforms
+                        .filter(p => p.type === mostCommonType && !favorites.includes(p.id))
+                        .slice(0, 4);
+                }
+            }
+            
+            // If no favorites or not enough recommendations, show popular platforms
+            if (recommendedPlatforms.length < 4) {
+                const popularPlatforms = platforms
+                    .filter(p => p.category === 'popular' && !favorites.includes(p.id))
+                    .slice(0, 4 - recommendedPlatforms.length);
+                
+                recommendedPlatforms = [...recommendedPlatforms, ...popularPlatforms];
+            }
+            
+            // Render recommendations
+            grid.innerHTML = recommendedPlatforms.map(platform => {
+                const matchPercentage = favorites.length > 0 ? 
+                    Math.floor(Math.random() * 30) + 70 : // 70-100% if has favorites
+                    Math.floor(Math.random() * 20) + 60; // 60-80% if no favorites
+                
+                return `
+                    <div class="recommendation-card" onclick="showPlatformDetails('${platform.id}')">
+                        <div class="recommendation-header">
+                            <div class="recommendation-logo" style="background: ${platform.logoColor};">
+                                <i class="${platform.logo}"></i>
+                            </div>
+                            <div class="recommendation-info">
+                                <h4>${platform.name}</h4>
+                                <p>${getTypeLabel(platform.type)}</p>
+                            </div>
+                        </div>
+                        <p class="platform-description">${platform.description.substring(0, 100)}...</p>
+                        <div class="recommendation-match">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${matchPercentage}% ${translations[currentLanguage].match}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Show comparison modal
+        function showComparison() {
+            const modal = document.getElementById('comparisonModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Initialize comparison table
+            updateComparisonTable();
+        }
+
+        // Close comparison modal
+        function closeComparisonModal() {
+            document.getElementById('comparisonModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Search comparison platforms
+        function searchComparisonPlatforms(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const results = document.getElementById('comparisonResults');
+            
+            if (!searchTerm) {
+                results.innerHTML = '';
+                return;
+            }
+            
+            const matchingPlatforms = platforms.filter(p => 
+                p.name.toLowerCase().includes(searchTerm) && 
+                !comparisonPlatforms.some(cp => cp.id === p.id)
+            );
+            
+            results.innerHTML = matchingPlatforms.map(platform => `
+                <div class="comparison-result-item" onclick="addToComparisonFromSearch('${platform.id}')">
+                    <div class="comparison-result-logo" style="background: ${platform.logoColor};">
+                        <i class="${platform.logo}"></i>
+                    </div>
+                    <div>
+                        <div>${platform.name}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">${getTypeLabel(platform.type)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add to comparison from search
+        function addToComparisonFromSearch(platformId) {
+            const platform = platforms.find(p => p.id === platformId);
+            if (!platform || comparisonPlatforms.length >= 4) return;
+            
+            comparisonPlatforms.push(platform);
+            updateComparisonTable();
+            
+            // Clear search
+            document.getElementById('comparisonSearch').value = '';
+            document.getElementById('comparisonResults').innerHTML = '';
+        }
+
+        // Add to comparison from modal
+        function addToComparison(platformId) {
+            const platform = platforms.find(p => p.id === platformId);
+            if (!platform || comparisonPlatforms.length >= 4) {
+                if (comparisonPlatforms.length >= 4) {
+                    showToast('Maksimal 4 platform untuk dibandingkan', 'error');
+                }
+                return;
+            }
+            
+            comparisonPlatforms.push(platform);
+            updateComparisonTable();
+            
+            // Close platform modal and open comparison modal
+            closeModal();
+            showComparison();
+        }
+
+        // Remove from comparison
+        function removeFromComparison(platformId) {
+            comparisonPlatforms = comparisonPlatforms.filter(p => p.id !== platformId);
+            updateComparisonTable();
+        }
+
+        // Update comparison table
+        function updateComparisonTable() {
+            const table = document.getElementById('comparisonTable');
+            const thead = table.querySelector('thead tr');
+            const tbody = table.querySelector('tbody');
+            
+            // Update table headers
+            thead.innerHTML = '<th>Fitur</th>' + 
+                comparisonPlatforms.map(platform => `
+                    <th>
+                        <div class="comparison-platform">
+                            <div class="comparison-logo" style="background: ${platform.logoColor};">
+                                <i class="${platform.logo}"></i>
+                            </div>
+                            <div>${platform.name}</div>
+                            <button class="comparison-remove" onclick="removeFromComparison('${platform.id}')" aria-label="Remove from comparison">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </th>
+                `).join('');
+            
+            // Update table body
+            tbody.innerHTML = `
+                <tr>
+                    <td>${translations[currentLanguage].featureType}</td>
+                    ${comparisonPlatforms.map(p => `<td>${getTypeLabel(p.type)}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureFree}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.pricing.free ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureStorage}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.pricing.storage}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureBandwidth}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.pricing.bandwidth}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureCustomDomain}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.pricing.customDomains ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureSsl}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.pricing.ssl ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureCdn}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.features.some(f => f.toLowerCase().includes('cdn')) ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureApi}</td>
+                    ${comparisonPlatforms.map(p => `<td>${p.features.some(f => f.toLowerCase().includes('api')) ? '<i class="fas fa-check comparison-check"></i>' : '<i class="fas fa-times comparison-cross"></i>'}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td>${translations[currentLanguage].featureRating}</td>
+                    ${comparisonPlatforms.map(p => `<td>${generateStars(p.rating)} ${p.rating}</td>`).join('')}
+                </tr>
+            `;
+        }
+
+        // Open help modal
+        function openHelpModal() {
+            const modal = document.getElementById('helpModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close help modal
+        function closeHelpModal() {
+            document.getElementById('helpModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Subscribe to newsletter (placeholder)
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simulate API call
+            setTimeout(() => {
+                showToast(translations[currentLanguage].toastSubscribed, 'success');
+                event.target.reset();
+            }, 500);
         }
 
         // Add intersection observer for animations
