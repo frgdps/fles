@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deploy-Your-Things - Platform Deployment Terlengkap di Dunia</title>
+    <title>Deploy-Your-Things - List Platform Deployment Terlengkap</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.css" rel="stylesheet">
     <style>
@@ -2701,6 +2701,214 @@
         </div>
     </div>
 
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+        <div class="modal-content">
+            <button class="close" onclick="closeProfileModal()" aria-label="Close modal">&times;</button>
+            <h2 id="profileTitle">Profil Pengguna</h2>
+            <div class="profile-content">
+                <div class="profile-avatar">
+                    <div class="user-avatar" style="width: 100px; height: 100px; font-size: 2rem;">
+                        <span id="profileInitial">F</span>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h3 id="profileName">Pengguna</h3>
+                    <p id="profileEmail">user@example.com</p>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <h4 id="profileFavoritesCount">0</h4>
+                        <p>Favorit</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4 id="profileViewedCount">0</h4>
+                        <p>Dilihat</p>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-primary" onclick="editProfile()">Edit Profil</button>
+                    <button class="btn btn-secondary" onclick="closeProfileModal()">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preferences Modal -->
+    <div id="preferencesModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="preferencesTitle">
+        <div class="modal-content">
+            <button class="close" onclick="closePreferencesModal()" aria-label="Close modal">&times;</button>
+            <h2 id="preferencesTitle">Preferensi</h2>
+            <div class="preferences-content">
+                <div class="form-group">
+                    <label for="prefTheme">Tema</label>
+                    <select class="form-control" id="prefTheme" onchange="updateThemePreference()">
+                        <option value="dark">Gelap</option>
+                        <option value="light">Terang</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prefLanguage">Bahasa</label>
+                    <select class="form-control" id="prefLanguage" onchange="updateLanguagePreference()">
+                        <option value="id">Bahasa Indonesia</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="prefRecommendations" onchange="updateRecommendationsPreference()">
+                        Tampilkan Rekomendasi
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="prefAnimations" onchange="updateAnimationsPreference()">
+                        Aktifkan Animasi
+                    </label>
+                </div>
+                <div class="preferences-actions">
+                    <button class="btn btn-primary" onclick="savePreferences()">Simpan</button>
+                    <button class="btn btn-secondary" onclick="closePreferencesModal()">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+        <div class="modal-content">
+            <button class="close" onclick="closeHistoryModal()" aria-label="Close modal">&times;</button>
+            <h2 id="historyTitle">Riwayat Penelusuran</h2>
+            <div class="history-content">
+                <div class="history-list" id="historyList">
+                    <!-- History items will be populated here -->
+                </div>
+                <div class="history-actions">
+                    <button class="btn btn-secondary" onclick="clearHistory()">Hapus Riwayat</button>
+                    <button class="btn btn-primary" onclick="exportHistory()">Export Riwayat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Submission Modal -->
+    <div id="submissionModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="submissionTitle">
+        <div class="modal-content">
+            <button class="close" onclick="closeSubmissionModal()" aria-label="Close modal">&times;</button>
+            <h2 id="submissionTitle">Ajukan Platform Baru</h2>
+            <div class="submission-content">
+                <form class="submission-form" onsubmit="submitPlatform(event)">
+                    <div class="form-group">
+                        <label for="platformName">Nama Platform *</label>
+                        <input type="text" class="form-control" id="platformName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="platformUrl">URL *</label>
+                        <input type="url" class="form-control" id="platformUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="platformType">Tipe *</label>
+                        <select class="form-control" id="platformType" required>
+                            <option value="">Pilih Tipe</option>
+                            <option value="static">Static</option>
+                            <option value="dynamic">Dynamic</option>
+                            <option value="both">Keduanya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="platformDescription">Deskripsi *</label>
+                        <textarea class="form-control" id="platformDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="platformFeatures">Fitur (pisahkan dengan koma)</label>
+                        <input type="text" class="form-control" id="platformFeatures">
+                    </div>
+                    <div class="form-group">
+                        <label for="platformTags">Tag (pisahkan dengan koma)</label>
+                        <input type="text" class="form-control" id="platformTags">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="platformFree"> Paket Gratis Tersedia
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="platformStorage">Kapasitas Penyimpanan</label>
+                        <input type="text" class="form-control" id="platformStorage">
+                    </div>
+                    <div class="form-group">
+                        <label for="platformBandwidth">Bandwidth</label>
+                        <input type="text" class="form-control" id="platformBandwidth">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="platformCustomDomain"> Domain Kustom
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="platformSSL"> SSL
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="platformRegion">Wilayah</label>
+                        <select class="form-control" id="platformRegion">
+                            <option value="global">Global</option>
+                            <option value="asia">Asia</option>
+                            <option value="europe">Eropa</option>
+                            <option value="america">Amerika</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="submitterEmail">Email Anda</label>
+                        <input type="email" class="form-control" id="submitterEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="submitterNotes">Catatan Tambahan</label>
+                        <textarea class="form-control" id="submitterNotes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeSubmissionModal()">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+        <div class="modal-content">
+            <button class="close" onclick="closeFeedbackModal()" aria-label="Close modal">&times;</button>
+            <h2 id="feedbackTitle">Kirim Masukan</h2>
+            <div class="feedback-content">
+                <form class="feedback-form" onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label for="feedbackType">Jenis Masukan</label>
+                        <select class="form-control" id="feedbackType">
+                            <option value="general">Umum</option>
+                            <option value="bug">Laporan Bug</option>
+                            <option value="feature">Permintaan Fitur</option>
+                            <option value="platform">Saran Platform</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email Anda</label>
+                        <input type="email" class="form-control" id="feedbackEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackMessage">Pesan *</label>
+                        <textarea class="form-control" id="feedbackMessage" rows="5" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Kirim Masukan</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" class="toast" role="alert" aria-live="polite">
         <i class="fas fa-check-circle" aria-hidden="true"></i>
@@ -2745,7 +2953,8 @@
         let userPreferences = JSON.parse(localStorage.getItem('deploygratis_preferences')) || {
             theme: 'dark',
             language: 'id',
-            recommendations: true
+            recommendations: true,
+            animations: true
         };
         let savedSearches = JSON.parse(localStorage.getItem('deploygratis_saved_searches')) || [];
         let currentFilter = 'all';
@@ -2755,6 +2964,11 @@
         let platformChart = null;
         let currentLanguage = 'id';
         let personalNotes = JSON.parse(localStorage.getItem('deploygratis_personal_notes')) || {};
+        let userData = JSON.parse(localStorage.getItem('deploygratis_user_data')) || {
+            name: 'Pengguna',
+            email: 'user@example.com',
+            joinDate: new Date().toISOString()
+        };
         
         // Translations
         const translations = {
@@ -2839,6 +3053,10 @@
                 toastNoteUpdated: "Catatan berhasil diperbarui",
                 toastCopied: "Tautan berhasil disalin",
                 toastShared: "Berhasil dibagikan",
+                toastPlatformSubmitted: "Platform berhasil diajukan",
+                toastFeedbackSubmitted: "Masukan berhasil dikirim",
+                toastHistoryCleared: "Riwayat berhasil dihapus",
+                toastHistoryExported: "Riwayat berhasil diekspor",
                 typeStatic: "Static Site",
                 typeDynamic: "Dynamic Site",
                 typeBoth: "Static & Dynamic",
@@ -2868,7 +3086,12 @@
                 privacyLink: "Kebijakan Privasi",
                 termsLink: "Syarat & Ketentuan",
                 contactLink: "Hubungi Kami",
-                contributeLink: "Kontribusi"
+                contributeLink: "Kontribusi",
+                profileTitle: "Profil Pengguna",
+                preferencesTitle: "Preferensi",
+                historyTitle: "Riwayat Penelusuran",
+                submissionTitle: "Ajukan Platform Baru",
+                feedbackTitle: "Kirim Masukan"
             },
             en: {
                 // English translations
@@ -2951,6 +3174,10 @@
                 toastNoteUpdated: "Note updated successfully",
                 toastCopied: "Link copied successfully",
                 toastShared: "Shared successfully",
+                toastPlatformSubmitted: "Platform submitted successfully",
+                toastFeedbackSubmitted: "Feedback submitted successfully",
+                toastHistoryCleared: "History cleared successfully",
+                toastHistoryExported: "History exported successfully",
                 typeStatic: "Static Site",
                 typeDynamic: "Dynamic Site",
                 typeBoth: "Static & Dynamic",
@@ -2980,7 +3207,12 @@
                 privacyLink: "Privacy Policy",
                 termsLink: "Terms & Conditions",
                 contactLink: "Contact Us",
-                contributeLink: "Contribute"
+                contributeLink: "Contribute",
+                profileTitle: "User Profile",
+                preferencesTitle: "Preferences",
+                historyTitle: "Browsing History",
+                submissionTitle: "Submit New Platform",
+                feedbackTitle: "Send Feedback"
             }
         };
 
@@ -2996,12 +3228,12 @@
             generateRecommendations();
             renderTagCloud();
             initializeChart();
+            updateUserData();
         });
 
         // Load platforms from JSON
         async function loadPlatforms() {
             try {
-                // Fixed: Use the correct URL for the platforms.json file
                 const response = await fetch('https://flessan.pages.dev/deploy/platforms.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -3012,7 +3244,6 @@
                 // Add missing properties that might not be in the JSON but are needed by our app
                 platforms = platforms.map(platform => ({
                     ...platform,
-                    // Fixed: Use pricing object properties if available
                     free: platform.pricing ? platform.pricing.free : true,
                     storage: platform.pricing ? platform.pricing.storage : "Unlimited",
                     bandwidth: platform.pricing ? platform.pricing.bandwidth : "Unlimited",
@@ -3020,8 +3251,8 @@
                     ssl: platform.pricing ? platform.pricing.ssl : true,
                     cdn: platform.features ? platform.features.includes('CDN') : false,
                     api: platform.features ? platform.features.includes('API') : false,
-                    rating: platform.rating || 4.0, // Default rating if not provided
-                    region: platform.region || 'global' // Default region if not provided
+                    rating: platform.rating || 4.0,
+                    region: platform.region || 'global'
                 }));
                 
                 renderPlatforms();
@@ -4000,6 +4231,11 @@
                 const platformModal = document.getElementById('platformModal');
                 const comparisonModal = document.getElementById('comparisonModal');
                 const helpModal = document.getElementById('helpModal');
+                const profileModal = document.getElementById('profileModal');
+                const preferencesModal = document.getElementById('preferencesModal');
+                const historyModal = document.getElementById('historyModal');
+                const submissionModal = document.getElementById('submissionModal');
+                const feedbackModal = document.getElementById('feedbackModal');
                 
                 if (event.target === platformModal) {
                     closeModal();
@@ -4011,6 +4247,26 @@
                 
                 if (event.target === helpModal) {
                     closeHelpModal();
+                }
+                
+                if (event.target === profileModal) {
+                    closeProfileModal();
+                }
+                
+                if (event.target === preferencesModal) {
+                    closePreferencesModal();
+                }
+                
+                if (event.target === historyModal) {
+                    closeHistoryModal();
+                }
+                
+                if (event.target === submissionModal) {
+                    closeSubmissionModal();
+                }
+                
+                if (event.target === feedbackModal) {
+                    closeFeedbackModal();
                 }
             });
             
@@ -4045,6 +4301,11 @@
                     closeModal();
                     closeComparisonModal();
                     closeHelpModal();
+                    closeProfileModal();
+                    closePreferencesModal();
+                    closeHistoryModal();
+                    closeSubmissionModal();
+                    closeFeedbackModal();
                 }
             });
             
@@ -4071,6 +4332,11 @@
             // Apply language
             currentLanguage = userPreferences.language || 'id';
             updateLanguage();
+            
+            // Apply animations preference
+            if (!userPreferences.animations) {
+                document.documentElement.style.setProperty('--transition', 'none');
+            }
         }
 
         // Toggle theme
@@ -4107,7 +4373,6 @@
             document.querySelector('.hero p').textContent = translations[currentLanguage].heroSubtitle;
             document.querySelector('.stat-item:nth-child(1) .stat-label').textContent = translations[currentLanguage].statPlatform;
             document.querySelector('.stat-item:nth-child(2) .stat-label').textContent = translations[currentLanguage].statFree;
-            document.querySelector('.stat-item:nth-child(3) .stat-label').textContent = translations[currentLanguage].statProject;
             document.getElementById('searchInput').placeholder = translations[currentLanguage].searchPlaceholder;
             
             // Update filter buttons
@@ -4301,7 +4566,8 @@
                 recentlyViewed: recentlyViewed,
                 userPreferences: userPreferences,
                 personalNotes: personalNotes,
-                savedSearches: savedSearches
+                savedSearches: savedSearches,
+                userData: userData
             };
             
             const dataStr = JSON.stringify(allData, null, 2);
@@ -4343,16 +4609,19 @@
                         userPreferences = { ...userPreferences, ...data.userPreferences };
                         personalNotes = data.personalNotes || {};
                         savedSearches = data.savedSearches || [];
+                        userData = data.userData || userData;
                         
                         localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
                         localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
                         localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
                         localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
                         localStorage.setItem('deploygratis_saved_searches', JSON.stringify(savedSearches));
+                        localStorage.setItem('deploygratis_user_data', JSON.stringify(userData));
                         
                         updateFavoriteCount();
                         updateRecentlyViewed();
                         applyUserPreferences();
+                        updateUserData();
                         renderPlatforms();
                         
                         showToast('All data imported successfully', 'success');
@@ -4447,22 +4716,251 @@
             document.getElementById('helpModal').style.display = 'none';
         }
 
-        // Fixed functions for user menu actions
+        // User profile functions
         function showProfile() {
-            showToast('Profile feature coming soon!', 'info');
+            document.getElementById('profileModal').style.display = 'block';
+            updateProfileData();
             toggleUserMenu();
         }
 
+        function closeProfileModal() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        function updateProfileData() {
+            document.getElementById('profileInitial').textContent = userData.name.charAt(0).toUpperCase();
+            document.getElementById('profileName').textContent = userData.name;
+            document.getElementById('profileEmail').textContent = userData.email;
+            document.getElementById('profileFavoritesCount').textContent = favorites.length;
+            document.getElementById('profileViewedCount').textContent = recentlyViewed.length;
+        }
+
+        function updateUserData() {
+            document.getElementById('userInitial').textContent = userData.name.charAt(0).toUpperCase();
+        }
+
+        function editProfile() {
+            const name = prompt('Nama:', userData.name);
+            if (name !== null && name.trim() !== '') {
+                userData.name = name.trim();
+            }
+            
+            const email = prompt('Email:', userData.email);
+            if (email !== null && email.trim() !== '') {
+                userData.email = email.trim();
+            }
+            
+            localStorage.setItem('deploygratis_user_data', JSON.stringify(userData));
+            updateProfileData();
+            updateUserData();
+            showToast('Profile updated successfully', 'success');
+        }
+
+        // Preferences functions
         function showPreferences() {
-            showToast('Preferences feature coming soon!', 'info');
+            document.getElementById('preferencesModal').style.display = 'block';
+            // Load current preferences
+            document.getElementById('prefTheme').value = userPreferences.theme;
+            document.getElementById('prefLanguage').value = userPreferences.language;
+            document.getElementById('prefRecommendations').checked = userPreferences.recommendations;
+            document.getElementById('prefAnimations').checked = userPreferences.animations;
             toggleUserMenu();
         }
 
+        function closePreferencesModal() {
+            document.getElementById('preferencesModal').style.display = 'none';
+        }
+
+        function updateThemePreference() {
+            const theme = document.getElementById('prefTheme').value;
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('themeIcon').className = 'fas fa-moon';
+            }
+        }
+
+        function updateLanguagePreference() {
+            const language = document.getElementById('prefLanguage').value;
+            currentLanguage = language;
+            updateLanguage();
+        }
+
+        function updateRecommendationsPreference() {
+            userPreferences.recommendations = document.getElementById('prefRecommendations').checked;
+        }
+
+        function updateAnimationsPreference() {
+            const enabled = document.getElementById('prefAnimations').checked;
+            userPreferences.animations = enabled;
+            
+            if (!enabled) {
+                document.documentElement.style.setProperty('--transition', 'none');
+            } else {
+                document.documentElement.style.removeProperty('--transition');
+            }
+        }
+
+        function savePreferences() {
+            userPreferences.theme = document.getElementById('prefTheme').value;
+            userPreferences.language = document.getElementById('prefLanguage').value;
+            userPreferences.recommendations = document.getElementById('prefRecommendations').checked;
+            userPreferences.animations = document.getElementById('prefAnimations').checked;
+            
+            localStorage.setItem('deploygratis_preferences', JSON.stringify(userPreferences));
+            applyUserPreferences();
+            
+            showToast('Preferences saved successfully', 'success');
+            closePreferencesModal();
+        }
+
+        // History functions
         function showHistory() {
-            showToast('History feature coming soon!', 'info');
+            document.getElementById('historyModal').style.display = 'block';
+            updateHistoryList();
             toggleUserMenu();
         }
 
+        function closeHistoryModal() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+
+        function updateHistoryList() {
+            const historyList = document.getElementById('historyList');
+            
+            if (recentlyViewed.length === 0) {
+                historyList.innerHTML = '<p class="empty-notes">No browsing history yet</p>';
+                return;
+            }
+            
+            historyList.innerHTML = recentlyViewed.map(platformId => {
+                const platform = platforms.find(p => p.id === platformId);
+                if (!platform) return '';
+                
+                return `
+                    <div class="history-item">
+                        <div class="recently-viewed-item" onclick="viewPlatform('${platform.id}')">
+                            <div class="recently-viewed-logo" style="background: ${platform.logoColor};">
+                                <i class="${platform.logo}"></i>
+                            </div>
+                            <div class="recently-viewed-info">
+                                <h4>${platform.name}</h4>
+                                <p>${getTypeLabel(platform.type)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function clearHistory() {
+            if (!confirm('Are you sure you want to clear your browsing history?')) return;
+            
+            recentlyViewed = [];
+            localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
+            updateHistoryList();
+            updateRecentlyViewed();
+            
+            showToast(translations[currentLanguage].toastHistoryCleared, 'success');
+        }
+
+        function exportHistory() {
+            const historyData = {
+                recentlyViewed: recentlyViewed,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(historyData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'deploygratis_history.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showToast(translations[currentLanguage].toastHistoryExported, 'success');
+        }
+
+        // Platform submission functions
+        function showSubmissionModal() {
+            document.getElementById('submissionModal').style.display = 'block';
+        }
+
+        function closeSubmissionModal() {
+            document.getElementById('submissionModal').style.display = 'none';
+            document.getElementById('submissionModal').querySelector('form').reset();
+        }
+
+        function submitPlatform(event) {
+            event.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('platformName').value,
+                url: document.getElementById('platformUrl').value,
+                type: document.getElementById('platformType').value,
+                description: document.getElementById('platformDescription').value,
+                features: document.getElementById('platformFeatures').value.split(',').map(f => f.trim()).filter(f => f),
+                tags: document.getElementById('platformTags').value.split(',').map(t => t.trim()).filter(t => t),
+                free: document.getElementById('platformFree').checked,
+                storage: document.getElementById('platformStorage').value,
+                bandwidth: document.getElementById('platformBandwidth').value,
+                customDomain: document.getElementById('platformCustomDomain').checked,
+                ssl: document.getElementById('platformSSL').checked,
+                region: document.getElementById('platformRegion').value,
+                submitterEmail: document.getElementById('submitterEmail').value,
+                submitterNotes: document.getElementById('submitterNotes').value,
+                submissionDate: new Date().toISOString()
+            };
+            
+            // In a real app, you would send this to your backend
+            console.log('Platform submission:', formData);
+            
+            // Save to local storage for demo purposes
+            const submissions = JSON.parse(localStorage.getItem('deploygratis_submissions') || '[]');
+            submissions.push(formData);
+            localStorage.setItem('deploygratis_submissions', JSON.stringify(submissions));
+            
+            showToast(translations[currentLanguage].toastPlatformSubmitted, 'success');
+            closeSubmissionModal();
+        }
+
+        // Feedback functions
+        function showFeedbackModal() {
+            document.getElementById('feedbackModal').style.display = 'block';
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').style.display = 'none';
+            document.getElementById('feedbackModal').querySelector('form').reset();
+        }
+
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            const feedbackData = {
+                type: document.getElementById('feedbackType').value,
+                email: document.getElementById('feedbackEmail').value,
+                message: document.getElementById('feedbackMessage').value,
+                submissionDate: new Date().toISOString()
+            };
+            
+            // In a real app, you would send this to your backend
+            console.log('Feedback submission:', feedbackData);
+            
+            // Save to local storage for demo purposes
+            const feedbacks = JSON.parse(localStorage.getItem('deploygratis_feedbacks') || '[]');
+            feedbacks.push(feedbackData);
+            localStorage.setItem('deploygratis_feedbacks', JSON.stringify(feedbacks));
+            
+            showToast(translations[currentLanguage].toastFeedbackSubmitted, 'success');
+            closeFeedbackModal();
+        }
+
+        // Fixed functions for user menu actions
         function exportUserData() {
             exportAllData();
             toggleUserMenu();
@@ -4474,8 +4972,70 @@
         }
 
         function logout() {
-            showToast('Logout feature coming soon!', 'info');
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear user-specific data but keep preferences
+                favorites = [];
+                recentlyViewed = [];
+                personalNotes = {};
+                savedSearches = [];
+                
+                localStorage.setItem('deploygratis_favorites', JSON.stringify(favorites));
+                localStorage.setItem('deploygratis_recently_viewed', JSON.stringify(recentlyViewed));
+                localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
+                localStorage.setItem('deploygratis_saved_searches', JSON.stringify(savedSearches));
+                
+                updateFavoriteCount();
+                updateRecentlyViewed();
+                renderPlatforms();
+                
+                showToast('Logged out successfully', 'success');
+            }
             toggleUserMenu();
+        }
+
+        // Add footer links functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for footer links
+            document.querySelectorAll('.footer-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    switch(href) {
+                        case '#about':
+                            showAbout();
+                            break;
+                        case '#privacy':
+                            showPrivacy();
+                            break;
+                        case '#terms':
+                            showTerms();
+                            break;
+                        case '#contact':
+                            showContact();
+                            break;
+                        case '#contribute':
+                            showSubmissionModal();
+                            break;
+                    }
+                });
+            });
+        });
+
+        function showAbout() {
+            alert('Deploy-Your-Things adalah platform yang mengumpulkan dan mengkurasi layanan deployment gratis dari seluruh dunia. Kami membantu developer menemukan platform yang tepat untuk project mereka tanpa biaya.');
+        }
+
+        function showPrivacy() {
+            alert('Kebijakan Privasi:\n\nKami menghormati privasi Anda. Data yang kami kumpulkan hanya digunakan untuk meningkatkan pengalaman pengguna dan tidak akan dibagikan kepada pihak ketiga tanpa persetujuan Anda.');
+        }
+
+        function showTerms() {
+            alert('Syarat & Ketentuan:\n\nDengan menggunakan platform ini, Anda setuju untuk tidak menyalahgunakan layanan dan mengikuti semua ketentuan yang berlaku.');
+        }
+
+        function showContact() {
+            showFeedbackModal();
         }
     </script>
 </body>
