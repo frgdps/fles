@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#24292e">
+    <meta name="theme-color" content="#0d1117">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="DevTools Hub">
@@ -11,8 +11,7 @@
     <title>DevTools Hub</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="https://progressier.app/Y3mHP0BbWcYXyn0VN0Ub/progressier.json"/><script defer src="https://progressier.app/Y3mHP0BbWcYXyn0VN0Ub/script.js"></script> 
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkRldlRvb2xzIEh1YiIsCiAgInNob3J0X25hbWUiOiAiRGV2VG9vbHMiLAogICJkZXNjcmlwdGlvbiI6ICJIYWIgZGV2ZWxvcGVyIHRvb2xzIHVudHVrIFBXQSIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGQxMTE3IiwKICAidGhlbWVfY29sb3IiOiAiIzI0MjkyZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyUzRSUzQ3BhdGggZmlsbD0nJTIzMjQyOTJlJyBkPSdNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMnM1LjM3NCAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3NC0xMi0xMi0xMnptMCAyMkM1LjM3MyAyMiAwIDE2LjYyNyAwIDEwUzUuMzczIDAgMTIgMCAxMiA1LjM3MyAxMiAxMi01LjM3MyAxMi0xMiAxMnptMC0xOGMtMy4zMTMgMC02IDIuNjg3LTYgNnMyLjY4NyA2IDYgNiA2LTIuNjg3IDYtNi0yLjY4Ny02LTYtNnptMCAxMGMtMi4yMDYgMC00LTEuNzk0LTQtNHMxLjc5NC00IDQtNCA0IDEuNzk0IDQgNC0xLjc5NCA0LTQgNHonLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgNTEyIDUxMicgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInPiUzQ3BhdGggZmlsbD0nJTIzMjQyOTJlJyBkPSdNMjU2IDBDMTE0LjYgMCAwIDExNC42IDAgMjU2czExNC42IDI1NiAyNTYgMjU2IDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDB6bTAgNDc2Yy0xMjEuNyAwLTIyMC05OC4zLTIyMC0yMjBTMTM0LjMgMzYgMjU2IDM2czIyMCA5OC4zIDIyMCAyMjAtOTguMyAyMjAtMjIwIDIyMHptMC00MDBjLTk5LjQgMC0xODAgODAuNi0xODAgMTgwaDQwYzAtNzcuMiA2Mi44LTE0MCAxNDAtMTQwczE0MCA2Mi44IDE0MCAxNDBoNDBjMC05OS40LTgwLjYtMTgwLTE4MC0xODB6Jy8lM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDUxMiA1MTInIHdpZHRoPSc1MTInIGhlaWdodD0nNTEyJyUzRSUzQ3BhdGggZmlsbD0nJTIzMjQyOTJlJyBkPSdNMjU2IDBDMTE0LjYgMCAwIDExNC42IDAgMjU2czExNC42IDI1NiAyNTYgMjU2IDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDB6bTAgNDc2Yy0xMjEuNyAwLTIyMC05OC4zLTIyMC0yMjBTMTM0LjMgMzYgMjU2IDM2czIyMCA5OC4zIDIyMCAyMjAtOTguMyAyMjAtMjIwIDIyMHptMC00MDBjLTk5LjQgMC0xODAgODAuNi0xODAgMTgwaDQwYzAtNzcuMiA2Mi44LTE0MCAxNDAtMTQwczE0MCA2Mi44IDE0MCAxNDBoNDBjMC05OS40LTgwLjYtMTgwLTE4MC0xODB6Jy8lM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkRldlRvb2xzIEh1YiIsCiAgInNob3J0X25hbWUiOiAiRGV2VG9vbHMiLAogICJkZXNjcmlwdGlvbiI6ICJBIGNvbXByZWhlbnNpdmUgZGV2ZWxvcGVyIHRvb2xzIGh1YiIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGQxMTE3IiwKICAidGhlbWVfY29sb3IiOiAiIzI0MjkyZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgd2lkdGg9JzI0JyBoZWlnaHQ9JzI0JyUzRSUzQ3BhdGggZmlsbD0nJTIzMjQyOTJlJyBkPSdNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMnM1LjM3NCAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3NC0xMi0xMi0xMnptMCAyMkM1LjM3MyAyMiAwIDE2LjYyNyAwIDEwUzUuMzczIDAgMTIgMCAxMiA1LjM3MyAxMiAxMi01LjM3MyAxMi0xMiAxMnptMC0xOGMtMy4zMTMgMC02IDIuNjg3LTYgNnMyLjY4NyA2IDYgNiA2LTIuNjg3IDYtNi0yLjY4Ny02LTYtNnptMCAxMGMtMi4yMDYgMC00LTEuNzk0LTQtNHMxLjc5NC00IDQtNCA0IDEuNzk0IDQgNC0xLjc5NCA0LTQgNHonLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgNTEyIDUxMicgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInPiUzQ3BhdGggZmlsbD0nJTIzMjQyOTJlJyBkPSdNMjU2IDBDMTE0LjYgMCAwIDExNC42IDAgMjU2czExNC42IDI1NiAyNTYgMjU2IDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDB6bTAgNDc2Yy0xMjEuNyAwLTIyMC05OC4zLTIyMC0yMjBTMTM0LjMgMzYgMjU2IDM2czIyMCA5OC4zIDIyMCAyMjAtOTguMyAyMjAtMjIwIDIyMHptMC00MDBjLTk5LjQgMC0xODAgODAuNi0xODAgMTgwaDQwYzAtNzcuMiA2Mi44LTE0MCAxNDAtMTQwczE0MCA2Mi44IDE0MCAxNDBoNDBjMC05OS40LTgwLjYtMTgwLTE4MC0xOHonLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
     
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%2324292e' d='M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C5.373 22 0 16.627 0 10S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-18c-3.313 0-6 2.687-6 6s2.687 6 6 6 6-2.687 6-6-2.687-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z'/%3E%3C/svg%3E">
@@ -20,11 +19,17 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-bg: #0d1117;
             --secondary-bg: #161b22;
             --tertiary-bg: #21262d;
+            --quaternary-bg: #30363d;
             --border-color: #30363d;
             --text-primary: #f0f6fc;
             --text-secondary: #c9d1d9;
@@ -32,8 +37,11 @@
             --accent-color: #58a6ff;
             --success-color: #238636;
             --success-hover: #2ea043;
+            --warning-color: #d29922;
+            --danger-color: #da3633;
             --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             --transition: all 0.2s ease;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
         
         * {
@@ -43,7 +51,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: var(--font-family);
             background-color: var(--primary-bg);
             color: var(--text-secondary);
             overflow: hidden;
@@ -130,64 +138,126 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            text-align: center;
             overflow-y: auto;
+            padding: 16px;
         }
         
-        .github-logo {
-            width: 120px;
-            height: 120px;
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
             margin-bottom: 24px;
-            animation: float 3s ease-in-out infinite;
+        }
+        
+        .dashboard-card {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: var(--transition);
+        }
+        
+        .dashboard-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .dashboard-card-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-        }
-        
-        .github-logo i {
-            font-size: 100px;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .title {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-primary);
+            justify-content: space-between;
             margin-bottom: 12px;
         }
         
-        .subtitle {
+        .dashboard-card-title {
             font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            max-width: 300px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dashboard-card-title i {
+            color: var(--accent-color);
+        }
+        
+        .dashboard-card-action {
+            font-size: 12px;
+            color: var(--accent-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .dashboard-card-action:hover {
+            text-decoration: underline;
+        }
+        
+        .dashboard-card-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .tools-section {
+            margin-bottom: 24px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-title i {
+            color: var(--accent-color);
+        }
+        
+        .view-all-btn {
+            font-size: 14px;
+            color: var(--accent-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .view-all-btn:hover {
+            background-color: var(--tertiary-bg);
         }
         
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
-            width: 100%;
-            max-width: 900px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
         }
         
         .tool-card {
             background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 16px;
-            text-align: left;
+            padding: 12px;
+            text-align: center;
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
         .tool-card:hover {
@@ -201,7 +271,197 @@
             transform: translateY(0);
         }
         
+        .tool-favorite {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        
+        .tool-favorite.active {
+            color: var(--warning-color);
+        }
+        
         .tool-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: var(--accent-color);
+        }
+        
+        .tool-icon i {
+            font-size: 24px;
+        }
+        
+        .tool-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .tool-description {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--quaternary-bg) var(--tertiary-bg);
+        }
+        
+        .category-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .category-tabs::-webkit-scrollbar-track {
+            background: var(--tertiary-bg);
+            border-radius: 4px;
+        }
+        
+        .category-tabs::-webkit-scrollbar-thumb {
+            background: var(--quaternary-bg);
+            border-radius: 4px;
+        }
+        
+        .category-tab {
+            padding: 8px 16px;
+            background-color: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        
+        .category-tab:hover {
+            background-color: var(--quaternary-bg);
+            color: var(--text-primary);
+        }
+        
+        .category-tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        
+        .news-feed {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .news-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .news-item:first-child {
+            padding-top: 0;
+        }
+        
+        .news-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .news-title:hover {
+            color: var(--accent-color);
+        }
+        
+        .news-source {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .news-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .news-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            background-color: var(--tertiary-bg);
+            border-radius: 4px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-right: 4px;
+        }
+        
+        .quick-tools {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--quaternary-bg) var(--tertiary-bg);
+        }
+        
+        .quick-tools::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .quick-tools::-webkit-scrollbar-track {
+            background: var(--tertiary-bg);
+            border-radius: 4px;
+        }
+        
+        .quick-tools::-webkit-scrollbar-thumb {
+            background: var(--quaternary-bg);
+            border-radius: 4px;
+        }
+        
+        .quick-tool {
+            flex-shrink: 0;
+            width: 100px;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .quick-tool:hover {
+            background-color: var(--tertiary-bg);
+            border-color: var(--accent-color);
+        }
+        
+        .quick-tool-icon {
             width: 40px;
             height: 40px;
             background-color: var(--primary-bg);
@@ -209,125 +469,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 12px;
+            margin: 0 auto 8px;
             color: var(--accent-color);
         }
         
-        .tool-icon i {
+        .quick-tool-icon i {
             font-size: 20px;
         }
         
-        .tool-title {
-            font-size: 16px;
-            font-weight: 600;
+        .quick-tool-name {
+            font-size: 12px;
+            font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 6px;
-        }
-        
-        .tool-description {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-        
-        .open-btn {
-            background-color: var(--success-color);
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-        
-        .open-btn:hover {
-            background-color: var(--success-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
-        }
-        
-        .open-btn:active {
-            transform: translateY(0);
-        }
-        
-        .open-btn i {
-            font-size: 18px;
-        }
-        
-        .info-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 24px;
-            line-height: 1.5;
-        }
-        
-        .install-prompt {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: var(--card-shadow);
-            z-index: 1000;
-            animation: slideUp 0.3s ease;
-            max-width: 90%;
-        }
-        
-        @keyframes slideUp {
-            from {
-                transform: translateX(-50%) translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(-50%) translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .install-prompt.hidden {
-            display: none;
-        }
-        
-        .install-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        
-        .install-btn {
-            background-color: var(--success-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            white-space: nowrap;
-        }
-        
-        .install-btn:hover {
-            background-color: var(--success-hover);
-        }
-        
-        .dismiss-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 20px;
-            padding: 4px;
         }
         
         .tools-menu {
@@ -466,14 +619,6 @@
             font-size: 16px;
         }
         
-        .footer {
-            padding: 16px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-        }
-        
         .search-container {
             padding: 16px;
             border-bottom: 1px solid var(--border-color);
@@ -552,6 +697,327 @@
             font-style: italic;
         }
         
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--card-shadow);
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+            max-width: 90%;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .install-prompt.hidden {
+            display: none;
+        }
+        
+        .install-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .install-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .install-btn:hover {
+            background-color: var(--success-hover);
+        }
+        
+        .dismiss-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 4px;
+        }
+        
+        .footer {
+            padding: 16px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .tool-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background-color: transparent;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            background-color: var(--tertiary-bg);
+            color: var(--text-primary);
+        }
+        
+        .modal-body {
+            padding: 16px;
+            flex: 1;
+        }
+        
+        .modal-footer {
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4c94e8;
+        }
+        
+        .btn-secondary {
+            background-color: var(--tertiary-bg);
+            color: var(--text-primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--quaternary-bg);
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-family: var(--font-family);
+            transition: var(--transition);
+        }
+        
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .color-value {
+            flex: 1;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .color-formats {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .color-format {
+            padding: 4px 8px;
+            background-color: var(--tertiary-bg);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .color-format:hover {
+            background-color: var(--quaternary-bg);
+        }
+        
+        .color-format.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .result-container {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 4px 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--quaternary-bg);
+            color: var(--text-primary);
+        }
+        
+        .copy-btn.copied {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+        
+        .snackbar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            box-shadow: var(--card-shadow);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .snackbar.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
         @media (max-width: 768px) {
             .header {
                 padding: 8px 12px;
@@ -561,21 +1027,12 @@
                 font-size: 14px;
             }
             
-            .title {
-                font-size: 24px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            .open-btn {
-                padding: 12px 24px;
-                font-size: 14px;
+            .dashboard {
+                grid-template-columns: 1fr;
             }
             
             .tools-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
             
             .tools-menu {
@@ -583,13 +1040,8 @@
                 right: -280px;
             }
             
-            .github-logo {
-                width: 80px;
-                height: 80px;
-            }
-            
-            .github-logo i {
-                font-size: 70px;
+            .modal-content {
+                max-width: 100%;
             }
         }
         
@@ -614,6 +1066,10 @@
             .recently-used {
                 padding: 12px;
             }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
         }
     </style>
 </head>
@@ -622,7 +1078,7 @@
         <header class="header">
             <div class="header-left">
                 <div class="logo">
-                    <i class="fab fa-github"></i>
+                    <i class="fas fa-code"></i>
                 </div>
                 <h1 class="app-title">DevTools Hub</h1>
             </div>
@@ -635,174 +1091,141 @@
         </header>
         
         <div class="content">
-            <div class="github-logo">
-                <i class="fab fa-github"></i>
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3 class="dashboard-card-title">
+                            <i class="fas fa-clock"></i>
+                            Recently Used
+                        </h3>
+                        <div class="dashboard-card-action" id="viewAllRecent">
+                            View All <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <div class="dashboard-card-content" id="recentToolsContent">
+                        <p class="no-recent-tools">No tools used yet</p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3 class="dashboard-card-title">
+                            <i class="fas fa-star"></i>
+                            Favorites
+                        </h3>
+                        <div class="dashboard-card-action" id="viewAllFavorites">
+                            View All <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <div class="dashboard-card-content" id="favoriteToolsContent">
+                        <p class="no-recent-tools">No favorites yet</p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3 class="dashboard-card-title">
+                            <i class="fas fa-newspaper"></i>
+                            Developer News
+                        </h3>
+                        <div class="dashboard-card-action" id="refreshNews">
+                            Refresh <i class="fas fa-sync-alt"></i>
+                        </div>
+                    </div>
+                    <div class="dashboard-card-content" id="newsContent">
+                        <p>Loading latest news...</p>
+                    </div>
+                </div>
             </div>
             
-            <h2 class="title">DevTools Hub</h2>
-            <p class="subtitle">Akses berbagai tools developer dalam satu aplikasi</p>
+            <div class="quick-tools" id="quickTools">
+                <!-- Quick tools will be populated by JavaScript -->
+            </div>
             
-            <button class="open-btn" id="openGithubBtn">
-                <i class="fas fa-external-link-alt"></i>
-                Buka GitHub
-            </button>
-            
-            <p class="info-text">
-                Klik pada tool untuk membukanya di browser.<br>
-                Aplikasi ini akan terinstall di homescreen Anda untuk akses cepat.
-            </p>
+            <div class="tools-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-tools"></i>
+                        Developer Tools
+                    </h2>
+                    <button class="view-all-btn" id="viewAllTools">
+                        View All <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="category-tabs" id="categoryTabs">
+                    <div class="category-tab active" data-category="all">All</div>
+                    <div class="category-tab" data-category="web">Web</div>
+                    <div class="category-tab" data-category="api">API</div>
+                    <div class="category-tab" data-category="format">Format</div>
+                    <div class="category-tab" data-category="generator">Generator</div>
+                    <div class="category-tab" data-category="convert">Convert</div>
+                </div>
+                
+                <div class="tools-grid" id="toolsGrid">
+                    <!-- Tools will be populated by JavaScript -->
+                </div>
+            </div>
         </div>
     </div>
     
     <div class="tools-menu" id="toolsMenu">
         <div class="menu-header">
-            <div style="
-                width:70px;
-                height:70px;
-                overflow:hidden;
-                border-radius:12px;
-            ">
-                <img src="https://i.pinimg.com/736x/5c/2b/c5/5c2bc53db08acad9c2c1162e5cfd87ba.jpg" 
-                     style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <h3 class="menu-title">Developer Tools</h3>
+            <h3 class="menu-title">All Tools</h3>
             <button class="close-menu-btn" id="closeMenuBtn">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
         <div class="search-container">
-            <input type="text" class="search-box" id="searchBox" placeholder="Cari tools...">
+            <input type="text" class="search-box" id="searchBox" placeholder="Search tools...">
         </div>
         
         <div class="recently-used" id="recentlyUsedSection">
             <h3 class="recently-used-title">
                 <i class="fas fa-history"></i>
-                Terakhir Digunakan
+                Recently Used
             </h3>
             <div class="recent-tools" id="recentTools">
-                <div class="no-recent-tools">Belum ada tools yang digunakan</div>
+                <div class="no-recent-tools">No tools used yet</div>
             </div>
         </div>
         
         <div class="menu-tools-list" id="menuToolsList">
-            <div class="menu-tool-item" data-url="https://github.com" data-name="GitHub">
-                <div class="menu-tool-icon">
-                    <i class="fab fa-github"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">GitHub</h4>
-                    <p class="menu-tool-description">Platform hosting dan kolaborasi kode</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://flessan.pages.dev/deploy" data-name="Deploy-Your-Things">
-                <div class="menu-tool-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">Deploy-Your-Things</h4>
-                    <p class="menu-tool-description">Tool untuk mendeploy proyek dengan cepat</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://readme.so/id/editor" data-name="Markdown Editor">
-                <div class="menu-tool-icon">
-                    <i class="fas fa-edit"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">Markdown Editor</h4>
-                    <p class="menu-tool-description">Editor markdown dengan preview real-time</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://chat.z.ai" data-name="GLM 4.5 (AI)">
-                <div class="menu-tool-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">GLM 4.5 (AI)</h4>
-                    <p class="menu-tool-description">Asisten AI canggih untuk developer</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://codepen.io" data-name="CodePen">
-                <div class="menu-tool-icon">
-                    <i class="fab fa-codepen"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">CodePen</h4>
-                    <p class="menu-tool-description">Platform untuk berbagi dan menguji kode</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://developer.mozilla.org" data-name="MDN Web Docs">
-                <div class="menu-tool-icon">
-                    <i class="fab fa-firefox"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">MDN Web Docs</h4>
-                    <p class="menu-tool-description">Dokumentasi lengkap untuk web developer</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://stackoverflow.com" data-name="Stack Overflow">
-                <div class="menu-tool-icon">
-                    <i class="fab fa-stack-overflow"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">Stack Overflow</h4>
-                    <p class="menu-tool-description">Komunitas Q&A untuk programmer</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-            
-            <div class="menu-tool-item" data-url="https://fonts.google.com" data-name="Google Fonts">
-                <div class="menu-tool-icon">
-                    <i class="fas fa-font"></i>
-                </div>
-                <div class="menu-tool-info">
-                    <h4 class="menu-tool-title">Google Fonts</h4>
-                    <p class="menu-tool-description">Koleksi font gratis untuk web</p>
-                </div>
-                <div class="menu-tool-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
+            <!-- Menu tools will be populated by JavaScript -->
         </div>
         
         <div class="footer">
-            <p>DevTools Hub v1.0</p>
+            <p>DevTools Hub v2.0</p>
         </div>
     </div>
     
     <div class="menu-overlay" id="menuOverlay"></div>
     
     <div class="install-prompt hidden" id="installPrompt">
-        <div class="install-text">Install aplikasi ini untuk pengalaman yang lebih baik</div>
+        <div class="install-text">Install this app for a better experience</div>
         <button class="install-btn" id="installBtn">Install</button>
         <button class="dismiss-btn" id="dismissBtn">×</button>
     </div>
+    
+    <div class="tool-modal" id="toolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Tool Title</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <!-- Modal footer will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="snackbar" id="snackbar"></div>
     
     <script>
         // Service Worker Registration
@@ -811,7 +1234,7 @@
                 const swContent = `
                     self.addEventListener('install', event => {
                         event.waitUntil(
-                            caches.open('devtools-hub-v1').then(cache => {
+                            caches.open('devtools-hub-v2').then(cache => {
                                 return cache.addAll([
                                     '/',
                                     'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBmaWxsPSIjMjQyOTJlIiBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMnM1LjM3NCAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3NC0xMi0xMi0xMnptMCAyMkM1LjM3MyAyMiAwIDE2LjYyNyAwIDEwUzUuMzczIDAgMTIgMCAxMiA1LjM3MyAxMiAxMi01LjM3MyAxMi0xMiAxMnptMC0xOGMtMy4zMTMgMC02IDIuNjg3LTYgNnMyLjY4NyA2IDYgNiA2LTIuNjg3IDYtNi0yLjY4Ny02LTYtNnptMCAxMGMtMi4yMDYgMC00LTEuNzk0LTQtNHMxLjc5NC00IDQtNCA0IDEuNzk0IDQgNC0xLjc5NCA0LTQgNHoiLz48L3N2Zz4='
@@ -917,97 +1340,1810 @@
             });
         }
         
+        // Tools data
+        const tools = [
+            {
+                id: 'github',
+                name: 'GitHub',
+                description: 'Platform for hosting and collaborating on code',
+                url: 'https://github.com',
+                icon: 'fab fa-github',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'deploy',
+                name: 'Deploy-Your-Things',
+                description: 'Tool for quick project deployment',
+                url: 'https://flessan.pages.dev/deploy',
+                icon: 'fas fa-rocket',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'markdown',
+                name: 'Markdown Editor',
+                description: 'Markdown editor with real-time preview',
+                url: 'https://readme.so/id/editor',
+                icon: 'fas fa-edit',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'glm',
+                name: 'GLM 4.5 (AI)',
+                description: 'Advanced AI assistant for developers',
+                url: 'https://chat.z.ai',
+                icon: 'fas fa-robot',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'codepen',
+                name: 'CodePen',
+                description: 'Platform for sharing and testing code',
+                url: 'https://codepen.io',
+                icon: 'fab fa-codepen',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'mdn',
+                name: 'MDN Web Docs',
+                description: 'Complete documentation for web developers',
+                url: 'https://developer.mozilla.org',
+                icon: 'fab fa-firefox',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'stackoverflow',
+                name: 'Stack Overflow',
+                description: 'Q&A community for programmers',
+                url: 'https://stackoverflow.com',
+                icon: 'fab fa-stack-overflow',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'fonts',
+                name: 'Google Fonts',
+                description: 'Free font collection for the web',
+                url: 'https://fonts.google.com',
+                icon: 'fas fa-font',
+                category: 'web',
+                favorite: false
+            },
+            {
+                id: 'json-formatter',
+                name: 'JSON Formatter',
+                description: 'Format and validate JSON data',
+                icon: 'fas fa-code',
+                category: 'format',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'color-picker',
+                name: 'Color Picker',
+                description: 'Pick colors and get different formats',
+                icon: 'fas fa-palette',
+                category: 'generator',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'base64',
+                name: 'Base64 Encoder/Decoder',
+                description: 'Encode and decode Base64 strings',
+                icon: 'fas fa-exchange-alt',
+                category: 'convert',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'url-encoder',
+                name: 'URL Encoder/Decoder',
+                description: 'Encode and decode URL strings',
+                icon: 'fas fa-link',
+                category: 'convert',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'regex-tester',
+                name: 'Regex Tester',
+                description: 'Test and debug regular expressions',
+                icon: 'fas fa-code-branch',
+                category: 'web',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'password-generator',
+                name: 'Password Generator',
+                description: 'Generate secure passwords',
+                icon: 'fas fa-key',
+                category: 'generator',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'lorem-ipsum',
+                name: 'Lorem Ipsum Generator',
+                description: 'Generate placeholder text',
+                icon: 'fas fa-align-left',
+                category: 'generator',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'api-tester',
+                name: 'API Tester',
+                description: 'Test REST APIs',
+                icon: 'fas fa-plug',
+                category: 'api',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'hash-generator',
+                name: 'Hash Generator',
+                description: 'Generate hash values',
+                icon: 'fas fa-fingerprint',
+                category: 'generator',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'uuid-generator',
+                name: 'UUID Generator',
+                description: 'Generate unique identifiers',
+                icon: 'fas fa-hashtag',
+                category: 'generator',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'timestamp-converter',
+                name: 'Timestamp Converter',
+                description: 'Convert between timestamp and date',
+                icon: 'fas fa-clock',
+                category: 'convert',
+                favorite: false,
+                modal: true
+            },
+            {
+                id: 'html-entities',
+                name: 'HTML Entities Encoder/Decoder',
+                description: 'Encode and decode HTML entities',
+                icon: 'fas fa-code',
+                category: 'convert',
+                favorite: false,
+                modal: true
+            }
+        ];
+        
+        // Quick tools
+        const quickTools = [
+            { id: 'json-formatter', name: 'JSON', icon: 'fas fa-code' },
+            { id: 'color-picker', name: 'Color', icon: 'fas fa-palette' },
+            { id: 'base64', name: 'Base64', icon: 'fas fa-exchange-alt' },
+            { id: 'password-generator', name: 'Password', icon: 'fas fa-key' },
+            { id: 'regex-tester', name: 'Regex', icon: 'fas fa-code-branch' },
+            { id: 'api-tester', name: 'API', icon: 'fas fa-plug' }
+        ];
+        
+        // Initialize tools
+        function initializeTools() {
+            // Load favorites from localStorage
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            tools.forEach(tool => {
+                tool.favorite = favorites.includes(tool.id);
+            });
+            
+            // Populate tools grid
+            populateToolsGrid('all');
+            
+            // Populate menu tools list
+            populateMenuToolsList();
+            
+            // Populate quick tools
+            populateQuickTools();
+            
+            // Load dashboard data
+            loadDashboardData();
+            
+            // Load developer news
+            loadDeveloperNews();
+        }
+        
+        // Populate tools grid
+        function populateToolsGrid(category) {
+            const toolsGrid = document.getElementById('toolsGrid');
+            toolsGrid.innerHTML = '';
+            
+            const filteredTools = category === 'all' 
+                ? tools 
+                : tools.filter(tool => tool.category === category);
+            
+            filteredTools.forEach(tool => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.dataset.id = tool.id;
+                
+                toolCard.innerHTML = `
+                    <div class="tool-favorite ${tool.favorite ? 'active' : ''}" data-id="${tool.id}">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="tool-icon">
+                        <i class="${tool.icon}"></i>
+                    </div>
+                    <h3 class="tool-title">${tool.name}</h3>
+                    <p class="tool-description">${tool.description}</p>
+                `;
+                
+                toolCard.addEventListener('click', (e) => {
+                    if (!e.target.closest('.tool-favorite')) {
+                        openTool(tool);
+                    }
+                });
+                
+                toolsGrid.appendChild(toolCard);
+            });
+            
+            // Add event listeners to favorite buttons
+            document.querySelectorAll('.tool-favorite').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleFavorite(btn.dataset.id);
+                });
+            });
+        }
+        
+        // Populate menu tools list
+        function populateMenuToolsList() {
+            menuToolsList.innerHTML = '';
+            
+            tools.forEach(tool => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'menu-tool-item';
+                toolItem.dataset.id = tool.id;
+                
+                toolItem.innerHTML = `
+                    <div class="menu-tool-icon">
+                        <i class="${tool.icon}"></i>
+                    </div>
+                    <div class="menu-tool-info">
+                        <h4 class="menu-tool-title">${tool.name}</h4>
+                        <p class="menu-tool-description">${tool.description}</p>
+                    </div>
+                    <div class="menu-tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                `;
+                
+                toolItem.addEventListener('click', () => {
+                    openTool(tool);
+                });
+                
+                menuToolsList.appendChild(toolItem);
+            });
+        }
+        
+        // Populate quick tools
+        function populateQuickTools() {
+            const quickToolsContainer = document.getElementById('quickTools');
+            quickToolsContainer.innerHTML = '';
+            
+            quickTools.forEach(tool => {
+                const toolData = tools.find(t => t.id === tool.id);
+                if (!toolData) return;
+                
+                const quickTool = document.createElement('div');
+                quickTool.className = 'quick-tool';
+                quickTool.dataset.id = tool.id;
+                
+                quickTool.innerHTML = `
+                    <div class="quick-tool-icon">
+                        <i class="${tool.icon}"></i>
+                    </div>
+                    <div class="quick-tool-name">${tool.name}</div>
+                `;
+                
+                quickTool.addEventListener('click', () => {
+                    openTool(toolData);
+                });
+                
+                quickToolsContainer.appendChild(quickTool);
+            });
+        }
+        
+        // Category tabs
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                populateToolsGrid(tab.dataset.category);
+            });
+        });
+        
+        // View all buttons
+        document.getElementById('viewAllTools').addEventListener('click', () => {
+            toolsMenu.classList.add('open');
+            menuOverlay.classList.add('open');
+            loadRecentlyUsed();
+        });
+        
+        document.getElementById('viewAllRecent').addEventListener('click', () => {
+            toolsMenu.classList.add('open');
+            menuOverlay.classList.add('open');
+            loadRecentlyUsed();
+        });
+        
+        document.getElementById('viewAllFavorites').addEventListener('click', () => {
+            toolsMenu.classList.add('open');
+            menuOverlay.classList.add('open');
+            loadRecentlyUsed();
+        });
+        
         // Load recently used tools
         function loadRecentlyUsed() {
             const recentlyUsed = JSON.parse(localStorage.getItem('recentlyUsed') || '[]');
             
             if (recentlyUsed.length === 0) {
-                recentTools.innerHTML = '<div class="no-recent-tools">Belum ada tools yang digunakan</div>';
+                recentTools.innerHTML = '<div class="no-recent-tools">No tools used yet</div>';
                 return;
             }
             
             recentTools.innerHTML = '';
-            recentlyUsed.forEach(tool => {
+            recentlyUsed.forEach(toolId => {
+                const tool = tools.find(t => t.id === toolId);
+                if (!tool) return;
+                
                 const toolElement = document.createElement('div');
                 toolElement.className = 'recent-tool';
-                toolElement.setAttribute('data-url', tool.url);
-                
-                // Get icon based on tool name
-                let iconClass = 'fas fa-tools';
-                if (tool.name === 'GitHub') iconClass = 'fab fa-github';
-                else if (tool.name === 'Deploy-Your-Things') iconClass = 'fas fa-rocket';
-                else if (tool.name === 'Markdown Editor') iconClass = 'fas fa-edit';
-                else if (tool.name === 'GLM 4.5 (AI)') iconClass = 'fas fa-robot';
-                else if (tool.name === 'CodePen') iconClass = 'fab fa-codepen';
-                else if (tool.name === 'MDN Web Docs') iconClass = 'fab fa-firefox';
-                else if (tool.name === 'Stack Overflow') iconClass = 'fab fa-stack-overflow';
-                else if (tool.name === 'Google Fonts') iconClass = 'fas fa-font';
+                toolElement.dataset.id = tool.id;
                 
                 toolElement.innerHTML = `
-                    <i class="${iconClass}"></i>
+                    <i class="${tool.icon}"></i>
                     <span>${tool.name}</span>
                 `;
                 
                 toolElement.addEventListener('click', () => {
-                    openTool(tool.url);
+                    openTool(tool);
                 });
                 
                 recentTools.appendChild(toolElement);
             });
         }
         
-        // Tool cards and menu items click handlers
-        const menuToolItems = document.querySelectorAll('.menu-tool-item');
-        
-        function openTool(url) {
-            // Close menu if open
-            closeMenu();
+        // Load dashboard data
+        function loadDashboardData() {
+            // Load recently used tools
+            const recentlyUsed = JSON.parse(localStorage.getItem('recentlyUsed') || '[]');
+            const recentToolsContent = document.getElementById('recentToolsContent');
             
-            // Open URL in new tab
-            window.open(url, '_blank');
+            if (recentlyUsed.length === 0) {
+                recentToolsContent.innerHTML = '<p class="no-recent-tools">No tools used yet</p>';
+            } else {
+                recentToolsContent.innerHTML = '';
+                const displayCount = Math.min(3, recentlyUsed.length);
+                
+                for (let i = 0; i < displayCount; i++) {
+                    const tool = tools.find(t => t.id === recentlyUsed[i]);
+                    if (!tool) continue;
+                    
+                    const toolElement = document.createElement('div');
+                    toolElement.className = 'recent-tool';
+                    toolElement.style.marginBottom = '8px';
+                    toolElement.dataset.id = tool.id;
+                    
+                    toolElement.innerHTML = `
+                        <i class="${tool.icon}"></i>
+                        <span>${tool.name}</span>
+                    `;
+                    
+                    toolElement.addEventListener('click', () => {
+                        openTool(tool);
+                    });
+                    
+                    recentToolsContent.appendChild(toolElement);
+                }
+            }
             
-            // If in PWA mode, try to open in system browser
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                // For Android PWA
-                window.location.href = url;
+            // Load favorite tools
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const favoriteToolsContent = document.getElementById('favoriteToolsContent');
+            
+            if (favorites.length === 0) {
+                favoriteToolsContent.innerHTML = '<p class="no-recent-tools">No favorites yet</p>';
+            } else {
+                favoriteToolsContent.innerHTML = '';
+                const displayCount = Math.min(3, favorites.length);
+                
+                for (let i = 0; i < displayCount; i++) {
+                    const tool = tools.find(t => t.id === favorites[i]);
+                    if (!tool) continue;
+                    
+                    const toolElement = document.createElement('div');
+                    toolElement.className = 'recent-tool';
+                    toolElement.style.marginBottom = '8px';
+                    toolElement.dataset.id = tool.id;
+                    
+                    toolElement.innerHTML = `
+                        <i class="${tool.icon}"></i>
+                        <span>${tool.name}</span>
+                    `;
+                    
+                    toolElement.addEventListener('click', () => {
+                        openTool(tool);
+                    });
+                    
+                    favoriteToolsContent.appendChild(toolElement);
+                }
             }
         }
         
-        menuToolItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const url = item.getAttribute('data-url');
-                const toolName = item.getAttribute('data-name');
-                saveToRecentlyUsed(toolName, url);
-                openTool(url);
+        // Load developer news
+        function loadDeveloperNews() {
+            const newsContent = document.getElementById('newsContent');
+            
+            // Simulate loading news (in a real app, this would fetch from an API)
+            setTimeout(() => {
+                const news = [
+                    {
+                        title: 'New JavaScript Framework Released',
+                        source: 'DevNews',
+                        time: '2 hours ago',
+                        tag: 'JavaScript'
+                    },
+                    {
+                        title: 'CSS Grid Layout Guide Updated',
+                        source: 'WebDev Weekly',
+                        time: '5 hours ago',
+                        tag: 'CSS'
+                    },
+                    {
+                        title: 'Security Vulnerability in Popular Library',
+                        source: 'Security Alert',
+                        time: '1 day ago',
+                        tag: 'Security'
+                    }
+                ];
+                
+                newsContent.innerHTML = '';
+                news.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    
+                    newsItem.innerHTML = `
+                        <div class="news-title">
+                            <i class="fas fa-external-link-alt"></i>
+                            ${item.title}
+                        </div>
+                        <div class="news-source">${item.source}</div>
+                        <div class="news-time">
+                            <span class="news-tag">${item.tag}</span>
+                            ${item.time}
+                        </div>
+                    `;
+                    
+                    newsContent.appendChild(newsItem);
+                });
+            }, 1000);
+        }
+        
+        // Refresh news
+        document.getElementById('refreshNews').addEventListener('click', () => {
+            const newsContent = document.getElementById('newsContent');
+            newsContent.innerHTML = '<p>Loading latest news...</p>';
+            loadDeveloperNews();
+        });
+        
+        // Toggle favorite
+        function toggleFavorite(toolId) {
+            const tool = tools.find(t => t.id === toolId);
+            if (!tool) return;
+            
+            tool.favorite = !tool.favorite;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (tool.favorite) {
+                if (!favorites.includes(toolId)) {
+                    favorites.push(toolId);
+                }
+            } else {
+                favorites = favorites.filter(id => id !== toolId);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Update UI
+            document.querySelectorAll(`.tool-favorite[data-id="${toolId}"]`).forEach(btn => {
+                btn.classList.toggle('active', tool.favorite);
             });
-        });
+            
+            // Update dashboard
+            loadDashboardData();
+            
+            // Show notification
+            showSnackbar(tool.favorite ? 'Added to favorites' : 'Removed from favorites');
+        }
         
-        // GitHub button
-        document.getElementById('openGithubBtn').addEventListener('click', () => {
-            saveToRecentlyUsed('GitHub', 'https://github.com');
-            openTool('https://github.com');
-        });
+        // Open tool
+        function openTool(tool) {
+            // Close menu if open
+            closeMenu();
+            
+            // Save to recently used
+            saveToRecentlyUsed(tool.id);
+            
+            // Update dashboard
+            loadDashboardData();
+            
+            if (tool.modal) {
+                // Open modal for built-in tools
+                openToolModal(tool);
+            } else {
+                // Open URL in new tab
+                window.open(tool.url, '_blank');
+                
+                // If in PWA mode, try to open in system browser
+                if (window.matchMedia('(display-mode: standalone)').matches) {
+                    // For Android PWA
+                    window.location.href = tool.url;
+                }
+            }
+        }
         
-        // Check if running as PWA
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('Running in standalone mode');
-            document.body.style.backgroundColor = 'var(--primary-bg)';
+        // Tool modal
+        const toolModal = document.getElementById('toolModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalFooter = document.getElementById('modalFooter');
+        const modalClose = document.getElementById('modalClose');
+        
+        modalClose.addEventListener('click', closeToolModal);
+        
+        function closeToolModal() {
+            toolModal.classList.remove('active');
+        }
+        
+        function openToolModal(tool) {
+            modalTitle.textContent = tool.name;
+            modalBody.innerHTML = '';
+            modalFooter.innerHTML = '';
+            
+            switch (tool.id) {
+                case 'json-formatter':
+                    openJsonFormatter();
+                    break;
+                case 'color-picker':
+                    openColorPicker();
+                    break;
+                case 'base64':
+                    openBase64Tool();
+                    break;
+                case 'url-encoder':
+                    openUrlEncoder();
+                    break;
+                case 'regex-tester':
+                    openRegexTester();
+                    break;
+                case 'password-generator':
+                    openPasswordGenerator();
+                    break;
+                case 'lorem-ipsum':
+                    openLoremIpsumGenerator();
+                    break;
+                case 'api-tester':
+                    openApiTester();
+                    break;
+                case 'hash-generator':
+                    openHashGenerator();
+                    break;
+                case 'uuid-generator':
+                    openUuidGenerator();
+                    break;
+                case 'timestamp-converter':
+                    openTimestampConverter();
+                    break;
+                case 'html-entities':
+                    openHtmlEntitiesTool();
+                    break;
+            }
+            
+            toolModal.classList.add('active');
+        }
+        
+        // JSON Formatter
+        function openJsonFormatter() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="jsonInput">Input JSON</label>
+                    <textarea class="form-textarea" id="jsonInput" placeholder="Enter JSON data..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="jsonOutput">Formatted JSON</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="jsonOutput"></div>
+                        <button class="copy-btn" id="copyJsonBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearJsonBtn">Clear</button>
+                <button class="btn btn-primary" id="formatJsonBtn">Format</button>
+            `;
+            
+            const jsonInput = document.getElementById('jsonInput');
+            const jsonOutput = document.getElementById('jsonOutput');
+            const formatJsonBtn = document.getElementById('formatJsonBtn');
+            const clearJsonBtn = document.getElementById('clearJsonBtn');
+            const copyJsonBtn = document.getElementById('copyJsonBtn');
+            
+            formatJsonBtn.addEventListener('click', () => {
+                try {
+                    const parsed = JSON.parse(jsonInput.value);
+                    jsonOutput.textContent = JSON.stringify(parsed, null, 2);
+                    jsonOutput.style.color = 'var(--text-secondary)';
+                } catch (error) {
+                    jsonOutput.textContent = `Error: ${error.message}`;
+                    jsonOutput.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            clearJsonBtn.addEventListener('click', () => {
+                jsonInput.value = '';
+                jsonOutput.textContent = '';
+            });
+            
+            copyJsonBtn.addEventListener('click', () => {
+                if (jsonOutput.textContent) {
+                    navigator.clipboard.writeText(jsonOutput.textContent).then(() => {
+                        copyJsonBtn.textContent = 'Copied!';
+                        copyJsonBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyJsonBtn.textContent = 'Copy';
+                            copyJsonBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+        }
+        
+        // Color Picker
+        function openColorPicker() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Color Picker</label>
+                    <div class="color-picker-container">
+                        <input type="color" class="color-picker" id="colorPicker" value="#58a6ff">
+                        <div class="color-value" id="colorValue">#58a6ff</div>
+                    </div>
+                    <div class="color-formats">
+                        <div class="color-format active" data-format="hex">HEX</div>
+                        <div class="color-format" data-format="rgb">RGB</div>
+                        <div class="color-format" data-format="hsl">HSL</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="colorOutput">Color Value</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="colorOutput">#58a6ff</div>
+                        <button class="copy-btn" id="copyColorBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-primary" id="randomColorBtn">Random Color</button>
+            `;
+            
+            const colorPicker = document.getElementById('colorPicker');
+            const colorValue = document.getElementById('colorValue');
+            const colorOutput = document.getElementById('colorOutput');
+            const copyColorBtn = document.getElementById('copyColorBtn');
+            const randomColorBtn = document.getElementById('randomColorBtn');
+            const colorFormats = document.querySelectorAll('.color-format');
+            
+            let currentFormat = 'hex';
+            
+            colorPicker.addEventListener('input', (e) => {
+                updateColorValue(e.target.value);
+            });
+            
+            colorFormats.forEach(format => {
+                format.addEventListener('click', () => {
+                    colorFormats.forEach(f => f.classList.remove('active'));
+                    format.classList.add('active');
+                    currentFormat = format.dataset.format;
+                    updateColorValue(colorPicker.value);
+                });
+            });
+            
+            copyColorBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(colorOutput.textContent).then(() => {
+                    copyColorBtn.textContent = 'Copied!';
+                    copyColorBtn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        copyColorBtn.textContent = 'Copy';
+                        copyColorBtn.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+            
+            randomColorBtn.addEventListener('click', () => {
+                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+                colorPicker.value = randomColor;
+                updateColorValue(randomColor);
+            });
+            
+            function updateColorValue(hex) {
+                colorValue.textContent = hex;
+                
+                let formattedValue;
+                
+                switch (currentFormat) {
+                    case 'hex':
+                        formattedValue = hex;
+                        break;
+                    case 'rgb':
+                        const r = parseInt(hex.slice(1, 3), 16);
+                        const g = parseInt(hex.slice(3, 5), 16);
+                        const b = parseInt(hex.slice(5, 7), 16);
+                        formattedValue = `rgb(${r}, ${g}, ${b})`;
+                        break;
+                    case 'hsl':
+                        const r2 = parseInt(hex.slice(1, 3), 16) / 255;
+                        const g2 = parseInt(hex.slice(3, 5), 16) / 255;
+                        const b2 = parseInt(hex.slice(5, 7), 16) / 255;
+                        
+                        const max = Math.max(r2, g2, b2);
+                        const min = Math.min(r2, g2, b2);
+                        let h, s, l = (max + min) / 2;
+                        
+                        if (max === min) {
+                            h = s = 0;
+                        } else {
+                            const d = max - min;
+                            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                            
+                            switch (max) {
+                                case r2: h = ((g2 - b2) / d + (g2 < b2 ? 6 : 0)) / 6; break;
+                                case g2: h = ((b2 - r2) / d + 2) / 6; break;
+                                case b2: h = ((r2 - g2) / d + 4) / 6; break;
+                            }
+                        }
+                        
+                        formattedValue = `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+                        break;
+                }
+                
+                colorOutput.textContent = formattedValue;
+            }
+        }
+        
+        // Base64 Tool
+        function openBase64Tool() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="base64Input">Input Text</label>
+                    <textarea class="form-textarea" id="base64Input" placeholder="Enter text to encode/decode..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="base64Output">Result</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="base64Output"></div>
+                        <button class="copy-btn" id="copyBase64Btn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearBase64Btn">Clear</button>
+                <button class="btn btn-primary" id="encodeBase64Btn">Encode</button>
+                <button class="btn btn-primary" id="decodeBase64Btn">Decode</button>
+            `;
+            
+            const base64Input = document.getElementById('base64Input');
+            const base64Output = document.getElementById('base64Output');
+            const encodeBase64Btn = document.getElementById('encodeBase64Btn');
+            const decodeBase64Btn = document.getElementById('decodeBase64Btn');
+            const clearBase64Btn = document.getElementById('clearBase64Btn');
+            const copyBase64Btn = document.getElementById('copyBase64Btn');
+            
+            encodeBase64Btn.addEventListener('click', () => {
+                try {
+                    base64Output.textContent = btoa(unescape(encodeURIComponent(base64Input.value)));
+                    base64Output.style.color = 'var(--text-secondary)';
+                } catch (error) {
+                    base64Output.textContent = `Error: ${error.message}`;
+                    base64Output.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            decodeBase64Btn.addEventListener('click', () => {
+                try {
+                    base64Output.textContent = decodeURIComponent(escape(atob(base64Input.value)));
+                    base64Output.style.color = 'var(--text-secondary)';
+                } catch (error) {
+                    base64Output.textContent = `Error: ${error.message}`;
+                    base64Output.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            clearBase64Btn.addEventListener('click', () => {
+                base64Input.value = '';
+                base64Output.textContent = '';
+            });
+            
+            copyBase64Btn.addEventListener('click', () => {
+                if (base64Output.textContent) {
+                    navigator.clipboard.writeText(base64Output.textContent).then(() => {
+                        copyBase64Btn.textContent = 'Copied!';
+                        copyBase64Btn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyBase64Btn.textContent = 'Copy';
+                            copyBase64Btn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+        }
+        
+        // URL Encoder
+        function openUrlEncoder() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="urlInput">Input URL</label>
+                    <textarea class="form-textarea" id="urlInput" placeholder="Enter URL to encode/decode..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="urlOutput">Result</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="urlOutput"></div>
+                        <button class="copy-btn" id="copyUrlBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearUrlBtn">Clear</button>
+                <button class="btn btn-primary" id="encodeUrlBtn">Encode</button>
+                <button class="btn btn-primary" id="decodeUrlBtn">Decode</button>
+            `;
+            
+            const urlInput = document.getElementById('urlInput');
+            const urlOutput = document.getElementById('urlOutput');
+            const encodeUrlBtn = document.getElementById('encodeUrlBtn');
+            const decodeUrlBtn = document.getElementById('decodeUrlBtn');
+            const clearUrlBtn = document.getElementById('clearUrlBtn');
+            const copyUrlBtn = document.getElementById('copyUrlBtn');
+            
+            encodeUrlBtn.addEventListener('click', () => {
+                try {
+                    urlOutput.textContent = encodeURIComponent(urlInput.value);
+                    urlOutput.style.color = 'var(--text-secondary)';
+                } catch (error) {
+                    urlOutput.textContent = `Error: ${error.message}`;
+                    urlOutput.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            decodeUrlBtn.addEventListener('click', () => {
+                try {
+                    urlOutput.textContent = decodeURIComponent(urlInput.value);
+                    urlOutput.style.color = 'var(--text-secondary)';
+                } catch (error) {
+                    urlOutput.textContent = `Error: ${error.message}`;
+                    urlOutput.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            clearUrlBtn.addEventListener('click', () => {
+                urlInput.value = '';
+                urlOutput.textContent = '';
+            });
+            
+            copyUrlBtn.addEventListener('click', () => {
+                if (urlOutput.textContent) {
+                    navigator.clipboard.writeText(urlOutput.textContent).then(() => {
+                        copyUrlBtn.textContent = 'Copied!';
+                        copyUrlBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyUrlBtn.textContent = 'Copy';
+                            copyUrlBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+        }
+        
+        // Regex Tester
+        function openRegexTester() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="regexPattern">Regular Expression</label>
+                    <input type="text" class="form-input" id="regexPattern" placeholder="Enter regex pattern...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="regexFlags">Flags</label>
+                    <input type="text" class="form-input" id="regexFlags" placeholder="e.g., g, i, m" value="g">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="regexTestString">Test String</label>
+                    <textarea class="form-textarea" id="regexTestString" placeholder="Enter text to test against the regex..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="regexOutput">Matches</label>
+                    <div class="result-container" id="regexOutput"></div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearRegexBtn">Clear</button>
+                <button class="btn btn-primary" id="testRegexBtn">Test</button>
+            `;
+            
+            const regexPattern = document.getElementById('regexPattern');
+            const regexFlags = document.getElementById('regexFlags');
+            const regexTestString = document.getElementById('regexTestString');
+            const regexOutput = document.getElementById('regexOutput');
+            const testRegexBtn = document.getElementById('testRegexBtn');
+            const clearRegexBtn = document.getElementById('clearRegexBtn');
+            
+            testRegexBtn.addEventListener('click', () => {
+                try {
+                    const regex = new RegExp(regexPattern.value, regexFlags.value);
+                    const matches = [];
+                    let match;
+                    
+                    if (regex.global) {
+                        while ((match = regex.exec(regexTestString.value)) !== null) {
+                            matches.push({
+                                match: match[0],
+                                index: match.index,
+                                groups: match.slice(1)
+                            });
+                        }
+                    } else {
+                        match = regex.exec(regexTestString.value);
+                        if (match) {
+                            matches.push({
+                                match: match[0],
+                                index: match.index,
+                                groups: match.slice(1)
+                            });
+                        }
+                    }
+                    
+                    if (matches.length > 0) {
+                        let output = `Found ${matches.length} match${matches.length !== 1 ? 'es' : ''}:\n\n`;
+                        
+                        matches.forEach((m, i) => {
+                            output += `Match ${i + 1}:\n`;
+                            output += `  Text: "${m.match}"\n`;
+                            output += `  Position: ${m.index}\n`;
+                            
+                            if (m.groups.length > 0) {
+                                output += `  Groups:\n`;
+                                m.groups.forEach((group, j) => {
+                                    output += `    ${j + 1}: "${group}"\n`;
+                                });
+                            }
+                            
+                            output += '\n';
+                        });
+                        
+                        regexOutput.textContent = output;
+                        regexOutput.style.color = 'var(--text-secondary)';
+                    } else {
+                        regexOutput.textContent = 'No matches found';
+                        regexOutput.style.color = 'var(--text-muted)';
+                    }
+                } catch (error) {
+                    regexOutput.textContent = `Error: ${error.message}`;
+                    regexOutput.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            clearRegexBtn.addEventListener('click', () => {
+                regexPattern.value = '';
+                regexFlags.value = 'g';
+                regexTestString.value = '';
+                regexOutput.textContent = '';
+            });
+        }
+        
+        // Password Generator
+        function openPasswordGenerator() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Password Options</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="includeUppercase" checked>
+                            <span>Include Uppercase Letters (A-Z)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="includeLowercase" checked>
+                            <span>Include Lowercase Letters (a-z)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="includeNumbers" checked>
+                            <span>Include Numbers (0-9)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="includeSymbols" checked>
+                            <span>Include Symbols (!@#$%^&*)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="passwordLength">Password Length: <span id="lengthValue">16</span></label>
+                    <input type="range" class="form-input" id="passwordLength" min="4" max="64" value="16">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="passwordOutput">Generated Password</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="passwordOutput"></div>
+                        <button class="copy-btn" id="copyPasswordBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-primary" id="generatePasswordBtn">Generate Password</button>
+            `;
+            
+            const includeUppercase = document.getElementById('includeUppercase');
+            const includeLowercase = document.getElementById('includeLowercase');
+            const includeNumbers = document.getElementById('includeNumbers');
+            const includeSymbols = document.getElementById('includeSymbols');
+            const passwordLength = document.getElementById('passwordLength');
+            const lengthValue = document.getElementById('lengthValue');
+            const passwordOutput = document.getElementById('passwordOutput');
+            const generatePasswordBtn = document.getElementById('generatePasswordBtn');
+            const copyPasswordBtn = document.getElementById('copyPasswordBtn');
+            
+            passwordLength.addEventListener('input', (e) => {
+                lengthValue.textContent = e.target.value;
+            });
+            
+            generatePasswordBtn.addEventListener('click', () => {
+                const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+                const numbers = '0123456789';
+                const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                
+                let charset = '';
+                if (includeUppercase.checked) charset += uppercase;
+                if (includeLowercase.checked) charset += lowercase;
+                if (includeNumbers.checked) charset += numbers;
+                if (includeSymbols.checked) charset += symbols;
+                
+                if (charset === '') {
+                    passwordOutput.textContent = 'Please select at least one option';
+                    passwordOutput.style.color = 'var(--danger-color)';
+                    return;
+                }
+                
+                let password = '';
+                for (let i = 0; i < parseInt(passwordLength.value); i++) {
+                    password += charset.charAt(Math.floor(Math.random() * charset.length));
+                }
+                
+                passwordOutput.textContent = password;
+                passwordOutput.style.color = 'var(--text-secondary)';
+            });
+            
+            copyPasswordBtn.addEventListener('click', () => {
+                if (passwordOutput.textContent) {
+                    navigator.clipboard.writeText(passwordOutput.textContent).then(() => {
+                        copyPasswordBtn.textContent = 'Copied!';
+                        copyPasswordBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyPasswordBtn.textContent = 'Copy';
+                            copyPasswordBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+            
+            // Generate initial password
+            generatePasswordBtn.click();
+        }
+        
+        // Lorem Ipsum Generator
+        function openLoremIpsumGenerator() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="loremType">Type</label>
+                    <select class="form-select" id="loremType">
+                        <option value="paragraphs">Paragraphs</option>
+                        <option value="sentences">Sentences</option>
+                        <option value="words">Words</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loremCount">Count: <span id="loremCountValue">3</span></label>
+                    <input type="range" class="form-input" id="loremCount" min="1" max="20" value="3">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loremOutput">Generated Text</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="loremOutput"></div>
+                        <button class="copy-btn" id="copyLoremBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-primary" id="generateLoremBtn">Generate</button>
+            `;
+            
+            const loremType = document.getElementById('loremType');
+            const loremCount = document.getElementById('loremCount');
+            const loremCountValue = document.getElementById('loremCountValue');
+            const loremOutput = document.getElementById('loremOutput');
+            const generateLoremBtn = document.getElementById('generateLoremBtn');
+            const copyLoremBtn = document.getElementById('copyLoremBtn');
+            
+            const loremWords = [
+                'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+                'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+                'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+                'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+                'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+                'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+                'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+                'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'
+            ];
+            
+            const loremSentences = [
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'Enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+                'Nisi aliquip ex ea commodo consequat.',
+                'Duis aute irure dolor in reprehenderit in voluptate velit esse.',
+                'Excepteur sint occaecat cupidatat non proident.',
+                'Sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            ];
+            
+            loremCount.addEventListener('input', (e) => {
+                loremCountValue.textContent = e.target.value;
+            });
+            
+            generateLoremBtn.addEventListener('click', () => {
+                const type = loremType.value;
+                const count = parseInt(loremCount.value);
+                let result = '';
+                
+                if (type === 'words') {
+                    for (let i = 0; i < count; i++) {
+                        result += loremWords[Math.floor(Math.random() * loremWords.length)] + ' ';
+                    }
+                    result = result.trim();
+                } else if (type === 'sentences') {
+                    for (let i = 0; i < count; i++) {
+                        result += loremSentences[Math.floor(Math.random() * loremSentences.length)] + ' ';
+                    }
+                    result = result.trim();
+                } else if (type === 'paragraphs') {
+                    for (let i = 0; i < count; i++) {
+                        const sentenceCount = Math.floor(Math.random() * 3) + 3;
+                        let paragraph = '';
+                        
+                        for (let j = 0; j < sentenceCount; j++) {
+                            paragraph += loremSentences[Math.floor(Math.random() * loremSentences.length)] + ' ';
+                        }
+                        
+                        result += paragraph.trim() + '\n\n';
+                    }
+                    
+                    result = result.trim();
+                }
+                
+                loremOutput.textContent = result;
+                loremOutput.style.color = 'var(--text-secondary)';
+            });
+            
+            copyLoremBtn.addEventListener('click', () => {
+                if (loremOutput.textContent) {
+                    navigator.clipboard.writeText(loremOutput.textContent).then(() => {
+                        copyLoremBtn.textContent = 'Copied!';
+                        copyLoremBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyLoremBtn.textContent = 'Copy';
+                            copyLoremBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+            
+            // Generate initial text
+            generateLoremBtn.click();
+        }
+        
+        // API Tester
+        function openApiTester() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="apiMethod">HTTP Method</label>
+                    <select class="form-select" id="apiMethod">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="OPTIONS">OPTIONS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="apiUrl">URL</label>
+                    <input type="text" class="form-input" id="apiUrl" placeholder="https://api.example.com/endpoint">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="apiHeaders">Headers (JSON format)</label>
+                    <textarea class="form-textarea" id="apiHeaders" placeholder='{"Content-Type": "application/json"}'></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="apiBody">Request Body (JSON format)</label>
+                    <textarea class="form-textarea" id="apiBody" placeholder='{"key": "value"}'></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="apiResponse">Response</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="apiResponse"></div>
+                        <button class="copy-btn" id="copyResponseBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearApiBtn">Clear</button>
+                <button class="btn btn-primary" id="sendApiBtn">Send Request</button>
+            `;
+            
+            const apiMethod = document.getElementById('apiMethod');
+            const apiUrl = document.getElementById('apiUrl');
+            const apiHeaders = document.getElementById('apiHeaders');
+            const apiBody = document.getElementById('apiBody');
+            const apiResponse = document.getElementById('apiResponse');
+            const sendApiBtn = document.getElementById('sendApiBtn');
+            const clearApiBtn = document.getElementById('clearApiBtn');
+            const copyResponseBtn = document.getElementById('copyResponseBtn');
+            
+            sendApiBtn.addEventListener('click', async () => {
+                try {
+                    const url = apiUrl.value.trim();
+                    if (!url) {
+                        throw new Error('URL is required');
+                    }
+                    
+                    const method = apiMethod.value;
+                    let headers = {};
+                    
+                    if (apiHeaders.value.trim()) {
+                        try {
+                            headers = JSON.parse(apiHeaders.value);
+                        } catch (error) {
+                            throw new Error('Invalid headers format');
+                        }
+                    }
+                    
+                    let body = null;
+                    if (['POST', 'PUT', 'PATCH'].includes(method) && apiBody.value.trim()) {
+                        try {
+                            body = JSON.parse(apiBody.value);
+                        } catch (error) {
+                            throw new Error('Invalid body format');
+                        }
+                    }
+                    
+                    apiResponse.textContent = 'Sending request...';
+                    apiResponse.style.color = 'var(--text-muted)';
+                    
+                    const response = await fetch(url, {
+                        method,
+                        headers,
+                        body: body ? JSON.stringify(body) : null
+                    });
+                    
+                    const responseText = await response.text();
+                    
+                    let formattedResponse = `Status: ${response.status} ${response.statusText}\n\n`;
+                    
+                    try {
+                        const responseJson = JSON.parse(responseText);
+                        formattedResponse += JSON.stringify(responseJson, null, 2);
+                    } catch (error) {
+                        formattedResponse += responseText;
+                    }
+                    
+                    apiResponse.textContent = formattedResponse;
+                    apiResponse.style.color = response.ok ? 'var(--text-secondary)' : 'var(--danger-color)';
+                } catch (error) {
+                    apiResponse.textContent = `Error: ${error.message}`;
+                    apiResponse.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            clearApiBtn.addEventListener('click', () => {
+                apiUrl.value = '';
+                apiHeaders.value = '';
+                apiBody.value = '';
+                apiResponse.textContent = '';
+            });
+            
+            copyResponseBtn.addEventListener('click', () => {
+                if (apiResponse.textContent) {
+                    navigator.clipboard.writeText(apiResponse.textContent).then(() => {
+                        copyResponseBtn.textContent = 'Copied!';
+                        copyResponseBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyResponseBtn.textContent = 'Copy';
+                            copyResponseBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+        }
+        
+        // Hash Generator
+        function openHashGenerator() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="hashInput">Input Text</label>
+                    <textarea class="form-textarea" id="hashInput" placeholder="Enter text to hash..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="hashAlgorithm">Hash Algorithm</label>
+                    <select class="form-select" id="hashAlgorithm">
+                        <option value="md5">MD5</option>
+                        <option value="sha1">SHA-1</option>
+                        <option value="sha256">SHA-256</option>
+                        <option value="sha512">SHA-512</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="hashOutput">Hash Value</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="hashOutput"></div>
+                        <button class="copy-btn" id="copyHashBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearHashBtn">Clear</button>
+                <button class="btn btn-primary" id="generateHashBtn">Generate Hash</button>
+            `;
+            
+            const hashInput = document.getElementById('hashInput');
+            const hashAlgorithm = document.getElementById('hashAlgorithm');
+            const hashOutput = document.getElementById('hashOutput');
+            const generateHashBtn = document.getElementById('generateHashBtn');
+            const clearHashBtn = document.getElementById('clearHashBtn');
+            const copyHashBtn = document.getElementById('copyHashBtn');
+            
+            generateHashBtn.addEventListener('click', async () => {
+                const text = hashInput.value.trim();
+                if (!text) {
+                    hashOutput.textContent = 'Please enter some text';
+                    hashOutput.style.color = 'var(--danger-color)';
+                    return;
+                }
+                
+                const algorithm = hashAlgorithm.value;
+                
+                try {
+                    let hash;
+                    
+                    if (algorithm === 'md5') {
+                        // Simple MD5 implementation (not secure, for demo only)
+                        hash = await md5(text);
+                    } else {
+                        // Use Web Crypto API for SHA hashes
+                        const encoder = new TextEncoder();
+                        const data = encoder.encode(text);
+                        
+                        let hashBuffer;
+                        switch (algorithm) {
+                            case 'sha1':
+                                hashBuffer = await crypto.subtle.digest('SHA-1', data);
+                                break;
+                            case 'sha256':
+                                hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                                break;
+                            case 'sha512':
+                                hashBuffer = await crypto.subtle.digest('SHA-512', data);
+                                break;
+                        }
+                        
+                        const hashArray = Array.from(new Uint8Array(hashBuffer));
+                        hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                    }
+                    
+                    hashOutput.textContent = hash;
+                    hashOutput.style.color = 'var(--text-secondary)';
+                } catch (error) {
+                    hashOutput.textContent = `Error: ${error.message}`;
+                    hashOutput.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            clearHashBtn.addEventListener('click', () => {
+                hashInput.value = '';
+                hashOutput.textContent = '';
+            });
+            
+            copyHashBtn.addEventListener('click', () => {
+                if (hashOutput.textContent) {
+                    navigator.clipboard.writeText(hashOutput.textContent).then(() => {
+                        copyHashBtn.textContent = 'Copied!';
+                        copyHashBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyHashBtn.textContent = 'Copy';
+                            copyHashBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+            
+            // Simple MD5 implementation (not secure, for demo only)
+            async function md5(text) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(text);
+                
+                // This is a simplified MD5 implementation
+                // In a real application, use a proper crypto library
+                let hash = 0;
+                
+                for (let i = 0; i < data.length; i++) {
+                    hash = ((hash << 5) - hash) + data[i];
+                    hash |= 0; // Convert to 32-bit integer
+                }
+                
+                return Math.abs(hash).toString(16).padStart(8, '0');
+            }
+        }
+        
+        // UUID Generator
+        function openUuidGenerator() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="uuidVersion">UUID Version</label>
+                    <select class="form-select" id="uuidVersion">
+                        <option value="4">Version 4 (Random)</option>
+                        <option value="1">Version 1 (Time-based)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="uuidCount">Count: <span id="uuidCountValue">1</span></label>
+                    <input type="range" class="form-input" id="uuidCount" min="1" max="10" value="1">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="uuidOutput">Generated UUIDs</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="uuidOutput"></div>
+                        <button class="copy-btn" id="copyUuidBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearUuidBtn">Clear</button>
+                <button class="btn btn-primary" id="generateUuidBtn">Generate UUID</button>
+            `;
+            
+            const uuidVersion = document.getElementById('uuidVersion');
+            const uuidCount = document.getElementById('uuidCount');
+            const uuidCountValue = document.getElementById('uuidCountValue');
+            const uuidOutput = document.getElementById('uuidOutput');
+            const generateUuidBtn = document.getElementById('generateUuidBtn');
+            const clearUuidBtn = document.getElementById('clearUuidBtn');
+            const copyUuidBtn = document.getElementById('copyUuidBtn');
+            
+            uuidCount.addEventListener('input', (e) => {
+                uuidCountValue.textContent = e.target.value;
+            });
+            
+            generateUuidBtn.addEventListener('click', () => {
+                const version = uuidVersion.value;
+                const count = parseInt(uuidCount.value);
+                let result = '';
+                
+                for (let i = 0; i < count; i++) {
+                    if (version === '4') {
+                        result += generateUuidV4() + '\n';
+                    } else if (version === '1') {
+                        result += generateUuidV1() + '\n';
+                    }
+                }
+                
+                uuidOutput.textContent = result.trim();
+                uuidOutput.style.color = 'var(--text-secondary)';
+            });
+            
+            clearUuidBtn.addEventListener('click', () => {
+                uuidOutput.textContent = '';
+            });
+            
+            copyUuidBtn.addEventListener('click', () => {
+                if (uuidOutput.textContent) {
+                    navigator.clipboard.writeText(uuidOutput.textContent).then(() => {
+                        copyUuidBtn.textContent = 'Copied!';
+                        copyUuidBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyUuidBtn.textContent = 'Copy';
+                            copyUuidBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+            
+            // Generate initial UUID
+            generateUuidBtn.click();
+            
+            function generateUuidV4() {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    const r = Math.random() * 16 | 0;
+                    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            }
+            
+            function generateUuidV1() {
+                // Simplified UUID v1 implementation
+                const timestamp = Date.now();
+                const random = Math.random() * 0xFFFFFFFFFFFF | 0;
+                
+                // Format as UUID v1
+                const timeLow = (timestamp & 0xFFFFFFFF).toString(16).padStart(8, '0');
+                const timeMid = ((timestamp >> 32) & 0xFFFF).toString(16).padStart(4, '0');
+                const timeHighAndVersion = (((timestamp >> 48) & 0x0FFF) | 0x1000).toString(16).padStart(4, '0');
+                const clockSeqAndReserved = ((random & 0x3F00) >> 8 | 0x80).toString(16).padStart(2, '0');
+                const clockSeqLow = (random & 0xFF).toString(16).padStart(2, '0');
+                const node = (random & 0xFFFFFFFFFFFF).toString(16).padStart(12, '0');
+                
+                return `${timeLow}-${timeMid}-${timeHighAndVersion}-${clockSeqAndReserved}${clockSeqLow}-${node}`;
+            }
+        }
+        
+        // Timestamp Converter
+        function openTimestampConverter() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="timestampInput">Timestamp (seconds)</label>
+                    <input type="text" class="form-input" id="timestampInput" placeholder="Enter timestamp...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dateInput">Date</label>
+                    <input type="text" class="form-input" id="dateInput" placeholder="Enter date (YYYY-MM-DD HH:MM:SS)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="timestampOutput">Result</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="timestampOutput"></div>
+                        <button class="copy-btn" id="copyTimestampBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearTimestampBtn">Clear</button>
+                <button class="btn btn-primary" id="convertTimestampBtn">Convert</button>
+                <button class="btn btn-primary" id="currentTimestampBtn">Current Timestamp</button>
+            `;
+            
+            const timestampInput = document.getElementById('timestampInput');
+            const dateInput = document.getElementById('dateInput');
+            const timestampOutput = document.getElementById('timestampOutput');
+            const convertTimestampBtn = document.getElementById('convertTimestampBtn');
+            const currentTimestampBtn = document.getElementById('currentTimestampBtn');
+            const clearTimestampBtn = document.getElementById('clearTimestampBtn');
+            const copyTimestampBtn = document.getElementById('copyTimestampBtn');
+            
+            convertTimestampBtn.addEventListener('click', () => {
+                const timestamp = timestampInput.value.trim();
+                const date = dateInput.value.trim();
+                
+                if (timestamp) {
+                    // Convert timestamp to date
+                    try {
+                        const dateObj = new Date(parseInt(timestamp) * 1000);
+                        if (isNaN(dateObj.getTime())) {
+                            throw new Error('Invalid timestamp');
+                        }
+                        
+                        const formattedDate = dateObj.toISOString().replace('T', ' ').substring(0, 19);
+                        timestampOutput.textContent = `Date: ${formattedDate}`;
+                        timestampOutput.style.color = 'var(--text-secondary)';
+                    } catch (error) {
+                        timestampOutput.textContent = `Error: ${error.message}`;
+                        timestampOutput.style.color = 'var(--danger-color)';
+                    }
+                } else if (date) {
+                    // Convert date to timestamp
+                    try {
+                        const dateObj = new Date(date);
+                        if (isNaN(dateObj.getTime())) {
+                            throw new Error('Invalid date format');
+                        }
+                        
+                        const timestampValue = Math.floor(dateObj.getTime() / 1000);
+                        timestampOutput.textContent = `Timestamp: ${timestampValue}`;
+                        timestampOutput.style.color = 'var(--text-secondary)';
+                    } catch (error) {
+                        timestampOutput.textContent = `Error: ${error.message}`;
+                        timestampOutput.style.color = 'var(--danger-color)';
+                    }
+                } else {
+                    timestampOutput.textContent = 'Please enter a timestamp or date';
+                    timestampOutput.style.color = 'var(--danger-color)';
+                }
+            });
+            
+            currentTimestampBtn.addEventListener('click', () => {
+                const now = new Date();
+                const timestamp = Math.floor(now.getTime() / 1000);
+                const formattedDate = now.toISOString().replace('T', ' ').substring(0, 19);
+                
+                timestampInput.value = timestamp;
+                dateInput.value = formattedDate;
+                timestampOutput.textContent = `Current timestamp: ${timestamp}\nCurrent date: ${formattedDate}`;
+                timestampOutput.style.color = 'var(--text-secondary)';
+            });
+            
+            clearTimestampBtn.addEventListener('click', () => {
+                timestampInput.value = '';
+                dateInput.value = '';
+                timestampOutput.textContent = '';
+            });
+            
+            copyTimestampBtn.addEventListener('click', () => {
+                if (timestampOutput.textContent) {
+                    navigator.clipboard.writeText(timestampOutput.textContent).then(() => {
+                        copyTimestampBtn.textContent = 'Copied!';
+                        copyTimestampBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyTimestampBtn.textContent = 'Copy';
+                            copyTimestampBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
+        }
+        
+        // HTML Entities Tool
+        function openHtmlEntitiesTool() {
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label" for="htmlInput">Input Text</label>
+                    <textarea class="form-textarea" id="htmlInput" placeholder="Enter text to encode/decode..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="htmlOutput">Result</label>
+                    <div style="position: relative;">
+                        <div class="result-container" id="htmlOutput"></div>
+                        <button class="copy-btn" id="copyHtmlBtn">Copy</button>
+                    </div>
+                </div>
+            `;
+            
+            modalFooter.innerHTML = `
+                <button class="btn btn-secondary" id="clearHtmlBtn">Clear</button>
+                <button class="btn btn-primary" id="encodeHtmlBtn">Encode</button>
+                <button class="btn btn-primary" id="decodeHtmlBtn">Decode</button>
+            `;
+            
+            const htmlInput = document.getElementById('htmlInput');
+            const htmlOutput = document.getElementById('htmlOutput');
+            const encodeHtmlBtn = document.getElementById('encodeHtmlBtn');
+            const decodeHtmlBtn = document.getElementById('decodeHtmlBtn');
+            const clearHtmlBtn = document.getElementById('clearHtmlBtn');
+            const copyHtmlBtn = document.getElementById('copyHtmlBtn');
+            
+            encodeHtmlBtn.addEventListener('click', () => {
+                const text = htmlInput.value;
+                let encoded = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    const code = char.charCodeAt(0);
+                    
+                    if (code > 127) {
+                        encoded += `&#${code};`;
+                    } else {
+                        switch (char) {
+                            case '&': encoded += '&amp;'; break;
+                            case '<': encoded += '&lt;'; break;
+                            case '>': encoded += '&gt;'; break;
+                            case '"': encoded += '&quot;'; break;
+                            case "'": encoded += '&apos;'; break;
+                            default: encoded += char;
+                        }
+                    }
+                }
+                
+                htmlOutput.textContent = encoded;
+                htmlOutput.style.color = 'var(--text-secondary)';
+            });
+            
+            decodeHtmlBtn.addEventListener('click', () => {
+                const text = htmlInput.value;
+                let decoded = text;
+                
+                // Create a temporary element to decode HTML entities
+                const textarea = document.createElement('textarea');
+                textarea.innerHTML = decoded;
+                decoded = textarea.value;
+                
+                htmlOutput.textContent = decoded;
+                htmlOutput.style.color = 'var(--text-secondary)';
+            });
+            
+            clearHtmlBtn.addEventListener('click', () => {
+                htmlInput.value = '';
+                htmlOutput.textContent = '';
+            });
+            
+            copyHtmlBtn.addEventListener('click', () => {
+                if (htmlOutput.textContent) {
+                    navigator.clipboard.writeText(htmlOutput.textContent).then(() => {
+                        copyHtmlBtn.textContent = 'Copied!';
+                        copyHtmlBtn.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            copyHtmlBtn.textContent = 'Copy';
+                            copyHtmlBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                }
+            });
         }
         
         // LocalStorage for recently used tools
-        function saveToRecentlyUsed(toolName, url) {
+        function saveToRecentlyUsed(toolId) {
             let recentlyUsed = JSON.parse(localStorage.getItem('recentlyUsed') || '[]');
             
             // Remove if already exists
-            recentlyUsed = recentlyUsed.filter(tool => tool.url !== url);
+            recentlyUsed = recentlyUsed.filter(id => id !== toolId);
             
             // Add to beginning
-            recentlyUsed.unshift({ name: toolName, url });
+            recentlyUsed.unshift(toolId);
             
-            // Keep only last 5
-            recentlyUsed = recentlyUsed.slice(0, 5);
+            // Keep only last 10
+            recentlyUsed = recentlyUsed.slice(0, 10);
             
             localStorage.setItem('recentlyUsed', JSON.stringify(recentlyUsed));
+        }
+        
+        // Show snackbar notification
+        function showSnackbar(message) {
+            const snackbar = document.getElementById('snackbar');
+            snackbar.textContent = message;
+            snackbar.classList.add('show');
+            
+            setTimeout(() => {
+                snackbar.classList.remove('show');
+            }, 3000);
         }
         
         // Add keyboard shortcuts
@@ -1024,11 +3160,24 @@
                 }
             }
             
-            // Escape to close menu
-            if (e.key === 'Escape' && toolsMenu.classList.contains('open')) {
-                closeMenu();
+            // Escape to close menu or modal
+            if (e.key === 'Escape') {
+                if (toolsMenu.classList.contains('open')) {
+                    closeMenu();
+                } else if (toolModal.classList.contains('active')) {
+                    closeToolModal();
+                }
             }
         });
+        
+        // Initialize the app
+        initializeTools();
+        
+        // Check if running as PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Running in standalone mode');
+            document.body.style.backgroundColor = 'var(--primary-bg)';
+        }
     </script>
 </body>
 </html>
