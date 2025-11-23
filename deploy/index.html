@@ -1164,22 +1164,6 @@
             box-shadow: var(--shadow-md);
         }
 
-        .platform-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .stars {
-            color: var(--accent-warning);
-        }
-
-        .rating-value {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
         /* Tags */
         .platform-tags {
             display: flex;
@@ -3289,7 +3273,7 @@
             emptyState.style.display = 'none';
             
             grid.innerHTML = filteredPlatforms.map((platform, index) => `
-                <div class="platform-card" data-id="${platform.id}" data-type="${platform.type}" data-category="${platform.category}" style="animation-delay: ${index * 0.05}s">
+                <div class="platform-card" data-id="${platform.id}" data-type="${platform.type}" data-category="${platform.category}" style="animation-delay: ${index * 0.05}s" onclick="openPlatformModal('${platform.id}')">
                     ${platform.category === 'popular' ? `<div class="popular-badge">${translations[currentLanguage].popularBadge}</div>` : ''}
                     <button class="favorite-btn ${favorites.includes(platform.id) ? 'active' : ''}" onclick="toggleFavorite('${platform.id}', event)" aria-label="${favorites.includes(platform.id) ? 'Remove from favorites' : 'Add to favorites'}">
                         <i class="fas fa-star"></i>
@@ -3308,18 +3292,12 @@
                         ${platform.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
                         ${platform.tags.length > 3 ? `<span class="tag">+${platform.tags.length - 3}</span>` : ''}
                     </div>
-                    <div class="platform-rating">
-                        <div class="stars">
-                            ${generateStars(platform.rating)}
-                        </div>
-                        <span class="rating-value">${platform.rating}</span>
-                    </div>
                     <div class="platform-footer">
                         ${platform.free ? 
                             `<span class="free-badge">${translations[currentLanguage].freeBadge}</span>` : 
                             `<span class="trial-badge">${translations[currentLanguage].trialBadge}</span>`
                         }
-                        <a href="${platform.url}" target="_blank" rel="noopener noreferrer" class="deploy-btn" onclick="viewPlatform('${platform.id}')">
+                        <a href="${platform.url}" target="_blank" rel="noopener noreferrer" class="deploy-btn" onclick="event.stopPropagation(); viewPlatform('${platform.id}')">
                             <i class="fas fa-rocket"></i> ${translations[currentLanguage].visitButton}
                         </a>
                     </div>
@@ -3405,26 +3383,6 @@
             }
         }
 
-        // Generate star rating HTML
-        function generateStars(rating) {
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-            const emptyStars = 5 - fullStars - halfStar;
-            
-            let stars = '';
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            if (halfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            
-            return stars;
-        }
-
         // Toggle favorite status
         function toggleFavorite(platformId, event) {
             event.stopPropagation();
@@ -3468,7 +3426,10 @@
         }
 
         // Open platform modal
-        function openPlatformModal(platform) {
+        function openPlatformModal(platformId) {
+            const platform = platforms.find(p => p.id === platformId);
+            if (!platform) return;
+            
             const modal = document.getElementById('platformModal');
             const modalContent = document.getElementById('modalContent');
             
@@ -3494,12 +3455,6 @@
                         <div class="platform-info">
                             <h3>${platform.name}</h3>
                             <span class="platform-type type-${platform.type}">${getTypeLabel(platform.type)}</span>
-                            <div class="platform-rating">
-                                <div class="stars">
-                                    ${generateStars(platform.rating)}
-                                </div>
-                                <span class="rating-value">${platform.rating}</span>
-                            </div>
                         </div>
                     </div>
                     
@@ -3825,7 +3780,7 @@
             localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
             
             // Refresh the notes list
-            viewPlatform(platformId);
+            openPlatformModal(platformId);
             
             showToast(translations[currentLanguage].toastNoteAdded, 'success');
         }
@@ -3851,7 +3806,7 @@
             localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
             
             // Refresh the notes list
-            viewPlatform(platformId);
+            openPlatformModal(platformId);
             
             showToast(translations[currentLanguage].toastNoteUpdated, 'success');
         }
@@ -3868,7 +3823,7 @@
                 localStorage.setItem('deploygratis_personal_notes', JSON.stringify(personalNotes));
                 
                 // Refresh the notes list
-                viewPlatform(platformId);
+                openPlatformModal(platformId);
                 
                 showToast(translations[currentLanguage].toastNoteDeleted, 'success');
             }
@@ -4001,7 +3956,7 @@
                 if (!platform) return '';
                 
                 return `
-                    <div class="recently-viewed-item" onclick="viewPlatform('${platform.id}')">
+                    <div class="recently-viewed-item" onclick="openPlatformModal('${platform.id}')">
                         <div class="recently-viewed-logo" style="background: ${platform.logoColor};">
                             <i class="${platform.logo}"></i>
                         </div>
@@ -4033,7 +3988,7 @@
                 .slice(0, 4);
             
             grid.innerHTML = recommendations.map(platform => `
-                <div class="recommendation-card" onclick="viewPlatform('${platform.id}')">
+                <div class="recommendation-card" onclick="openPlatformModal('${platform.id}')">
                     <div class="recommendation-header">
                         <div class="recommendation-logo" style="background: ${platform.logoColor};">
                             <i class="${platform.logo}"></i>
@@ -4841,7 +4796,7 @@
                 
                 return `
                     <div class="history-item">
-                        <div class="recently-viewed-item" onclick="viewPlatform('${platform.id}')">
+                        <div class="recently-viewed-item" onclick="openPlatformModal('${platform.id}')">
                             <div class="recently-viewed-logo" style="background: ${platform.logoColor};">
                                 <i class="${platform.logo}"></i>
                             </div>
@@ -5036,6 +4991,26 @@
 
         function showContact() {
             showFeedbackModal();
+        }
+
+        // Generate stars for comparison table (internal function)
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+            const emptyStars = 5 - fullStars - halfStar;
+            
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            if (halfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
         }
     </script>
 </body>
