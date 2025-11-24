@@ -68,7 +68,7 @@
         
         .header {
             background-color: var(--secondary-bg);
-            padding: 12px 16px;
+            padding: 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -84,20 +84,86 @@
         }
         
         .logo {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            background-color: var(--tertiary-bg);
+            border-radius: 12px;
+        }
+        
+        .logo i {
+            font-size: 24px;
+        }
+
+        .github-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
         }
         
-        .logo i {
-            font-size: 24px;
+        .github-logo i {
+            font-size: 100px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 300px;
+        }
+
+        .open-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .open-btn:hover {
+            background-color: var(--success-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+        }
+        
+        .open-btn:active {
+            transform: translateY(0);
+        }
+        
+        .open-btn i {
+            font-size: 18px;
         }
         
         .app-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--text-primary);
         }
@@ -108,11 +174,11 @@
         }
         
         .menu-btn {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border: none;
             background-color: var(--tertiary-bg);
-            border-radius: 6px;
+            border-radius: 10px;
             color: var(--text-muted);
             cursor: pointer;
             display: flex;
@@ -140,6 +206,16 @@
             flex-direction: column;
             overflow-y: auto;
             padding: 16px;
+            padding-bottom: 80px; /* Space for bottom nav */
+        }
+        
+        .welcome-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+            text-align: center;
         }
         
         .dashboard {
@@ -152,7 +228,7 @@
         .dashboard-card {
             background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 16px;
             transition: var(--transition);
         }
@@ -251,8 +327,8 @@
         .tool-card {
             background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
             transition: var(--transition);
             cursor: pointer;
@@ -273,12 +349,19 @@
         
         .tool-favorite {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 12px;
+            right: 12px;
             color: var(--text-muted);
             font-size: 14px;
             cursor: pointer;
             z-index: 1;
+            background-color: var(--secondary-bg);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .tool-favorite.active {
@@ -286,10 +369,10 @@
         }
         
         .tool-icon {
-            width: 48px;
-            height: 48px;
+            width: 60px;
+            height: 60px;
             background-color: var(--primary-bg);
-            border-radius: 8px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -298,11 +381,11 @@
         }
         
         .tool-icon i {
-            font-size: 24px;
+            font-size: 28px;
         }
         
         .tool-title {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 4px;
@@ -339,7 +422,7 @@
         }
         
         .category-tab {
-            padding: 8px 16px;
+            padding: 10px 16px;
             background-color: var(--tertiary-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
@@ -362,68 +445,9 @@
             border-color: var(--accent-color);
         }
         
-        .news-feed {
-            background-color: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-        
-        .news-item {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .news-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        
-        .news-item:first-child {
-            padding-top: 0;
-        }
-        
-        .news-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        
-        .news-title:hover {
-            color: var(--accent-color);
-        }
-        
-        .news-source {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-        
-        .news-time {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        
-        .news-tag {
-            display: inline-block;
-            padding: 2px 6px;
-            background-color: var(--tertiary-bg);
-            border-radius: 4px;
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-right: 4px;
-        }
-        
         .quick-tools {
             display: flex;
             gap: 12px;
-            margin-bottom: 24px;
             overflow-x: auto;
             padding-bottom: 4px;
             scrollbar-width: thin;
@@ -449,7 +473,7 @@
             width: 100px;
             background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 12px 8px;
             text-align: center;
             cursor: pointer;
@@ -564,7 +588,7 @@
             display: flex;
             align-items: center;
             padding: 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             margin-bottom: 8px;
             cursor: pointer;
             transition: var(--transition);
@@ -575,10 +599,10 @@
         }
         
         .menu-tool-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background-color: var(--primary-bg);
-            border-radius: 6px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -626,10 +650,10 @@
         
         .search-box {
             width: 100%;
-            padding: 10px 16px;
+            padding: 12px 16px;
             background-color: var(--primary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--text-secondary);
             font-size: 14px;
             transition: var(--transition);
@@ -670,7 +694,7 @@
         .recent-tool {
             background-color: var(--primary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 8px 12px;
             font-size: 12px;
             color: var(--text-secondary);
@@ -699,12 +723,12 @@
         
         .install-prompt {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px; /* Above bottom nav */
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 16px;
             display: flex;
             align-items: center;
@@ -740,7 +764,7 @@
             color: white;
             border: none;
             padding: 8px 16px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -793,7 +817,7 @@
         .modal-content {
             background-color: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             width: 100%;
             max-width: 600px;
             max-height: 90vh;
@@ -849,9 +873,9 @@
         }
         
         .btn {
-            padding: 8px 16px;
+            padding: 10px 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
@@ -890,10 +914,10 @@
         
         .form-input, .form-textarea, .form-select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px;
             background-color: var(--primary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--text-secondary);
             font-size: 14px;
             font-family: var(--font-family);
@@ -921,7 +945,7 @@
             width: 50px;
             height: 50px;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
         }
         
@@ -938,9 +962,9 @@
         }
         
         .color-format {
-            padding: 4px 8px;
+            padding: 6px 12px;
             background-color: var(--tertiary-bg);
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 12px;
             color: var(--text-secondary);
             cursor: pointer;
@@ -959,7 +983,7 @@
         .result-container {
             background-color: var(--primary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 12px;
             margin-top: 12px;
             font-family: monospace;
@@ -977,10 +1001,10 @@
             right: 8px;
             background-color: var(--tertiary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 6px;
             color: var(--text-secondary);
             font-size: 12px;
-            padding: 4px 8px;
+            padding: 6px 10px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -998,12 +1022,12 @@
         
         .snackbar {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px; /* Above bottom nav */
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background-color: var(--tertiary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 12px 16px;
             font-size: 14px;
             color: var(--text-primary);
@@ -1018,13 +1042,88 @@
             opacity: 1;
         }
         
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            width: 60px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            border-radius: 8px;
+        }
+        
+        .nav-item.active {
+            color: var(--accent-color);
+        }
+        
+        .nav-item:hover {
+            background-color: var(--tertiary-bg);
+            color: var(--text-primary);
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .nav-item span {
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Quick Access Section */
+        .quick-access {
+            margin-bottom: 24px;
+        }
+        
+        .quick-access-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quick-access-title i {
+            color: var(--accent-color);
+        }
+        
+        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
             .header {
-                padding: 8px 12px;
+                padding: 12px;
             }
             
             .app-title {
-                font-size: 14px;
+                font-size: 16px;
             }
             
             .dashboard {
@@ -1042,6 +1141,23 @@
             
             .modal-content {
                 max-width: 100%;
+            }
+            
+            .bottom-nav {
+                padding: 6px 0;
+            }
+            
+            .nav-item {
+                width: 50px;
+                padding: 6px;
+            }
+            
+            .nav-item i {
+                font-size: 18px;
+            }
+            
+            .nav-item span {
+                font-size: 9px;
             }
         }
         
@@ -1070,6 +1186,31 @@
             .tools-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
+            
+            .tool-card {
+                padding: 12px;
+            }
+            
+            .tool-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .tool-icon i {
+                font-size: 24px;
+            }
+            
+            .welcome-section {
+                padding: 16px 0;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -1089,83 +1230,126 @@
                 </button>
             </div>
         </header>
-        
+
         <div class="content">
-            <div class="dashboard">
-                <div class="dashboard-card">
-                    <div class="dashboard-card-header">
-                        <h3 class="dashboard-card-title">
-                            <i class="fas fa-clock"></i>
-                            Recently Used
-                        </h3>
-                        <div class="dashboard-card-action" id="viewAllRecent">
-                            View All <i class="fas fa-chevron-right"></i>
-                        </div>
+            <!-- Home Tab -->
+            <div class="tab-content active" id="homeTab">
+                <div class="welcome-section">
+                    <div class="github-logo">
+                        <i class="fab fa-github"></i>
                     </div>
-                    <div class="dashboard-card-content" id="recentToolsContent">
-                        <p class="no-recent-tools">No tools used yet</p>
-                    </div>
-                </div>
-                
-                <div class="dashboard-card">
-                    <div class="dashboard-card-header">
-                        <h3 class="dashboard-card-title">
-                            <i class="fas fa-star"></i>
-                            Favorites
-                        </h3>
-                        <div class="dashboard-card-action" id="viewAllFavorites">
-                            View All <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="dashboard-card-content" id="favoriteToolsContent">
-                        <p class="no-recent-tools">No favorites yet</p>
-                    </div>
-                </div>
-                
-                <div class="dashboard-card">
-                    <div class="dashboard-card-header">
-                        <h3 class="dashboard-card-title">
-                            <i class="fas fa-newspaper"></i>
-                            Developer News
-                        </h3>
-                        <div class="dashboard-card-action" id="refreshNews">
-                            Refresh <i class="fas fa-sync-alt"></i>
-                        </div>
-                    </div>
-                    <div class="dashboard-card-content" id="newsContent">
-                        <p>Loading latest news...</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="quick-tools" id="quickTools">
-                <!-- Quick tools will be populated by JavaScript -->
-            </div>
-            
-            <div class="tools-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-tools"></i>
-                        Developer Tools
-                    </h2>
-                    <button class="view-all-btn" id="viewAllTools">
-                        View All <i class="fas fa-chevron-right"></i>
+                    
+                    <h2 class="title">DevTools Hub</h2>
+                    <p class="subtitle">Akses berbagai tools developer dalam satu aplikasi</p>
+                    
+                    <button class="open-btn" id="openGithubBtn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Buka GitHub
                     </button>
                 </div>
                 
-                <div class="category-tabs" id="categoryTabs">
-                    <div class="category-tab active" data-category="all">All</div>
-                    <div class="category-tab" data-category="web">Web</div>
-                    <div class="category-tab" data-category="api">API</div>
-                    <div class="category-tab" data-category="format">Format</div>
-                    <div class="category-tab" data-category="generator">Generator</div>
-                    <div class="category-tab" data-category="convert">Convert</div>
+                <div class="dashboard">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h3 class="dashboard-card-title">
+                                <i class="fas fa-clock"></i>
+                                Recently Used
+                            </h3>
+                            <div class="dashboard-card-action" id="viewAllRecent">
+                                View All <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="dashboard-card-content" id="recentToolsContent">
+                            <p class="no-recent-tools">No tools used yet</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h3 class="dashboard-card-title">
+                                <i class="fas fa-star"></i>
+                                Favorites
+                            </h3>
+                            <div class="dashboard-card-action" id="viewAllFavorites">
+                                View All <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="dashboard-card-content" id="favoriteToolsContent">
+                            <p class="no-recent-tools">No favorites yet</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="tools-grid" id="toolsGrid">
-                    <!-- Tools will be populated by JavaScript -->
+                <div class="quick-access">
+                    <h3 class="quick-access-title">
+                        <i class="fas fa-bolt"></i>
+                        Quick Access
+                    </h3>
+                    <div class="quick-tools" id="quickTools">
+                        <!-- Quick tools will be populated by JavaScript -->
+                    </div>
                 </div>
             </div>
+            
+            <!-- Tools Tab -->
+            <div class="tab-content" id="toolsTab">
+                <div class="tools-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-tools"></i>
+                            Developer Tools
+                        </h2>
+                        <button class="view-all-btn" id="viewAllTools">
+                            View All <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="category-tabs" id="categoryTabs">
+                        <div class="category-tab active" data-category="all">All</div>
+                        <div class="category-tab" data-category="web">Web</div>
+                        <div class="category-tab" data-category="api">API</div>
+                        <div class="category-tab" data-category="format">Format</div>
+                        <div class="category-tab" data-category="generator">Generator</div>
+                        <div class="category-tab" data-category="convert">Convert</div>
+                    </div>
+                    
+                    <div class="tools-grid" id="toolsGrid">
+                        <!-- Tools will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Favorites Tab -->
+            <div class="tab-content" id="favoritesTab">
+                <div class="tools-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-star"></i>
+                            Favorite Tools
+                        </h2>
+                    </div>
+                    
+                    <div class="tools-grid" id="favoritesGrid">
+                        <!-- Favorite tools will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="#" class="nav-item active" data-tab="homeTab">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="toolsTab">
+                <i class="fas fa-tools"></i>
+                <span>Tools</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="favoritesTab">
+                <i class="fas fa-star"></i>
+                <span>Favorites</span>
+            </a>
         </div>
     </div>
     
@@ -1292,6 +1476,34 @@
         
         dismissBtn.addEventListener('click', () => {
             installPrompt.classList.add('hidden');
+        });
+        
+        // Tab Navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active nav item
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Show corresponding tab content
+                const tabId = item.getAttribute('data-tab');
+                tabContents.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.id === tabId) {
+                        tab.classList.add('active');
+                    }
+                });
+                
+                // Load favorites if favorites tab is selected
+                if (tabId === 'favoritesTab') {
+                    loadFavoritesTab();
+                }
+            });
         });
         
         // Menu functionality
@@ -1524,16 +1736,6 @@
             }
         ];
         
-        // Quick tools
-        const quickTools = [
-            { id: 'json-formatter', name: 'JSON', icon: 'fas fa-code' },
-            { id: 'color-picker', name: 'Color', icon: 'fas fa-palette' },
-            { id: 'base64', name: 'Base64', icon: 'fas fa-exchange-alt' },
-            { id: 'password-generator', name: 'Password', icon: 'fas fa-key' },
-            { id: 'regex-tester', name: 'Regex', icon: 'fas fa-code-branch' },
-            { id: 'api-tester', name: 'API', icon: 'fas fa-plug' }
-        ];
-        
         // Initialize tools
         function initializeTools() {
             // Load favorites from localStorage
@@ -1553,9 +1755,6 @@
             
             // Load dashboard data
             loadDashboardData();
-            
-            // Load developer news
-            loadDeveloperNews();
         }
         
         // Populate tools grid
@@ -1590,6 +1789,54 @@
                 });
                 
                 toolsGrid.appendChild(toolCard);
+            });
+            
+            // Add event listeners to favorite buttons
+            document.querySelectorAll('.tool-favorite').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleFavorite(btn.dataset.id);
+                });
+            });
+        }
+        
+        // Populate favorites tab
+        function loadFavoritesTab() {
+            const favoritesGrid = document.getElementById('favoritesGrid');
+            favoritesGrid.innerHTML = '';
+            
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (favorites.length === 0) {
+                favoritesGrid.innerHTML = '<p class="no-recent-tools" style="grid-column: 1/-1; text-align: center; padding: 20px;">No favorites yet</p>';
+                return;
+            }
+            
+            const favoriteTools = tools.filter(tool => favorites.includes(tool.id));
+            
+            favoriteTools.forEach(tool => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.dataset.id = tool.id;
+                
+                toolCard.innerHTML = `
+                    <div class="tool-favorite active" data-id="${tool.id}">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="tool-icon">
+                        <i class="${tool.icon}"></i>
+                    </div>
+                    <h3 class="tool-title">${tool.name}</h3>
+                    <p class="tool-description">${tool.description}</p>
+                `;
+                
+                toolCard.addEventListener('click', (e) => {
+                    if (!e.target.closest('.tool-favorite')) {
+                        openTool(tool);
+                    }
+                });
+                
+                favoritesGrid.appendChild(toolCard);
             });
             
             // Add event listeners to favorite buttons
@@ -1636,10 +1883,26 @@
             const quickToolsContainer = document.getElementById('quickTools');
             quickToolsContainer.innerHTML = '';
             
-            quickTools.forEach(tool => {
-                const toolData = tools.find(t => t.id === tool.id);
-                if (!toolData) return;
+            // Get the 4 most recently used tools or first 4 tools if none used recently
+            const recentlyUsed = JSON.parse(localStorage.getItem('recentlyUsed') || '[]');
+            let quickToolsList = [];
+            
+            if (recentlyUsed.length > 0) {
+                quickToolsList = recentlyUsed.slice(0, 4).map(id => 
+                    tools.find(tool => tool.id === id)
+                ).filter(Boolean);
+            }
+            
+            // If we don't have 4 tools, add some popular ones
+            if (quickToolsList.length < 4) {
+                const popularTools = tools.filter(tool => 
+                    !quickToolsList.some(t => t.id === tool.id)
+                ).slice(0, 4 - quickToolsList.length);
                 
+                quickToolsList = [...quickToolsList, ...popularTools];
+            }
+            
+            quickToolsList.forEach(tool => {
                 const quickTool = document.createElement('div');
                 quickTool.className = 'quick-tool';
                 quickTool.dataset.id = tool.id;
@@ -1652,7 +1915,7 @@
                 `;
                 
                 quickTool.addEventListener('click', () => {
-                    openTool(toolData);
+                    openTool(tool);
                 });
                 
                 quickToolsContainer.appendChild(quickTool);
@@ -1682,9 +1945,18 @@
         });
         
         document.getElementById('viewAllFavorites').addEventListener('click', () => {
-            toolsMenu.classList.add('open');
-            menuOverlay.classList.add('open');
-            loadRecentlyUsed();
+            // Switch to favorites tab
+            navItems.forEach(nav => nav.classList.remove('active'));
+            document.querySelector('[data-tab="favoritesTab"]').classList.add('active');
+            
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.id === 'favoritesTab') {
+                    tab.classList.add('active');
+                }
+            });
+            
+            loadFavoritesTab();
         });
         
         // Load recently used tools
@@ -1785,62 +2057,6 @@
             }
         }
         
-        // Load developer news
-        function loadDeveloperNews() {
-            const newsContent = document.getElementById('newsContent');
-            
-            // Simulate loading news (in a real app, this would fetch from an API)
-            setTimeout(() => {
-                const news = [
-                    {
-                        title: 'New JavaScript Framework Released',
-                        source: 'DevNews',
-                        time: '2 hours ago',
-                        tag: 'JavaScript'
-                    },
-                    {
-                        title: 'CSS Grid Layout Guide Updated',
-                        source: 'WebDev Weekly',
-                        time: '5 hours ago',
-                        tag: 'CSS'
-                    },
-                    {
-                        title: 'Security Vulnerability in Popular Library',
-                        source: 'Security Alert',
-                        time: '1 day ago',
-                        tag: 'Security'
-                    }
-                ];
-                
-                newsContent.innerHTML = '';
-                news.forEach(item => {
-                    const newsItem = document.createElement('div');
-                    newsItem.className = 'news-item';
-                    
-                    newsItem.innerHTML = `
-                        <div class="news-title">
-                            <i class="fas fa-external-link-alt"></i>
-                            ${item.title}
-                        </div>
-                        <div class="news-source">${item.source}</div>
-                        <div class="news-time">
-                            <span class="news-tag">${item.tag}</span>
-                            ${item.time}
-                        </div>
-                    `;
-                    
-                    newsContent.appendChild(newsItem);
-                });
-            }, 1000);
-        }
-        
-        // Refresh news
-        document.getElementById('refreshNews').addEventListener('click', () => {
-            const newsContent = document.getElementById('newsContent');
-            newsContent.innerHTML = '<p>Loading latest news...</p>';
-            loadDeveloperNews();
-        });
-        
         // Toggle favorite
         function toggleFavorite(toolId) {
             const tool = tools.find(t => t.id === toolId);
@@ -1868,6 +2084,11 @@
             // Update dashboard
             loadDashboardData();
             
+            // Update favorites tab if it's active
+            if (document.getElementById('favoritesTab').classList.contains('active')) {
+                loadFavoritesTab();
+            }
+            
             // Show notification
             showSnackbar(tool.favorite ? 'Added to favorites' : 'Removed from favorites');
         }
@@ -1882,6 +2103,9 @@
             
             // Update dashboard
             loadDashboardData();
+            
+            // Update quick tools
+            populateQuickTools();
             
             if (tool.modal) {
                 // Open modal for built-in tools
@@ -2544,7 +2768,7 @@
                         let paragraph = '';
                         
                         for (let j = 0; j < sentenceCount; j++) {
-                            paragraph += loremSentences[Math.floor(Math.random() * loremSentences.length)] + ' ';
+                                                    paragraph += loremSentences[Math.floor(Math.random() * loremSentences.length)] + ' ';
                         }
                         
                         result += paragraph.trim() + '\n\n';
@@ -3168,6 +3392,11 @@
                     closeToolModal();
                 }
             }
+        });
+        
+        // Open GitHub button
+        document.getElementById('openGithubBtn').addEventListener('click', () => {
+            window.open('https://github.com', '_blank');
         });
         
         // Initialize the app
