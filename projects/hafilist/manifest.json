@@ -1,7 +1,7 @@
 {
-  "name": "Jam",
-  "short_name": "Jam",
-  "start_url": "/projects/jam",
+  "name": "Hafilist - Pelacak Keuangan Pribadi",
+  "short_name": "Hafilist",
+  "start_url": "/projects/hafilist",
   "display": "standalone",
   "background_color": "#4e54c8",
   "theme_color": "#4e54c8",
