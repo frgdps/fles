@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terjadi Kesalahan</title>
+    <style>
+        /* --- VARIABEL KUSTOMISASI --- */
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --text-color: #333;
+            --light-text-color: #666;
+            --background-color: #f7fafc;
+            --card-background: #ffffff;
+            --border-color: #e2e8f0;
+            --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* --- GAYA DASAR --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* --- KONTAINER UTAMA --- */
+        .error-container {
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* --- ANIMASI --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- ELEMEN ERROR --- */
+        .error-code {
+            font-size: 10rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .error-title {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* --- TOMBOL DAN AKSI --- */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        /* --- FITUR KHUSUS (SEARCH BOX) --- */
+        .search-box {
+            display: flex;
+            margin: 25px auto;
+            max-width: 400px;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-box input {
+            flex-grow: 1;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .search-box button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <!-- Kode error akan diubah oleh JavaScript -->
+        <div class="error-code" id="errorCode">404</div>
+
+        <!-- Konten error akan diubah oleh JavaScript -->
+        <div id="errorContent">
+            <!-- Konten default adalah 404 -->
+            <h1 class="error-title">Halaman Tidak Ditemukan</h1>
+            <p class="error-message">
+                Sepertinya halaman yang Anda cari sudah tidak ada, mungkin telah dipindahkan, atau Anda salah mengetikkan alamat URL.
+            </p>
+            
+            <!-- Fitur Khusus untuk 400: Search Box -->
+            <div class="search-box">
+                <input type="text" placeholder="Cari di situs ini...">
+                <button type="button">Cari</button>
+            </div>
+
+            <div class="actions">
+                <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+                <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Data untuk setiap jenis error
+        const errorData = {
+            '400': {
+                title: 'Permintaan Tidak Valid (Bad Request)',
+                message: 'Server tidak dapat memahami permintaan Anda karena format yang tidak valid. Periksa kembali URL atau data yang Anda kirim.',
+                actions: `
+                    <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+                    <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
+                `
+            }
+        };
+
+        function showError(code) {
+            const error = errorData[code];
+            if (!error) return;
+
+            // Update judul halaman
+            document.title = `${code} - ${error.title}`;
+
+            // Update konten
+            document.getElementById('errorCode').innerText = code;
+            
+            let contentHTML = `
+                <h1 class="error-title">${error.title}</h1>
+                <p class="error-message">${error.message}</p>
+            `;
+            
+            if (error.specialFeature) {
+                contentHTML += error.specialFeature;
+            }
+
+            contentHTML += `<div class="actions">${error.actions}</div>`;
+            
+            document.getElementById('errorContent').innerHTML = contentHTML;
+        }
+
+        // Tampilkan error 400 sebagai default saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            showError('400');
+        });
+    </script>
+</body>
+</html>
